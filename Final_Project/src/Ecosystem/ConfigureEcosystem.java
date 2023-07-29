@@ -11,6 +11,7 @@ import Geography.Address;
 import Geography.Country;
 import Geography.City;
 import Geography.State;
+import Organization.CDCOrganization;
 import Organization.OrganizationDirectory;
 import Organization.SystemManagementOrganization;
 import Role.SystemManagementRole;
@@ -46,7 +47,7 @@ public class ConfigureEcosystem {
         //Create an address、a contact for SystemManagement Organization
         Address address = new Address("215 Kelton St", "02134");
         Contact contact = new Contact("781-921-8195");
-        System.out.println(contact.getPhoneNumber());
+        // System.out.println(contact.getPhoneNumber());
         
         //Create a SystemManagement Organization
         SystemManagementOrganization smo = new SystemManagementOrganization(usa, massachusetts, cambridge, address, contact);
