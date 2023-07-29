@@ -175,7 +175,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbState.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStateActionPerformed(evt);
@@ -185,14 +184,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         lblOrganization.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblOrganization.setText("Organization:");
 
-        cmbCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCountryActionPerformed(evt);
             }
         });
 
-        cmbOrganization.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationActionPerformed(evt);
@@ -208,7 +205,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         lblEmployee.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblEmployee.setText("Employee:");
 
-        cmbEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEmployeeActionPerformed(evt);

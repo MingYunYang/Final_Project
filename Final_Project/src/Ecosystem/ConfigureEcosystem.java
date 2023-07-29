@@ -46,6 +46,7 @@ public class ConfigureEcosystem {
         //Create an address、a contact for SystemManagement Organization
         Address address = new Address("215 Kelton St", "02134");
         Contact contact = new Contact("781-921-8195");
+        System.out.println(contact.getPhoneNumber());
         
         //Create a SystemManagement Organization
         SystemManagementOrganization smo = new SystemManagementOrganization(usa, massachusetts, cambridge, address, contact);
@@ -61,7 +62,6 @@ public class ConfigureEcosystem {
         
         UserAccountDirectory uad = smo.getUserAccountDirectory();
         UserAccount systemManagementUserAccount = uad.createUserAccount("system", "system", systemManagementEmployee, smr);
-
         
       
         

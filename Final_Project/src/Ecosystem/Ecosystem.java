@@ -37,18 +37,5 @@ public class Ecosystem {
     public ArrayList<Country> getCountryList() {
         return countryList;
     }
-    
-    
-    
-    
-
-    
-    
-    
-
-    
-    
-    
-    
-    
+     
 }

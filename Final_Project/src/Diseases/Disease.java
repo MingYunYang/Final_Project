@@ -1,5 +1,7 @@
 package Diseases;
 
+import Vaccine.Vaccine;
+
 /**
  * Class to represent a disease. Each disease has a unique id and a name.
  */
@@ -11,8 +13,11 @@ public class Disease {
 
     private String name;
 
-    public Disease(String name) {
+    private Vaccine vaccine;
+
+    public Disease(String name, Vaccine vaccine) {
         this.name = name;
+        this.vaccine = vaccine;
         this.id = nextId++;
     }
 
@@ -26,6 +31,14 @@ public class Disease {
 
     public int getId() {
         return id;
+    }
+
+    public Vaccine getVaccine() {
+        return vaccine;
+    }
+
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
     @Override

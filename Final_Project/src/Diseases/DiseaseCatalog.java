@@ -1,11 +1,10 @@
 package Diseases;
 
 import java.util.ArrayList;
-// import java.util.Collections;
 
 /**
  * Class to represent a catalog of diseases.
- * 
+ *
  * @author William
  * @author Libby
  */

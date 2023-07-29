@@ -13,15 +13,7 @@ public class Contact {
     private String phoneNumber;
 
     public Contact(String phoneNumber) {
-        this.phoneNumber = validatePhoneNumber(phoneNumber);
-    }
-
-    private static String validatePhoneNumber(String phoneNumber) {
-        String pattern = "^[2-9]{1}[0-9]{9}$";
-        if (!phoneNumber.matches(pattern)) {
-            throw new IllegalArgumentException("Invalid phone number");
-        }
-        return phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPhoneNumber() {
@@ -29,7 +21,7 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = validatePhoneNumber(phoneNumber);
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
