@@ -9,11 +9,19 @@ package Contact;
  * @author libby
  */
 public class Contact {
-    
+
     private String phoneNumber;
 
     public Contact(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = validatePhoneNumber(phoneNumber);
+    }
+
+    private static String validatePhoneNumber(String phoneNumber) {
+        String pattern = "^[2-9]{1}[0-9]{9}$";
+        if (!phoneNumber.matches(pattern)) {
+            throw new IllegalArgumentException("Invalid phone number");
+        }
+        return phoneNumber;
     }
 
     public String getPhoneNumber() {
@@ -21,15 +29,40 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = validatePhoneNumber(phoneNumber);
     }
-    
+
     @Override
-    public String toString(){
-     return phoneNumber;
+    public String toString() {
+        return phoneNumber;
+
     }
 
-    
+    /**
+     * The equals() and hashCode() methods are especially important if you plan
+     * to use your Contact class in collections like Set or Map, where
+     * uniqueness of elements is required.
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contact)) {
+            return false;
+        }
 
-    
+        Contact contact = (Contact) o;
+
+        return phoneNumber != null ? phoneNumber.equals(contact.phoneNumber) : contact.phoneNumber == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return phoneNumber != null ? phoneNumber.hashCode() : 0;
+    }
+
 }

@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- * to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit
- * this template
- */
 package Diseases;
 
 import java.util.ArrayList;
+// import java.util.Collections;
 
 /**
- *
- * @author twmut
+ * Class to represent a catalog of diseases.
+ * 
+ * @author William
+ * @author Libby
  */
 public class DiseaseCatalog {
 
-    private ArrayList<Disease> diseases;
+    private final ArrayList<Disease> diseases;
 
     public DiseaseCatalog() {
         this.diseases = new ArrayList<>();
@@ -25,8 +22,20 @@ public class DiseaseCatalog {
         return disease;
     }
 
+    public void removeDisease(Disease disease) {
+        diseases.remove(disease);
+    }
+
+    public Disease findDiseaseById(int id) {
+        return diseases.stream().filter(disease -> disease.getId() == id).findFirst().orElse(null);
+    }
+
+    public Disease findDiseaseByName(String name) {
+        return diseases.stream().filter(disease -> disease.getName().equals(name)).findFirst().orElse(null);
+    }
+
     public ArrayList<Disease> getDiseases() {
-        return diseases;
+        return new ArrayList<>(diseases);
     }
 
 }

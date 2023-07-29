@@ -1,28 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- * to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit
- * this template
- */
 package Diseases;
 
-import Vaccine.Vaccine;
-
 /**
- *
- * @author twmut
+ * Class to represent a disease. Each disease has a unique id and a name.
  */
 public class Disease {
-    
-    private int id;
-    private static int count = 1;
-    private String name;
-    private Vaccine vaccine;
 
-    public Disease(Vaccine vaccine, String name) {
-        this.vaccine = vaccine;
+    private static int nextId = 1;
+
+    private final int id;
+
+    private String name;
+
+    public Disease(String name) {
         this.name = name;
-        this.id = ++count;
+        this.id = nextId++;
     }
 
     public String getName() {
@@ -37,24 +28,29 @@ public class Disease {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Disease)) {
+            return false;
+        }
+        Disease disease = (Disease) o;
+        return id == disease.id;
     }
 
-    public Vaccine getVaccine() {
-        return vaccine;
+    @Override
+    public int hashCode() {
+        return id;
     }
 
-    public void setVaccine(Vaccine vaccine) {
-        this.vaccine = vaccine;
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int aCount) {
-        count = aCount;
+    @Override
+    public String toString() {
+        return "Disease{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 
 }
