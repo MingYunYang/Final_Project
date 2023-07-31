@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="0" green="99" red="ff" type="rgb"/>
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -195,7 +195,7 @@
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="18" style="1"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Create User accounts and Manage Users"/>
       </Properties>
@@ -211,7 +211,7 @@
     <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="18" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
@@ -222,7 +222,7 @@
     <Component class="javax.swing.JComboBox" name="cmbState">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -235,7 +235,7 @@
     <Component class="javax.swing.JLabel" name="lblOrganization">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Organization:"/>
       </Properties>
@@ -243,7 +243,7 @@
     <Component class="javax.swing.JComboBox" name="cmbCountry">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -256,7 +256,7 @@
     <Component class="javax.swing.JComboBox" name="cmbOrganization">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -269,7 +269,7 @@
     <Component class="javax.swing.JLabel" name="lblCountry">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Country:"/>
       </Properties>
@@ -277,7 +277,7 @@
     <Component class="javax.swing.JLabel" name="lblState">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="State:"/>
       </Properties>
@@ -285,7 +285,7 @@
     <Component class="javax.swing.JLabel" name="lblEmployee">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Employee:"/>
       </Properties>
@@ -293,7 +293,7 @@
     <Component class="javax.swing.JComboBox" name="cmbEmployee">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -306,7 +306,7 @@
     <Component class="javax.swing.JComboBox" name="cmbRoles">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -316,7 +316,7 @@
     <Component class="javax.swing.JLabel" name="lblRole">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Role:"/>
       </Properties>
@@ -324,14 +324,14 @@
     <Component class="javax.swing.JTextField" name="txtUserName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUserName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="User Name:"/>
       </Properties>
@@ -339,14 +339,14 @@
     <Component class="javax.swing.JTextField" name="txtPassword">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCreate">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
@@ -357,7 +357,7 @@
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="0"/>
+          <Font name="Courier New" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>

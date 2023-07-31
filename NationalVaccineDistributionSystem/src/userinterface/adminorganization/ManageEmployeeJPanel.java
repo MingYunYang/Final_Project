@@ -107,7 +107,6 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployees = new javax.swing.JTable();
         lblEmployeeList = new javax.swing.JLabel();
-        lblNewEmployee = new javax.swing.JLabel();
         lblEmployeeName = new javax.swing.JLabel();
         txtEmployeeName = new javax.swing.JTextField();
         btnCreateEmployee = new javax.swing.JButton();
@@ -116,11 +115,12 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         cmbCountry = new javax.swing.JComboBox();
         lblCountry = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Manage Employees");
 
+        btnBack.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,15 +128,17 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblOrganization.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblOrganization.setText("Organization:");
 
+        cmbOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationActionPerformed(evt);
             }
         });
 
+        tblEmployees.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -170,14 +172,19 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             tblEmployees.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        lblEmployeeList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmployeeList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblEmployeeList.setText("Employee List:");
 
-        lblNewEmployee.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNewEmployee.setText("New Employee:");
+        lblEmployeeName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblEmployeeName.setText("Employee Name");
 
-        lblEmployeeName.setText("Name:");
+        txtEmployeeName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmployeeNameActionPerformed(evt);
+            }
+        });
 
+        btnCreateEmployee.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnCreateEmployee.setText("Create Employee");
         btnCreateEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,22 +192,24 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblState.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblState.setText("State:");
 
+        cmbState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStateActionPerformed(evt);
             }
         });
 
+        cmbCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCountryActionPerformed(evt);
             }
         });
 
-        lblCountry.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblCountry.setText("Country:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -208,38 +217,38 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblCountry)
+                                .addComponent(btnBack))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitle))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblEmployeeList)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCreateEmployee))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblOrganization)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblCountry)
-                                    .addGap(45, 45, 45)
-                                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(36, 36, 36)
-                                    .addComponent(lblState)
-                                    .addGap(26, 26, 26)
-                                    .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lblEmployeeList)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblNewEmployee)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblEmployeeName)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(btnCreateEmployee)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBack)))
-                    .addComponent(lblTitle))
-                .addGap(76, 76, 76))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(51, 51, 51)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblEmployeeName)
+                                        .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(53, 53, 53))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbCountry, cmbOrganization});
@@ -247,32 +256,29 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(lblTitle)
-                .addGap(40, 40, 40)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCountry)
-                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack)
+                    .addComponent(lblTitle))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblState))
+                    .addComponent(lblState)
+                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCountry))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOrganization)
-                    .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblEmployeeList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(lblNewEmployee)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmployeeName)
+                    .addComponent(lblEmployeeName))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmployeeList)
                     .addComponent(btnCreateEmployee))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack)
-                .addGap(50, 50, 50))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -352,6 +358,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cmbCountryActionPerformed
 
+    private void txtEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmployeeNameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateEmployee;
@@ -362,7 +372,6 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCountry;
     private javax.swing.JLabel lblEmployeeList;
     private javax.swing.JLabel lblEmployeeName;
-    private javax.swing.JLabel lblNewEmployee;
     private javax.swing.JLabel lblOrganization;
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblTitle;

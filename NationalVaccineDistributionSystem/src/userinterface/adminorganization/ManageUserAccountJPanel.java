@@ -101,7 +101,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tblUsers.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
@@ -146,13 +146,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblTitle.setText("Create User accounts and Manage Users");
 
         lblUsersList.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblUsersList.setText("User Account in this organization:");
 
-        btnBack.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,59 +160,59 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbState.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        cmbState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStateActionPerformed(evt);
             }
         });
 
-        lblOrganization.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblOrganization.setText("Organization:");
 
-        cmbCountry.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        cmbCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCountryActionPerformed(evt);
             }
         });
 
-        cmbOrganization.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        cmbOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationActionPerformed(evt);
             }
         });
 
-        lblCountry.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblCountry.setText("Country:");
 
-        lblState.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblState.setText("State:");
 
-        lblEmployee.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblEmployee.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblEmployee.setText("Employee:");
 
-        cmbEmployee.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        cmbEmployee.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEmployeeActionPerformed(evt);
             }
         });
 
-        cmbRoles.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        cmbRoles.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
 
-        lblRole.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblRole.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblRole.setText("Role:");
 
-        txtUserName.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        txtUserName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
 
-        lblUserName.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblUserName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblUserName.setText("User Name:");
 
-        txtPassword.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
 
-        btnCreate.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnCreate.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +220,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblPassword.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        lblPassword.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblPassword.setText("Password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

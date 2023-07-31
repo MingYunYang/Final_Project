@@ -8,12 +8,12 @@ import javax.swing.JPanel;
  *
  * @author raunak
  */
-public class SystemManagementWorkArea extends javax.swing.JPanel {
+public class SystemAdminWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
 
-    public SystemManagementWorkArea(JPanel userProcessContainer, Ecosystem ecosystem) {
+    public SystemAdminWorkArea(JPanel userProcessContainer, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -25,11 +25,10 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
         userJButton = new javax.swing.JButton();
         manageEmployeeJButton = new javax.swing.JButton();
         manageOrganizationJButton = new javax.swing.JButton();
-        lblQuestion = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        userJButton.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        userJButton.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         userJButton.setText("Manage Users");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -37,7 +36,7 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
             }
         });
 
-        manageEmployeeJButton.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        manageEmployeeJButton.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         manageEmployeeJButton.setText("Manage Employees");
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,7 +44,7 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
             }
         });
 
-        manageOrganizationJButton.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        manageOrganizationJButton.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         manageOrganizationJButton.setText("Manage Organizations");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,25 +52,17 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
             }
         });
 
-        lblQuestion.setFont(new java.awt.Font("Courier New", 3, 18)); // NOI18N
-        lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblQuestion.setText("What would you like to do today?");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageOrganizationJButton)))
-                    .addComponent(lblQuestion))
-                .addContainerGap(228, Short.MAX_VALUE))
+                    .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOrganizationJButton)
+                    .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, userJButton});
@@ -79,18 +70,16 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(lblQuestion)
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addComponent(manageOrganizationJButton)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageEmployeeJButton)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userJButton)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, userJButton});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, userJButton});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,7 +109,6 @@ public class SystemManagementWorkArea extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblQuestion;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;
