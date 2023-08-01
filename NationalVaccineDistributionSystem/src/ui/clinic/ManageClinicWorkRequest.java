@@ -14,14 +14,14 @@ import javax.swing.JPanel;
  *
  * @author libby
  */
-public class ManageClinic extends javax.swing.JPanel {
+public class ManageClinicWorkRequest extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
     UserAccount userAccount;
     Organization organization;
     
-    public ManageClinic(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ManageClinicWorkRequest(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;

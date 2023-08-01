@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ui.clinic;
 
 import model.Ecosystem;
@@ -10,18 +6,16 @@ import model.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
-/**
- *
- * @author libby
- */
 public class ClinicWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
+
     Ecosystem ecosystem;
+
     UserAccount userAccount;
+
     Organization organization;
-    
-    
+
     public ClinicWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -95,16 +89,16 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
 
-        VaccineInventory vi = new VaccineInventory(userProcessContainer, userAccount, organization, ecosystem);
-        userProcessContainer.add("VaccineInventory", vi);
+        ManageClinicVaccineInventory vi = new ManageClinicVaccineInventory(userProcessContainer, userAccount, organization, ecosystem);
+        userProcessContainer.add("ManageClinicVaccineInventory", vi);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageVaccineInventoryActionPerformed
 
     private void btnManageClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClinicActionPerformed
 
-        ManageClinic mc = new ManageClinic(userProcessContainer, userAccount, organization, ecosystem);
-        userProcessContainer.add("manageClinic", mc);
+        ManageClinicWorkRequest mc = new ManageClinicWorkRequest(userProcessContainer, userAccount, organization, ecosystem);
+        userProcessContainer.add("ManageClinicWorkRequest", mc);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageClinicActionPerformed

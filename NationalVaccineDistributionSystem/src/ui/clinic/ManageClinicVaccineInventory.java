@@ -17,14 +17,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author libby
  */
-public class VaccineInventory extends javax.swing.JPanel {
+public class ManageClinicVaccineInventory extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
     UserAccount userAccount;
     Organization organization;
     
-    public VaccineInventory(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ManageClinicVaccineInventory(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
