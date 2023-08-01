@@ -313,6 +313,8 @@ public class AddOrganizationJPanel extends javax.swing.JPanel {
         txtStreet.setText("");
         txtPostalCode.setText("");
 
+        JOptionPane.showMessageDialog(this, "Successfully saved");
+
         evt.getWhen();
     }//GEN-LAST:event_btnSaveActionPerformed
 
