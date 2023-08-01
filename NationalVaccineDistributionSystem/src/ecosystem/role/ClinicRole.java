@@ -15,7 +15,7 @@ public class ClinicRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
         type = RoleType.Clinic_Role;
-        return new ClinicWorkArea(userProcessContainer, Ecosystem.getInstance());
+        return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
     }
 
 }

@@ -7,63 +7,69 @@ import ecosystem.geographies.City;
 import ecosystem.geographies.Country;
 import ecosystem.geographies.State;
 import ecosystem.organization.Organization;
+import ecosystem.organization.Organization.Type;
 import ecosystem.organization.OrganizationDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class AddOrganizationJPanel extends javax.swing.JPanel {
+public class AddOrganization extends javax.swing.JPanel {
 
-    OrganizationDirectory organizationDirectory;
-
+    OrganizationDirectory directory;
     JPanel userProcessContainer;
-
     Ecosystem ecosystem;
 
-    public AddOrganizationJPanel(OrganizationDirectory directory, JPanel userProcessContainer, Ecosystem ecosystem) {
+    public AddOrganization(OrganizationDirectory directory, JPanel userProcessContainer, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.organizationDirectory = directory;
+        this.directory = directory;
         this.ecosystem = ecosystem;
-
-        populateCountryCombobox();
-        populateStateCombobox();
-        populateCityCombobox();
-        populateOrganizationCombobox();
+        
+        populateOrganizationCombo();
+        
+        populateCountryCombo();
+        Country country = (Country)cmbCountry.getSelectedItem();
+        if(country != null){
+            populateStateCombo(country);
+            State state = (State)cmbState.getSelectedItem();
+            if(state != null){
+                populateCityCombo(state);
+            }
+        }
     }
 
-    private void populateCountryCombobox() {
-
+    private void populateOrganizationCombo(){
+        
+        cmbOrganizationType.removeAllItems();
+        for(Type type : Organization.Type.values()){
+            if(!type.getValue().equals(Type.SystemAdmin.getValue())){
+                cmbOrganizationType.addItem(type);
+            }
+        }
+    }
+    
+    private void populateCountryCombo(){
+        
         cmbCountry.removeAllItems();
         for (Country country : ecosystem.getListOfCountries()) {
             cmbCountry.addItem(country);
         }
     }
-
-    private void populateStateCombobox() {
-
-        Country country = (Country) cmbCountry.getSelectedItem();
+    
+    private void populateStateCombo(Country country){
+        
         cmbState.removeAllItems();
-        for (State state : country.getStateList()) {
+        for (State state : country.getStateList()){
             cmbState.addItem(state);
         }
     }
-
-    private void populateCityCombobox() {
-
-        State state = (State) cmbState.getSelectedItem();
+    
+    private void populateCityCombo(State state){
+        
         cmbCity.removeAllItems();
-        for (City c : state.getListOfCities()) {
+        for (City c : state.getListOfCities()){
             cmbCity.addItem(c);
-        }
-    }
-
-    private void populateOrganizationCombobox() {
-
-        cmbOrganizationType.removeAllItems();
-        for (Organization o : organizationDirectory.getListOfOrganizations()) {
-            cmbOrganizationType.addItem(o);
         }
     }
 
@@ -267,53 +273,66 @@ public class AddOrganizationJPanel extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
         userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component c = componentArray[componentArray.length - 1];
-        ManageOrganizationJPanel mo = (ManageOrganizationJPanel) c;
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageOrganization mo = (ManageOrganization) c;
         mo.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-        evt.getWhen();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-        String organizationName = txtName.getText();
+        String name = txtName.getText();
+        if(txtName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter the organization name");
+            return;
+        }
+        
         Contact phone = new Contact(txtPhone.getText());
-        Address address = new Address(txtStreet.getText(), txtPostalCode.getText());
-
-        Organization organizationType = (Organization) cmbOrganizationType.getSelectedItem();
-        if (organizationType == null) {
+        if(txtPhone.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter the organization phone");
+            return;
+        }
+        
+        Type type = (Type)cmbOrganizationType.getSelectedItem();
+        if(type == null){
             JOptionPane.showMessageDialog(this, "Please select an organization type first");
             return;
         }
-
-        Country country = (Country) cmbCountry.getSelectedItem();
-        if (country == null) {
-            JOptionPane.showMessageDialog(this, "Please select a country to which the new organization belongs!");
+        
+        Country country = (Country)cmbCountry.getSelectedItem();
+        if(country == null){
+            JOptionPane.showMessageDialog(this, "Please select a country for the new organization");
             return;
         }
-
-        State state = (State) cmbState.getSelectedItem();
-        if (state == null) {
-            JOptionPane.showMessageDialog(this, "Please select a state to which the new organization belongs!");
+        
+        State state = (State)cmbState.getSelectedItem();
+        if(state == null){
+            JOptionPane.showMessageDialog(this, "Please select a state for the new organization");
             return;
         }
-
-        City city = (City) cmbCity.getSelectedItem();
-        if (city == null) {
-            JOptionPane.showMessageDialog(this, "Please select a city to which the new organization belongs!");
+        
+        City city = (City)cmbCity.getSelectedItem();
+        if(city == null){
+            JOptionPane.showMessageDialog(this, "Please select a city for the new organization");
             return;
         }
-
-        organizationDirectory.addOrganization(organizationName, organizationType.getType(), country, state, city, address, phone);
-
+        
+        Address address = new Address(txtStreet.getText(), txtPostalCode.getText());
+        if(txtStreet.getText().isEmpty() ||  txtPostalCode.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter the organization address & postal code");
+            return;
+        }
+        
+        Organization newOrganization = directory.newOrganization(name, type, country, state, city, address, phone);
+        
         txtName.setText("");
         txtPhone.setText("");
         txtStreet.setText("");
         txtPostalCode.setText("");
-
-        JOptionPane.showMessageDialog(this, "Successfully saved");
+        
+        JOptionPane.showMessageDialog(this, "Organization created successfully");
 
         evt.getWhen();
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -323,15 +342,31 @@ public class AddOrganizationJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
+        
+        Country country = (Country)cmbCountry.getSelectedItem();
+        if(country != null){
+            populateStateCombo(country);
+            State state = (State)cmbState.getSelectedItem();
+            if(state != null){
+                populateCityCombo(state);
+            }
+        }
+        
         evt.getWhen();
     }//GEN-LAST:event_cmbCountryActionPerformed
 
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
+        
+        State state = (State)cmbState.getSelectedItem();
+        if(state != null){
+            populateCityCombo(state);
+        }
+        
         evt.getWhen();
     }//GEN-LAST:event_cmbStateActionPerformed
 
     private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
-        // TODO add your handling code here:
+        
         evt.getWhen();
     }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
 

@@ -8,8 +8,8 @@ import ecosystem.geographies.City;
 import ecosystem.geographies.State;
 import ecosystem.role.Role;
 import ecosystem.useraccount.UserAccountDirectory;
+import ecosystem.vaccine.VaccineInventoryCatalog;
 import ecosystem.workqueue.WorkQueue;
-import java.util.ArrayList;
 
 public abstract class Organization {
 
@@ -20,6 +20,8 @@ public abstract class Organization {
     private EmployeeDirectory employeeDirectory;
 
     private UserAccountDirectory userAccountDirectory;
+    
+    private VaccineInventoryCatalog inventoryCatalog;
 
     private Type type;
 
@@ -33,19 +35,19 @@ public abstract class Organization {
 
     private Contact contact;
 
-    public abstract ArrayList<Role> getSupportedRole();
+    public abstract Role getSupportedRole();
 
     public enum Type {
 
-        CDC("Centers for disease control and prevention"),
-        PUBLIC_HEALTH_DEPARTMENT("Public health department"),
+        CDC("Centers For Disease Control And Prevention"),
+        Public_Health_Department("Public Health Department"),
         Clinic("Clinic"),
         DistributionCenter("Distribution Center"),
         Distributor("Distributor"),
         Hospital("Hospital"),
         Manufacturer("Manufacturer"),
         Provider("Provider"),
-        SystemAdmin("Ecosystem admininistration");
+        SystemAdmin("System Admininistration");
 
         private final String value;
 
@@ -54,6 +56,11 @@ public abstract class Organization {
         }
 
         public String getValue() {
+            return value;
+        }
+        
+        @Override 
+        public String toString(){
             return value;
         }
 
@@ -70,6 +77,15 @@ public abstract class Organization {
         this.city = city;
         this.address = address;
         this.contact = contact;
+    }
+    
+    // not every organization has inventory catalog
+    // call this method when the organization object is created (in OrganizationDirectory - addOrganization())
+    public VaccineInventoryCatalog createVaccineInventoryCatalog(){
+        if(inventoryCatalog == null){
+            inventoryCatalog = new VaccineInventoryCatalog();
+        }
+        return inventoryCatalog;
     }
 
     public String getName() {
@@ -102,6 +118,10 @@ public abstract class Organization {
 
     public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
         this.userAccountDirectory = userAccountDirectory;
+    }
+
+    public VaccineInventoryCatalog getInventoryCatalog() {
+        return inventoryCatalog;
     }
 
     public Type getType() {

@@ -1,36 +1,34 @@
 package ecosystem.order;
 
 import ecosystem.vaccine.Vaccine;
+import ecosystem.vaccine.VaccineItem;
 
 public class OrderItem {
 
-    private Vaccine vaccine;
+    private VaccineItem vaccineItem;
+    
+    private int orderQuantity;
 
-    private int quantity;
-
-    public OrderItem(Vaccine vaccine, int quantity) {
-        this.vaccine = vaccine;
-        this.quantity = quantity;
+    public OrderItem(VaccineItem vaccineItem, int quantity){
+        this.vaccineItem = vaccineItem;
+        orderQuantity = quantity;
     }
 
-    public int getOrderItemTotal() {
-        return vaccine.getPrice() * quantity;
+    public VaccineItem getVaccineItem() {
+        return vaccineItem;
     }
 
-    public Vaccine getVaccine() {
-        return vaccine;
+    public void setVaccineItem(VaccineItem vaccineItem) {
+        this.vaccineItem = vaccineItem;
     }
 
-    public void setVaccine(Vaccine vaccine) {
-        this.vaccine = vaccine;
+    public int getOrderQuantity() {
+        return orderQuantity;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setOrderQuantity(int orderQuantity) {
+        this.orderQuantity = orderQuantity;
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+   
 
 }

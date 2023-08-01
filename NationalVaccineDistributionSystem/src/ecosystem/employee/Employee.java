@@ -1,5 +1,7 @@
 package ecosystem.employee;
 
+import ecosystem.useraccount.UserAccount;
+
 public class Employee {
 
     private String employeeName;
@@ -7,6 +9,8 @@ public class Employee {
     private final int employeeID;
 
     private static int count = 1;
+    
+    private UserAccount userAccount;
 
     public Employee(String name) {
         employeeName = name;
@@ -24,6 +28,14 @@ public class Employee {
 
     public int getEmployeeID() {
         return employeeID;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     @Override

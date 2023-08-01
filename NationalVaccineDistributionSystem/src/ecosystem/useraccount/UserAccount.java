@@ -20,6 +20,7 @@ public class UserAccount {
         this.username = username;
         this.password = password;
         this.employee = employee;
+        employee.setUserAccount(this);
         this.role = role;
         workQueue = new WorkQueue();
     }

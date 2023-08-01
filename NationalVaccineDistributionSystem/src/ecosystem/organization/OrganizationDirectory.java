@@ -28,7 +28,7 @@ public class OrganizationDirectory {
         return listOfOrganizations;
     }
 
-    public Organization addOrganization(String name, Type type, Country country, State state, City city, Address address, Contact contact) {
+    public Organization newOrganization(String name, Type type, Country country, State state, City city, Address address, Contact contact) {
 
         Organization organization = null;
 
@@ -37,6 +37,7 @@ public class OrganizationDirectory {
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Clinic.getValue())) {
             organization = new Clinic(name, country, state, city, address, contact);
+            organization.createVaccineInventoryCatalog();
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.DistributionCenter.getValue())) {
             organization = new DistributionCenter(name, country, state, city, address, contact);
@@ -50,7 +51,7 @@ public class OrganizationDirectory {
         } else if (type.getValue().equals(Type.Manufacturer.getValue())) {
             organization = new Manufacturer(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
-        } else if (type.getValue().equals(Type.PUBLIC_HEALTH_DEPARTMENT.getValue())) {
+        } else if (type.getValue().equals(Type.Public_Health_Department.getValue())) {
             organization = new PublicHealthDepartment(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Provider.getValue())) {

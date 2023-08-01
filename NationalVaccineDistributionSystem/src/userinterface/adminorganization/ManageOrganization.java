@@ -10,68 +10,65 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-public class ManageOrganizationJPanel extends javax.swing.JPanel {
+public class ManageOrganization extends javax.swing.JPanel {
 
     OrganizationDirectory directory;
-
     JPanel userProcessContainer;
-
     Ecosystem ecosystem;
 
-    public ManageOrganizationJPanel(JPanel userProcessContainer, OrganizationDirectory directory, Ecosystem ecosystem) {
+    public ManageOrganization(JPanel userProcessContainer, OrganizationDirectory directory, Ecosystem ecosystem) {
 
         initComponents();
-
+        
         this.userProcessContainer = userProcessContainer;
         this.directory = directory;
         this.ecosystem = ecosystem;
 
         populateCountryCombo();
-
         Country selectedCountry = (Country) cmbCountry.getSelectedItem();
         if (selectedCountry != null) {
             populateStateCombo(selectedCountry);
         }
-
+        
         populateTable();
     }
 
     @SuppressWarnings("unchecked")
-    private void populateCountryCombo() {
-
+    
+    private void populateCountryCombo(){
+        
         cmbCountry.removeAllItems();
-
         for (Country country : ecosystem.getListOfCountries()) {
             cmbCountry.addItem(country);
         }
     }
-
-    private void populateStateCombo(Country country) {
-
+    
+    private void populateStateCombo(Country country){
+    
         cmbState.removeAllItems();
-
-        for (State state : country.getStateList()) {
+        for (State state : country.getStateList()){
             cmbState.addItem(state);
         }
     }
 
-    public final void populateTable() {
-
+    public void populateTable(){
+        
         DefaultTableModel model = (DefaultTableModel) tblOrganizations.getModel();
         model.setRowCount(0);
 
-        Country selectedCountry = (Country) cmbCountry.getSelectedItem();
-        State selectedState = (State) cmbState.getSelectedItem();
-
+        Country selectedCountry = (Country)cmbCountry.getSelectedItem();
+        State selectedState = (State)cmbState.getSelectedItem();
+        
         int count = 1;
         for (Organization organization : directory.getListOfOrganizations()) {
-            if (organization.getCountry().equals(selectedCountry) && organization.getState().equals(selectedState)) {
-                Object[] row = new Object[4];
+            if(organization.getCountry().equals(selectedCountry) && organization.getState().equals(selectedState)){
+                Object[] row = new Object[5];
                 row[0] = count;
                 row[1] = organization;
-                row[2] = organization.getContact();
+                row[2] = organization.getCity();
                 row[3] = organization.getAddress();
-
+                row[4] = organization.getContact();
+                            
                 model.addRow(row);
                 count++;
             }
@@ -99,20 +96,20 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         tblOrganizations.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "No.", "Name", "Country", "State", "City", "Address", "Contact"
+                "No.", "Name", "City", "Address", "Contact"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -131,8 +128,6 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             tblOrganizations.getColumnModel().getColumn(2).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(4).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(5).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(6).setResizable(false);
         }
 
         btnAdd.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
@@ -249,7 +244,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        AddOrganizationJPanel ao = new AddOrganizationJPanel(directory, userProcessContainer, ecosystem);
+        AddOrganization ao = new AddOrganization(directory, userProcessContainer, ecosystem);
         userProcessContainer.add(ao);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -269,14 +264,14 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
 
         int selectedIndex = tblOrganizations.getSelectedRow();
-        if (selectedIndex < 0) {
+        if(selectedIndex < 0){
             JOptionPane.showMessageDialog(this, "Please selecte an row to delete");
             return;
         }
-
-        Organization o = (Organization) tblOrganizations.getValueAt(selectedIndex, 1);
+        
+        Organization o = (Organization)tblOrganizations.getValueAt(selectedIndex, 1);
         directory.removeOrganization(o);
-
+        
         populateTable();
 
         evt.getWhen();
@@ -288,7 +283,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         if (selectedCountry != null) {
             populateStateCombo(selectedCountry);
         }
-
+        
         populateTable();
 
         evt.getWhen();

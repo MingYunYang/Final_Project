@@ -21,7 +21,7 @@ public abstract class Role {
         Hospital_Role("Hospital_Role"),
         Manufacturer_Role("Manufacturer_Role"),
         Provider_Role("Provider_Role"),
-        System_Administration_Role("SystemManagement_Role");
+        System_Administration_Role("System_Administration_Role");
 
         private final String value;
 

@@ -5,6 +5,9 @@
 package userinterface.clinic;
 
 import ecosystem.Ecosystem;
+import ecosystem.organization.Organization;
+import ecosystem.useraccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -15,11 +18,16 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
+    UserAccount userAccount;
+    Organization organization;
     
-    public ClinicWorkArea(JPanel userProcessContainer, Ecosystem ecosystem) {
+    
+    public ClinicWorkArea(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
+        this.userAccount = userAccount;
+        this.organization = organization;
     }
 
     /**
@@ -31,19 +39,81 @@ public class ClinicWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnManageVaccineInventory = new javax.swing.JButton();
+        btnManageClinic = new javax.swing.JButton();
+        lblQuestion = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        btnManageVaccineInventory.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageVaccineInventory.setText("Manage Vaccine Inventory");
+        btnManageVaccineInventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageVaccineInventoryActionPerformed(evt);
+            }
+        });
+
+        btnManageClinic.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageClinic.setText("Manage Clinic");
+        btnManageClinic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageClinicActionPerformed(evt);
+            }
+        });
+
+        lblQuestion.setFont(new java.awt.Font("Courier New", 3, 18)); // NOI18N
+        lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblQuestion.setText("What would you like to do today?");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(236, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnManageVaccineInventory)
+                            .addComponent(btnManageClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(285, 285, 285))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblQuestion)
+                        .addGap(212, 212, 212))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(224, Short.MAX_VALUE)
+                .addComponent(lblQuestion)
+                .addGap(33, 33, 33)
+                .addComponent(btnManageClinic)
+                .addGap(26, 26, 26)
+                .addComponent(btnManageVaccineInventory)
+                .addGap(250, 250, 250))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
+
+        VaccineInventory vi = new VaccineInventory(userProcessContainer, userAccount, organization, ecosystem);
+        userProcessContainer.add("VaccineInventory", vi);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageVaccineInventoryActionPerformed
+
+    private void btnManageClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClinicActionPerformed
+
+        ManageClinic mc = new ManageClinic(userProcessContainer, userAccount, organization, ecosystem);
+        userProcessContainer.add("manageClinic", mc);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageClinicActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageClinic;
+    private javax.swing.JButton btnManageVaccineInventory;
+    private javax.swing.JLabel lblQuestion;
     // End of variables declaration//GEN-END:variables
 }

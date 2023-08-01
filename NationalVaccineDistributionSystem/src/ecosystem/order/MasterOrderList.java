@@ -1,7 +1,6 @@
 package ecosystem.order;
 
 import ecosystem.organization.Provider;
-import ecosystem.vaccine.Vaccine;
 import java.util.ArrayList;
 
 public class MasterOrderList {
@@ -12,8 +11,8 @@ public class MasterOrderList {
         listOfOrders = new ArrayList<>();
     }
 
-    public Order addOrder(Provider provider, Vaccine orderVaccine, int orderQuantity) {
-        Order o = new Order(provider, orderVaccine, orderQuantity);
+    public Order addOrder(Provider provider) {
+        Order o = new Order(provider);
         listOfOrders.add(o);
         return o;
     }

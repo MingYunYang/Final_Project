@@ -10,16 +10,21 @@ import ecosystem.role.Role;
 import java.util.ArrayList;
 
 public class Distributor extends Organization {
+    
+    private Role distributorRole;
 
     public Distributor(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.Distributor, country, state, city, address, contact);
     }
 
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roles = new ArrayList<>();
-        roles.add(new DistributorRole());
-        return roles;
+    public Role getSupportedRole() {
+        if(distributorRole == null){
+            distributorRole = new DistributorRole();
+        }
+        return distributorRole;
     }
+
+
 
 }
