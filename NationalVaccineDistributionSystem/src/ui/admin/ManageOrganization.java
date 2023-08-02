@@ -123,11 +123,14 @@ public class ManageOrganization extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblOrganizations);
         if (tblOrganizations.getColumnModel().getColumnCount() > 0) {
             tblOrganizations.getColumnModel().getColumn(0).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblOrganizations.getColumnModel().getColumn(0).setPreferredWidth(1);
             tblOrganizations.getColumnModel().getColumn(1).setResizable(false);
+            tblOrganizations.getColumnModel().getColumn(1).setPreferredWidth(50);
             tblOrganizations.getColumnModel().getColumn(2).setResizable(false);
+            tblOrganizations.getColumnModel().getColumn(2).setPreferredWidth(5);
             tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(4).setResizable(false);
+            tblOrganizations.getColumnModel().getColumn(4).setPreferredWidth(5);
         }
 
         btnAdd.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
@@ -190,9 +193,9 @@ public class ManageOrganization extends javax.swing.JPanel {
                         .addGap(0, 47, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
+                                .addComponent(lblTitle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTitle))
+                                .addComponent(btnBack))
                             .addComponent(lblOrganizationList)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -220,11 +223,11 @@ public class ManageOrganization extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
-                .addGap(53, 53, 53)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCountry)
                     .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

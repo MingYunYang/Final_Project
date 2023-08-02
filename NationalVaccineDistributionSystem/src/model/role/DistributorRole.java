@@ -9,7 +9,7 @@ import ui.distributor.DistributorWorkArea;
 public class DistributorRole extends Role {
 
     public DistributorRole() {
-        type = RoleType.Distributor_Role;
+        super(RoleType.Distributor_Role);
     }
 
     @Override

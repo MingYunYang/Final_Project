@@ -5,6 +5,8 @@
 package ui.clinic;
 
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import model.Ecosystem;
 import model.organization.Organization;
 import model.useraccount.UserAccount;
@@ -12,6 +14,11 @@ import model.vaccine.Vaccine;
 import model.vaccine.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.role.Role;
+import model.role.Role.RoleType;
+import model.workqueue.ClinicReviewRequest;
+import model.workqueue.WorkQueue;
+import model.workqueue.WorkRequest;
 
 /**
  *
@@ -31,7 +38,8 @@ public class ManageClinicVaccineInventory extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.organization = organization;
         
-        populateTable();
+        populateVaccineInventoryTable();
+        populateWorkQueueTable();
     }
 
     /**
@@ -48,6 +56,13 @@ public class ManageClinicVaccineInventory extends javax.swing.JPanel {
         tblVaccineInventory = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         btnViewDetails = new javax.swing.JButton();
+        btnSendRequest = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblInventoryWorkQueue = new javax.swing.JTable();
+        lblInventoryWorkQueue = new javax.swing.JLabel();
+        lblInventoryList = new javax.swing.JLabel();
+        txtRequestQuantity = new javax.swing.JTextField();
+        lblRequestQuantity = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -79,48 +94,162 @@ public class ManageClinicVaccineInventory extends javax.swing.JPanel {
             tblVaccineInventory.getColumnModel().getColumn(0).setPreferredWidth(5);
             tblVaccineInventory.getColumnModel().getColumn(1).setResizable(false);
             tblVaccineInventory.getColumnModel().getColumn(2).setResizable(false);
-            tblVaccineInventory.getColumnModel().getColumn(2).setPreferredWidth(5);
             tblVaccineInventory.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btnBack.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnViewDetails.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnViewDetails.setText("View Details");
+
+        btnSendRequest.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnSendRequest.setText("Send Request");
+        btnSendRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendRequestActionPerformed(evt);
+            }
+        });
+
+        tblInventoryWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Status", "Result"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblInventoryWorkQueue);
+        if (tblInventoryWorkQueue.getColumnModel().getColumnCount() > 0) {
+            tblInventoryWorkQueue.getColumnModel().getColumn(0).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(1).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(2).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(3).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(4).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(5).setResizable(false);
+            tblInventoryWorkQueue.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        lblInventoryWorkQueue.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblInventoryWorkQueue.setText("Inventory Work Queue");
+
+        lblInventoryList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblInventoryList.setText("Inventory List");
+
+        lblRequestQuantity.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblRequestQuantity.setText("Request Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnViewDetails)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitle)
+                    .addComponent(lblInventoryList)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnBack)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblInventoryWorkQueue)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblTitle)
+                            .addComponent(lblRequestQuantity)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSendRequest)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBack))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(btnViewDetails))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblInventoryList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(btnSendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRequestQuantity)
+                    .addComponent(btnViewDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnViewDetails)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addComponent(lblInventoryWorkQueue)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populateTable(){
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendRequestActionPerformed
+        
+        // create the request
+        int selectedRowIndex = tblVaccineInventory.getSelectedRow();
+        if(selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row from the table first");
+            return;
+        }
+        
+        Vaccine vaccine = (Vaccine)tblVaccineInventory.getValueAt(selectedRowIndex, 1);
+        int requestQuantity = Integer.parseInt(txtRequestQuantity.getText());
+        ClinicReviewRequest request = new ClinicReviewRequest();
+        
+        request.setVaccine(vaccine);
+        request.setRequestQuantity(requestQuantity);
+        request.setSender(userAccount); // will show the employee's name
+        request.setStatus("Sent");
+        
+        
+        // add the request to Inventory Role's work queue
+        // add the request to the Review Role's work queue as well
+        Role reviewRole = organization.getSpecificRole(RoleType.Review_Role);
+        WorkQueue inventoryRoleworkQueue = userAccount.getRole().getWorkQueue();
+        
+        if (reviewRole != null){
+            reviewRole.getWorkQueue().getListOfWorkRequests().add(request);
+            inventoryRoleworkQueue.getListOfWorkRequests().add(request);
+        } else {
+            JOptionPane.showMessageDialog(this, "There's no review service now");
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this, "Request sent successfully");
+        txtRequestQuantity.setText("");
+        populateWorkQueueTable();
+    }//GEN-LAST:event_btnSendRequestActionPerformed
+
+    private void populateVaccineInventoryTable(){
         
         DefaultTableModel model = (DefaultTableModel) tblVaccineInventory.getModel();
         model.setRowCount(0);
@@ -139,12 +268,41 @@ public class ManageClinicVaccineInventory extends javax.swing.JPanel {
             model.addRow(row);
         }  
     }
+    
+    private void populateWorkQueueTable(){
+    
+        DefaultTableModel model = (DefaultTableModel) tblInventoryWorkQueue.getModel();
+        model.setRowCount(0);
+        
+        for (WorkRequest request : userAccount.getRole().getWorkQueue().getListOfWorkRequests()){
+            Object[] row = new Object[7];
+            row[0] = request.getVaccine().getVaccineId();
+            row[1] = request.getVaccine().getName();
+            row[2] = request.getRequestQuantity();
+            row[3] = request.getSender();
+            row[4] = request.getReceiver();
+            row[5] = request.getStatus();
+            
+            String result = ((ClinicReviewRequest) request).getResult();
+            row[6] = ((result == null) ? "Waiting" : result);
+            
+            model.addRow(row);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSendRequest;
     private javax.swing.JButton btnViewDetails;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblInventoryList;
+    private javax.swing.JLabel lblInventoryWorkQueue;
+    private javax.swing.JLabel lblRequestQuantity;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tblInventoryWorkQueue;
     private javax.swing.JTable tblVaccineInventory;
+    private javax.swing.JTextField txtRequestQuantity;
     // End of variables declaration//GEN-END:variables
 }

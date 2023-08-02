@@ -4,25 +4,25 @@
  */
 package ui.clinic;
 
-
+import javax.swing.JPanel;
 import model.Ecosystem;
 import model.organization.Organization;
 import model.useraccount.UserAccount;
-import javax.swing.JPanel;
 
 /**
  *
  * @author libby
  */
-public class ManageClinicWorkRequest extends javax.swing.JPanel {
+public class ReportSafetyIssue extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
     UserAccount userAccount;
     Organization organization;
     
-    public ManageClinicWorkRequest(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ReportSafetyIssue(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
+        
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.userAccount = userAccount;
@@ -37,8 +37,6 @@ public class ManageClinicWorkRequest extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

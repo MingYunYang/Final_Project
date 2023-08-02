@@ -9,7 +9,7 @@ import ui.admin.AdminWorkArea;
 public class AdminRole extends Role {
 
     public AdminRole() {
-        type = RoleType.System_Administration_Role;
+        super(RoleType.System_Administration_Role);
     }
 
     @Override

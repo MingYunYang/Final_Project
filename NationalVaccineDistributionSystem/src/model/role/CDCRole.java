@@ -9,7 +9,7 @@ import ui.cdc.CDCWorkArea;
 public class CDCRole extends Role {
 
     public CDCRole() {
-        type = RoleType.CDC_Role;
+        super(RoleType.CDC_Role);
     }
 
     @Override

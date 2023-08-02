@@ -2,11 +2,14 @@ package model.workqueue;
 
 import model.useraccount.UserAccount;
 import java.util.Date;
+import model.vaccine.Vaccine;
 
 public abstract class WorkRequest {
 
-    private String message;
-
+    private Vaccine vaccine;
+    
+    private int requestQuantity;
+    
     private UserAccount sender;
 
     private UserAccount receiver;
@@ -15,18 +18,9 @@ public abstract class WorkRequest {
 
     private Date requestDate;
 
-    private Date resolveDate;
 
     public WorkRequest() {
         requestDate = new Date();
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public UserAccount getSender() {
@@ -61,18 +55,23 @@ public abstract class WorkRequest {
         this.requestDate = requestDate;
     }
 
-    public Date getResolveDate() {
-        return resolveDate;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setResolveDate(Date resolveDate) {
-        this.resolveDate = resolveDate;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
-    @Override
-
-    public String toString() {
-        return this.message;
+    public int getRequestQuantity() {
+        return requestQuantity;
     }
+
+    public void setRequestQuantity(int requestQuantity) {
+        this.requestQuantity = requestQuantity;
+    }
+    
+    
+
 
 }

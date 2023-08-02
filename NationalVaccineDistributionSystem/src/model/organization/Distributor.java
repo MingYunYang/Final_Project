@@ -11,18 +11,19 @@ import java.util.ArrayList;
 
 public class Distributor extends Organization {
     
-    private Role distributorRole;
+    private ArrayList<Role> supportedRole;
 
     public Distributor(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.Distributor, country, state, city, address, contact);
     }
 
     @Override
-    public Role getSupportedRole() {
-        if(distributorRole == null){
-            distributorRole = new DistributorRole();
+    public ArrayList<Role> getSupportedRole() {
+        if(supportedRole == null){
+            supportedRole = new ArrayList<>();
+            supportedRole.add(new DistributorRole());
         }
-        return distributorRole;
+        return supportedRole;
     }
 
 

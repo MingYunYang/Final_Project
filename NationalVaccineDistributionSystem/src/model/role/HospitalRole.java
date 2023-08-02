@@ -9,7 +9,7 @@ import ui.hospital.HospitalWorkArea;
 public class HospitalRole extends Role {
 
     public HospitalRole() {
-        type = RoleType.Hospital_Role;
+        super(RoleType.Hospital_Role);
     }
 
     @Override

@@ -58,7 +58,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(202, 202, 202)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
@@ -67,7 +67,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
                             .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(manageOrganizationJButton)))
                     .addComponent(lblQuestion))
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, userJButton});
@@ -75,7 +75,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
+                .addGap(164, 164, 164)
                 .addComponent(lblQuestion)
                 .addGap(31, 31, 31)
                 .addComponent(manageOrganizationJButton)
@@ -83,7 +83,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
                 .addComponent(manageEmployeeJButton)
                 .addGap(41, 41, 41)
                 .addComponent(userJButton)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, userJButton});

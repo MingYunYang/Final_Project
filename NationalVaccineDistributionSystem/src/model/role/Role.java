@@ -4,24 +4,31 @@ import model.Ecosystem;
 import model.organization.Organization;
 import model.useraccount.UserAccount;
 import javax.swing.JPanel;
+import model.workqueue.WorkQueue;
 
 public abstract class Role {
 
     public RoleType type;
+    private WorkQueue workQueue;
 
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem);
 
     public enum RoleType {
 
-        CDC_Role("CDC_Role"),
-        PHD_Role("PHD_Role"),
-        Clinic_Role("Clinic_Role"),
-        DistributionCenter_Role("DistributionCenter_Role"),
-        Distributor_Role("Distributor_Role"),
-        Hospital_Role("Hospital_Role"),
-        Manufacturer_Role("Manufacturer_Role"),
-        Provider_Role("Provider_Role"),
-        System_Administration_Role("System_Administration_Role");
+        CDC_Role("CDC Role"),
+        PHD_Role("PHD Role"),
+        Clinic_Role("Clinic Role"),
+        DistributionCenter_Role("DistributionCenter Role"),
+        Distributor_Role("Distributor Role"),
+        Hospital_Role("Hospital Role"),
+        Manufacturer_Role("Manufacturer Role"),
+        Provider_Role("Provider Role"),
+        System_Administration_Role("System Administration Role"),
+        
+        Doctor_Role("Doctor Role"),
+        Review_Role("Review Role"),
+        Inventory_Role("Inventory Role"),
+        Monitor_Role("Monitor Role");
 
         private final String value;
 
@@ -37,7 +44,20 @@ public abstract class Role {
         public String toString() {
             return value;
         }
+    }
+    
+    public Role(RoleType roleType){
+        workQueue = new WorkQueue();
+        type = roleType;
+    }
 
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+    
+    @Override
+    public String toString(){
+        return type.getValue();
     }
 
 }

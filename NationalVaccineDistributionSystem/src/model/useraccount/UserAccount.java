@@ -2,7 +2,6 @@ package model.useraccount;
 
 import model.employee.Employee;
 import model.role.Role;
-import model.workqueue.WorkQueue;
 
 public class UserAccount {
 
@@ -13,8 +12,7 @@ public class UserAccount {
     private Employee employee;
 
     private Role role;
-
-    private WorkQueue workQueue;
+   
 
     public UserAccount(String username, String password, Employee employee, Role role) {
         this.username = username;
@@ -22,7 +20,6 @@ public class UserAccount {
         this.employee = employee;
         employee.setUserAccount(this);
         this.role = role;
-        workQueue = new WorkQueue();
     }
 
     public String getUsername() {
@@ -56,13 +53,11 @@ public class UserAccount {
     public Employee getEmployee() {
         return employee;
     }
-
-    public WorkQueue getWorkQueue() {
-        return workQueue;
+    
+    @Override
+    public String toString(){
+        return employee.getEmployeeName();
     }
-
-    public void setWorkQueue(WorkQueue workQueue) {
-        this.workQueue = workQueue;
-    }
+   
 
 }

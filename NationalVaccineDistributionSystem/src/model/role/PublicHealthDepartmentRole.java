@@ -9,7 +9,7 @@ import ui.phd.PHDWorkArea;
 public class PublicHealthDepartmentRole extends Role {
 
     public PublicHealthDepartmentRole() {
-        type = RoleType.PHD_Role;
+        super(RoleType.PHD_Role);
     }
 
     @Override

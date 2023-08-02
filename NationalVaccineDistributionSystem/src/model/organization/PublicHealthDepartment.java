@@ -1,5 +1,6 @@
 package model.organization;
 
+import java.util.ArrayList;
 import model.geography.Contact;
 import model.geography.Address;
 import model.geography.City;
@@ -10,18 +11,19 @@ import model.role.Role;
 
 public class PublicHealthDepartment extends Organization {
     
-    private Role publicHealthDepartmentRole;
+    private ArrayList<Role> supportedRole;
 
     public PublicHealthDepartment(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.Public_Health_Department, country, state, city, address, contact);
     }
 
     @Override
-    public Role getSupportedRole() {
-        if(publicHealthDepartmentRole == null){
-            publicHealthDepartmentRole = new PublicHealthDepartmentRole();
+    public ArrayList<Role> getSupportedRole() {
+        if(supportedRole == null){
+            supportedRole = new ArrayList<>();
+            supportedRole.add(new PublicHealthDepartmentRole());
         }
-        return publicHealthDepartmentRole;
+        return supportedRole;
     }
 
 

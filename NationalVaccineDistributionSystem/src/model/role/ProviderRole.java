@@ -9,7 +9,7 @@ import ui.provider.ProviderWorkArea;
 public class ProviderRole extends Role {
 
     public ProviderRole() {
-        type = RoleType.Provider_Role;
+        super(RoleType.Provider_Role);
     }
 
     @Override

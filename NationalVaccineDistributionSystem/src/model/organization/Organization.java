@@ -1,5 +1,6 @@
 package model.organization;
 
+import java.util.ArrayList;
 import model.geography.Contact;
 import model.employee.EmployeeDirectory;
 import model.geography.Address;
@@ -7,6 +8,7 @@ import model.geography.Country;
 import model.geography.City;
 import model.geography.State;
 import model.role.Role;
+import model.role.Role.RoleType;
 import model.useraccount.UserAccountDirectory;
 import model.vaccine.VaccineInventoryCatalog;
 import model.workqueue.WorkQueue;
@@ -35,7 +37,7 @@ public abstract class Organization {
 
     private Contact contact;
 
-    public abstract Role getSupportedRole();
+    public abstract ArrayList<Role> getSupportedRole();
 
     public enum Type {
 
@@ -77,10 +79,21 @@ public abstract class Organization {
         this.city = city;
         this.address = address;
         this.contact = contact;
+        
+        getSupportedRole();
+    }
+    
+    public Role getSpecificRole(RoleType roleType){ 
+        for(Role role : getSupportedRole()){
+            if(role.type == roleType){
+                return role;
+            }
+        }
+        return null;
     }
     
     // not every organization has inventory catalog
-    // call this method when the organization object is created (in OrganizationDirectory - addOrganization())
+    // if needed, call this method when the organization object is created (OrganizationDirectory - addOrganization())
     public VaccineInventoryCatalog createVaccineInventoryCatalog(){
         if(inventoryCatalog == null){
             inventoryCatalog = new VaccineInventoryCatalog();

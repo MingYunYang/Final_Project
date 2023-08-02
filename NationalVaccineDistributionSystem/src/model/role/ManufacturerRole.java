@@ -9,7 +9,7 @@ import ui.manufacturer.ManufacturerWorkArea;
 public class ManufacturerRole extends Role {
 
     public ManufacturerRole() {
-        type = RoleType.Manufacturer_Role;
+        super(RoleType.Manufacturer_Role);
     }
 
     @Override
