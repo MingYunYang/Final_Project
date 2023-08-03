@@ -15,7 +15,7 @@ import model.workqueue.WorkQueue;
 
 public abstract class Organization {
 
-    private String name;
+    private String organizationName;
 
     private WorkQueue workQueue;
 
@@ -69,7 +69,7 @@ public abstract class Organization {
     }
 
     public Organization(String name, Type type, Country country, State state, City city, Address address, Contact contact) {
-        this.name = name;
+        this.organizationName = name;
         this.type = type;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
@@ -101,12 +101,12 @@ public abstract class Organization {
         return inventoryCatalog;
     }
 
-    public String getName() {
-        return name;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public WorkQueue getWorkQueue() {
@@ -187,7 +187,7 @@ public abstract class Organization {
 
     @Override
     public String toString() {
-        return name;
+        return organizationName;
     }
 
 }

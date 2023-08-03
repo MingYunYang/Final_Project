@@ -18,18 +18,18 @@ public class AdminWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userJButton = new javax.swing.JButton();
+        manageUserAccountJPanel = new javax.swing.JButton();
         manageEmployeeJButton = new javax.swing.JButton();
         manageOrganizationJButton = new javax.swing.JButton();
         lblQuestion = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        userJButton.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        userJButton.setText("Manage Users");
-        userJButton.addActionListener(new java.awt.event.ActionListener() {
+        manageUserAccountJPanel.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        manageUserAccountJPanel.setText("Manage Users");
+        manageUserAccountJPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userJButtonActionPerformed(evt);
+                manageUserAccountJPanelActionPerformed(evt);
             }
         });
 
@@ -73,13 +73,13 @@ public class AdminWorkArea extends javax.swing.JPanel {
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageUserAccountJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(manageOrganizationJButton)))
                     .addComponent(lblQuestion))
                 .addContainerGap(246, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, userJButton});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, manageUserAccountJPanel});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,21 +91,21 @@ public class AdminWorkArea extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addComponent(manageEmployeeJButton)
                 .addGap(41, 41, 41)
-                .addComponent(userJButton)
+                .addComponent(manageUserAccountJPanel)
                 .addContainerGap(234, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, userJButton});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, manageUserAccountJPanel});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
+    private void manageUserAccountJPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserAccountJPanelActionPerformed
         
         ManageUserAccount muajp = new ManageUserAccount(userProcessContainer, ecosystem.getOrganizationDirectory(), ecosystem);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_userJButtonActionPerformed
+    }//GEN-LAST:event_manageUserAccountJPanelActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
 
@@ -132,7 +132,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuestion;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
-    private javax.swing.JButton userJButton;
+    private javax.swing.JButton manageUserAccountJPanel;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -15,9 +15,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class ManageEmployee extends javax.swing.JPanel {
 
-    private OrganizationDirectory organizationDirectory;
-    private JPanel userProcessContainer;
-    private Ecosystem ecosystem;
+    private final OrganizationDirectory organizationDirectory;
+    private final JPanel userProcessContainer;
+    private final Ecosystem ecosystem;
 
     public ManageEmployee(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, Ecosystem ecosystem) {
 
@@ -46,7 +46,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         }
     }
 
-    public void populateCountryCombo(){
+    private void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
         for(Country country : ecosystem.getCountryList()){
@@ -54,7 +54,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         }
     }
     
-    public void populateStateCombo(Country country){
+    private void populateStateCombo(Country country){
         
         cmbState.removeAllItems();
         for(State state : country.getStateList()){
@@ -62,7 +62,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         }
     }
     
-    public void populateOrganizationTypeCombo(){
+    private void populateOrganizationTypeCombo(){
                 
         cmbOrganizationType.removeAllItems();
         for(Organization.Type type : Organization.Type.values()){
@@ -70,7 +70,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         }
     }
     
-    public void populateOrganizationCombo(Country country, State state, Type type){
+    private void populateOrganizationCombo(Country country, State state, Type type){
         
         cmbOrganization.removeAllItems();
         for (Organization organization : organizationDirectory.getListOfOrganizations()){

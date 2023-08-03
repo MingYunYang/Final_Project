@@ -9,7 +9,7 @@ import model.workqueue.WorkQueue;
 public abstract class Role {
 
     public RoleType type;
-    private WorkQueue workQueue;
+    private final WorkQueue workQueue;
 
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem);
 
