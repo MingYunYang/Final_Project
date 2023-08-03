@@ -24,14 +24,14 @@ import model.workqueue.WorkRequest;
  *
  * @author libby
  */
-public class ManageClinicVaccineInventory extends javax.swing.JPanel {
+public class ManageVaccineInventory extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
     UserAccount userAccount;
     Organization organization;
     
-    public ManageClinicVaccineInventory(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ManageVaccineInventory(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;

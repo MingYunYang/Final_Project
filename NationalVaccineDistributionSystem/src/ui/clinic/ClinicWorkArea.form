@@ -29,11 +29,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnManageVaccineRequest" max="32767" attributes="0"/>
-                          <Component id="btnOpenClinic" min="-2" pref="222" max="-2" attributes="0"/>
-                          <Component id="btnManageVaccineInventory" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnReportSafetyIssue" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnManageClinic" min="-2" pref="222" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnManageVaccineRequest" max="32767" attributes="0"/>
+                              <Component id="btnOpenClinic" min="-2" pref="222" max="-2" attributes="0"/>
+                              <Component id="btnManageVaccineInventory" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnReportSafetyIssue" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -49,12 +52,14 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="btnOpenClinic" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnManageVaccineInventory" min="-2" max="-2" attributes="0"/>
+              <Component id="btnManageClinic" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnManageVaccineInventory" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="btnManageVaccineRequest" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnReportSafetyIssue" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="270" max="32767" attributes="0"/>
+              <EmptySpace pref="228" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +68,7 @@
     <Component class="javax.swing.JButton" name="btnManageVaccineRequest">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
+          <Font name="Courier New" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Manage Vaccine Request"/>
       </Properties>
@@ -74,7 +79,7 @@
     <Component class="javax.swing.JButton" name="btnOpenClinic">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
+          <Font name="Courier New" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Open Clinic"/>
       </Properties>
@@ -94,7 +99,7 @@
     <Component class="javax.swing.JButton" name="btnManageVaccineInventory">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
+          <Font name="Courier New" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Manage Vaccine Inventory"/>
       </Properties>
@@ -105,12 +110,23 @@
     <Component class="javax.swing.JButton" name="btnReportSafetyIssue">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
+          <Font name="Courier New" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Report Safety Issue"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportSafetyIssueActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnManageClinic">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Manage Clinic"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageClinicActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -8,12 +8,12 @@ package ui.clinic;
  *
  * @author libby
  */
-public class ViewDetails extends javax.swing.JPanel {
+public class ManageClinic extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewDetails
+     * Creates new form ManageClinic
      */
-    public ViewDetails() {
+    public ManageClinic() {
         initComponents();
     }
 

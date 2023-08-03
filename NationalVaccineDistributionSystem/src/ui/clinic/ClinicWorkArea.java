@@ -55,10 +55,11 @@ public class ClinicWorkArea extends javax.swing.JPanel {
         lblQuestion = new javax.swing.JLabel();
         btnManageVaccineInventory = new javax.swing.JButton();
         btnReportSafetyIssue = new javax.swing.JButton();
+        btnManageClinic = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        btnManageVaccineRequest.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnManageVaccineRequest.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         btnManageVaccineRequest.setText("Manage Vaccine Request");
         btnManageVaccineRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +67,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnOpenClinic.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnOpenClinic.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         btnOpenClinic.setText("Open Clinic");
         btnOpenClinic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +79,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblQuestion.setText("What would you like to do today?");
 
-        btnManageVaccineInventory.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnManageVaccineInventory.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         btnManageVaccineInventory.setText("Manage Vaccine Inventory");
         btnManageVaccineInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,11 +87,19 @@ public class ClinicWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnReportSafetyIssue.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnReportSafetyIssue.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         btnReportSafetyIssue.setText("Report Safety Issue");
         btnReportSafetyIssue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportSafetyIssueActionPerformed(evt);
+            }
+        });
+
+        btnManageClinic.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageClinic.setText("Manage Clinic");
+        btnManageClinic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageClinicActionPerformed(evt);
             }
         });
 
@@ -105,11 +114,13 @@ public class ClinicWorkArea extends javax.swing.JPanel {
                         .addComponent(lblQuestion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(263, 263, 263)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnManageVaccineRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnOpenClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnManageVaccineInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReportSafetyIssue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnManageClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnManageVaccineRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnOpenClinic, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnManageVaccineInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnReportSafetyIssue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(226, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,12 +131,14 @@ public class ClinicWorkArea extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(btnOpenClinic)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageVaccineInventory)
+                .addComponent(btnManageClinic)
                 .addGap(18, 18, 18)
+                .addComponent(btnManageVaccineInventory)
+                .addGap(19, 19, 19)
                 .addComponent(btnManageVaccineRequest)
                 .addGap(18, 18, 18)
                 .addComponent(btnReportSafetyIssue)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,7 +160,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
         
-        ManageClinicVaccineInventory mcvi = new ManageClinicVaccineInventory(userProcessContainer, userAccount, organization, ecosystem);
+        ManageVaccineInventory mcvi = new ManageVaccineInventory(userProcessContainer, userAccount, organization, ecosystem);
         userProcessContainer.add("ManageClinicVaccineInventory", mcvi);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -161,8 +174,13 @@ public class ClinicWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnReportSafetyIssueActionPerformed
 
+    private void btnManageClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClinicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageClinicActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageClinic;
     private javax.swing.JButton btnManageVaccineInventory;
     private javax.swing.JButton btnManageVaccineRequest;
     private javax.swing.JButton btnOpenClinic;

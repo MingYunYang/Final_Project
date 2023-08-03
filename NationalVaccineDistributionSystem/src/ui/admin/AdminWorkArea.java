@@ -35,6 +35,15 @@ public class AdminWorkArea extends javax.swing.JPanel {
 
         manageEmployeeJButton.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         manageEmployeeJButton.setText("Manage Employees");
+        manageEmployeeJButton.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                manageEmployeeJButtonAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageEmployeeJButtonActionPerformed(evt);
@@ -113,6 +122,10 @@ public class AdminWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+
+    private void manageEmployeeJButtonAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonAncestorMoved
+        
+    }//GEN-LAST:event_manageEmployeeJButtonAncestorMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -133,7 +133,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         lblOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblOrganization.setText("Organization:");
 
-        cmbOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationActionPerformed(evt);
@@ -197,14 +196,12 @@ public class ManageEmployee extends javax.swing.JPanel {
         lblState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblState.setText("State:");
 
-        cmbState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStateActionPerformed(evt);
             }
         });
 
-        cmbCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCountryActionPerformed(evt);
@@ -217,7 +214,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         lblOrganizationType.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblOrganizationType.setText("Organization Type:");
 
-        cmbOrganizationType.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbOrganizationType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationTypeActionPerformed(evt);

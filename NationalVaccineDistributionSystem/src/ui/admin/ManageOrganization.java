@@ -9,6 +9,10 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.geography.Address;
+import model.geography.City;
+import model.geography.Contact;
+import model.organization.Organization.Type;
 
 public class ManageOrganization extends javax.swing.JPanel {
 
@@ -25,12 +29,22 @@ public class ManageOrganization extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
 
         populateCountryCombo();
-        Country selectedCountry = (Country) cmbCountry.getSelectedItem();
-        if (selectedCountry != null) {
-            populateStateCombo(selectedCountry);
+        Country country = (Country)cmbCountry.getSelectedItem();
+        if(country != null){
+            populateStateCombo(country);
+            State state = (State)cmbState.getSelectedItem();
+            if(state != null){
+                populateCityCombo(state);
+                City city = (City)cmbCity.getSelectedItem();
+                if(city != null){
+                    populateOrganizationTypeCombo();
+                    Type type = (Type)cmbOrganizationType.getSelectedItem();
+                    if(type != null){
+                        populateTable();
+                    }
+                }
+            }
         }
-        
-        populateTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +64,22 @@ public class ManageOrganization extends javax.swing.JPanel {
             cmbState.addItem(state);
         }
     }
+    
+    private void populateCityCombo(State state){
+        
+        cmbCity.removeAllItems();
+        for (City city : state.getListOfCities()){
+            cmbCity.addItem(city);
+        }
+    }
+    
+    private void populateOrganizationTypeCombo(){
+                
+        cmbOrganizationType.removeAllItems();
+        for(Type type : Type.values()){
+            cmbOrganizationType.addItem(type);
+        }
+    }
 
     public void populateTable(){
         
@@ -58,16 +88,21 @@ public class ManageOrganization extends javax.swing.JPanel {
 
         Country selectedCountry = (Country)cmbCountry.getSelectedItem();
         State selectedState = (State)cmbState.getSelectedItem();
+        City city = (City)cmbCity.getSelectedItem();
+        Type type = (Type)cmbOrganizationType.getSelectedItem();
         
         int count = 1;
         for (Organization organization : directory.getListOfOrganizations()) {
-            if(organization.getCountry().equals(selectedCountry) && organization.getState().equals(selectedState)){
-                Object[] row = new Object[5];
+            if(organization.getCountry().equals(selectedCountry) 
+                    && organization.getState().equals(selectedState)
+                    && organization.getCity().equals(city)
+                    && organization.getType().equals(type)){
+                
+                Object[] row = new Object[4];
                 row[0] = count;
                 row[1] = organization;
-                row[2] = organization.getCity();
-                row[3] = organization.getAddress();
-                row[4] = organization.getContact();
+                row[2] = organization.getAddress();
+                row[3] = organization.getContact();
                             
                 model.addRow(row);
                 count++;
@@ -81,7 +116,7 @@ public class ManageOrganization extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrganizations = new javax.swing.JTable();
-        btnAdd = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
         cmbCountry = new javax.swing.JComboBox();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
@@ -89,27 +124,41 @@ public class ManageOrganization extends javax.swing.JPanel {
         lblCountry = new javax.swing.JLabel();
         lblState = new javax.swing.JLabel();
         cmbState = new javax.swing.JComboBox();
-        btnRemove = new javax.swing.JButton();
+        lblOrganizationType = new javax.swing.JLabel();
+        cmbOrganizationType = new javax.swing.JComboBox();
+        lblCity = new javax.swing.JLabel();
+        cmbCity = new javax.swing.JComboBox();
+        lblNewName = new javax.swing.JLabel();
+        lblNewPhone = new javax.swing.JLabel();
+        lblNewAddress = new javax.swing.JLabel();
+        lblNewPostalCode = new javax.swing.JLabel();
+        lblOrganizationList1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblCreateNewOrganization = new javax.swing.JLabel();
+        txtNewName = new javax.swing.JTextField();
+        txtNewPhone = new javax.swing.JTextField();
+        txtNewAddress = new javax.swing.JTextField();
+        txtNewPostalCode = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         tblOrganizations.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "No.", "Name", "City", "Address", "Contact"
+                "No.", "Name", "Address", "Contact"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -124,24 +173,22 @@ public class ManageOrganization extends javax.swing.JPanel {
         if (tblOrganizations.getColumnModel().getColumnCount() > 0) {
             tblOrganizations.getColumnModel().getColumn(0).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tblOrganizations.getColumnModel().getColumn(0).setHeaderValue("No.");
             tblOrganizations.getColumnModel().getColumn(1).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(1).setPreferredWidth(50);
             tblOrganizations.getColumnModel().getColumn(2).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(2).setPreferredWidth(5);
             tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(4).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(4).setPreferredWidth(5);
+            tblOrganizations.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
-        btnAdd.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
 
-        cmbCountry.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCountryActionPerformed(evt);
@@ -168,92 +215,208 @@ public class ManageOrganization extends javax.swing.JPanel {
         lblState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblState.setText("State:");
 
-        cmbState.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         cmbState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStateActionPerformed(evt);
             }
         });
 
-        btnRemove.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnRemove.setText("Delete");
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+        lblOrganizationType.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblOrganizationType.setText("Organization Type:");
+
+        cmbOrganizationType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
+                cmbOrganizationTypeActionPerformed(evt);
             }
         });
+
+        lblCity.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblCity.setText("City:");
+
+        cmbCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCityActionPerformed(evt);
+            }
+        });
+
+        lblNewName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblNewName.setText("Name:");
+
+        lblNewPhone.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblNewPhone.setText("Phone:");
+
+        lblNewAddress.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblNewAddress.setText("Address:");
+
+        lblNewPostalCode.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblNewPostalCode.setText("Postal Code:");
+
+        lblOrganizationList1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblOrganizationList1.setText("Search Organization:");
+
+        lblCreateNewOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblCreateNewOrganization.setText("Create New Organization:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 47, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBack))
+                        .addComponent(lblTitle)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblOrganizationList)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCountry)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblOrganizationList1)
+                                            .addComponent(lblCreateNewOrganization)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lblNewName, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNewPhone, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNewPostalCode, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNewAddress, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(txtNewPostalCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtNewAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtNewPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtNewName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jSeparator1))
+                                        .addGap(50, 50, 50))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(120, 120, 120))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblCity)
+                                                    .addComponent(lblCountry)
+                                                    .addComponent(lblState))
+                                                .addGap(98, 98, 98))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(lblOrganizationType)
+                                                .addGap(18, 18, 18)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbOrganizationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbState, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbCountry, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(53, 53, 53))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblState)
-                                .addGap(203, 203, 203))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(43, 43, 43))
+                                .addComponent(btnBack)
+                                .addGap(53, 53, 53))))))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbCountry, cmbState});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnRemove});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCountry)
-                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblState))
                 .addGap(18, 18, 18)
-                .addComponent(lblOrganizationList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemove)
-                    .addComponent(btnAdd))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblOrganizationList1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCountry)
+                                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblState))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCity))
+                                .addGap(35, 35, 35))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbOrganizationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblOrganizationType)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCreateNewOrganization)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNewName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(lblNewName)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNewPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNewPhone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNewAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNewAddress))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNewPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNewPostalCode))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCreate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblOrganizationList)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
-        AddOrganization ao = new AddOrganization(directory, userProcessContainer, ecosystem);
-        userProcessContainer.add(ao);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        Country country = (Country)cmbCountry.getSelectedItem();
+        State state = (State)cmbState.getSelectedItem();
+        City city = (City)cmbCity.getSelectedItem();
+        Type type = (Type)cmbOrganizationType.getSelectedItem();
+        
+        String name = txtNewName.getText();
+        if (txtNewName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the new organization name");
+            return;
+        }
+
+        Contact phone = new Contact(txtNewPhone.getText());
+        if (txtNewPhone.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the new organization phone");
+            return;
+        }
+
+        Address address = new Address(txtNewAddress.getText(), txtNewPostalCode.getText());
+        if (txtNewAddress.getText().isEmpty() || txtNewPostalCode.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the new organization address & postal code");
+            return;
+        }
+
+        Organization newOrganization = directory.newOrganization(name, type, country, state, city, address, phone);
+
+        txtNewName.setText("");
+        txtNewPhone.setText("");
+        txtNewAddress.setText("");
+        txtNewPostalCode.setText("");
+
+        JOptionPane.showMessageDialog(this, "New Organization created successfully");
+        populateTable();
 
         evt.getWhen();
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -264,52 +427,92 @@ public class ManageOrganization extends javax.swing.JPanel {
         evt.getWhen();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-
-        int selectedIndex = tblOrganizations.getSelectedRow();
-        if(selectedIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please selecte an row to delete");
-            return;
-        }
-        
-        Organization o = (Organization)tblOrganizations.getValueAt(selectedIndex, 1);
-        directory.removeOrganization(o);
-        
-        populateTable();
-
-        evt.getWhen();
-    }//GEN-LAST:event_btnRemoveActionPerformed
-
     private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
 
-        Country selectedCountry = (Country) cmbCountry.getSelectedItem();
-        if (selectedCountry != null) {
-            populateStateCombo(selectedCountry);
+        Country country = (Country)cmbCountry.getSelectedItem();
+        if(country != null){
+            populateStateCombo(country);
+            State state = (State)cmbState.getSelectedItem();
+            if(state != null){
+                populateCityCombo(state);
+                City city = (City)cmbCity.getSelectedItem();
+                if(city != null){
+                    populateOrganizationTypeCombo();
+                    Type type = (Type)cmbOrganizationType.getSelectedItem();
+                    if(type != null){
+                        populateTable();
+                    }
+                }
+            }
         }
-        
-        populateTable();
 
         evt.getWhen();
     }//GEN-LAST:event_cmbCountryActionPerformed
 
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
-        populateTable();
+        
+        State state = (State)cmbState.getSelectedItem();
+            if(state != null){
+                populateCityCombo(state);
+                City city = (City)cmbCity.getSelectedItem();
+                if(city != null){
+                    populateOrganizationTypeCombo();
+                    Type type = (Type)cmbOrganizationType.getSelectedItem();
+                    if(type != null){
+                        populateTable();
+                    }
+                }
+            }
 
         evt.getWhen();
     }//GEN-LAST:event_cmbStateActionPerformed
 
+    private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
+
+        Type type = (Type)cmbOrganizationType.getSelectedItem();
+            if(type != null){
+                populateTable();
+        }
+    }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
+
+    private void cmbCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCityActionPerformed
+        
+        City city = (City)cmbCity.getSelectedItem();
+            if(city != null){
+                populateOrganizationTypeCombo();
+                Type type = (Type)cmbOrganizationType.getSelectedItem();
+                if(type != null){
+                    populateTable();
+            }
+        }
+    }//GEN-LAST:event_cmbCityActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JComboBox cmbCity;
     private javax.swing.JComboBox cmbCountry;
+    private javax.swing.JComboBox cmbOrganizationType;
     private javax.swing.JComboBox cmbState;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCountry;
+    private javax.swing.JLabel lblCreateNewOrganization;
+    private javax.swing.JLabel lblNewAddress;
+    private javax.swing.JLabel lblNewName;
+    private javax.swing.JLabel lblNewPhone;
+    private javax.swing.JLabel lblNewPostalCode;
     private javax.swing.JLabel lblOrganizationList;
+    private javax.swing.JLabel lblOrganizationList1;
+    private javax.swing.JLabel lblOrganizationType;
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrganizations;
+    private javax.swing.JTextField txtNewAddress;
+    private javax.swing.JTextField txtNewName;
+    private javax.swing.JTextField txtNewPhone;
+    private javax.swing.JTextField txtNewPostalCode;
     // End of variables declaration//GEN-END:variables
 
 }

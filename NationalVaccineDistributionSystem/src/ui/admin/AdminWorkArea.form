@@ -74,6 +74,7 @@
         <Property name="text" type="java.lang.String" value="Manage Employees"/>
       </Properties>
       <Events>
+        <EventHandler event="ancestorMoved" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="manageEmployeeJButtonAncestorMoved"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageEmployeeJButtonActionPerformed"/>
       </Events>
     </Component>
