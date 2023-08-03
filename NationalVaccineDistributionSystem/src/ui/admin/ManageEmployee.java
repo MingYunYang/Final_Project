@@ -49,7 +49,7 @@ public class ManageEmployee extends javax.swing.JPanel {
     public void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getListOfCountries()){
+        for(Country country : ecosystem.getCountryList()){
             cmbCountry.addItem(country);
         }
     }
