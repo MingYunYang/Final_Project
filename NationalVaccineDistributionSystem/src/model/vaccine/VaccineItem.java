@@ -12,18 +12,18 @@ import java.util.Date;
  * @author libby
  */
 public class VaccineItem {
-    
+
     private Vaccine vaccine;
-    
+
     private Manufacturer manufacturer;
-    
+
     private int batchId;
-    
+
     private Date manufactureDate;
-    
+
     private Date expirationDate;
-    
-    public VaccineItem(Vaccine vaccine, Manufacturer manufacturer, int batchId){
+
+    public VaccineItem(Vaccine vaccine , Manufacturer manufacturer , int batchId) {
         this.vaccine = vaccine;
         this.batchId = batchId;
         this.manufacturer = manufacturer;
@@ -70,7 +70,6 @@ public class VaccineItem {
     public void setManufactureDate(Date manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
-    
-    
-    
+
+
 }

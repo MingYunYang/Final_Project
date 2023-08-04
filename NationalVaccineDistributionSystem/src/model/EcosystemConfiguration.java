@@ -23,9 +23,9 @@ public class EcosystemConfiguration {
     public static Ecosystem configure() {
 
         Ecosystem ecosystem = Ecosystem.getInstance();
-        
+
         Country usa = ecosystem.addCountry("United States");
-        
+
         State massachusetts = usa.addState("Massachusetts");
         City cambridge = massachusetts.addCity("Cambridge");
         massachusetts.addCity("Boston");
@@ -43,41 +43,37 @@ public class EcosystemConfiguration {
         newyork.addCity("Albany");
         newyork.addCity("New York");
 
-        Address address = cambridge.addAddress("215 Kelton St", "02134");
-        
+        Address address = cambridge.addAddress("215 Kelton St" , "02134");
         Contact contact = address.addContact("781-921-8195");
-        
+
         OrganizationDirectory organizationDirectory = ecosystem.getOrganizationDirectory();
+        AdminOrganization adminOrganization = new AdminOrganization("US Dept. of Health and Human Services" , usa , massachusetts , cambridge , address , contact);
+        organizationDirectory.addOrganization(adminOrganization);
 
-        AdminOrganization admin = new AdminOrganization("US Dept. of Health and Human Services", usa, massachusetts, cambridge, address, contact);
+        Employee adminEmployee = adminOrganization.getEmployeeDirectory().addEmployee("Admin");
+        Role adminRole = adminOrganization.getSpecificRole(RoleType.System_Administration_Role);
+        adminOrganization.getUserAccountDirectory().createUserAccount("admin" , "admin" , adminEmployee , adminRole);
 
-        
-        organizationDirectory.addOrganization(admin);
+        // TESTING
+        Clinic clinic = ( Clinic ) organizationDirectory.newOrganization("Malden Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
 
-        Employee adminEmployee = admin.getEmployeeDirectory().addEmployee("Admin");
-
-        Role adminRole = admin.getSpecificRole(RoleType.System_Administration_Role);
-
-        admin.getUserAccountDirectory().createUserAccount("admin", "admin", adminEmployee, adminRole);
-
-        Clinic clinic = (Clinic) organizationDirectory.newOrganization("Malden Clinic", Organization.Type.Clinic, usa, massachusetts, cambridge, address, contact);
-
-        Employee clinicEmployee = clinic.getEmployeeDirectory().addEmployee("libby");
-
+        Employee clinicEmployee1 = clinic.getEmployeeDirectory().addEmployee("libby");
         Role inventoryRole = clinic.getSpecificRole(RoleType.Vaccine_Inventory_Management_Role);
+        clinic.getUserAccountDirectory().createUserAccount("1" , "1" , clinicEmployee1 , inventoryRole);
 
-        clinic.getUserAccountDirectory().createUserAccount("inventory", "inventory", clinicEmployee, inventoryRole);
+        Employee clinicEmployee2 = clinic.getEmployeeDirectory().addEmployee("libby");
+        Role reviewRequestsRole = clinic.getSpecificRole(RoleType.Review_Requests_Role);
+        clinic.getUserAccountDirectory().createUserAccount("2" , "2" , clinicEmployee2 , reviewRequestsRole);
+
+        Employee clinicEmployee3 = clinic.getEmployeeDirectory().addEmployee("libby");
+        Role doctorRole = clinic.getSpecificRole(RoleType.Doctor_Role);
+        clinic.getUserAccountDirectory().createUserAccount("3" , "3" , clinicEmployee3 , doctorRole);
 
         VaccineInventoryCatalog clinicInventoryCatalog = clinic.getInventoryCatalog();
-
-        Vaccine vaccine = new Vaccine("Covid-19 Vaccine", 500, 1);
-
-        Manufacturer manufacturer = new Manufacturer("Modena", usa, massachusetts, cambridge, address, contact);
-
-        VaccineItem vaccineItem = new VaccineItem(vaccine, manufacturer, 1);
-
-        OrderItem oi = new OrderItem(vaccineItem, 5);
-
+        Vaccine vaccine = new Vaccine("Covid-19 Vaccine" , 500 , 1);
+        Manufacturer manufacturer = new Manufacturer("Modena" , usa , massachusetts , cambridge , address , contact);
+        VaccineItem vaccineItem = new VaccineItem(vaccine , manufacturer , 1);
+        OrderItem oi = new OrderItem(vaccineItem , 5);
         clinicInventoryCatalog.getOrderItemList().add(oi);
 
         return ecosystem;
