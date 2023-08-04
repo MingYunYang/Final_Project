@@ -4,7 +4,6 @@
  */
 package ui.clinic;
 
-
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import model.Ecosystem;
@@ -24,20 +23,20 @@ import model.workqueue.WorkRequest;
  *
  * @author libby
  */
-public class ManageVaccineInventory extends javax.swing.JPanel {
+public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Ecosystem ecosystem;
     UserAccount userAccount;
     Organization organization;
-    
-    public ManageVaccineInventory(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+
+    public ManageVaccineInventoryJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.userAccount = userAccount;
         this.organization = organization;
-        
+
         populateVaccineInventoryTable();
         populateWorkQueueTable();
     }
@@ -58,7 +57,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         btnViewDetails = new javax.swing.JButton();
         btnSendRequest = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblInventoryWorkQueue = new javax.swing.JTable();
+        tblVaccineInventoryManagementWorkQueue = new javax.swing.JTable();
         lblInventoryWorkQueue = new javax.swing.JLabel();
         lblInventoryList = new javax.swing.JLabel();
         txtRequestQuantity = new javax.swing.JTextField();
@@ -107,6 +106,11 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
         btnViewDetails.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnViewDetails.setText("View Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
 
         btnSendRequest.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnSendRequest.setText("Send Request");
@@ -116,7 +120,8 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             }
         });
 
-        tblInventoryWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
+        tblVaccineInventoryManagementWorkQueue.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        tblVaccineInventoryManagementWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -124,7 +129,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Status", "Result"
+                "Vaccine ID", "Vaccine Name", "Qty request", "Sender", "Recipient", "Status", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -135,25 +140,27 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblInventoryWorkQueue);
-        if (tblInventoryWorkQueue.getColumnModel().getColumnCount() > 0) {
-            tblInventoryWorkQueue.getColumnModel().getColumn(0).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(1).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(2).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(3).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(4).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(5).setResizable(false);
-            tblInventoryWorkQueue.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane2.setViewportView(tblVaccineInventoryManagementWorkQueue);
+        if (tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumnCount() > 0) {
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(0).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(1).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(2).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(3).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(4).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(5).setResizable(false);
+            tblVaccineInventoryManagementWorkQueue.getColumnModel().getColumn(6).setResizable(false);
         }
 
         lblInventoryWorkQueue.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblInventoryWorkQueue.setText("Inventory Work Queue");
+        lblInventoryWorkQueue.setText("Vaccine Inventory request Work Queue");
 
         lblInventoryList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblInventoryList.setText("Inventory List");
+        lblInventoryList.setText("Vaccine Inventory");
 
         lblRequestQuantity.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblRequestQuantity.setText("Request Quantity:");
+        lblRequestQuantity.setText("Request Vaccine Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -162,119 +169,169 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle)
-                    .addComponent(lblInventoryList)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnBack)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblInventoryWorkQueue)
+                        .addGap(574, 574, 574))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblInventoryWorkQueue)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblRequestQuantity)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSendRequest)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewDetails))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblInventoryList))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(btnBack)
+                                    .addGap(350, 350, 350)
+                                    .addComponent(lblTitle))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblRequestQuantity)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnSendRequest)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnViewDetails)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(lblInventoryList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(btnSendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                    .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRequestQuantity)
-                    .addComponent(btnViewDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSendRequest)
+                        .addComponent(btnViewDetails))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRequestQuantity)))
                 .addGap(18, 18, 18)
                 .addComponent(lblInventoryWorkQueue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * This method is triggered when the "Send Request" button is clicked.
+     *
+     * The purpose of this method is to create and send a vaccine review request
+     * to the organization's Review Role from the current user (who is assumed
+     * to have an Inventory Role). The review request includes a selected
+     * vaccine, the quantity of vaccine to be reviewed, and the user who is
+     * sending the request.
+     *
+     * The method performs the following actions:
+     *
+     * 1. It fetches the index of the selected row from the vaccine inventory
+     * table. If no row is selected, the method shows an error message and
+     * returns without further action.
+     *
+     * 2. It retrieves the vaccine and request quantity from the selected row
+     * and input field respectively, and creates a new ClinicReviewRequest with
+     * these details.
+     *
+     * 3. The sender of the request is set as the current user, and the request
+     * status is set to "Sent".
+     *
+     * 4. The method then fetches the Review Role from the organization, as well
+     * as the work queue for the current user's role.
+     *
+     * 5. If the Review Role is present, the request is added to the work queues
+     * of both the current user's role and the Review Role. If the Review Role
+     * is not present, an error message is displayed.
+     *
+     * 6. Upon successful submission of the request, a success message is
+     * displayed and the request quantity input field is cleared. The work queue
+     * table is then updated to reflect the new request.
+     *
+     * @param evt The ActionEvent object generated when the button is clicked.
+     * This parameter is not used in the method implementation, but is required
+     * due to the method being an event handler.
+     */
     private void btnSendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendRequestActionPerformed
-        
+
         // create the request
         int selectedRowIndex = tblVaccineInventory.getSelectedRow();
-        if(selectedRowIndex < 0){
+        if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row from the table first");
             return;
         }
-        
-        Vaccine vaccine = (Vaccine)tblVaccineInventory.getValueAt(selectedRowIndex, 1);
+
+        Vaccine vaccine = (Vaccine) tblVaccineInventory.getValueAt(selectedRowIndex, 1);
         int requestQuantity = Integer.parseInt(txtRequestQuantity.getText());
         ClinicReviewRequest request = new ClinicReviewRequest();
-        
+
         request.setVaccine(vaccine);
         request.setRequestQuantity(requestQuantity);
         request.setSender(userAccount); // will show the employee's name
         request.setStatus("Sent");
-        
-        
+
         // add the request to Inventory Role's work queue
         // add the request to the Review Role's work queue as well
-        Role reviewRole = organization.getSpecificRole(RoleType.Review_Role);
+        Role reviewRole = organization.getSpecificRole(RoleType.Review_Requests_Role);
         WorkQueue inventoryRoleworkQueue = userAccount.getRole().getWorkQueue();
-        
-        if (reviewRole != null){
+
+        if (reviewRole != null) {
             reviewRole.getWorkQueue().getListOfWorkRequests().add(request);
             inventoryRoleworkQueue.getListOfWorkRequests().add(request);
         } else {
             JOptionPane.showMessageDialog(this, "There's no review service now");
             return;
         }
-        
+
         JOptionPane.showMessageDialog(this, "Request sent successfully");
         txtRequestQuantity.setText("");
         populateWorkQueueTable();
     }//GEN-LAST:event_btnSendRequestActionPerformed
 
-    private void populateVaccineInventoryTable(){
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
+        // TODO add your handling code here:
         
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
+
+    private void populateVaccineInventoryTable() {
+
         DefaultTableModel model = (DefaultTableModel) tblVaccineInventory.getModel();
         model.setRowCount(0);
-        
+
         VaccineInventoryCatalog inventory = organization.getInventoryCatalog();
         inventory.populateVaccineTypeList();
         inventory.populateVaccineInventoryCount();
-        
-        for(Vaccine vaccine : inventory.getVaccineInventoryCount().keySet()){
+
+        for (Vaccine vaccine : inventory.getVaccineInventoryCount().keySet()) {
             Object[] row = new Object[4];
             row[0] = vaccine.getVaccineId();
             row[1] = vaccine;
             row[2] = inventory.getVaccineInventoryCount().get(vaccine);
             row[3] = inventory.getInventoryStatus(vaccine);
-            
+
             model.addRow(row);
-        }  
+        }
     }
-    
-    private void populateWorkQueueTable(){
-    
-        DefaultTableModel model = (DefaultTableModel) tblInventoryWorkQueue.getModel();
+
+    private void populateWorkQueueTable() {
+
+        DefaultTableModel model = (DefaultTableModel) tblVaccineInventoryManagementWorkQueue.getModel();
         model.setRowCount(0);
-        
-        for (WorkRequest request : userAccount.getRole().getWorkQueue().getListOfWorkRequests()){
+
+        for (WorkRequest request : userAccount.getRole().getWorkQueue().getListOfWorkRequests()) {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request.getVaccine().getName();
@@ -282,14 +339,14 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             row[3] = request.getSender();
             row[4] = request.getReceiver();
             row[5] = request.getStatus();
-            
+
             String result = ((ClinicReviewRequest) request).getResult();
             row[6] = ((result == null) ? "Waiting" : result);
-            
+
             model.addRow(row);
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -301,8 +358,8 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
     private javax.swing.JLabel lblInventoryWorkQueue;
     private javax.swing.JLabel lblRequestQuantity;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tblInventoryWorkQueue;
     private javax.swing.JTable tblVaccineInventory;
+    private javax.swing.JTable tblVaccineInventoryManagementWorkQueue;
     private javax.swing.JTextField txtRequestQuantity;
     // End of variables declaration//GEN-END:variables
 }

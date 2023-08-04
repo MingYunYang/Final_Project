@@ -26,8 +26,8 @@ public abstract class Role {
         System_Administration_Role("System Administration Role"),
         
         Doctor_Role("Doctor Role"),
-        Review_Role("Review Role"),
-        Inventory_Role("Inventory Role"),
+        Review_Requests_Role("Review Role"),
+        Vaccine_Inventory_Management_Role("Inventory Role"),
         Monitor_Role("Monitor Role");
 
         private final String value;

@@ -88,7 +88,7 @@ public class EcosystemConfiguration {
         Employee clinicEmployee = clinic.getEmployeeDirectory().addEmployee("libby");
 
         // Get the specified role for the employee in the clinic organization
-        Role inventoryRole = clinic.getSpecificRole(RoleType.Inventory_Role);
+        Role inventoryRole = clinic.getSpecificRole(RoleType.Vaccine_Inventory_Management_Role);
 
         // Create user account for the clinic employee
         clinic.getUserAccountDirectory().createUserAccount("inventory", "inventory", clinicEmployee, inventoryRole);

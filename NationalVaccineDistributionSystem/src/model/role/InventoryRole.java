@@ -18,12 +18,12 @@ import ui.clinic.ClinicWorkArea;
 public class InventoryRole extends Role{
     
     public InventoryRole(){
-        super(RoleType.Inventory_Role);
+        super(RoleType.Vaccine_Inventory_Management_Role);
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.Inventory_Role;
+        type = RoleType.Vaccine_Inventory_Management_Role;
         
         if(organization instanceof Clinic){
             return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());

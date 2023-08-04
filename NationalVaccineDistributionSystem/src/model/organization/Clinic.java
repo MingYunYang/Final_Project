@@ -10,7 +10,7 @@ import model.role.DoctorRole;
 import model.role.MonitorRole;
 import model.role.InventoryRole;
 import model.role.Role;
-import model.role.ReviewRole;
+import model.role.ReviewRequestsRole;
 
 public class Clinic extends Organization {
     
@@ -27,7 +27,7 @@ public class Clinic extends Organization {
             supportedRole.add(new DoctorRole());
             supportedRole.add(new MonitorRole());
             supportedRole.add(new InventoryRole());
-            supportedRole.add(new ReviewRole());
+            supportedRole.add(new ReviewRequestsRole());
         }
         return supportedRole;
     }

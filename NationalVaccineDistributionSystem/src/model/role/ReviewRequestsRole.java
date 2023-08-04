@@ -15,15 +15,15 @@ import ui.clinic.ClinicWorkArea;
  *
  * @author libby
  */
-public class ReviewRole extends Role{
+public class ReviewRequestsRole extends Role{
     
-    public ReviewRole(){
-        super(RoleType.Review_Role);
+    public ReviewRequestsRole(){
+        super(RoleType.Review_Requests_Role);
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.Review_Role;
+        type = RoleType.Review_Requests_Role;
         
         if(organization instanceof Clinic){
             return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
