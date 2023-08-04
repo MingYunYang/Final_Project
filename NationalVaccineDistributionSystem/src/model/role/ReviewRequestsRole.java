@@ -7,9 +7,11 @@ package model.role;
 import javax.swing.JPanel;
 import model.Ecosystem;
 import model.organization.Clinic;
+import model.organization.Hospital;
 import model.organization.Organization;
 import model.useraccount.UserAccount;
 import ui.clinic.ClinicWorkArea;
+import ui.hospital.HospitalWorkArea;
 
 /**
  *
@@ -27,7 +29,9 @@ public class ReviewRequestsRole extends Role{
         
         if(organization instanceof Clinic){
             return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
-        } //如果organization是hospital，就會new出hospital的頁面，以此類推，待完成...
+        } else if(organization instanceof Hospital){
+            return new HospitalWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
+        } 
         return null;
     }
     

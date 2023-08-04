@@ -9,7 +9,8 @@ import model.workqueue.WorkQueue;
 public abstract class Role {
 
     public RoleType type;
-    private final WorkQueue workQueue;
+    private final WorkQueue mainWorkQueue;
+    private final WorkQueue waitingWorkQueue;
 
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem);
 
@@ -28,7 +29,8 @@ public abstract class Role {
         Doctor_Role("Doctor Role"),
         Review_Requests_Role("Review Role"),
         Vaccine_Inventory_Management_Role("Inventory Role"),
-        Monitor_Role("Monitor Role");
+        Monitor_Role("Monitor Role"),
+        LabTechnician_Role("LabTechnician Role");
 
         private final String value;
 
@@ -47,13 +49,20 @@ public abstract class Role {
     }
     
     public Role(RoleType roleType){
-        workQueue = new WorkQueue();
+        mainWorkQueue = new WorkQueue();
+        waitingWorkQueue = new WorkQueue();
         type = roleType;
     }
 
-    public WorkQueue getWorkQueue() {
-        return workQueue;
+    public WorkQueue getMainWorkQueue() {
+        return mainWorkQueue;
     }
+
+    public WorkQueue getWaitingWorkQueue() {
+        return waitingWorkQueue;
+    }
+    
+    
     
     @Override
     public String toString(){

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.clinic;
+package ui.hospital;
 
+import ui.clinic.*;
 import javax.swing.JPanel;
 import model.Ecosystem;
 import model.organization.Organization;

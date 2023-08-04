@@ -28,8 +28,7 @@ public class EcosystemConfiguration {
 
         State massachusetts = usa.addState("Massachusetts");
         City cambridge = massachusetts.addCity("Cambridge");
-        massachusetts.addCity("Boston");
-        massachusetts.addCity("Attleboro");
+        City boston = massachusetts.addCity("Boston");
 
         State washington = usa.addState("Washington");
         washington.addCity("Seattle");
@@ -54,18 +53,20 @@ public class EcosystemConfiguration {
         Role adminRole = adminOrganization.getSpecificRole(RoleType.System_Administration_Role);
         adminOrganization.getUserAccountDirectory().createUserAccount("admin" , "admin" , adminEmployee , adminRole);
 
+        
+        
         // TESTING
-        Clinic clinic = ( Clinic ) organizationDirectory.newOrganization("Malden Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
+        Clinic clinic = ( Clinic ) organizationDirectory.newOrganization("Cambridge Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
 
         Employee clinicEmployee1 = clinic.getEmployeeDirectory().addEmployee("libby");
         Role inventoryRole = clinic.getSpecificRole(RoleType.Vaccine_Inventory_Management_Role);
         clinic.getUserAccountDirectory().createUserAccount("1" , "1" , clinicEmployee1 , inventoryRole);
 
-        Employee clinicEmployee2 = clinic.getEmployeeDirectory().addEmployee("libby");
+        Employee clinicEmployee2 = clinic.getEmployeeDirectory().addEmployee("william");
         Role reviewRequestsRole = clinic.getSpecificRole(RoleType.Review_Requests_Role);
         clinic.getUserAccountDirectory().createUserAccount("2" , "2" , clinicEmployee2 , reviewRequestsRole);
 
-        Employee clinicEmployee3 = clinic.getEmployeeDirectory().addEmployee("libby");
+        Employee clinicEmployee3 = clinic.getEmployeeDirectory().addEmployee("john");
         Role doctorRole = clinic.getSpecificRole(RoleType.Doctor_Role);
         clinic.getUserAccountDirectory().createUserAccount("3" , "3" , clinicEmployee3 , doctorRole);
 

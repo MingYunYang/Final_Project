@@ -71,6 +71,11 @@ public abstract class WorkRequest {
         this.requestQuantity = requestQuantity;
     }
     
+    @Override
+    public String toString(){
+        return vaccine.getName();
+    }
+    
     
 
 

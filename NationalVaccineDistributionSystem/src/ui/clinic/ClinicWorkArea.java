@@ -51,12 +51,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
                 btnReportSafetyIssue.setEnabled(false);
                 btnManageVaccineInventory.setEnabled(false);
             }
-            default -> {
-                btnManageVaccineInventory.setEnabled(false);
-                btnManageVaccineRequest.setEnabled(false);
-            }
         }
-
     }
 
     @SuppressWarnings ( "unchecked" )
@@ -132,7 +127,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineRequestActionPerformed
 
-        ManageVaccineRequest mvr = new ManageVaccineRequest(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineRequestJPanel mvr = new ManageVaccineRequestJPanel(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageClinicRequestReview" , mvr);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -148,7 +143,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnReportSafetyIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSafetyIssueActionPerformed
 
-        ReportSafetyIssue rsi = new ReportSafetyIssue(userProcessContainer , userAccount , organization , ecosystem);
+        ReportSafetyIssueJPanel rsi = new ReportSafetyIssueJPanel(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ReportSafetyIssue" , rsi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

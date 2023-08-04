@@ -47,6 +47,7 @@ public class OrganizationDirectory {
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Hospital.getValue())) {
             organization = new Hospital(name, country, state, city, address, contact);
+            organization.createVaccineInventoryCatalog();
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Manufacturer.getValue())) {
             organization = new Manufacturer(name, country, state, city, address, contact);
@@ -62,6 +63,15 @@ public class OrganizationDirectory {
             listOfOrganizations.add(organization);
         }
         return organization;
+    }
+    
+    public Organization getAffiliateHospital(City city){
+        for(Organization organization : listOfOrganizations){
+            if(organization.getCity().equals(city) && organization.getType().equals(Type.Hospital)){
+                return organization;
+            }
+        }
+        return null;
     }
 
 }

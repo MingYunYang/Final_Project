@@ -10,28 +10,25 @@ import model.organization.Clinic;
 import model.organization.Hospital;
 import model.organization.Organization;
 import model.useraccount.UserAccount;
-import ui.clinic.ClinicWorkArea;
 import ui.hospital.HospitalWorkArea;
 
 /**
  *
  * @author libby
  */
-public class InventoryRole extends Role{
+public class LabTechnicianRole extends Role{
     
-    public InventoryRole(){
-        super(RoleType.Vaccine_Inventory_Management_Role);
+    public LabTechnicianRole(){
+        super(Role.RoleType.LabTechnician_Role);
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.Vaccine_Inventory_Management_Role;
+        type = Role.RoleType.LabTechnician_Role;
         
-        if(organization instanceof Clinic){
-            return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
-        } else if(organization instanceof Hospital){
+        if(organization instanceof Hospital){
             return new HospitalWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
-        } 
+        }
         return null;    
     }
     

@@ -1,6 +1,7 @@
 package model.geography;
 
 import java.util.HashSet;
+import model.organization.Hospital;
 
 public class City {
 
@@ -13,11 +14,14 @@ public class City {
     private int cityPopulation;
 
     private HashSet<Address> listOfAddresses;
+    
+    private Hospital affiliateHospital;
+
 
     public City(String cityName) {
         cityId = ++count;
         this.cityName = cityName;
-        this.listOfAddresses = new HashSet<>();
+        listOfAddresses = new HashSet<>();
     }
 
     public Address addAddress(String street, String postalCode) {
@@ -53,6 +57,17 @@ public class City {
     public void setListOfAddresses(HashSet<Address> listOfAddresses) {
         this.listOfAddresses = listOfAddresses;
     }
+
+    public Hospital getAffiliateHospital() {
+        return affiliateHospital;
+    }
+
+    public void setAffiliateHospital(Hospital affiliateHospital) {
+        this.affiliateHospital = affiliateHospital;
+    }
+
+    
+    
 
     @Override
     public String toString() {
