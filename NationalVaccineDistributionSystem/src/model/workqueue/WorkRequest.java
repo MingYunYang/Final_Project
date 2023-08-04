@@ -13,6 +13,10 @@ public abstract class WorkRequest {
     private UserAccount sender;
 
     private UserAccount receiver;
+    
+    private UserAccount clinicReviewer;
+    
+    private UserAccount hospitalReviewer;
 
     private String status;
 
@@ -21,6 +25,16 @@ public abstract class WorkRequest {
 
     public WorkRequest() {
         requestDate = new Date();
+    }
+
+    public UserAccount getHospitalReviewer() {
+        return hospitalReviewer;
+    }
+    
+    
+    
+    public void setHospitalReviewer(UserAccount userAccount){
+        hospitalReviewer = userAccount;
     }
 
     public UserAccount getSender() {
@@ -70,6 +84,16 @@ public abstract class WorkRequest {
     public void setRequestQuantity(int requestQuantity) {
         this.requestQuantity = requestQuantity;
     }
+
+    public UserAccount getClinicReviewer() {
+        return clinicReviewer;
+    }
+
+    public void setClinicReviewer(UserAccount reviewer) {
+        this.clinicReviewer = reviewer;
+    }
+    
+    
     
     @Override
     public String toString(){

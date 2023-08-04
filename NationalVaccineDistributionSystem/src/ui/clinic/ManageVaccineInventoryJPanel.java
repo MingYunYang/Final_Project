@@ -128,7 +128,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Status", "Result"
+                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Request Status", "Review Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {

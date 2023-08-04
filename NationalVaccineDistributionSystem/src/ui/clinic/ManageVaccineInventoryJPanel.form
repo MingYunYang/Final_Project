@@ -191,8 +191,8 @@
                 <Column editable="false" title="Quantity" type="java.lang.Object"/>
                 <Column editable="false" title="Sender" type="java.lang.Object"/>
                 <Column editable="false" title="Recipient" type="java.lang.Object"/>
-                <Column editable="false" title="Status" type="java.lang.Object"/>
-                <Column editable="false" title="Result" type="java.lang.Object"/>
+                <Column editable="false" title="Request Status" type="java.lang.Object"/>
+                <Column editable="false" title="Review Result" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

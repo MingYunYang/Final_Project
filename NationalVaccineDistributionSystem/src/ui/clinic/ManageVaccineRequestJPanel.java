@@ -50,7 +50,7 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
             row[1] = request;
             row[2] = request.getRequestQuantity();
             row[3] = request.getSender();
-            row[4] = request.getReceiver();
+            row[4] = request.getClinicReviewer();
             row[5] = request.getStatus();
             
             String result = ((ClinicReviewRequest) request).getResult();
@@ -67,16 +67,17 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
         
         for(WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests()){
   
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
             row[2] = request.getRequestQuantity();
             row[3] = request.getSender();
-            row[4] = request.getReceiver();
+            row[4] = request.getClinicReviewer();
             row[5] = request.getStatus();
+            row[6] = request.getReceiver();
             
             String result = ((ClinicReviewRequest) request).getResult();
-            row[6] = ((result == null) ? "Waiting" : result);
+            row[7] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);  
         }
@@ -109,7 +110,7 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Status", "Result"
+                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Request Status", "Review Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -167,17 +168,17 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
 
         tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Recipient", "Status", "Result"
+                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Reviewer", "Request Status", "Recipient", "Review Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,6 +198,7 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
             tblRequestWaitingToBeReviewed.getColumnModel().getColumn(4).setPreferredWidth(50);
             tblRequestWaitingToBeReviewed.getColumnModel().getColumn(5).setResizable(false);
             tblRequestWaitingToBeReviewed.getColumnModel().getColumn(6).setResizable(false);
+            tblRequestWaitingToBeReviewed.getColumnModel().getColumn(7).setResizable(false);
         }
 
         btnRejected.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
@@ -243,18 +245,18 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(lblReceivedVaccineRequest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAssignToMe)
                 .addGap(18, 18, 18)
                 .addComponent(lblRequestWaitingToBeReviewed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnApproved)
                     .addComponent(btnRejected))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,7 +277,6 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
         WorkRequest request = (WorkRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
         
         // push the request to affiliate hospital's inventory role's work queue
-        // add the request to clinic's review role's waiting list as well
         Hospital affiliateHospital = organization.getCity().getAffiliateHospital();
         Role inventoryRole = affiliateHospital.getSpecificRole(Role.RoleType.Vaccine_Inventory_Management_Role);
 
@@ -303,7 +304,7 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
                 return;
             } else {
                 userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests().add(request);
-                request.setReceiver(userAccount);
+                request.setClinicReviewer(userAccount);
                 request.setStatus("Under Clinic Review");
                 JOptionPane.showMessageDialog(this, "Request successfully assigned to you");
                 populateMainWorkQueue();

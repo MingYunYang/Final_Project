@@ -10,6 +10,7 @@ import model.order.OrderItem;
 import model.organization.OrganizationDirectory;
 import model.organization.AdminOrganization;
 import model.organization.Clinic;
+import model.organization.Hospital;
 import model.organization.Manufacturer;
 import model.organization.Organization;
 import model.role.Role;
@@ -56,6 +57,7 @@ public class EcosystemConfiguration {
         
         
         // TESTING
+        // create 1 clinic and add 3 roles in it
         Clinic clinic = ( Clinic ) organizationDirectory.newOrganization("Cambridge Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
 
         Employee clinicEmployee1 = clinic.getEmployeeDirectory().addEmployee("libby");
@@ -77,6 +79,24 @@ public class EcosystemConfiguration {
         OrderItem oi = new OrderItem(vaccineItem , 5);
         clinicInventoryCatalog.getOrderItemList().add(oi);
 
+        // add 1 hospital and add 3 roles in it
+        Hospital hospital = ( Hospital ) organizationDirectory.newOrganization("Cambridge Hospital" , Organization.Type.Hospital , usa , massachusetts , cambridge , address , contact);
+
+        Employee hospitalEmployee1 = hospital.getEmployeeDirectory().addEmployee("hospital employee 1");
+        Role hospitalInventoryRole = hospital.getSpecificRole(RoleType.Vaccine_Inventory_Management_Role);
+        hospital.getUserAccountDirectory().createUserAccount("4" , "4" , hospitalEmployee1 , hospitalInventoryRole);
+
+        Employee hospitalEmployee2 = hospital.getEmployeeDirectory().addEmployee("hospital employee 2");
+        Role hospitalReviewRequestsRole = hospital.getSpecificRole(RoleType.Review_Requests_Role);
+        hospital.getUserAccountDirectory().createUserAccount("5" , "5" , hospitalEmployee2 , hospitalReviewRequestsRole);
+
+        Employee hospitalEmployee3 = hospital.getEmployeeDirectory().addEmployee("hospital employee 3");
+        Role hospitalLabRole = hospital.getSpecificRole(RoleType.LabTechnician_Role);
+        hospital.getUserAccountDirectory().createUserAccount("6" , "6" , hospitalEmployee3 , hospitalLabRole);
+        
+        
+        
+        
         return ecosystem;
     }
 
