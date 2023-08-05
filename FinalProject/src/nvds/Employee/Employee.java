@@ -22,7 +22,7 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    public String getEmployeeName() {
+    public String getOrganizationEmployeeName() {
         return employeeName;
     }
 

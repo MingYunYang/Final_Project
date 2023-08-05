@@ -12,7 +12,7 @@ public class UserAccountDirectory {
         listOfUserAccounts = new ArrayList<>();
     }
 
-    public UserAccount authenticateUser(String username , String password) {
+    public UserAccount authenticateEmployeeUserAccount(String username , String password) {
         for ( UserAccount ua : listOfUserAccounts ) {
             if ( ua.getUsername().equals(username) && ua.getPassword().equals(password) ) {
                 return ua;
