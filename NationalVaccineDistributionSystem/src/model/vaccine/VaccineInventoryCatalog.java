@@ -4,7 +4,7 @@
  */
 package model.vaccine;
 
-import model.order.OrderItem;
+import model.VaccineOrderManagement.VaccineOrderItem;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class VaccineInventoryCatalog { // similar to the concept of OrderHistory
     
-    private ArrayList<OrderItem> orderItemList;
+    private ArrayList<VaccineOrderItem> orderItemList;
     private ArrayList<Vaccine> vaccineTypeList;
     private HashMap<Vaccine, Integer> vaccineInventoryCount;
     
@@ -28,7 +28,7 @@ public class VaccineInventoryCatalog { // similar to the concept of OrderHistory
         
         vaccineTypeList.clear();
         
-        for(OrderItem oi : orderItemList){
+        for(VaccineOrderItem oi : orderItemList){
             Vaccine vaccine = oi.getVaccineItem().getVaccine();
             if(!vaccineTypeList.contains(vaccine)){
                 vaccineTypeList.add(vaccine);
@@ -39,7 +39,7 @@ public class VaccineInventoryCatalog { // similar to the concept of OrderHistory
     public int countInventory(Vaccine vaccine){
         
         int sum = 0;
-        for(OrderItem oi : orderItemList){
+        for(VaccineOrderItem oi : orderItemList){
             if(oi.getVaccineItem().getVaccine().equals(vaccine)){
                 sum = sum + oi.getOrderQuantity();
             }
@@ -66,7 +66,7 @@ public class VaccineInventoryCatalog { // similar to the concept of OrderHistory
         return "Sufficient";
     }
 
-    public ArrayList<OrderItem> getOrderItemList() {
+    public ArrayList<VaccineOrderItem> getVaccineOrderItemList() {
         return orderItemList;
     }
 

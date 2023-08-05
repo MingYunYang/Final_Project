@@ -5,10 +5,10 @@
 package ui.hospital;
 
 import java.awt.CardLayout;
-import model.Ecosystem;
+import model.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
-import model.organization.Organization;
-import model.role.Role;
+import model.organization.NvdsParticipatingOrganization;
+import model.role.EmployeeRole;
 import model.useraccount.UserAccount;
 
 /**
@@ -19,13 +19,13 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
 
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
 
     UserAccount userAccount;
 
-    Organization organization;
+    NvdsParticipatingOrganization organization;
     
-    public HospitalWorkArea(JPanel userProcessContainer , UserAccount userAccount , Organization organization , Ecosystem ecosystem) {
+    public HospitalWorkArea(JPanel userProcessContainer , UserAccount userAccount , NvdsParticipatingOrganization organization , NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -39,17 +39,17 @@ public class HospitalWorkArea extends javax.swing.JPanel {
     
     private void toggleButtonsAccessBasedOnRole() {
 
-        Role role = userAccount.getRole();
+        EmployeeRole role = userAccount.getRole();
         switch ( role.type ) {
-            case LabTechnician_Role -> {
+            case HOSPITAL_LAB_TECHNICIAN_ROLE -> {
                 btnManageVaccineInventory.setEnabled(false);
                 btnManageVaccineRequest.setEnabled(false);
             }
-            case Vaccine_Inventory_Management_Role -> {
+            case VACCINE_INVENTORY_MANAGEMENT_ROLE -> {
                 btnManageVaccineRequest.setEnabled(false);
                 btnReportSafetyIssue.setEnabled(false);
             }
-            case Review_Requests_Role -> {
+            case REVIEW_VACCINE_ORDER_REQUEST_ROLE -> {
                 btnReportSafetyIssue.setEnabled(false);
                 btnManageVaccineInventory.setEnabled(false);
             }

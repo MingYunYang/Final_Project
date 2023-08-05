@@ -1,7 +1,7 @@
 package model.useraccount;
 
-import model.employee.Employee;
-import model.role.Role;
+import model.Employee.Employee;
+import model.role.EmployeeRole;
 import java.util.ArrayList;
 
 public class UserAccountDirectory {
@@ -21,7 +21,7 @@ public class UserAccountDirectory {
         return null;
     }
 
-    public UserAccount createUserAccount(String username, String password, Employee employee, Role role) {
+    public UserAccount createUserAccount(String username, String password, Employee employee, EmployeeRole role) {
         UserAccount userAccount = new UserAccount(username, password, employee, role);
         listOfAccounts.add(userAccount);
         return userAccount;

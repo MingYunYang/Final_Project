@@ -4,7 +4,7 @@
  */
 package ui.cdc;
 
-import model.Ecosystem;
+import model.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
 
 /**
@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 public class CDCWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
     
-    public CDCWorkArea(JPanel userProcessContainer, Ecosystem ecosystem) {
+    public CDCWorkArea(JPanel userProcessContainer, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;

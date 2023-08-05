@@ -1,18 +1,18 @@
 package model.role;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import javax.swing.JPanel;
 import model.workqueue.WorkQueue;
 
-public abstract class Role {
+public abstract class EmployeeRole {
 
     public RoleType type;
     private final WorkQueue mainWorkQueue;
     private final WorkQueue waitingWorkQueue;
 
-    public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem);
+    public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem);
 
     public enum RoleType {
 
@@ -24,13 +24,13 @@ public abstract class Role {
         Hospital_Role("Hospital Role"),
         Manufacturer_Role("Manufacturer Role"),
         Provider_Role("Provider Role"),
-        System_Administration_Role("System Administration Role"),
+        NVDS_ADMIN_ORG_ADMIN_ROLE("System Administration Role"),
         
-        Doctor_Role("Doctor Role"),
-        Review_Requests_Role("Review Role"),
-        Vaccine_Inventory_Management_Role("Inventory Role"),
+        CLINIC_DOCTOR_ROLE("Doctor Role"),
+        REVIEW_VACCINE_ORDER_REQUEST_ROLE("Review Role"),
+        VACCINE_INVENTORY_MANAGEMENT_ROLE("Inventory Role"),
         Monitor_Role("Monitor Role"),
-        LabTechnician_Role("LabTechnician Role");
+        HOSPITAL_LAB_TECHNICIAN_ROLE("LabTechnician Role");
 
         private final String value;
 
@@ -48,7 +48,7 @@ public abstract class Role {
         }
     }
     
-    public Role(RoleType roleType){
+    public EmployeeRole(RoleType roleType){
         mainWorkQueue = new WorkQueue();
         waitingWorkQueue = new WorkQueue();
         type = roleType;

@@ -6,16 +6,16 @@ package ui.hospital;
 
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import model.vaccine.Vaccine;
 import model.vaccine.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.organization.Hospital;
-import model.role.Role;
-import model.role.Role.RoleType;
+import model.organization.NvdsHospital;
+import model.role.EmployeeRole;
+import model.role.EmployeeRole.RoleType;
 import model.workqueue.ClinicReviewRequest;
 import model.workqueue.WorkQueue;
 import model.workqueue.WorkRequest;
@@ -27,11 +27,11 @@ import model.workqueue.WorkRequest;
 public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
-    Organization organization;
+    NvdsParticipatingOrganization organization;
 
-    public ManageVaccineInventoryJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ManageVaccineInventoryJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -294,8 +294,8 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         WorkRequest request = (WorkRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
 
         // push the request to affiliate hospital's inventory role's work queue
-        Hospital affiliateHospital = organization.getCity().getAffiliateHospital();
-        Role inventoryRole = affiliateHospital.getSpecificRole(Role.RoleType.Vaccine_Inventory_Management_Role);
+        NvdsHospital affiliateHospital = organization.getCity().getAffiliateHospital();
+        EmployeeRole inventoryRole = affiliateHospital.setSupportedEmployeeRole(EmployeeRole.RoleType.VACCINE_INVENTORY_MANAGEMENT_ROLE);
 
         if (inventoryRole != null) {
             inventoryRole.getMainWorkQueue().getListOfWorkRequests().add(request);

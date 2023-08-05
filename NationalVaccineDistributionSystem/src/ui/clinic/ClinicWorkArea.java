@@ -1,23 +1,23 @@
 package ui.clinic;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import model.role.Role;
+import model.role.EmployeeRole;
 
 public class ClinicWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
 
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
 
     UserAccount userAccount;
 
-    Organization organization;
+    NvdsParticipatingOrganization organization;
 
-    public ClinicWorkArea(JPanel userProcessContainer , UserAccount userAccount , Organization organization , Ecosystem ecosystem) {
+    public ClinicWorkArea(JPanel userProcessContainer , UserAccount userAccount , NvdsParticipatingOrganization organization , NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -37,17 +37,17 @@ public class ClinicWorkArea extends javax.swing.JPanel {
      */
     private void toggleButtonsAccessBasedOnRole() {
 
-        Role role = userAccount.getRole();
+        EmployeeRole role = userAccount.getRole();
         switch ( role.type ) {
-            case Doctor_Role -> {
+            case CLINIC_DOCTOR_ROLE -> {
                 btnManageVaccineInventory.setEnabled(false);
                 btnManageVaccineRequest.setEnabled(false);
             }
-            case Vaccine_Inventory_Management_Role -> {
+            case VACCINE_INVENTORY_MANAGEMENT_ROLE -> {
                 btnManageVaccineRequest.setEnabled(false);
                 btnReportSafetyIssue.setEnabled(false);
             }
-            case Review_Requests_Role -> {
+            case REVIEW_VACCINE_ORDER_REQUEST_ROLE -> {
                 btnReportSafetyIssue.setEnabled(false);
                 btnManageVaccineInventory.setEnabled(false);
             }

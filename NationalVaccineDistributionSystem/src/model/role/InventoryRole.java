@@ -5,10 +5,10 @@
 package model.role;
 
 import javax.swing.JPanel;
-import model.Ecosystem;
-import model.organization.Clinic;
-import model.organization.Hospital;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsClinic;
+import model.organization.NvdsHospital;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import ui.clinic.ClinicWorkArea;
 import ui.hospital.HospitalWorkArea;
@@ -17,20 +17,20 @@ import ui.hospital.HospitalWorkArea;
  *
  * @author libby
  */
-public class InventoryRole extends Role{
+public class InventoryRole extends EmployeeRole{
     
     public InventoryRole(){
-        super(RoleType.Vaccine_Inventory_Management_Role);
+        super(RoleType.VACCINE_INVENTORY_MANAGEMENT_ROLE);
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.Vaccine_Inventory_Management_Role;
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+        type = RoleType.VACCINE_INVENTORY_MANAGEMENT_ROLE;
         
-        if(organization instanceof Clinic){
-            return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
-        } else if(organization instanceof Hospital){
-            return new HospitalWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
+        if(organization instanceof NvdsClinic){
+            return new ClinicWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance());
+        } else if(organization instanceof NvdsHospital){
+            return new HospitalWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance());
         } 
         return null;    
     }

@@ -1,21 +1,21 @@
 package model.role;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import javax.swing.JPanel;
 import ui.admin.AdminWorkArea;
 
-public class AdminRole extends Role {
+public class AdminRole extends EmployeeRole {
 
     public AdminRole() {
-        super(RoleType.System_Administration_Role);
+        super(RoleType.NVDS_ADMIN_ORG_ADMIN_ROLE);
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.System_Administration_Role;
-        return new AdminWorkArea(userProcessContainer, Ecosystem.getInstance());
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+        type = RoleType.NVDS_ADMIN_ORG_ADMIN_ROLE;
+        return new AdminWorkArea(userProcessContainer, NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance());
     }
 
 }

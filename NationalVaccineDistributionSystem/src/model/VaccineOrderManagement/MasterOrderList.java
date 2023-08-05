@@ -1,6 +1,6 @@
-package model.order;
+package model.VaccineOrderManagement;
 
-import model.organization.Provider;
+import model.organization.NvdsVaccineProvider;
 import java.util.ArrayList;
 
 public class MasterOrderList {
@@ -11,7 +11,7 @@ public class MasterOrderList {
         listOfOrders = new ArrayList<>();
     }
 
-    public Order addOrder(Provider provider) {
+    public Order addOrder(NvdsVaccineProvider provider) {
         Order o = new Order(provider);
         listOfOrders.add(o);
         return o;

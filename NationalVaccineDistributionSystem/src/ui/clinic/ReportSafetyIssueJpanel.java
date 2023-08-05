@@ -5,8 +5,8 @@
 package ui.clinic;
 
 import javax.swing.JPanel;
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 
 /**
@@ -16,11 +16,11 @@ import model.useraccount.UserAccount;
 public class ReportSafetyIssueJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
-    Organization organization;
+    NvdsParticipatingOrganization organization;
     
-    public ReportSafetyIssueJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ReportSafetyIssueJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

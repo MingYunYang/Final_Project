@@ -1,21 +1,21 @@
 package model.role;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import javax.swing.JPanel;
 import ui.distributioncenter.DistributionCenterWorkArea;
 
-public class DistributionCenterRole extends Role {
+public class DistributionCenterRole extends EmployeeRole {
 
     public DistributionCenterRole() {
         super(RoleType.DistributionCenter_Role);
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         type = RoleType.DistributionCenter_Role;
-        return new DistributionCenterWorkArea(userProcessContainer, Ecosystem.getInstance());
+        return new DistributionCenterWorkArea(userProcessContainer, NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance());
     }
 
 }

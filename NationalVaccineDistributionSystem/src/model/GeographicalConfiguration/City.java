@@ -1,7 +1,7 @@
-package model.geography;
+package model.GeographicalConfiguration;
 
 import java.util.HashSet;
-import model.organization.Hospital;
+import model.organization.NvdsHospital;
 
 public class City {
 
@@ -15,7 +15,7 @@ public class City {
 
     private HashSet<Address> listOfAddresses;
     
-    private Hospital affiliateHospital;
+    private NvdsHospital affiliateHospital;
 
 
     public City(String cityName) {
@@ -58,11 +58,11 @@ public class City {
         this.listOfAddresses = listOfAddresses;
     }
 
-    public Hospital getAffiliateHospital() {
+    public NvdsHospital getAffiliateHospital() {
         return affiliateHospital;
     }
 
-    public void setAffiliateHospital(Hospital affiliateHospital) {
+    public void setAffiliateHospital(NvdsHospital affiliateHospital) {
         this.affiliateHospital = affiliateHospital;
     }
 

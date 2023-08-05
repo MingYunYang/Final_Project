@@ -4,7 +4,7 @@
  */
 package ui.provider;
 
-import model.Ecosystem;
+import model.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
 
 /**
@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 public class ProviderWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
     
-    public ProviderWorkArea(JPanel userProcessContainer, Ecosystem ecosystem) {
+    public ProviderWorkArea(JPanel userProcessContainer, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;

@@ -5,8 +5,8 @@
  */
 package ui;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,10 +19,10 @@ public class MainScreen extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
     UserAccount userAccount;
-    Organization organization;
-    Ecosystem ecosystem;
+    NvdsParticipatingOrganization organization;
+    NationalVaccineDistributionSystem ecosystem;
 
-    public MainScreen(JPanel mainWorkArea, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public MainScreen(JPanel mainWorkArea, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
         this.userAccount = userAccount;

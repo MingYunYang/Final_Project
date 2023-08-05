@@ -4,13 +4,13 @@
  */
 package ui.admin;
 
-import model.Ecosystem;
-import model.employee.Employee;
-import model.geography.Country;
-import model.geography.State;
-import model.organization.Organization;
-import model.organization.OrganizationDirectory;
-import model.role.Role;
+import model.NationalVaccineDistributionSystem;
+import model.Employee.Employee;
+import model.GeographicalConfiguration.Country;
+import model.GeographicalConfiguration.State;
+import model.organization.NvdsParticipatingOrganization;
+import model.organization.NvdsParticipatingOrganizationsDirectory;
+import model.role.EmployeeRole;
 import model.useraccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageUserAccount extends javax.swing.JPanel {
 
-    private OrganizationDirectory organizationDirectory;
+    private NvdsParticipatingOrganizationsDirectory organizationDirectory;
     private JPanel userProcessContainer;
-    private Ecosystem ecosystem;
+    private NationalVaccineDistributionSystem ecosystem;
 
-    public ManageUserAccount(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, Ecosystem ecosystem) {
+    public ManageUserAccount(JPanel userProcessContainer, NvdsParticipatingOrganizationsDirectory organizationDirectory, NationalVaccineDistributionSystem ecosystem) {
         
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -42,10 +42,10 @@ public class ManageUserAccount extends javax.swing.JPanel {
             State state = (State)cmbState.getSelectedItem();
             if(state != null){
                 populateOrganizationTypeCombo();
-                Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
+                NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
                 if(type != null){
                     populateOrganizationCombo(country, state, type);
-                    Organization organization = (Organization)cmbOrganization.getSelectedItem();
+                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
                     if(organization != null){
                         populateRoleTypeCombo(organization);
                         populateTable(organization);
@@ -58,7 +58,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
     public void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getCountryList()){
+        for(Country country : ecosystem.getNvdsListOfParticipatingCountries()){
             cmbCountry.addItem(country);
         }
     }
@@ -74,15 +74,15 @@ public class ManageUserAccount extends javax.swing.JPanel {
     public void populateOrganizationTypeCombo(){
                 
         cmbOrganizationType.removeAllItems();
-        for(Organization.Type type : Organization.Type.values()){
+        for(NvdsParticipatingOrganization.OrganizationType type : NvdsParticipatingOrganization.OrganizationType.values()){
             cmbOrganizationType.addItem(type);
         }
     }
     
-    public void populateOrganizationCombo(Country country, State state, Organization.Type type){
+    public void populateOrganizationCombo(Country country, State state, NvdsParticipatingOrganization.OrganizationType type){
         
         cmbOrganization.removeAllItems();
-        for (Organization organization : organizationDirectory.getListOfOrganizations()){
+        for (NvdsParticipatingOrganization organization : organizationDirectory.getListOfOrganizations()){
             if(organization.getCountry().equals(country) 
                && organization.getState().equals(state)
                && organization.getType().equals(type)){
@@ -92,24 +92,24 @@ public class ManageUserAccount extends javax.swing.JPanel {
         }
     }
     
-    private void populateRoleTypeCombo(Organization organization){
+    private void populateRoleTypeCombo(NvdsParticipatingOrganization organization){
         
         cmbRoleType.removeAllItems();
-        for(Role role : organization.getSupportedRole()){
+        for(EmployeeRole role : organization.getSupportedRole()){
             cmbRoleType.addItem(role);
         }
     }
     
-    private void populateTable(Organization organization){
+    private void populateTable(NvdsParticipatingOrganization organization){
         
         DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
         model.setRowCount(0);
         
-        for (Employee employee : organization.getEmployeeDirectory().getListOfEmployees()){
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
             Object[] row = new Object[3];
-            row[0] = employee.getEmployeeID();
+            row[0] = employee.getEMPLOYEE_ID();
             row[1] = employee;
-            row[2] = employee.getUserAccount() != null ? employee.getUserAccount().getUsername() : "No account";
+            row[2] = employee.getEmployeeUserAccount() != null ? employee.getEmployeeUserAccount().getUsername() : "No account";
             model.addRow(row);
         }
     }
@@ -372,10 +372,10 @@ public class ManageUserAccount extends javax.swing.JPanel {
         
         if (state != null && country != null) {
             populateOrganizationTypeCombo();
-            Organization.Type type = (Organization.Type) cmbOrganizationType.getSelectedItem();
+            NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType) cmbOrganizationType.getSelectedItem();
             if (type != null) {
                 populateOrganizationCombo(country, state, type);
-                Organization organization = (Organization) cmbOrganization.getSelectedItem();
+                NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization) cmbOrganization.getSelectedItem();
                 if (organization != null) {
                     populateRoleTypeCombo(organization);
                     populateTable(organization);
@@ -396,10 +396,10 @@ public class ManageUserAccount extends javax.swing.JPanel {
             State state = (State)cmbState.getSelectedItem();
             if(state != null){
                 populateOrganizationTypeCombo();
-                Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
+                NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
                 if(type != null){
                     populateOrganizationCombo(country, state, type);
-                    Organization organization = (Organization)cmbOrganization.getSelectedItem();
+                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
                     if(organization != null){
                         populateRoleTypeCombo(organization);
                         populateTable(organization);
@@ -417,11 +417,11 @@ public class ManageUserAccount extends javax.swing.JPanel {
 
         Country country = (Country)cmbCountry.getSelectedItem();
         State state = (State) cmbState.getSelectedItem();
-        Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
+        NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
         
         if(type != null){
             populateOrganizationCombo(country, state, type);
-            Organization organization = (Organization)cmbOrganization.getSelectedItem();
+            NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
             if(organization != null){
                 populateRoleTypeCombo(organization);
                 populateTable(organization);
@@ -435,7 +435,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
 
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
 
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
+        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
         if(organization != null){
             populateRoleTypeCombo(organization);
             populateTable(organization);
@@ -467,8 +467,8 @@ public class ManageUserAccount extends javax.swing.JPanel {
             return;
         }
         
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
-        Role role = (Role)cmbRoleType.getSelectedItem();
+        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
+        EmployeeRole role = (EmployeeRole)cmbRoleType.getSelectedItem();
         
         UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
         userAccountDirectory.createUserAccount(userName, password, employee, role);

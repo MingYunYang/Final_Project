@@ -5,8 +5,8 @@
  */
 package ui;
 
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 public class LoginScreen extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
 
-    public LoginScreen(JPanel mainWorkArea, Ecosystem ecosystem) {
+    public LoginScreen(JPanel mainWorkArea, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
         this.ecosystem = ecosystem;
@@ -140,7 +140,7 @@ public class LoginScreen extends javax.swing.JPanel {
         String password = String.valueOf(passwordCharArray);
         boolean flag = false;
 
-        for (Organization organization : ecosystem.getOrganizationDirectory().getListOfOrganizations()) {
+        for (NvdsParticipatingOrganization organization : ecosystem.getNvdsListOfParticipatingOrganizations().getListOfOrganizations()) {
             UserAccount userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
             if (userAccount != null) {
 

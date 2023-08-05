@@ -1,36 +1,36 @@
-package model.order;
+package model.VaccineOrderManagement;
 
-import model.organization.Provider;
-import model.vaccine.VaccineItem;
+import model.organization.NvdsVaccineProvider;
+import model.vaccine.VaccineOrderDetails;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
 
-    private ArrayList<OrderItem> orderItems;
+    private ArrayList<VaccineOrderItem> orderItems;
     private Date orderDate;
     private Status status;
-    private Provider provider;
+    private NvdsVaccineProvider provider;
 
     public enum Status {
         //Sending, Approved, Pending_Review, Review_In_Progress, Cancelled;
         Created;
     }
 
-    public Order(Provider provider) {
+    public Order(NvdsVaccineProvider provider) {
         orderItems = new ArrayList<>();
         orderDate = new Date();
         status = Status.Created;
         this.provider = provider;
     }
 
-    public OrderItem newOrderItem(VaccineItem vaccineItem, int quantity) {
-        OrderItem oi = new OrderItem(vaccineItem, quantity);
+    public VaccineOrderItem newOrderItem(VaccineOrderDetails vaccineItem, int quantity) {
+        VaccineOrderItem oi = new VaccineOrderItem(vaccineItem, quantity);
         orderItems.add(oi);
         return oi;
     }
 
-    public ArrayList<OrderItem> getOrderItems() {
+    public ArrayList<VaccineOrderItem> getOrderItems() {
         return orderItems;
     }
 
@@ -50,11 +50,11 @@ public class Order {
         this.status = status;
     }
 
-    public Provider getProviderOrganization() {
+    public NvdsVaccineProvider getProviderOrganization() {
         return provider;
     }
 
-    public void setProviderOrganization(Provider provider) {
+    public void setProviderOrganization(NvdsVaccineProvider provider) {
         this.provider = provider;
     }
 

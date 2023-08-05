@@ -5,10 +5,10 @@
 package model.role;
 
 import javax.swing.JPanel;
-import model.Ecosystem;
-import model.organization.Clinic;
-import model.organization.Hospital;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsClinic;
+import model.organization.NvdsHospital;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import ui.clinic.ClinicWorkArea;
 import ui.hospital.HospitalWorkArea;
@@ -17,18 +17,18 @@ import ui.hospital.HospitalWorkArea;
  *
  * @author libby
  */
-public class DoctorRole extends Role {
+public class DoctorRole extends EmployeeRole {
     
     public DoctorRole() {
-        super(RoleType.Doctor_Role);
+        super(RoleType.CLINIC_DOCTOR_ROLE);
     }
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Ecosystem ecosystem) {
-        type = RoleType.Doctor_Role;
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+        type = RoleType.CLINIC_DOCTOR_ROLE;
         
-        if(organization instanceof Clinic){
-            return new ClinicWorkArea(userProcessContainer, account, organization, Ecosystem.getInstance());
+        if(organization instanceof NvdsClinic){
+            return new ClinicWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance());
         }
         return null;
     }

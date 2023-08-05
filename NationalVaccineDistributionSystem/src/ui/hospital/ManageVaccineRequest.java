@@ -7,8 +7,8 @@ package ui.hospital;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Ecosystem;
-import model.organization.Organization;
+import model.NationalVaccineDistributionSystem;
+import model.organization.NvdsParticipatingOrganization;
 import model.useraccount.UserAccount;
 import model.workqueue.ClinicReviewRequest;
 
@@ -20,11 +20,11 @@ import model.workqueue.ClinicReviewRequest;
 public class ManageVaccineRequest extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
-    Organization organization;
+    NvdsParticipatingOrganization organization;
     
-    public ManageVaccineRequest(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Ecosystem ecosystem) {
+    public ManageVaccineRequest(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

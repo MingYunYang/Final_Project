@@ -1,19 +1,19 @@
 package model.organization;
 
 import java.util.ArrayList;
-import model.geography.Contact;
-import model.employee.EmployeeDirectory;
-import model.geography.Address;
-import model.geography.Country;
-import model.geography.City;
-import model.geography.State;
-import model.role.Role;
-import model.role.Role.RoleType;
+import model.GeographicalConfiguration.Contact;
+import model.Employee.EmployeeDirectory;
+import model.GeographicalConfiguration.Address;
+import model.GeographicalConfiguration.Country;
+import model.GeographicalConfiguration.City;
+import model.GeographicalConfiguration.State;
+import model.role.EmployeeRole;
+import model.role.EmployeeRole.RoleType;
 import model.useraccount.UserAccountDirectory;
 import model.vaccine.VaccineInventoryCatalog;
 import model.workqueue.WorkQueue;
 
-public abstract class Organization {
+public abstract class NvdsParticipatingOrganization {
 
     private String organizationName;
 
@@ -25,7 +25,7 @@ public abstract class Organization {
     
     private VaccineInventoryCatalog inventoryCatalog;
 
-    private Type type;
+    private OrganizationType type;
 
     private Country country;
 
@@ -37,23 +37,23 @@ public abstract class Organization {
 
     private Contact contact;
 
-    public abstract ArrayList<Role> getSupportedRole();
+    public abstract ArrayList<EmployeeRole> getSupportedRole();
 
-    public enum Type {
+    public enum OrganizationType {
 
         CDC("Centers For Disease Control And Prevention"),
         Public_Health_Department("Public Health Department"),
-        Clinic("Clinic"),
+        NVDS_CLINIC_ORG("Clinic"),
         DistributionCenter("Distribution Center"),
         Distributor("Distributor"),
-        Hospital("Hospital"),
+        NVDS_HOSPITAL_ORG("Hospital"),
         Manufacturer("Manufacturer"),
         Provider("Provider"),
-        SystemAdmin("System Admininistration");
+        NVDS_ADMIN_ORG("System Admininistration");
 
         private final String value;
 
-        private Type(String value) {
+        private OrganizationType(String value) {
             this.value = value;
         }
 
@@ -68,7 +68,7 @@ public abstract class Organization {
 
     }
 
-    public Organization(String name, Type type, Country country, State state, City city, Address address, Contact contact) {
+    public NvdsParticipatingOrganization(String name, OrganizationType type, Country country, State state, City city, Address address, Contact contact) {
         this.organizationName = name;
         this.type = type;
         workQueue = new WorkQueue();
@@ -83,8 +83,8 @@ public abstract class Organization {
         getSupportedRole();
     }
     
-    public Role getSpecificRole(RoleType roleType){ 
-        for(Role role : getSupportedRole()){
+    public EmployeeRole setSupportedEmployeeRole(RoleType roleType){ 
+        for(EmployeeRole role : getSupportedRole()){
             if(role.type == roleType){
                 return role;
             }
@@ -133,15 +133,15 @@ public abstract class Organization {
         this.userAccountDirectory = userAccountDirectory;
     }
 
-    public VaccineInventoryCatalog getInventoryCatalog() {
+    public VaccineInventoryCatalog getVaccineInventoryCatalog() {
         return inventoryCatalog;
     }
 
-    public Type getType() {
+    public OrganizationType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(OrganizationType type) {
         this.type = type;
     }
 

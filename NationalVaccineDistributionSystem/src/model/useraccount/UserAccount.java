@@ -1,7 +1,7 @@
 package model.useraccount;
 
-import model.employee.Employee;
-import model.role.Role;
+import model.Employee.Employee;
+import model.role.EmployeeRole;
 
 public class UserAccount {
 
@@ -11,14 +11,14 @@ public class UserAccount {
 
     private Employee employee;
 
-    private Role role;
+    private EmployeeRole role;
    
 
-    public UserAccount(String username, String password, Employee employee, Role role) {
+    public UserAccount(String username, String password, Employee employee, EmployeeRole role) {
         this.username = username;
         this.password = password;
         this.employee = employee;
-        employee.setUserAccount(this);
+        employee.setEmployeeUserAccount(this);
         this.role = role;
     }
 
@@ -38,7 +38,7 @@ public class UserAccount {
         this.password = password;
     }
 
-    public Role getRole() {
+    public EmployeeRole getRole() {
         return role;
     }
 
@@ -46,7 +46,7 @@ public class UserAccount {
         this.employee = employee;
     }
 
-    public void setRole(Role role) {
+    public void setRole(EmployeeRole role) {
         this.role = role;
     }
 

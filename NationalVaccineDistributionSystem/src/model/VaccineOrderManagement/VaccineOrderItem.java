@@ -1,24 +1,24 @@
-package model.order;
+package model.VaccineOrderManagement;
 
 import model.vaccine.Vaccine;
-import model.vaccine.VaccineItem;
+import model.vaccine.VaccineOrderDetails;
 
-public class OrderItem {
+public class VaccineOrderItem {
 
-    private VaccineItem vaccineItem;
+    private VaccineOrderDetails vaccineItem;
     
     private int orderQuantity;
 
-    public OrderItem(VaccineItem vaccineItem, int quantity){
+    public VaccineOrderItem(VaccineOrderDetails vaccineItem, int quantity){
         this.vaccineItem = vaccineItem;
         orderQuantity = quantity;
     }
 
-    public VaccineItem getVaccineItem() {
+    public VaccineOrderDetails getVaccineItem() {
         return vaccineItem;
     }
 
-    public void setVaccineItem(VaccineItem vaccineItem) {
+    public void setVaccineItem(VaccineOrderDetails vaccineItem) {
         this.vaccineItem = vaccineItem;
     }
 

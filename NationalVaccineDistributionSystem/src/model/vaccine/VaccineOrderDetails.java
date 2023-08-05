@@ -4,18 +4,18 @@
  */
 package model.vaccine;
 
-import model.organization.Manufacturer;
+import model.organization.NvdsVaccineManufacturer;
 import java.util.Date;
 
 /**
  *
  * @author libby
  */
-public class VaccineItem {
+public class VaccineOrderDetails {
 
     private Vaccine vaccine;
 
-    private Manufacturer manufacturer;
+    private NvdsVaccineManufacturer manufacturer;
 
     private int batchId;
 
@@ -23,7 +23,7 @@ public class VaccineItem {
 
     private Date expirationDate;
 
-    public VaccineItem(Vaccine vaccine , Manufacturer manufacturer , int batchId) {
+    public VaccineOrderDetails(Vaccine vaccine , NvdsVaccineManufacturer manufacturer , int batchId) {
         this.vaccine = vaccine;
         this.batchId = batchId;
         this.manufacturer = manufacturer;
@@ -55,11 +55,11 @@ public class VaccineItem {
         this.expirationDate = expirationDate;
     }
 
-    public Manufacturer getManufacturer() {
+    public NvdsVaccineManufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
+    public void setManufacturer(NvdsVaccineManufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 
