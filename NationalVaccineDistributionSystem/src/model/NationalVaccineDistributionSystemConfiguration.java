@@ -27,6 +27,13 @@ public class NationalVaccineDistributionSystemConfiguration {
                 = NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance();
 
 
+        // Create NVDS organization directory to store list of participating organizations, 
+        // their geography, address and contact information.
+        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
+                = nationalVaccineDistributionSystem.getListOfParticipatingOrganizations();
+
+
+        // Create the geographical information(country, state, city, address)and contact information first
         // NVDS Participating Country 1: USA
         Country usa = nationalVaccineDistributionSystem.addNewParticipatingCountry("United States");
         // NVDS Participating Country 1: USA - State 1: Massachussets
@@ -37,11 +44,6 @@ public class NationalVaccineDistributionSystemConfiguration {
         massachussets.addCity("Attleboro");
         // NVDS Participating Country 1: USA - State 1: Massachussets - City 3: Cambridge
         City cambridge = massachussets.addCity("Cambridge");
-
-        // Create NVDS organization directory to store list of participating organizations, their geography, address and contact information
-        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
-                = nationalVaccineDistributionSystem.getListOfParticipatingOrganizations();
-
         // ADD NVDS Admin orgainzation nvdsAdminOrganizationAddress(street and postal code), 
         // in NVDS Participating Country 1: USA - State 1: Massachussets City 3: Cambridge
         Address nvdsAdminOrganizationAddress = cambridge.addAddress("215 Kelton St" , "02134");
