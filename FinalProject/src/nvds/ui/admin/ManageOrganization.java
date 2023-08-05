@@ -142,7 +142,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         txtNewAddress = new javax.swing.JTextField();
         txtNewPostalCode = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 102, 102));
 
         tblOrganizations.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(

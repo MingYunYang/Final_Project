@@ -117,7 +117,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         lblOrganizationType = new javax.swing.JLabel();
         cmbOrganizationType = new javax.swing.JComboBox();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 102, 102));
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Manage Employees");

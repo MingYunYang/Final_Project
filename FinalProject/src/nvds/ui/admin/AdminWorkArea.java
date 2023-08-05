@@ -23,7 +23,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         lblQuestion = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 102, 102));
 
         manageUserAccountJPanel.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         manageUserAccountJPanel.setText("Manage Users");
