@@ -15,9 +15,9 @@ public class NationalVaccineDistributionSystem {
 
     private static NationalVaccineDistributionSystem nationalVaccineDistributionSystemSingleInstance;
 
-    private final ArrayList<Country> listOfParticipatingCountries;
+    private final ArrayList<Country> nvdsListOfParticipatingCountries;
 
-    private final NvdsParticipatingOrganizationsDirectory listOfParticipatingOrganizations;
+    private final NvdsParticipatingOrganizationsDirectory nvdsListOfParticipatingOrganizations;
 
     public static NationalVaccineDistributionSystem getNationalVaccineDistributionSystemSingleInstance() {
         if ( nationalVaccineDistributionSystemSingleInstance == null ) {
@@ -29,22 +29,22 @@ public class NationalVaccineDistributionSystem {
     }
 
     private NationalVaccineDistributionSystem() {
-        this.listOfParticipatingCountries = new ArrayList<>();
-        this.listOfParticipatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
+        this.nvdsListOfParticipatingCountries = new ArrayList<>();
+        this.nvdsListOfParticipatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
 
     }
 
-    public NvdsParticipatingOrganizationsDirectory getListOfParticipatingOrganizations() {
-        return listOfParticipatingOrganizations;
+    public NvdsParticipatingOrganizationsDirectory getNvdsListOfParticipatingOrganizations() {
+        return nvdsListOfParticipatingOrganizations;
     }
 
-    public ArrayList<Country> getListOfParticipatingCountries() {
-        return listOfParticipatingCountries;
+    public ArrayList<Country> getNvdsListOfParticipatingCountries() {
+        return nvdsListOfParticipatingCountries;
     }
 
     public Country addNewParticipatingCountry(String countryName) {
         Country country = new Country(countryName);
-        listOfParticipatingCountries.add(country);
+        nvdsListOfParticipatingCountries.add(country);
         return country;
     }
 

@@ -140,7 +140,7 @@ public class LoginScreen extends javax.swing.JPanel {
         String password = String.valueOf(passwordCharArray);
         boolean flag = false;
 
-        for (NvdsParticipatingOrganization organization : ecosystem.getListOfParticipatingOrganizations().getListOfOrganizations()) {
+        for (NvdsParticipatingOrganization organization : ecosystem.getNvdsListOfParticipatingOrganizations().getListOfOrganizations()) {
             UserAccount userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
             if (userAccount != null) {
 

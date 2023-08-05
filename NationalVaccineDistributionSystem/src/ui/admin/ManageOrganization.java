@@ -54,7 +54,7 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void populateCountryCombo() {
 
         cmbCountry.removeAllItems();
-        for ( Country country : ecosystem.getListOfParticipatingCountries() ) {
+        for ( Country country : ecosystem.getNvdsListOfParticipatingCountries() ) {
             cmbCountry.addItem(country);
         }
     }
