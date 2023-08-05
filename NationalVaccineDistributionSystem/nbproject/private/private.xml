@@ -3,48 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/PublicHealthDepartmentRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/clinic/ManageVaccineRequest.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/workqueue/WorkRequest.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/InventoryRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/CDCRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/EcosystemConfiguration.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/DoctorRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/HospitalRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/LoginScreen.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/geography/City.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Hospital.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/workqueue/ClinicReviewRequest.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/vaccine/Vaccine.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/admin/ManageEmployee.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/AdminRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/MainScreen.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Provider.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/ProviderRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Distributor.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/Ecosystem.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/clinic/ClinicWorkArea.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/admin/ManageUserAccount.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/ManufacturerRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/MonitorRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/Role.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/DistributionCenter.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/OrganizationDirectory.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/employee/EmployeeDirectory.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Manufacturer.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Organization.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/useraccount/UserAccount.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/CDC.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/admin/ManageOrganization.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/DistributionCenterRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/admin/AdminWorkArea.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/Clinic.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/ui/clinic/ReportSafetyIssue.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/role/DistributorRole.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/vaccine/VaccineItem.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/PublicHealthDepartment.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/workqueue/WorkQueue.java</file>
-            <file>file:/Users/libby/Desktop/Final_Project/NationalVaccineDistributionSystem/src/model/organization/AdminOrganization.java</file>
+            <file>file:/C:/Users/tugum/OneDrive/Documents/GitHub/Final_Project/NationalVaccineDistributionSystem/src/nvds/NationalVaccineDistributionSystem.java</file>
         </group>
     </open-files>
 </project-private>

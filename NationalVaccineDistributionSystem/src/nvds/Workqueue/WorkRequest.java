@@ -1,8 +1,8 @@
 package nvds.Workqueue;
 
-import model.UserAccount.UserAccount;
+import nvds.Useraccount.UserAccount;
 import java.util.Date;
-import model.Vaccine.Vaccine;
+import nvds.VaccineManagement.Vaccine;
 
 public abstract class WorkRequest {
 
