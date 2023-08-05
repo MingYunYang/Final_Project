@@ -39,7 +39,7 @@ public abstract class WorkRequest {
         return requestSender;
     }
 
-    public void setRequestSender(UserAccount requestSender) {
+    public void setVaccineOrderRequestSender(UserAccount requestSender) {
         this.requestSender = requestSender;
     }
 
@@ -55,7 +55,7 @@ public abstract class WorkRequest {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setVaccineOrderRequestStatus(String status) {
         this.status = status;
     }
 
@@ -79,7 +79,7 @@ public abstract class WorkRequest {
         return vaccineRequestQuantity;
     }
 
-    public void setVaccineRequestQuantity(int vaccineRequestQuantity) {
+    public void setVaccineOrderRequestQuantity(int vaccineRequestQuantity) {
         this.vaccineRequestQuantity = vaccineRequestQuantity;
     }
 

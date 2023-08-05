@@ -54,8 +54,10 @@ public class VaccineInventoryCatalog {
     public String getInventoryStatus(Vaccine vaccine) {
 
         int inventory = vaccineInventoryCount.get(vaccine);
-        if ( inventory < 50 ) {
+        if ( inventory < 500 ) {
             return "Insufficient";
+        } else if ( inventory > 500 && inventory < 800 ) {
+            return "Running low";
         }
         return "Sufficient";
     }

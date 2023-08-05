@@ -13,7 +13,7 @@ import nvds.Organization.Hospital;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.Useraccount.UserAccount;
-import nvds.Workqueue.ReviewRequest;
+import nvds.Workqueue.ClinicReviewVaccineOrderRequest;
 import nvds.Workqueue.WorkRequest;
 
 /**
@@ -53,7 +53,7 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
             row[4] = request.getRequestReviewer();
             row[5] = request.getStatus();
             
-            String result = ((ReviewRequest) request).getReviewResult();
+            String result = ((ClinicReviewVaccineOrderRequest) request).getReviewResult();
             row[6] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);
@@ -76,7 +76,7 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
             row[5] = request.getStatus();
             row[6] = request.getRequestReceiver();
             
-            String result = ((ReviewRequest) request).getReviewResult();
+            String result = ((ClinicReviewVaccineOrderRequest) request).getReviewResult();
             row[7] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);  
@@ -282,7 +282,7 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
 
         if (inventoryRole != null) {
             inventoryRole.getIncomingVaccineOrderRequestsWorkQueue().getListOfWorkRequests().add(request);
-            request.setStatus("Process to Hospital");
+            request.setVaccineOrderRequestStatus("Process to Hospital");
         } else {
             JOptionPane.showMessageDialog(this, "There's no service in affiliate hospital now");
             return;
@@ -305,7 +305,7 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
             } else {
                 userAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue().getListOfWorkRequests().add(request);
                 request.setRequestReviewer(userAccount);
-                request.setStatus("Under Clinic Review");
+                request.setVaccineOrderRequestStatus("Under Clinic Review");
                 JOptionPane.showMessageDialog(this, "Request successfully assigned to you");
                 populateMainWorkQueue();
                 populateWaitingWorkQueue();
@@ -321,8 +321,8 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
         
         int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
         if (selectedRow >= 0) {
-            ReviewRequest request = (ReviewRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
-            request.setStatus("Completed");
+            ClinicReviewVaccineOrderRequest request = (ClinicReviewVaccineOrderRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
+            request.setVaccineOrderRequestStatus("Completed");
             request.setReviewResult("Rejected");
             JOptionPane.showMessageDialog(this, "Review send successfully");
             populateMainWorkQueue();
