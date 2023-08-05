@@ -6,12 +6,12 @@ package ui.admin;
 
 import model.NationalVaccineDistributionSystem;
 import model.Employee.Employee;
-import model.GeographicalConfiguration.Country;
-import model.GeographicalConfiguration.State;
-import model.organization.NvdsParticipatingOrganization;
-import model.organization.NvdsParticipatingOrganizationsDirectory;
-import model.role.EmployeeRole;
-import model.useraccount.UserAccountDirectory;
+import model.Location.Country;
+import model.Location.State;
+import model.Organization.NvdsParticipatingOrganization;
+import model.Organization.NvdsParticipatingOrganizationsDirectory;
+import model.EmployeeRole.EmployeeRole;
+import model.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

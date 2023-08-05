@@ -1,7 +1,7 @@
 package model;
 
-import model.GeographicalConfiguration.Country;
-import model.organization.NvdsParticipatingOrganizationsDirectory;
+import model.Location.Country;
+import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import java.util.ArrayList;
 
 /**

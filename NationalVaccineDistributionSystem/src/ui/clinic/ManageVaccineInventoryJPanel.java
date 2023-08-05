@@ -7,17 +7,17 @@ package ui.clinic;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsParticipatingOrganization;
-import model.useraccount.UserAccount;
-import model.vaccine.Vaccine;
-import model.vaccine.VaccineInventoryCatalog;
+import model.Organization.NvdsParticipatingOrganization;
+import model.UserAccount.UserAccount;
+import model.Vaccine.Vaccine;
+import model.Vaccine.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.role.EmployeeRole;
-import model.role.EmployeeRole.RoleType;
-import model.workqueue.ClinicReviewRequest;
-import model.workqueue.WorkQueue;
-import model.workqueue.WorkRequest;
+import model.EmployeeRole.EmployeeRole;
+import model.EmployeeRole.EmployeeRole.RoleType;
+import nvds.Workqueue.ClinicReviewRequest;
+import nvds.Workqueue.WorkQueue;
+import nvds.Workqueue.WorkRequest;
 
 /**
  *

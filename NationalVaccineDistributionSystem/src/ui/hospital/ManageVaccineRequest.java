@@ -8,9 +8,9 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsParticipatingOrganization;
-import model.useraccount.UserAccount;
-import model.workqueue.ClinicReviewRequest;
+import model.Organization.NvdsParticipatingOrganization;
+import model.UserAccount.UserAccount;
+import nvds.Workqueue.ClinicReviewRequest;
 
 
 /**

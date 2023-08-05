@@ -7,8 +7,8 @@ package ui.hospital;
 import ui.clinic.*;
 import javax.swing.JPanel;
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsParticipatingOrganization;
-import model.useraccount.UserAccount;
+import model.Organization.NvdsParticipatingOrganization;
+import model.UserAccount.UserAccount;
 
 /**
  *

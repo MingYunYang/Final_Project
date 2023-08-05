@@ -1,6 +1,6 @@
 package model.Employee;
 
-import model.useraccount.UserAccount;
+import model.UserAccount.UserAccount;
 
 public class Employee {
 

@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsHospital;
-import model.organization.NvdsParticipatingOrganization;
-import model.role.EmployeeRole;
-import model.useraccount.UserAccount;
-import model.workqueue.ClinicReviewRequest;
-import model.workqueue.WorkRequest;
+import model.Organization.NvdsHospital;
+import model.Organization.NvdsParticipatingOrganization;
+import model.EmployeeRole.EmployeeRole;
+import model.UserAccount.UserAccount;
+import nvds.Workqueue.ClinicReviewRequest;
+import nvds.Workqueue.WorkRequest;
 
 /**
  *

@@ -7,9 +7,9 @@ package ui.hospital;
 import java.awt.CardLayout;
 import model.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
-import model.organization.NvdsParticipatingOrganization;
-import model.role.EmployeeRole;
-import model.useraccount.UserAccount;
+import model.Organization.NvdsParticipatingOrganization;
+import model.EmployeeRole.EmployeeRole;
+import model.UserAccount.UserAccount;
 
 /**
  *

@@ -1,23 +1,23 @@
 package model;
 
-import model.GeographicalConfiguration.Contact;
+import model.Contact.Contact;
 import model.Employee.Employee;
-import model.GeographicalConfiguration.Address;
-import model.GeographicalConfiguration.Country;
-import model.GeographicalConfiguration.City;
-import model.GeographicalConfiguration.State;
-import model.VaccineOrderManagement.VaccineOrderItem;
-import model.organization.NvdsParticipatingOrganizationsDirectory;
-import model.organization.NvdsAdminOrganization;
-import model.organization.NvdsClinic;
-import model.organization.NvdsHospital;
-import model.organization.NvdsVaccineManufacturer;
-import model.organization.NvdsParticipatingOrganization;
-import model.role.EmployeeRole;
-import model.role.EmployeeRole.RoleType;
-import model.vaccine.Vaccine;
-import model.vaccine.VaccineInventoryCatalog;
-import model.vaccine.VaccineOrderDetails;
+import model.Address.Address;
+import model.Location.Country;
+import model.Location.City;
+import model.Location.State;
+import model.OrganizationVaccineOrderManagement.VaccineOrderItem;
+import model.Organization.NvdsParticipatingOrganizationsDirectory;
+import model.Organization.NvdsAdminOrganization;
+import model.Organization.NvdsClinic;
+import model.Organization.NvdsHospital;
+import model.Organization.NvdsVaccineManufacturer;
+import model.Organization.NvdsParticipatingOrganization;
+import model.EmployeeRole.EmployeeRole;
+import model.EmployeeRole.EmployeeRole.RoleType;
+import model.Vaccine.Vaccine;
+import model.Vaccine.VaccineInventoryCatalog;
+import model.Vaccine.VaccineOrderDetails;
 
 public class ConfigureNVDS {
 

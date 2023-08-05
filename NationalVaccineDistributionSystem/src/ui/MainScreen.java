@@ -6,8 +6,8 @@
 package ui;
 
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsParticipatingOrganization;
-import model.useraccount.UserAccount;
+import model.Organization.NvdsParticipatingOrganization;
+import model.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 

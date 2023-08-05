@@ -1,18 +1,18 @@
 package ui.admin;
 
 import model.NationalVaccineDistributionSystem;
-import model.GeographicalConfiguration.Country;
-import model.GeographicalConfiguration.State;
-import model.organization.NvdsParticipatingOrganization;
-import model.organization.NvdsParticipatingOrganizationsDirectory;
+import model.Location.Country;
+import model.Location.State;
+import model.Organization.NvdsParticipatingOrganization;
+import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.GeographicalConfiguration.Address;
-import model.GeographicalConfiguration.City;
-import model.GeographicalConfiguration.Contact;
-import model.organization.NvdsParticipatingOrganization.OrganizationType;
+import model.Address.Address;
+import model.Location.City;
+import model.Contact.Contact;
+import model.Organization.NvdsParticipatingOrganization.OrganizationType;
 
 public class ManageOrganization extends javax.swing.JPanel {
 

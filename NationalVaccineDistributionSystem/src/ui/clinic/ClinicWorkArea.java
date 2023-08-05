@@ -1,11 +1,11 @@
 package ui.clinic;
 
 import model.NationalVaccineDistributionSystem;
-import model.organization.NvdsParticipatingOrganization;
-import model.useraccount.UserAccount;
+import model.Organization.NvdsParticipatingOrganization;
+import model.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import model.role.EmployeeRole;
+import model.EmployeeRole.EmployeeRole;
 
 public class ClinicWorkArea extends javax.swing.JPanel {
 
