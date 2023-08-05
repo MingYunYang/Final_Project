@@ -58,7 +58,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
     public void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getNvdsListOfParticipatingCountries()){
+        for(Country country : ecosystem.getListOfParticipatingCountries()){
             cmbCountry.addItem(country);
         }
     }

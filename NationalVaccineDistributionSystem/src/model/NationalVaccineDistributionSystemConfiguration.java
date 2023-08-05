@@ -30,7 +30,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         // Create NVDS organization directory to store list of participating organizations, 
         // their geography, address and contact information.
         NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
-                = nationalVaccineDistributionSystem.getNvdsListOfParticipatingOrganizations();
+                = nationalVaccineDistributionSystem.getListOfParticipatingOrganizations();
 
 
         // Create the geographical information(country, state, city, address)and contact information first
