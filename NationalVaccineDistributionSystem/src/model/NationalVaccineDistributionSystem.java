@@ -1,6 +1,6 @@
 package model;
 
-import model.Location.Country;
+import model.Geography.Country;
 import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import java.util.ArrayList;
 
@@ -15,9 +15,9 @@ public class NationalVaccineDistributionSystem {
 
     private static NationalVaccineDistributionSystem nationalVaccineDistributionSystemSingleInstance;
 
-    private final ArrayList<Country> nvdsListOfParticipatingCountries;
+    private final ArrayList<Country> listOfParticipatingCountries;
 
-    private final NvdsParticipatingOrganizationsDirectory nvdsListOfParticipatingOrganizations;
+    private final NvdsParticipatingOrganizationsDirectory listOfParticipatingOrganizations;
 
     public static NationalVaccineDistributionSystem getNationalVaccineDistributionSystemSingleInstance() {
         if ( nationalVaccineDistributionSystemSingleInstance == null ) {
@@ -29,22 +29,22 @@ public class NationalVaccineDistributionSystem {
     }
 
     private NationalVaccineDistributionSystem() {
-        this.nvdsListOfParticipatingCountries = new ArrayList<>();
-        this.nvdsListOfParticipatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
+        this.listOfParticipatingCountries = new ArrayList<>();
+        this.listOfParticipatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
 
     }
 
-    public NvdsParticipatingOrganizationsDirectory getNvdsListOfParticipatingOrganizations() {
-        return nvdsListOfParticipatingOrganizations;
+    public NvdsParticipatingOrganizationsDirectory getListOfParticipatingOrganizations() {
+        return listOfParticipatingOrganizations;
     }
 
-    public ArrayList<Country> getNvdsListOfParticipatingCountries() {
-        return nvdsListOfParticipatingCountries;
+    public ArrayList<Country> getListOfParticipatingCountries() {
+        return listOfParticipatingCountries;
     }
 
     public Country addNewParticipatingCountry(String countryName) {
         Country country = new Country(countryName);
-        nvdsListOfParticipatingCountries.add(country);
+        listOfParticipatingCountries.add(country);
         return country;
     }
 

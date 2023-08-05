@@ -1,10 +1,10 @@
 package model.Organization;
 
 import model.Contact.Contact;
-import model.Address.Address;
-import model.Location.City;
-import model.Location.Country;
-import model.Location.State;
+import model.Geography.Address;
+import model.Geography.City;
+import model.Geography.Country;
+import model.Geography.State;
 import model.Organization.NvdsParticipatingOrganization.OrganizationType;
 import java.util.ArrayList;
 

@@ -2,10 +2,10 @@ package model.Organization;
 
 import java.util.ArrayList;
 import model.Contact.Contact;
-import model.Address.Address;
-import model.Location.City;
-import model.Location.Country;
-import model.Location.State;
+import model.Geography.Address;
+import model.Geography.City;
+import model.Geography.Country;
+import model.Geography.State;
 import model.EmployeeRole.AdminRole;
 import model.EmployeeRole.EmployeeRole;
 

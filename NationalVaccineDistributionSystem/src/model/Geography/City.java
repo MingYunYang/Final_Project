@@ -1,6 +1,5 @@
-package model.Location;
+package model.Geography;
 
-import model.Address.Address;
 import java.util.HashSet;
 import model.Organization.NvdsHospital;
 

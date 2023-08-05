@@ -1,4 +1,4 @@
-package model.Address;
+package model.Geography;
 
 import model.Contact.Contact;
 import java.util.HashSet;

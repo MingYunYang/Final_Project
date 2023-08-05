@@ -4,7 +4,7 @@
  */
 package ui;
 
-import model.ConfigureNVDS;
+import model.NationalVaccineDistributionSystemConfiguration;
 import model.NationalVaccineDistributionSystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,7 +19,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-        ecosystem = ConfigureNVDS.configure(); // initialize the ecosystem object
+        ecosystem = NationalVaccineDistributionSystemConfiguration.configure(); // initialize the ecosystem object
         setSize(800, 600); // width and height of the screen
         initLoginScreen(); // call the initialize login screen within the main jframe constructor
     }

@@ -1,4 +1,4 @@
-package model.Location;
+package model.Geography;
 
 import java.util.ArrayList;
 

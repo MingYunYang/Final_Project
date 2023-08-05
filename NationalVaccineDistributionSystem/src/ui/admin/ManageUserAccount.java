@@ -6,8 +6,8 @@ package ui.admin;
 
 import model.NationalVaccineDistributionSystem;
 import model.Employee.Employee;
-import model.Location.Country;
-import model.Location.State;
+import model.Geography.Country;
+import model.Geography.State;
 import model.Organization.NvdsParticipatingOrganization;
 import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import model.EmployeeRole.EmployeeRole;
@@ -58,7 +58,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
     public void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getNvdsListOfParticipatingCountries()){
+        for(Country country : ecosystem.getListOfParticipatingCountries()){
             cmbCountry.addItem(country);
         }
     }

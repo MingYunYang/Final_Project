@@ -1,16 +1,16 @@
 package ui.admin;
 
 import model.NationalVaccineDistributionSystem;
-import model.Location.Country;
-import model.Location.State;
+import model.Geography.Country;
+import model.Geography.State;
 import model.Organization.NvdsParticipatingOrganization;
 import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.Address.Address;
-import model.Location.City;
+import model.Geography.Address;
+import model.Geography.City;
 import model.Contact.Contact;
 import model.Organization.NvdsParticipatingOrganization.OrganizationType;
 
@@ -54,7 +54,7 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void populateCountryCombo() {
 
         cmbCountry.removeAllItems();
-        for ( Country country : ecosystem.getNvdsListOfParticipatingCountries() ) {
+        for ( Country country : ecosystem.getListOfParticipatingCountries() ) {
             cmbCountry.addItem(country);
         }
     }

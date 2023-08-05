@@ -2,10 +2,10 @@ package model;
 
 import model.Contact.Contact;
 import model.Employee.Employee;
-import model.Address.Address;
-import model.Location.Country;
-import model.Location.City;
-import model.Location.State;
+import model.Geography.Address;
+import model.Geography.Country;
+import model.Geography.City;
+import model.Geography.State;
 import model.OrganizationVaccineOrderManagement.VaccineOrderItem;
 import model.Organization.NvdsParticipatingOrganizationsDirectory;
 import model.Organization.NvdsAdminOrganization;
@@ -19,12 +19,13 @@ import model.Vaccine.Vaccine;
 import model.Vaccine.VaccineInventoryCatalog;
 import model.Vaccine.VaccineOrderDetails;
 
-public class ConfigureNVDS {
+public class NationalVaccineDistributionSystemConfiguration {
 
     public static NationalVaccineDistributionSystem configure() {
 
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem
                 = NationalVaccineDistributionSystem.getNationalVaccineDistributionSystemSingleInstance();
+
 
         // NVDS Participating Country 1: USA
         Country usa = nationalVaccineDistributionSystem.addNewParticipatingCountry("United States");
@@ -37,15 +38,16 @@ public class ConfigureNVDS {
         // NVDS Participating Country 1: USA - State 1: Massachussets - City 3: Cambridge
         City cambridge = massachussets.addCity("Cambridge");
 
+        // Create NVDS organization directory to store list of participating organizations, their geography, address and contact information
+        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
+                = nationalVaccineDistributionSystem.getListOfParticipatingOrganizations();
+
         // ADD NVDS Admin orgainzation nvdsAdminOrganizationAddress(street and postal code), 
         // in NVDS Participating Country 1: USA - State 1: Massachussets City 3: Cambridge
         Address nvdsAdminOrganizationAddress = cambridge.addAddress("215 Kelton St" , "02134");
         // ADD NVDS Admin NvdsParticipatingOrganization Contact phone number
         Contact nvdsAdminOrganizationContact = nvdsAdminOrganizationAddress.addContact("781-921-8195");
 
-        // Create NVDS orgainization directory
-        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
-                = nationalVaccineDistributionSystem.getNvdsListOfParticipatingOrganizations();
 
         // Create an NVDS admin organization to manage the NVDS and add it to the NVDS organization directory
         // Organization name, Country to which the organization belongs, state in the country, city in the state, 

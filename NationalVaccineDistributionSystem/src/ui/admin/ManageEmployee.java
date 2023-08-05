@@ -3,8 +3,8 @@ package ui.admin;
 import model.NationalVaccineDistributionSystem;
 import model.Employee.Employee;
 import model.Employee.EmployeeDirectory;
-import model.Location.Country;
-import model.Location.State;
+import model.Geography.Country;
+import model.Geography.State;
 import model.Organization.NvdsParticipatingOrganization;
 import model.Organization.NvdsParticipatingOrganization.OrganizationType;
 import model.Organization.NvdsParticipatingOrganizationsDirectory;
@@ -49,7 +49,7 @@ public class ManageEmployee extends javax.swing.JPanel {
     private void populateCountryCombo(){
         
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getNvdsListOfParticipatingCountries()){
+        for(Country country : ecosystem.getListOfParticipatingCountries()){
             cmbCountry.addItem(country);
         }
     }
