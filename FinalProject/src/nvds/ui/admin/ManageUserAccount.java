@@ -10,7 +10,7 @@ import nvds.Geography.Country;
 import nvds.Geography.State;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Organization.NvdsParticipatingOrganizationsDirectory;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.Useraccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -96,7 +96,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
     private void populateRoleTypeCombo(NvdsParticipatingOrganization organization) {
 
         cmbRoleType.removeAllItems();
-        for ( OrganizationEmployeeRole role : organization.getOrganizationSupportedRole() ) {
+        for ( OrganizationEmployeeUserAccountRole role : organization.getOrganizationSupportedRole() ) {
             cmbRoleType.addItem(role);
         }
     }
@@ -471,7 +471,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
         }
 
         NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
-        OrganizationEmployeeRole role = ( OrganizationEmployeeRole ) cmbRoleType.getSelectedItem();
+        OrganizationEmployeeUserAccountRole role = ( OrganizationEmployeeUserAccountRole ) cmbRoleType.getSelectedItem();
 
         UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
         userAccountDirectory.createUserAccount(userName , password , employee , role);

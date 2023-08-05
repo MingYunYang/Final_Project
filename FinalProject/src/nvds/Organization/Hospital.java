@@ -9,11 +9,11 @@ import nvds.Geography.State;
 import nvds.OrganizationEmployeeRole.VaccineInventoryManagerRole;
 import nvds.OrganizationEmployeeRole.HospitalLabTechnicianRole;
 import nvds.OrganizationEmployeeRole.VaccineOrderRequestsReviewerRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 
 public class Hospital extends NvdsParticipatingOrganization {
 
-    private ArrayList<OrganizationEmployeeRole> organizationSupportedRole;
+    private ArrayList<OrganizationEmployeeUserAccountRole> organizationSupportedRole;
 
     public Hospital(String organizationName , Country country , State state , City city , Address address , Contact contact) {
         super(organizationName , NvdsParticipatingOrganization.OrganizationType.HOSPITAL , country , state , city , address , contact);
@@ -21,7 +21,7 @@ public class Hospital extends NvdsParticipatingOrganization {
     }
 
     @Override
-    public ArrayList<OrganizationEmployeeRole> getOrganizationSupportedRole() {
+    public ArrayList<OrganizationEmployeeUserAccountRole> getOrganizationSupportedRole() {
         if ( organizationSupportedRole == null ) {
             organizationSupportedRole = new ArrayList<>();
             organizationSupportedRole.add(new VaccineInventoryManagerRole());

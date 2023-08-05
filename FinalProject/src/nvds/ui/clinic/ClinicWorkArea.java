@@ -5,24 +5,24 @@ import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 
 public class ClinicWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
 
-    NationalVaccineDistributionSystem ecosystem;
+    NationalVaccineDistributionSystem nvds;
 
-    UserAccount userAccount;
+    UserAccount employeeUserAccount;
 
-    NvdsParticipatingOrganization organization;
+    NvdsParticipatingOrganization participatingOrganization;
 
-    public ClinicWorkArea(JPanel userProcessContainer , UserAccount userAccount , NvdsParticipatingOrganization organization , NationalVaccineDistributionSystem ecosystem) {
+    public ClinicWorkArea(JPanel userProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization participatingOrganization , NationalVaccineDistributionSystem nvds) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
-        this.userAccount = userAccount;
-        this.organization = organization;
+        this.nvds = nvds;
+        this.employeeUserAccount = employeeUserAccount;
+        this.participatingOrganization = participatingOrganization;
 
         toggleButtonsAccessBasedOnRole();
     }
@@ -37,8 +37,8 @@ public class ClinicWorkArea extends javax.swing.JPanel {
      */
     private void toggleButtonsAccessBasedOnRole() {
 
-        OrganizationEmployeeRole role = userAccount.getOrganizationEmployeeRole();
-        switch ( role.organizationEmployeeRoleType ) {
+        OrganizationEmployeeUserAccountRole role = employeeUserAccount.getOrganizationEmployeeRole();
+        switch ( role.organizationEmployeeUserAccountRoleType ) {
             case ORGANIZATION_DOCTOR -> {
                 btnManageVaccineInventory.setEnabled(false);
                 btnManageVaccineRequest.setEnabled(false);
@@ -127,7 +127,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineRequestActionPerformed
 
-        ManageVaccineRequestJPanel mvr = new ManageVaccineRequestJPanel(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineRequestJPanel mvr = new ManageVaccineRequestJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ManageClinicRequestReview" , mvr);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -135,7 +135,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
 
-        ManageVaccineInventoryJPanel mcvi = new ManageVaccineInventoryJPanel(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineInventoryJPanel mcvi = new ManageVaccineInventoryJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ManageClinicVaccineInventory" , mcvi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -143,7 +143,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
 
     private void btnReportSafetyIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSafetyIssueActionPerformed
 
-        ReportSafetyIssueJPanel rsi = new ReportSafetyIssueJPanel(userProcessContainer , userAccount , organization , ecosystem);
+        ReportVaccineSafetyIssueJPanel rsi = new ReportVaccineSafetyIssueJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ReportSafetyIssue" , rsi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

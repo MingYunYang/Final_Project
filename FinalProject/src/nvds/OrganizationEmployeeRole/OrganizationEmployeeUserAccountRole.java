@@ -6,9 +6,9 @@ import nvds.Useraccount.UserAccount;
 import javax.swing.JPanel;
 import nvds.Workqueue.WorkQueue;
 
-public abstract class OrganizationEmployeeRole {
+public abstract class OrganizationEmployeeUserAccountRole {
 
-    public OrganizationEmployeeRoleType organizationEmployeeRoleType;
+    public OrganizationEmployeeRoleType organizationEmployeeUserAccountRoleType;
 
     private final WorkQueue incomingVaccineOrderRequestsWorkQueue;
 
@@ -41,10 +41,10 @@ public abstract class OrganizationEmployeeRole {
 
     }
 
-    public OrganizationEmployeeRole(OrganizationEmployeeRoleType roleType) {
+    public OrganizationEmployeeUserAccountRole(OrganizationEmployeeRoleType roleType) {
         incomingVaccineOrderRequestsWorkQueue = new WorkQueue();
         vaccineOrderRequestsCurrentlyUnderReviewWorkQueue = new WorkQueue();
-        this.organizationEmployeeRoleType = roleType;
+        this.organizationEmployeeUserAccountRoleType = roleType;
     }
 
     public WorkQueue getIncomingVaccineOrderRequestsWorkQueue() {
@@ -58,7 +58,7 @@ public abstract class OrganizationEmployeeRole {
 
     @Override
     public String toString() {
-        return organizationEmployeeRoleType.getValue();
+        return organizationEmployeeUserAccountRoleType.getValue();
     }
 
 }

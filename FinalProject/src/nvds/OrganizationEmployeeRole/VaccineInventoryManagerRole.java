@@ -9,7 +9,7 @@ import nvds.Useraccount.UserAccount;
 import nvds.ui.clinic.ClinicWorkArea;
 import nvds.ui.hospital.HospitalWorkArea;
 
-public class VaccineInventoryManagerRole extends OrganizationEmployeeRole {
+public class VaccineInventoryManagerRole extends OrganizationEmployeeUserAccountRole {
 
     public VaccineInventoryManagerRole() {
         super(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
@@ -17,7 +17,7 @@ public class VaccineInventoryManagerRole extends OrganizationEmployeeRole {
 
     @Override
     public JPanel createWorkArea(JPanel userAccountProcessContainer , UserAccount userAccount , NvdsParticipatingOrganization nvdsParticipatingOrganization , NationalVaccineDistributionSystem nvds) {
-        organizationEmployeeRoleType = OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER;
+        organizationEmployeeUserAccountRoleType = OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER;
 
         if ( nvdsParticipatingOrganization instanceof Clinic ) {
             return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());

@@ -13,14 +13,14 @@ import nvds.Useraccount.UserAccount;
  *
  * @author libby
  */
-public class ReportSafetyIssueJPanel extends javax.swing.JPanel {
+public class ReportVaccineSafetyIssueJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
     NvdsParticipatingOrganization organization;
     
-    public ReportSafetyIssueJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+    public ReportVaccineSafetyIssueJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

@@ -1,7 +1,7 @@
 package nvds.Useraccount;
 
 import nvds.Employee.Employee;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import java.util.ArrayList;
 
 public class UserAccountDirectory {
@@ -21,7 +21,7 @@ public class UserAccountDirectory {
         return null;
     }
 
-    public UserAccount createUserAccount(String username , String password , Employee employeeName , OrganizationEmployeeRole organizationEmployeeRole) {
+    public UserAccount createUserAccount(String username , String password , Employee employeeName , OrganizationEmployeeUserAccountRole organizationEmployeeRole) {
         UserAccount userAccount = new UserAccount(username , password , employeeName , organizationEmployeeRole);
         listOfUserAccounts.add(userAccount);
         return userAccount;
