@@ -2,23 +2,23 @@ package model.Contact;
 
 public class Contact {
 
-    private String phoneNumber;
+    private String participatingOrganizationPhoneNumber;
 
-    public Contact(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public Contact(String participatingOrganizationPhoneNumber) {
+        this.participatingOrganizationPhoneNumber = participatingOrganizationPhoneNumber;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getParticipatingOrganizationPhoneNumber() {
+        return participatingOrganizationPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setParticipatingOrganizationPhoneNumber(String participatingOrganizationPhoneNumber) {
+        this.participatingOrganizationPhoneNumber = participatingOrganizationPhoneNumber;
     }
 
     @Override
     public String toString() {
-        return phoneNumber;
+        return participatingOrganizationPhoneNumber;
 
     }
 
