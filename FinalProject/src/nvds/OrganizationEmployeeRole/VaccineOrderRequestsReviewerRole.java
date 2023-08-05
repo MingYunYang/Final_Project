@@ -20,9 +20,9 @@ public class VaccineOrderRequestsReviewerRole extends OrganizationEmployeeRole {
         organizationEmployeeRoleType = OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER;
 
         if ( nvdsParticipatingOrganization instanceof Clinic ) {
-            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         } else if ( nvdsParticipatingOrganization instanceof Hospital ) {
-            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         }
         return null;
     }

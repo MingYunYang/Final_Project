@@ -20,9 +20,9 @@ public class VaccineInventoryManagerRole extends OrganizationEmployeeRole {
         organizationEmployeeRoleType = OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER;
 
         if ( nvdsParticipatingOrganization instanceof Clinic ) {
-            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         } else if ( nvdsParticipatingOrganization instanceof Hospital ) {
-            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         }
         return null;
     }

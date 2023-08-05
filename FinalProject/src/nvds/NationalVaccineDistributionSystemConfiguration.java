@@ -24,18 +24,11 @@ public class NationalVaccineDistributionSystemConfiguration {
     public static NationalVaccineDistributionSystem configure() {
 
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem
-                = NationalVaccineDistributionSystem.getNvdsSingleInstance();
-
-
-        // Create NVDS organization directory to store list of participating organizations, 
-        // their geography, address and contact information.
-        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
-                = nationalVaccineDistributionSystem.getListOfParticipatingOrganizations();
-
+                = NationalVaccineDistributionSystem.getSingleInstance();
 
         // Create the geographical information(country, state, city, address)and contact information first
         // NVDS Participating Country 1: USA
-        Country usa = nationalVaccineDistributionSystem.addNewParticipatingCountry("United States");
+        Country usa = nationalVaccineDistributionSystem.addParticipatingCountry("United States");
         // NVDS Participating Country 1: USA - State 1: Massachussets
         State massachussets = usa.addState("Massachusetts");
         // NVDS Participating country 1: USA - State 1: Massachussets - City 1: Boston
@@ -49,6 +42,11 @@ public class NationalVaccineDistributionSystemConfiguration {
         Address nvdsAdminOrganizationAddress = cambridge.addAddress("215 Kelton St" , "02134");
         // ADD NVDS Admin NvdsParticipatingOrganization Contact phone number
         Contact nvdsAdminOrganizationContact = nvdsAdminOrganizationAddress.addContact("781-921-8195");
+
+        // Create NVDS organization directory to store list of participating organizations, 
+        // their geography, address and contact information.
+        NvdsParticipatingOrganizationsDirectory nvdsParticipatingOrganizationsDirectory
+                = nationalVaccineDistributionSystem.getParticipatingOrganizations();
 
 
         // Create an NVDS admin organization to manage the NVDS and add it to the NVDS organization directory

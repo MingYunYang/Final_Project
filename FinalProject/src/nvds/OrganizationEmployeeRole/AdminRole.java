@@ -15,7 +15,7 @@ public class AdminRole extends OrganizationEmployeeRole {
     @Override
     public JPanel createWorkArea(JPanel accountUserProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization nvdsParticipatingOrganization , NationalVaccineDistributionSystem nvds) {
         organizationEmployeeRoleType = OrganizationEmployeeRoleType.ORGANIZATION_ADMIN;
-        return new AdminWorkArea(accountUserProcessContainer , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+        return new AdminWorkArea(accountUserProcessContainer , NationalVaccineDistributionSystem.getSingleInstance());
     }
 
 }

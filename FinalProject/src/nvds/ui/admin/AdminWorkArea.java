@@ -101,7 +101,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
 
     private void manageUserAccountJPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserAccountJPanelActionPerformed
         
-        ManageUserAccount muajp = new ManageUserAccount(userProcessContainer, ecosystem.getListOfParticipatingOrganizations(), ecosystem);
+        ManageUserAccount muajp = new ManageUserAccount(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -109,7 +109,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
 
-        ManageEmployee manageEmployeeJPanel = new ManageEmployee(userProcessContainer, ecosystem.getListOfParticipatingOrganizations(), ecosystem);
+        ManageEmployee manageEmployeeJPanel = new ManageEmployee(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
         userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -117,7 +117,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
 
-        ManageOrganization manageOrganizationJPanel = new ManageOrganization(userProcessContainer, ecosystem.getListOfParticipatingOrganizations(), ecosystem);
+        ManageOrganization manageOrganizationJPanel = new ManageOrganization(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
         userProcessContainer.add("manageOrganizationJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

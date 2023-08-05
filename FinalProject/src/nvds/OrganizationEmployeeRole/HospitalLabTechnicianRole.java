@@ -18,7 +18,7 @@ public class HospitalLabTechnicianRole extends OrganizationEmployeeRole {
         organizationEmployeeRoleType = OrganizationEmployeeRole.OrganizationEmployeeRoleType.HOSPITAL_LAB_TECHNICIAN_ROLE;
 
         if ( nvdsParticipatingOrganization instanceof Hospital ) {
-            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new HospitalWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         }
         return null;
     }

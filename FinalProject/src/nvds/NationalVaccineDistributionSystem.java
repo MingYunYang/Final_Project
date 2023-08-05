@@ -13,38 +13,38 @@ import java.util.ArrayList;
  */
 public class NationalVaccineDistributionSystem {
 
-    private static NationalVaccineDistributionSystem nvdsSingleInstance;
+    private static NationalVaccineDistributionSystem singleInstance;
 
-    private final ArrayList<Country> listOfParticipatingCountries;
+    private final ArrayList<Country> participatingCountries;
 
-    private final NvdsParticipatingOrganizationsDirectory listOfParticipatingOrganizations;
+    private final NvdsParticipatingOrganizationsDirectory participatingOrganizations;
 
-    public static NationalVaccineDistributionSystem getNvdsSingleInstance() {
-        if ( nvdsSingleInstance == null ) {
+    public static NationalVaccineDistributionSystem getSingleInstance() {
+        if ( singleInstance == null ) {
             // Create a new single Vaccine distribution system instance
             // Or in other terms instantiate a new single Vaccine distribution system object
-            nvdsSingleInstance = new NationalVaccineDistributionSystem();
+            singleInstance = new NationalVaccineDistributionSystem();
         }
-        return nvdsSingleInstance;
+        return singleInstance;
     }
 
     private NationalVaccineDistributionSystem() {
-        this.listOfParticipatingCountries = new ArrayList<>();
-        this.listOfParticipatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
+        this.participatingCountries = new ArrayList<>();
+        this.participatingOrganizations = new NvdsParticipatingOrganizationsDirectory();
 
     }
 
-    public NvdsParticipatingOrganizationsDirectory getListOfParticipatingOrganizations() {
-        return listOfParticipatingOrganizations;
+    public NvdsParticipatingOrganizationsDirectory getParticipatingOrganizations() {
+        return participatingOrganizations;
     }
 
-    public ArrayList<Country> getListOfParticipatingCountries() {
-        return listOfParticipatingCountries;
+    public ArrayList<Country> getParticipatingCountries() {
+        return participatingCountries;
     }
 
-    public Country addNewParticipatingCountry(String countryName) {
+    public Country addParticipatingCountry(String countryName) {
         Country country = new Country(countryName);
-        listOfParticipatingCountries.add(country);
+        participatingCountries.add(country);
         return country;
     }
 

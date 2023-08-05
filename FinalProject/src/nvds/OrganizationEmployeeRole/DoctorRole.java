@@ -18,7 +18,7 @@ public class DoctorRole extends OrganizationEmployeeRole {
         organizationEmployeeRoleType = OrganizationEmployeeRoleType.ORGANIZATION_DOCTOR;
 
         if ( nvdsParticipatingOrganization instanceof Clinic ) {
-            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getNvdsSingleInstance());
+            return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());
         }
         return null;
     }
