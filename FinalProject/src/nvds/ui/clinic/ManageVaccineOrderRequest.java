@@ -20,14 +20,14 @@ import nvds.Workqueue.WorkRequest;
  *
  * @author libby
  */
-public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
+public class ManageVaccineOrderRequest extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
     NvdsParticipatingOrganization organization;
     
-    public ManageVaccineRequestJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+    public ManageVaccineOrderRequest(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;

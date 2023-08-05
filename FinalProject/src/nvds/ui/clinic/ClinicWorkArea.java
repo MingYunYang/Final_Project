@@ -126,24 +126,24 @@ public class ClinicWorkArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineRequestActionPerformed
-
-        ManageVaccineRequestJPanel mvr = new ManageVaccineRequestJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
+        // Reviewer role
+        ManageVaccineOrderRequest mvr = new ManageVaccineOrderRequest(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ManageClinicRequestReview" , mvr);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageVaccineRequestActionPerformed
 
     private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
-
-        ManageVaccineInventoryJPanel mcvi = new ManageVaccineInventoryJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
+        // Inventory manager role
+        ManageVaccineInventory mcvi = new ManageVaccineInventory(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ManageClinicVaccineInventory" , mcvi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageVaccineInventoryActionPerformed
 
     private void btnReportSafetyIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSafetyIssueActionPerformed
-
-        ReportVaccineSafetyIssueJPanel rsi = new ReportVaccineSafetyIssueJPanel(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
+        // Doctor role
+        ReportVaccineSafetyIssue rsi = new ReportVaccineSafetyIssue(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
         userProcessContainer.add("ReportSafetyIssue" , rsi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

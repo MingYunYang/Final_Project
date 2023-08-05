@@ -23,19 +23,19 @@ import nvds.Workqueue.WorkRequest;
  *
  * @author libby
  */
-public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
+public class ManageVaccineInventory extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    NationalVaccineDistributionSystem ecosystem;
-    UserAccount userAccount;
-    NvdsParticipatingOrganization organization;
+    NationalVaccineDistributionSystem nvds;
+    UserAccount employeeUserAccount;
+    NvdsParticipatingOrganization participatingOrganization;
 
-    public ManageVaccineInventoryJPanel(JPanel userProcessContainer, UserAccount userAccount, NvdsParticipatingOrganization organization, NationalVaccineDistributionSystem ecosystem) {
+    public ManageVaccineInventory(JPanel userProcessContainer, UserAccount employeeUserAccount, NvdsParticipatingOrganization participatingOrganization, NationalVaccineDistributionSystem nvds) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
-        this.userAccount = userAccount;
-        this.organization = organization;
+        this.nvds = nvds;
+        this.employeeUserAccount = employeeUserAccount;
+        this.participatingOrganization = participatingOrganization;
 
         populateVaccineInventoryTable();
         populateWaitingWorkQueueTable();
@@ -274,13 +274,13 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
 
         request.setVaccine(vaccine);
         request.setVaccineRequestQuantity(requestQuantity);
-        request.setRequestSender(userAccount); // will show the employee's name
+        request.setRequestSender(employeeUserAccount); // will show the employee's name
         request.setStatus("Sent");
 
         // add the request to Inventory OrganizationEmployeeUserAccountRole's work queue
         // add the request to the Review OrganizationEmployeeUserAccountRole's work queue as well
-        OrganizationEmployeeUserAccountRole reviewRole = organization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
-        WorkQueue inventoryRoleWaitingWorkQueue = userAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue();
+        OrganizationEmployeeUserAccountRole reviewRole = participatingOrganization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
+        WorkQueue inventoryRoleWaitingWorkQueue = employeeUserAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue();
 
         if (reviewRole != null) {
             reviewRole.getIncomingVaccineOrderRequestsWorkQueue().getListOfWorkRequests().add(request);
@@ -306,7 +306,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblVaccineInventory.getModel();
         model.setRowCount(0);
 
-        VaccineInventoryCatalog inventory = organization.getVaccineInventoryCatalog();
+        VaccineInventoryCatalog inventory = participatingOrganization.getVaccineInventoryCatalog();
         inventory.populateVaccineTypeList();
         inventory.populateVaccineInventoryCount();
 
@@ -326,7 +326,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblVaccineInventoryManagementWorkQueue.getModel();
         model.setRowCount(0);
 
-        for (WorkRequest request : userAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue().getListOfWorkRequests()) {
+        for (WorkRequest request : employeeUserAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue().getListOfWorkRequests()) {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request.getVaccine().getVaccineName();
