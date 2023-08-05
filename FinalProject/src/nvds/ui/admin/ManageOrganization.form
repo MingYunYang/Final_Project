@@ -50,10 +50,10 @@
                                               </Group>
                                               <EmptySpace pref="72" max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="txtNewPostalCode" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                                  <Component id="txtNewAddress" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                                  <Component id="txtNewPhone" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                                  <Component id="txtNewName" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                                  <Component id="txtPostalCode" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                                  <Component id="txtStreetAddress" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                                  <Component id="txtPhoneNumber" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                                  <Component id="txtOrganizationName" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
@@ -143,7 +143,7 @@
                       <Component id="lblCreateNewOrganization" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNewName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtOrganizationName" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="lblNewName" min="-2" max="-2" attributes="0"/>
@@ -151,17 +151,17 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNewPhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNewPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNewAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtStreetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNewAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNewPostalCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPostalCode" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNewPostalCode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -390,13 +390,13 @@
         <Property name="text" type="java.lang.String" value="Create New Organization:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNewName">
+    <Component class="javax.swing.JTextField" name="txtOrganizationName">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNewPhone">
+    <Component class="javax.swing.JTextField" name="txtPhoneNumber">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNewAddress">
+    <Component class="javax.swing.JTextField" name="txtStreetAddress">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNewPostalCode">
+    <Component class="javax.swing.JTextField" name="txtPostalCode">
     </Component>
   </SubComponents>
 </Form>

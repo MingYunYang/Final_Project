@@ -15,104 +15,107 @@ import javax.swing.table.DefaultTableModel;
 
 public class ManageEmployee extends javax.swing.JPanel {
 
-    private final NvdsParticipatingOrganizationsDirectory organizationDirectory;
-    private final JPanel userProcessContainer;
-    private final NationalVaccineDistributionSystem ecosystem;
+    private final NvdsParticipatingOrganizationsDirectory participatingOrganizationsDirectory;
 
-    public ManageEmployee(JPanel userProcessContainer, NvdsParticipatingOrganizationsDirectory organizationDirectory, NationalVaccineDistributionSystem ecosystem) {
+    private final JPanel userProcessContainer;
+
+    private final NationalVaccineDistributionSystem nvds;
+
+    public ManageEmployee(JPanel userProcessContainer , NvdsParticipatingOrganizationsDirectory organizationDirectory , NationalVaccineDistributionSystem nvds) {
 
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
-        this.organizationDirectory = organizationDirectory;
-        this.ecosystem = ecosystem;
-        
-        populateCountryCombo();
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
-            populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
-                populateOrganizationTypeCombo();
-                OrganizationType type = (OrganizationType)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
-                        populateTable(organization);
+        this.participatingOrganizationsDirectory = organizationDirectory;
+        this.nvds = nvds;
+
+        populateParticipatingCountriesComboBox();
+
+        Country participatingCountry = ( Country ) cmbParticipatingCountries.getSelectedItem();
+        if ( participatingCountry != null ) {
+            populateStateComboBox(participatingCountry);
+            State organizationState = ( State ) cmbState.getSelectedItem();
+            if ( organizationState != null ) {
+                populateParticipatingOrganizationTypeComboBox();
+                OrganizationType participatingOrganizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+                if ( participatingOrganizationType != null ) {
+                    populateOrganizationCombo(participatingCountry , organizationState , participatingOrganizationType);
+                    NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+                    if ( participatingOrganization != null ) {
+                        populateTable(participatingOrganization);
                     }
                 }
             }
         }
     }
 
-    private void populateCountryCombo(){
-        
-        cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getParticipatingCountries()){
-            cmbCountry.addItem(country);
-        }
-    }
-    
-    private void populateStateCombo(Country country){
-        
-        cmbState.removeAllItems();
-        for(State state : country.getStateList()){
-            cmbState.addItem(state);
-        }
-    }
-    
-    private void populateOrganizationTypeCombo(){
-                
-        cmbOrganizationType.removeAllItems();
-        for(NvdsParticipatingOrganization.OrganizationType type : NvdsParticipatingOrganization.OrganizationType.values()){
-            cmbOrganizationType.addItem(type);
-        }
-    }
-    
-    private void populateOrganizationCombo(Country country, State state, OrganizationType type){
-        
-        cmbOrganization.removeAllItems();
-        for (NvdsParticipatingOrganization organization : organizationDirectory.getListOfParticipatingOrganizations()){
-            if(organization.getOrganizationCountry().equals(country) 
-               && organization.getOrganizationState().equals(state)
-               && organization.getTypeOfOrganization().equals(type)){
-               
-               cmbOrganization.addItem(organization); 
-            }
-        }
-    }
-    
-    private void populateTable(NvdsParticipatingOrganization organization){
-        
-        DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
-        model.setRowCount(0);
-        
-        for (Employee employee : organization.getEmployeeDirectory().getListOfEmployees()){
-             Object[] row = new Object[2];
-             row[0] = employee.getEMPLOYEE_ID();
-             row[1] = employee.getOrganizationEmployeeName();
-             model.addRow(row);
+    private void populateParticipatingCountriesComboBox() {
+
+        cmbParticipatingCountries.removeAllItems();
+        for ( Country participatingCountry : nvds.getParticipatingCountries() ) {
+            cmbParticipatingCountries.addItem(participatingCountry);
         }
     }
 
-    @SuppressWarnings("unchecked")
+    private void populateStateComboBox(Country participatingCountry) {
+
+        cmbState.removeAllItems();
+        for ( State organizationState : participatingCountry.getlistOfStatesInParticipatingCountry() ) {
+            cmbState.addItem(organizationState);
+        }
+    }
+
+    private void populateParticipatingOrganizationTypeComboBox() {
+
+        cmbOrganizationType.removeAllItems();
+        for ( NvdsParticipatingOrganization.OrganizationType organizationType : NvdsParticipatingOrganization.OrganizationType.values() ) {
+            cmbOrganizationType.addItem(organizationType);
+        }
+    }
+
+    private void populateOrganizationCombo(Country participatingCountry , State organizationState , OrganizationType organizationType) {
+
+        cmbParticipatingOrganizations.removeAllItems();
+        for ( NvdsParticipatingOrganization participatingOrganization : participatingOrganizationsDirectory.getListOfParticipatingOrganizations() ) {
+            if ( participatingOrganization.getOrganizationCountry().equals(participatingCountry)
+                    && participatingOrganization.getOrganizationState().equals(organizationState)
+                    && participatingOrganization.getTypeOfOrganization().equals(organizationType) ) {
+
+                cmbParticipatingOrganizations.addItem(participatingOrganization);
+            }
+        }
+    }
+
+    private void populateTable(NvdsParticipatingOrganization participatingOrganization) {
+
+        DefaultTableModel model = ( DefaultTableModel ) tblParticpatingOrganizationEmployees.getModel();
+        model.setRowCount(0);
+
+        for ( Employee participatingOrganizationEmployee : participatingOrganization.getEmployeeDirectory().getListOfEmployees() ) {
+            Object[] row = new Object[ 2 ];
+            row[ 0 ] = participatingOrganizationEmployee.getEMPLOYEE_ID();
+            row[ 1 ] = participatingOrganizationEmployee.getOrganizationEmployeeName();
+            model.addRow(row);
+        }
+    }
+
+    @SuppressWarnings ( "unchecked" )
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblOrganization = new javax.swing.JLabel();
-        cmbOrganization = new javax.swing.JComboBox();
+        cmbParticipatingOrganizations = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployees = new javax.swing.JTable();
+        tblParticpatingOrganizationEmployees = new javax.swing.JTable();
         lblEmployeeList = new javax.swing.JLabel();
         lblEmployeeName = new javax.swing.JLabel();
         txtEmployeeName = new javax.swing.JTextField();
         btnCreateEmployee = new javax.swing.JButton();
         lblState = new javax.swing.JLabel();
         cmbState = new javax.swing.JComboBox();
-        cmbCountry = new javax.swing.JComboBox();
+        cmbParticipatingCountries = new javax.swing.JComboBox();
         lblCountry = new javax.swing.JLabel();
         lblOrganizationType = new javax.swing.JLabel();
         cmbOrganizationType = new javax.swing.JComboBox();
@@ -133,14 +136,14 @@ public class ManageEmployee extends javax.swing.JPanel {
         lblOrganization.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblOrganization.setText("Organization:");
 
-        cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
+        cmbParticipatingOrganizations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbOrganizationActionPerformed(evt);
+                cmbParticipatingOrganizationsActionPerformed(evt);
             }
         });
 
-        tblEmployees.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tblParticpatingOrganizationEmployees.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        tblParticpatingOrganizationEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -166,11 +169,11 @@ public class ManageEmployee extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblEmployees);
-        if (tblEmployees.getColumnModel().getColumnCount() > 0) {
-            tblEmployees.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tblEmployees.getColumnModel().getColumn(0).setMaxWidth(50);
-            tblEmployees.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(tblParticpatingOrganizationEmployees);
+        if (tblParticpatingOrganizationEmployees.getColumnModel().getColumnCount() > 0) {
+            tblParticpatingOrganizationEmployees.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblParticpatingOrganizationEmployees.getColumnModel().getColumn(0).setMaxWidth(50);
+            tblParticpatingOrganizationEmployees.getColumnModel().getColumn(1).setResizable(false);
         }
 
         lblEmployeeList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
@@ -202,9 +205,9 @@ public class ManageEmployee extends javax.swing.JPanel {
             }
         });
 
-        cmbCountry.addActionListener(new java.awt.event.ActionListener() {
+        cmbParticipatingCountries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCountryActionPerformed(evt);
+                cmbParticipatingCountriesActionPerformed(evt);
             }
         });
 
@@ -239,7 +242,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                                 .addComponent(lblCountry))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbParticipatingCountries, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cmbOrganizationType, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(37, 37, 37)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +250,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                                 .addComponent(lblOrganization))
                             .addGap(16, 16, 16)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbParticipatingOrganizations, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -270,11 +273,11 @@ public class ManageEmployee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblState)
-                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbParticipatingCountries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCountry))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbParticipatingOrganizations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOrganization)
                     .addComponent(lblOrganizationType)
                     .addComponent(cmbOrganizationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -293,19 +296,19 @@ public class ManageEmployee extends javax.swing.JPanel {
 
     private void btnCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEmployeeActionPerformed
 
-        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization) cmbOrganization.getSelectedItem();
-        EmployeeDirectory employeeDirectory = organization.getEmployeeDirectory();
-        String name = txtEmployeeName.getText();
-        
-        if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Employee name cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+        EmployeeDirectory participatingOrganizationEmployeeDirectory = participatingOrganization.getEmployeeDirectory();
+        String employeeName = txtEmployeeName.getText();
+
+        if ( employeeName.isEmpty() ) {
+            JOptionPane.showMessageDialog(this , "Employee name cannot be empty" , "Warning" , JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        employeeDirectory.addNewEmployee(name);
-        
+
+        participatingOrganizationEmployeeDirectory.addNewEmployee(employeeName);
+
         txtEmployeeName.setText("");
-        populateTable(organization);
+        populateTable(participatingOrganization);
 
         evt.getWhen();
 
@@ -314,42 +317,42 @@ public class ManageEmployee extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
         userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
 
         evt.getWhen();
 
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
+    private void cmbParticipatingOrganizationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbParticipatingOrganizationsActionPerformed
 
-        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-        if(organization != null){
-            populateTable(organization);
+        NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+        if ( participatingOrganization != null ) {
+            populateTable(participatingOrganization);
         } else {
-            DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+            DefaultTableModel model = ( DefaultTableModel ) tblParticpatingOrganizationEmployees.getModel();
             model.setRowCount(0);
         }
 
         evt.getWhen();
 
-    }//GEN-LAST:event_cmbOrganizationActionPerformed
+    }//GEN-LAST:event_cmbParticipatingOrganizationsActionPerformed
 
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        
-        if (state != null && country != null) {
-            populateOrganizationTypeCombo();
-            OrganizationType type = (OrganizationType) cmbOrganizationType.getSelectedItem();
-            if (type != null) {
-                populateOrganizationCombo(country, state, type);
-                NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization) cmbOrganization.getSelectedItem();
-                if (organization != null) {
-                    populateTable(organization);
+        Country participatingCountry = ( Country ) cmbParticipatingCountries.getSelectedItem();
+        State organizationState = ( State ) cmbState.getSelectedItem();
+
+        if ( organizationState != null && participatingCountry != null ) {
+            populateParticipatingOrganizationTypeComboBox();
+            OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+            if ( organizationType != null ) {
+                populateOrganizationCombo(participatingCountry , organizationState , organizationType);
+                NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+                if ( participatingOrganization != null ) {
+                    populateTable(participatingOrganization);
                 } else {
-                    DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+                    DefaultTableModel model = ( DefaultTableModel ) tblParticpatingOrganizationEmployees.getModel();
                     model.setRowCount(0);
                 }
             }
@@ -359,22 +362,22 @@ public class ManageEmployee extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cmbStateActionPerformed
 
-    private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
+    private void cmbParticipatingCountriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbParticipatingCountriesActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
-            populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
-                populateOrganizationTypeCombo();
-                OrganizationType type = (OrganizationType)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
-                        populateTable(organization);
+        Country participatingCountry = ( Country ) cmbParticipatingCountries.getSelectedItem();
+        if ( participatingCountry != null ) {
+            populateStateComboBox(participatingCountry);
+            State organizationState = ( State ) cmbState.getSelectedItem();
+            if ( organizationState != null ) {
+                populateParticipatingOrganizationTypeComboBox();
+                OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+                if ( organizationType != null ) {
+                    populateOrganizationCombo(participatingCountry , organizationState , organizationType);
+                    NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+                    if ( participatingOrganization != null ) {
+                        populateTable(participatingOrganization);
                     } else {
-                        DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+                        DefaultTableModel model = ( DefaultTableModel ) tblParticpatingOrganizationEmployees.getModel();
                         model.setRowCount(0);
                     }
                 }
@@ -383,36 +386,36 @@ public class ManageEmployee extends javax.swing.JPanel {
 
         evt.getWhen();
 
-    }//GEN-LAST:event_cmbCountryActionPerformed
+    }//GEN-LAST:event_cmbParticipatingCountriesActionPerformed
 
     private void txtEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeNameActionPerformed
-        
+
     }//GEN-LAST:event_txtEmployeeNameActionPerformed
 
     private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
-        
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        OrganizationType type = (OrganizationType)cmbOrganizationType.getSelectedItem();
-        
-        if(type != null){
-            populateOrganizationCombo(country, state, type);
-            NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-            if(organization != null){
-                populateTable(organization);
+
+        Country participatingCountry = ( Country ) cmbParticipatingCountries.getSelectedItem();
+        State organizationState = ( State ) cmbState.getSelectedItem();
+        OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+
+        if ( organizationType != null ) {
+            populateOrganizationCombo(participatingCountry , organizationState , organizationType);
+            NvdsParticipatingOrganization participatingOrganization = ( NvdsParticipatingOrganization ) cmbParticipatingOrganizations.getSelectedItem();
+            if ( participatingOrganization != null ) {
+                populateTable(participatingOrganization);
             } else {
-                DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
+                DefaultTableModel model = ( DefaultTableModel ) tblParticpatingOrganizationEmployees.getModel();
                 model.setRowCount(0);
             }
-        }     
+        }
     }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateEmployee;
-    private javax.swing.JComboBox cmbCountry;
-    private javax.swing.JComboBox cmbOrganization;
     private javax.swing.JComboBox cmbOrganizationType;
+    private javax.swing.JComboBox cmbParticipatingCountries;
+    private javax.swing.JComboBox cmbParticipatingOrganizations;
     private javax.swing.JComboBox cmbState;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCountry;
@@ -422,7 +425,7 @@ public class ManageEmployee extends javax.swing.JPanel {
     private javax.swing.JLabel lblOrganizationType;
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tblEmployees;
+    private javax.swing.JTable tblParticpatingOrganizationEmployees;
     private javax.swing.JTextField txtEmployeeName;
     // End of variables declaration//GEN-END:variables
 }

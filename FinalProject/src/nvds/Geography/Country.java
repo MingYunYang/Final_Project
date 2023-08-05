@@ -37,7 +37,7 @@ public class Country {
         this.countryPopulation = countryPopulation;
     }
 
-    public ArrayList<State> getStateList() {
+    public ArrayList<State> getlistOfStatesInParticipatingCountry() {
         return stateList;
     }
 

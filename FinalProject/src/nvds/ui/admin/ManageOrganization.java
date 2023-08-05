@@ -16,33 +16,33 @@ import nvds.Organization.NvdsParticipatingOrganization.OrganizationType;
 
 public class ManageOrganization extends javax.swing.JPanel {
 
-    NvdsParticipatingOrganizationsDirectory directory;
+    NvdsParticipatingOrganizationsDirectory participatingOrganizationsDirectory;
 
     JPanel userProcessContainer;
 
-    NationalVaccineDistributionSystem ecosystem;
+    NationalVaccineDistributionSystem nvds;
 
-    public ManageOrganization(JPanel userProcessContainer , NvdsParticipatingOrganizationsDirectory directory , NationalVaccineDistributionSystem ecosystem) {
+    public ManageOrganization(JPanel userProcessContainer , NvdsParticipatingOrganizationsDirectory participatingOrganizationsDirectory , NationalVaccineDistributionSystem nvds) {
 
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
-        this.directory = directory;
-        this.ecosystem = ecosystem;
+        this.participatingOrganizationsDirectory = participatingOrganizationsDirectory;
+        this.nvds = nvds;
 
-        populateCountryCombo();
-        Country country = ( Country ) cmbCountry.getSelectedItem();
-        if ( country != null ) {
-            populateStateCombo(country);
-            State state = ( State ) cmbState.getSelectedItem();
-            if ( state != null ) {
-                populateCityCombo(state);
-                City city = ( City ) cmbCity.getSelectedItem();
-                if ( city != null ) {
+        populateParticipatingCountriesComboBox();
+        Country participatingCountry = ( Country ) cmbCountry.getSelectedItem();
+        if ( participatingCountry != null ) {
+            populateStateCombo(participatingCountry);
+            State organizationState = ( State ) cmbState.getSelectedItem();
+            if ( organizationState != null ) {
+                populateCityCombo(organizationState);
+                City organizationCity = ( City ) cmbCity.getSelectedItem();
+                if ( organizationCity != null ) {
                     populateOrganizationTypeCombo();
-                    OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
-                    if ( type != null ) {
-                        populateTable();
+                    OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+                    if ( organizationType != null ) {
+                        populateParticipatingOrganizationsListTable();
                     }
                 }
             }
@@ -51,60 +51,60 @@ public class ManageOrganization extends javax.swing.JPanel {
 
     @SuppressWarnings ( "unchecked" )
 
-    private void populateCountryCombo() {
+    private void populateParticipatingCountriesComboBox() {
 
         cmbCountry.removeAllItems();
-        for ( Country country : ecosystem.getParticipatingCountries() ) {
-            cmbCountry.addItem(country);
+        for ( Country participatingCountry : nvds.getParticipatingCountries() ) {
+            cmbCountry.addItem(participatingCountry);
         }
     }
 
-    private void populateStateCombo(Country country) {
+    private void populateStateCombo(Country participatingCountry) {
 
         cmbState.removeAllItems();
-        for ( State state : country.getStateList() ) {
-            cmbState.addItem(state);
+        for ( State organizationState : participatingCountry.getlistOfStatesInParticipatingCountry() ) {
+            cmbState.addItem(organizationState);
         }
     }
 
-    private void populateCityCombo(State state) {
+    private void populateCityCombo(State organizationState) {
 
         cmbCity.removeAllItems();
-        for ( City city : state.getListOfCities() ) {
-            cmbCity.addItem(city);
+        for ( City organizationCity : organizationState.getListOfCitiesInState() ) {
+            cmbCity.addItem(organizationCity);
         }
     }
 
     private void populateOrganizationTypeCombo() {
 
         cmbOrganizationType.removeAllItems();
-        for ( OrganizationType type : OrganizationType.values() ) {
-            cmbOrganizationType.addItem(type);
+        for ( OrganizationType organizationType : OrganizationType.values() ) {
+            cmbOrganizationType.addItem(organizationType);
         }
     }
 
-    public void populateTable() {
+    private void populateParticipatingOrganizationsListTable() {
 
         DefaultTableModel model = ( DefaultTableModel ) tblOrganizations.getModel();
         model.setRowCount(0);
 
-        Country selectedCountry = ( Country ) cmbCountry.getSelectedItem();
-        State selectedState = ( State ) cmbState.getSelectedItem();
-        City city = ( City ) cmbCity.getSelectedItem();
-        OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+        Country selectedParticipatingCountry = ( Country ) cmbCountry.getSelectedItem();
+        State selectedOrganizationState = ( State ) cmbState.getSelectedItem();
+        City selectedOrganizationCity = ( City ) cmbCity.getSelectedItem();
+        OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
 
         int count = 1;
-        for ( NvdsParticipatingOrganization organization : directory.getListOfParticipatingOrganizations() ) {
-            if ( organization.getOrganizationCountry().equals(selectedCountry)
-                    && organization.getOrganizationState().equals(selectedState)
-                    && organization.getOragnizationCity().equals(city)
-                    && organization.getTypeOfOrganization().equals(type) ) {
+        for ( NvdsParticipatingOrganization participatingOrganization : participatingOrganizationsDirectory.getListOfParticipatingOrganizations() ) {
+            if ( participatingOrganization.getOrganizationCountry().equals(selectedParticipatingCountry)
+                    && participatingOrganization.getOrganizationState().equals(selectedOrganizationState)
+                    && participatingOrganization.getOrganizationCity().equals(selectedOrganizationCity)
+                    && participatingOrganization.getTypeOfOrganization().equals(organizationType) ) {
 
                 Object[] row = new Object[ 4 ];
                 row[ 0 ] = count;
-                row[ 1 ] = organization;
-                row[ 2 ] = organization.getOrganizationAddress();
-                row[ 3 ] = organization.getOrganizationContact();
+                row[ 1 ] = participatingOrganization;
+                row[ 2 ] = participatingOrganization.getOrganizationAddress();
+                row[ 3 ] = participatingOrganization.getOrganizationContact();
 
                 model.addRow(row);
                 count ++;
@@ -137,10 +137,10 @@ public class ManageOrganization extends javax.swing.JPanel {
         lblOrganizationList1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblCreateNewOrganization = new javax.swing.JLabel();
-        txtNewName = new javax.swing.JTextField();
-        txtNewPhone = new javax.swing.JTextField();
-        txtNewAddress = new javax.swing.JTextField();
-        txtNewPostalCode = new javax.swing.JTextField();
+        txtOrganizationName = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
+        txtStreetAddress = new javax.swing.JTextField();
+        txtPostalCode = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 102, 102));
 
@@ -289,10 +289,10 @@ public class ManageOrganization extends javax.swing.JPanel {
                                                     .addComponent(lblNewAddress, javax.swing.GroupLayout.Alignment.LEADING))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(txtNewPostalCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNewAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNewPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNewName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(txtPostalCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtStreetAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtOrganizationName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addComponent(jSeparator1))
                                         .addGap(50, 50, 50))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -356,21 +356,21 @@ public class ManageOrganization extends javax.swing.JPanel {
                         .addComponent(lblCreateNewOrganization)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNewName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtOrganizationName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(lblNewName)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNewPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNewPhone))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNewAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStreetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNewAddress))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNewPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNewPostalCode))
                         .addGap(18, 18, 18)
                         .addComponent(btnCreate))
@@ -384,46 +384,46 @@ public class ManageOrganization extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
-        Country country = ( Country ) cmbCountry.getSelectedItem();
-        State state = ( State ) cmbState.getSelectedItem();
-        City city = ( City ) cmbCity.getSelectedItem();
-        OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
+        Country participatingCountry = ( Country ) cmbCountry.getSelectedItem();
+        State organizationState = ( State ) cmbState.getSelectedItem();
+        City organizationCity = ( City ) cmbCity.getSelectedItem();
+        OrganizationType organizationType = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
 
-        String name = txtNewName.getText();
-        if ( txtNewName.getText().isEmpty() ) {
-            JOptionPane.showMessageDialog(this , "Please enter the new organization name");
+        String organizationName = txtOrganizationName.getText();
+        if ( txtOrganizationName.getText().isEmpty() ) {
+            JOptionPane.showMessageDialog(this , "Please enter the organization name");
             return;
         }
 
-        Contact phone = new Contact(txtNewPhone.getText());
-        if ( txtNewPhone.getText().isEmpty() ) {
+        Contact phoneNumber = new Contact(txtPhoneNumber.getText());
+        if ( txtPhoneNumber.getText().isEmpty() ) {
             JOptionPane.showMessageDialog(this , "Please enter the new organization phone");
             return;
         }
 
-        Address address = new Address(txtNewAddress.getText() , txtNewPostalCode.getText());
-        if ( txtNewAddress.getText().isEmpty() || txtNewPostalCode.getText().isEmpty() ) {
+        Address organizationAddress = new Address(txtStreetAddress.getText() , txtPostalCode.getText());
+        if ( txtStreetAddress.getText().isEmpty() || txtPostalCode.getText().isEmpty() ) {
             JOptionPane.showMessageDialog(this , "Please enter the new organization address & postal code");
             return;
         }
 
-        NvdsParticipatingOrganization newAdminOrganization = directory.addNewNvdsAdminOrganization(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newClinicOrganization = directory.addNewNvdsClinicOrganization(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newHospitalOrganization = directory.addNewNvdsHospitalOrganization(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newCDC = directory.addNewNvdsCDC(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newDistributionCenter = directory.addNewNvdsDistributionCenter(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newPHD = directory.addNewNvdsPHD(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newDistributor = directory.addNewNvdsVaccineDistributorOrganization(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newProvider = directory.addNewNvdsProviderOrganization(name , type , country , state , city , address , phone);
-        NvdsParticipatingOrganization newmanufacturer = directory.addNewNvdsVaccineManufacturerOrganization(name , type , country , state , city , address , phone);
+        NvdsParticipatingOrganization newAdminOrganization = participatingOrganizationsDirectory.addNewNvdsAdminOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newClinicOrganization = participatingOrganizationsDirectory.addNewNvdsClinicOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newHospitalOrganization = participatingOrganizationsDirectory.addNewNvdsHospitalOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newCDC = participatingOrganizationsDirectory.addNewNvdsCDC(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newDistributionCenter = participatingOrganizationsDirectory.addNewNvdsDistributionCenter(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newPHD = participatingOrganizationsDirectory.addNewNvdsPHD(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newDistributor = participatingOrganizationsDirectory.addNewNvdsVaccineDistributorOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newProvider = participatingOrganizationsDirectory.addNewNvdsProviderOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
+        NvdsParticipatingOrganization newmanufacturer = participatingOrganizationsDirectory.addNewNvdsVaccineManufacturerOrganization(organizationName , organizationType , participatingCountry , organizationState , organizationCity , organizationAddress , phoneNumber);
 
-        txtNewName.setText("");
-        txtNewPhone.setText("");
-        txtNewAddress.setText("");
-        txtNewPostalCode.setText("");
+        txtOrganizationName.setText("");
+        txtPhoneNumber.setText("");
+        txtStreetAddress.setText("");
+        txtPostalCode.setText("");
 
-        JOptionPane.showMessageDialog(this , "New Organization created successfully");
-        populateTable();
+        JOptionPane.showMessageDialog(this , "Organization created successfully");
+        populateParticipatingOrganizationsListTable();
 
         evt.getWhen();
     }//GEN-LAST:event_btnCreateActionPerformed
@@ -450,7 +450,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                     populateOrganizationTypeCombo();
                     OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
                     if ( type != null ) {
-                        populateTable();
+                        populateParticipatingOrganizationsListTable();
                     }
                 }
             }
@@ -469,7 +469,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                 populateOrganizationTypeCombo();
                 OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
                 if ( type != null ) {
-                    populateTable();
+                    populateParticipatingOrganizationsListTable();
                 }
             }
         }
@@ -481,7 +481,7 @@ public class ManageOrganization extends javax.swing.JPanel {
 
         OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
         if ( type != null ) {
-            populateTable();
+            populateParticipatingOrganizationsListTable();
         }
     }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
 
@@ -492,7 +492,7 @@ public class ManageOrganization extends javax.swing.JPanel {
             populateOrganizationTypeCombo();
             OrganizationType type = ( OrganizationType ) cmbOrganizationType.getSelectedItem();
             if ( type != null ) {
-                populateTable();
+                populateParticipatingOrganizationsListTable();
             }
         }
     }//GEN-LAST:event_cmbCityActionPerformed
@@ -519,10 +519,10 @@ public class ManageOrganization extends javax.swing.JPanel {
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrganizations;
-    private javax.swing.JTextField txtNewAddress;
-    private javax.swing.JTextField txtNewName;
-    private javax.swing.JTextField txtNewPhone;
-    private javax.swing.JTextField txtNewPostalCode;
+    private javax.swing.JTextField txtOrganizationName;
+    private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtPostalCode;
+    private javax.swing.JTextField txtStreetAddress;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -60,7 +60,7 @@
                                   <Component id="cmbRoleType" min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="txtUserName" min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="txtPassword" min="-2" pref="168" max="-2" attributes="0"/>
-                                  <Component id="btnCreate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCreate" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="btnBack" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -82,72 +82,65 @@
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblGetEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCreateUserAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblGetEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCreateUserAccount" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="cmbCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="cmbState" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblState" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="cmbOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblRoleType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cmbRoleType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
+                                  <Component id="cmbCountry" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cmbOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbState" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblState" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cmbOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblRoleType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbRoleType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblEmployeeList" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cmbOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                      <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblEmployeeList" min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="142" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="129" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="126" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

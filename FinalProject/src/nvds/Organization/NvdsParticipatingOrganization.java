@@ -161,7 +161,7 @@ public abstract class NvdsParticipatingOrganization {
         this.organizationState = organizationState;
     }
 
-    public City getOragnizationCity() {
+    public City getOrganizationCity() {
         return oragnizationCity;
     }
 

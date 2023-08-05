@@ -277,7 +277,7 @@ public class ManageVaccineRequestJPanel extends javax.swing.JPanel {
         WorkRequest request = (WorkRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
         
         // push the request to affiliate hospital's inventory role's work queue
-        Hospital affiliateHospital = organization.getOragnizationCity().getAffiliateHospital();
+        Hospital affiliateHospital = organization.getOrganizationCity().getAffiliateHospital();
         OrganizationEmployeeRole inventoryRole = affiliateHospital.getSpecificRole(OrganizationEmployeeRole.OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
 
         if (inventoryRole != null) {

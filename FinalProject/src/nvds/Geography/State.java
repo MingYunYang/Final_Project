@@ -37,7 +37,7 @@ public class State {
         this.statePopulation = statePopulation;
     }
 
-    public ArrayList<City> getListOfCities() {
+    public ArrayList<City> getListOfCitiesInState() {
         return listOfCities;
     }
 

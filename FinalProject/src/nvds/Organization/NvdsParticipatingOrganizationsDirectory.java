@@ -107,7 +107,7 @@ public class NvdsParticipatingOrganizationsDirectory {
 
     public NvdsParticipatingOrganization getAffiliateHospital(City organizationCity) {
         for ( NvdsParticipatingOrganization organization : listOfParticipatingOrganizations ) {
-            if ( organization.getOragnizationCity().equals(organizationCity) && organization.getTypeOfOrganization().equals(OrganizationType.HOSPITAL) ) {
+            if ( organization.getOrganizationCity().equals(organizationCity) && organization.getTypeOfOrganization().equals(OrganizationType.HOSPITAL) ) {
                 return organization;
             }
         }

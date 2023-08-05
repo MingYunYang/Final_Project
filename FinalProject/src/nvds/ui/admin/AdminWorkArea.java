@@ -6,13 +6,16 @@ import javax.swing.JPanel;
 
 public class AdminWorkArea extends javax.swing.JPanel {
 
+    // different tasks the user has to do in different panels. 
+    // Enable users to switch between different panels with different tasks
     JPanel userProcessContainer;
-    NationalVaccineDistributionSystem ecosystem;
 
-    public AdminWorkArea(JPanel userProcessContainer, NationalVaccineDistributionSystem ecosystem) {
+    NationalVaccineDistributionSystem nvds;
+
+    public AdminWorkArea(JPanel userProcessContainer , NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+        this.nvds = ecosystem;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -100,31 +103,31 @@ public class AdminWorkArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageUserAccountJPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageUserAccountJPanelActionPerformed
-        
-        ManageUserAccount muajp = new ManageUserAccount(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
-        userProcessContainer.add("ManageUserAccountJPanel", muajp);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+
+        ManageUserAccount muajp = new ManageUserAccount(userProcessContainer , nvds.getParticipatingOrganizations() , nvds);
+        userProcessContainer.add("ManageUserAccountJPanel" , muajp);
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageUserAccountJPanelActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
 
-        ManageEmployee manageEmployeeJPanel = new ManageEmployee(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
-        userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        ManageEmployee manageEmployeeJPanel = new ManageEmployee(userProcessContainer , nvds.getParticipatingOrganizations() , nvds);
+        userProcessContainer.add("manageEmployeeJPanel" , manageEmployeeJPanel);
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
 
-        ManageOrganization manageOrganizationJPanel = new ManageOrganization(userProcessContainer, ecosystem.getParticipatingOrganizations(), ecosystem);
-        userProcessContainer.add("manageOrganizationJPanel", manageOrganizationJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        ManageOrganization manageOrganizationJPanel = new ManageOrganization(userProcessContainer , nvds.getParticipatingOrganizations() , nvds);
+        userProcessContainer.add("manageOrganizationJPanel" , manageOrganizationJPanel);
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
 
     private void manageEmployeeJButtonAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonAncestorMoved
-        
+
     }//GEN-LAST:event_manageEmployeeJButtonAncestorMoved
 
 

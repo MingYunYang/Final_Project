@@ -38,7 +38,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbCountry" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="cmbParticipatingCountries" min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="cmbOrganizationType" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -48,7 +48,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cmbOrganization" min="-2" pref="167" max="-2" attributes="0"/>
+                              <Component id="cmbParticipatingOrganizations" min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="cmbState" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -80,12 +80,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cmbState" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblState" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbCountry" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbParticipatingCountries" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCountry" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbParticipatingOrganizations" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblOrganization" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmbOrganizationType" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,14 +133,14 @@
         <Property name="text" type="java.lang.String" value="Organization:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbOrganization">
+    <Component class="javax.swing.JComboBox" name="cmbParticipatingOrganizations">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbOrganizationActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbParticipatingOrganizationsActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -150,7 +150,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblEmployees">
+        <Component class="javax.swing.JTable" name="tblParticpatingOrganizationEmployees">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Courier New" size="14" style="0"/>
@@ -232,14 +232,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbStateActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbCountry">
+    <Component class="javax.swing.JComboBox" name="cmbParticipatingCountries">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbCountryActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbParticipatingCountriesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCountry">

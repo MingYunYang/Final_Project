@@ -13,7 +13,6 @@ import nvds.Organization.NvdsParticipatingOrganizationsDirectory;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import nvds.Useraccount.UserAccountDirectory;
 import java.awt.CardLayout;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,92 +23,94 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageUserAccount extends javax.swing.JPanel {
 
-    private NvdsParticipatingOrganizationsDirectory organizationDirectory;
-    private JPanel userProcessContainer;
-    private NationalVaccineDistributionSystem ecosystem;
+    private final NvdsParticipatingOrganizationsDirectory participatingOrganizationDirectory;
 
-    public ManageUserAccount(JPanel userProcessContainer, NvdsParticipatingOrganizationsDirectory organizationDirectory, NationalVaccineDistributionSystem ecosystem) {
-        
+    private final JPanel userProcessContainer;
+
+    private final NationalVaccineDistributionSystem nvds;
+
+    public ManageUserAccount(JPanel userProcessContainer , NvdsParticipatingOrganizationsDirectory organizationDirectory , NationalVaccineDistributionSystem ecosystem) {
+
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.organizationDirectory = organizationDirectory;
-        this.ecosystem = ecosystem;
+        this.participatingOrganizationDirectory = organizationDirectory;
+        this.nvds = ecosystem;
 
         populateCountryCombo();
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        if ( country != null ) {
             populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
+            State state = ( State ) cmbState.getSelectedItem();
+            if ( state != null ) {
                 populateOrganizationTypeCombo();
-                NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
+                NvdsParticipatingOrganization.OrganizationType type = ( NvdsParticipatingOrganization.OrganizationType ) cmbOrganizationType.getSelectedItem();
+                if ( type != null ) {
+                    populateOrganizationCombo(country , state , type);
+                    NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+                    if ( organization != null ) {
                         populateRoleTypeCombo(organization);
                         populateTable(organization);
                     }
                 }
             }
-        }  
+        }
     }
-    
-    public void populateCountryCombo(){
-        
+
+    private void populateCountryCombo() {
+
         cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getParticipatingCountries()){
+        for ( Country country : nvds.getParticipatingCountries() ) {
             cmbCountry.addItem(country);
         }
     }
-    
-    public void populateStateCombo(Country country){
-        
+
+    private void populateStateCombo(Country country) {
+
         cmbState.removeAllItems();
-        for(State state : country.getStateList()){
+        for ( State state : country.getlistOfStatesInParticipatingCountry() ) {
             cmbState.addItem(state);
         }
     }
-    
-    public void populateOrganizationTypeCombo(){
-                
+
+    private void populateOrganizationTypeCombo() {
+
         cmbOrganizationType.removeAllItems();
-        for(NvdsParticipatingOrganization.OrganizationType type : NvdsParticipatingOrganization.OrganizationType.values()){
+        for ( NvdsParticipatingOrganization.OrganizationType type : NvdsParticipatingOrganization.OrganizationType.values() ) {
             cmbOrganizationType.addItem(type);
         }
     }
-    
-    public void populateOrganizationCombo(Country country, State state, NvdsParticipatingOrganization.OrganizationType type){
-        
+
+    private void populateOrganizationCombo(Country country , State state , NvdsParticipatingOrganization.OrganizationType type) {
+
         cmbOrganization.removeAllItems();
-        for (NvdsParticipatingOrganization organization : organizationDirectory.getListOfParticipatingOrganizations()){
-            if(organization.getOrganizationCountry().equals(country) 
-               && organization.getOrganizationState().equals(state)
-               && organization.getTypeOfOrganization().equals(type)){
-               
-               cmbOrganization.addItem(organization); 
+        for ( NvdsParticipatingOrganization organization : participatingOrganizationDirectory.getListOfParticipatingOrganizations() ) {
+            if ( organization.getOrganizationCountry().equals(country)
+                    && organization.getOrganizationState().equals(state)
+                    && organization.getTypeOfOrganization().equals(type) ) {
+
+                cmbOrganization.addItem(organization);
             }
         }
     }
-    
-    private void populateRoleTypeCombo(NvdsParticipatingOrganization organization){
-        
+
+    private void populateRoleTypeCombo(NvdsParticipatingOrganization organization) {
+
         cmbRoleType.removeAllItems();
-        for(OrganizationEmployeeRole role : organization.getOrganizationSupportedRole()){
+        for ( OrganizationEmployeeRole role : organization.getOrganizationSupportedRole() ) {
             cmbRoleType.addItem(role);
         }
     }
-    
-    private void populateTable(NvdsParticipatingOrganization organization){
-        
-        DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+
+    private void populateTable(NvdsParticipatingOrganization organization) {
+
+        DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
         model.setRowCount(0);
-        
-        for (Employee employee : organization.getEmployeeDirectory().getListOfEmployees()){
-            Object[] row = new Object[3];
-            row[0] = employee.getEMPLOYEE_ID();
-            row[1] = employee;
-            row[2] = employee.getEmployeeUserAccount() != null ? employee.getEmployeeUserAccount().getUsername() : "No account";
+
+        for ( Employee employee : organization.getEmployeeDirectory().getListOfEmployees() ) {
+            Object[] row = new Object[ 3 ];
+            row[ 0 ] = employee.getEMPLOYEE_ID();
+            row[ 1 ] = employee;
+            row[ 2 ] = employee.getEmployeeUserAccount() != null ? employee.getEmployeeUserAccount().getUsername() : "No account";
             model.addRow(row);
         }
     }
@@ -120,7 +121,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings ( "unchecked" )
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -299,7 +300,7 @@ public class ManageUserAccount extends javax.swing.JPanel {
                                     .addComponent(cmbRoleType, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCreate)))
+                                    .addComponent(btnCreate, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
@@ -313,80 +314,76 @@ public class ManageUserAccount extends javax.swing.JPanel {
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGetEmployee)
+                            .addComponent(lblCreateUserAccount))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblGetEmployee)
-                                    .addComponent(lblCreateUserAccount))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblCountry))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblState))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(cmbOrganizationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblOrganizationType)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lblRoleType)
-                                            .addComponent(cmbRoleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(35, 35, 35)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(lblPassword)))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblUserName)))))
+                                    .addComponent(cmbCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCountry))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblOrganization)))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblEmployeeList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(btnCreate)))
+                                    .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblState))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbOrganizationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblOrganizationType)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblRoleType)
+                                    .addComponent(cmbRoleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(35, 35, 35)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblPassword)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblUserName)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblOrganization)
+                            .addComponent(btnCreate)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lblEmployeeList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 129, Short.MAX_VALUE))
+                .addGap(0, 126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+
         userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
-        
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        
-        if (state != null && country != null) {
+
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        State state = ( State ) cmbState.getSelectedItem();
+
+        if ( state != null && country != null ) {
             populateOrganizationTypeCombo();
-            NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType) cmbOrganizationType.getSelectedItem();
-            if (type != null) {
-                populateOrganizationCombo(country, state, type);
-                NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization) cmbOrganization.getSelectedItem();
-                if (organization != null) {
+            NvdsParticipatingOrganization.OrganizationType type = ( NvdsParticipatingOrganization.OrganizationType ) cmbOrganizationType.getSelectedItem();
+            if ( type != null ) {
+                populateOrganizationCombo(country , state , type);
+                NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+                if ( organization != null ) {
                     populateRoleTypeCombo(organization);
                     populateTable(organization);
-                }  else {
-                    DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+                } else {
+                    DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
                     model.setRowCount(0);
                     cmbRoleType.removeAllItems();
                 }
@@ -395,22 +392,22 @@ public class ManageUserAccount extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbStateActionPerformed
 
     private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
-        
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
+
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        if ( country != null ) {
             populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
+            State state = ( State ) cmbState.getSelectedItem();
+            if ( state != null ) {
                 populateOrganizationTypeCombo();
-                NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
+                NvdsParticipatingOrganization.OrganizationType type = ( NvdsParticipatingOrganization.OrganizationType ) cmbOrganizationType.getSelectedItem();
+                if ( type != null ) {
+                    populateOrganizationCombo(country , state , type);
+                    NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+                    if ( organization != null ) {
                         populateRoleTypeCombo(organization);
                         populateTable(organization);
-                    }  else {
-                        DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+                    } else {
+                        DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
                         model.setRowCount(0);
                         cmbRoleType.removeAllItems();
                     }
@@ -421,74 +418,74 @@ public class ManageUserAccount extends javax.swing.JPanel {
 
     private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        NvdsParticipatingOrganization.OrganizationType type = (NvdsParticipatingOrganization.OrganizationType)cmbOrganizationType.getSelectedItem();
-        
-        if(type != null){
-            populateOrganizationCombo(country, state, type);
-            NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-            if(organization != null){
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        State state = ( State ) cmbState.getSelectedItem();
+        NvdsParticipatingOrganization.OrganizationType type = ( NvdsParticipatingOrganization.OrganizationType ) cmbOrganizationType.getSelectedItem();
+
+        if ( type != null ) {
+            populateOrganizationCombo(country , state , type);
+            NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+            if ( organization != null ) {
                 populateRoleTypeCombo(organization);
                 populateTable(organization);
             } else {
-                DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+                DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
                 model.setRowCount(0);
                 cmbRoleType.removeAllItems();
             }
-        }     
+        }
     }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
 
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
 
-        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-        if(organization != null){
+        NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+        if ( organization != null ) {
             populateRoleTypeCombo(organization);
             populateTable(organization);
         } else {
-            DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+            DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
             model.setRowCount(0);
             cmbRoleType.removeAllItems();
         }
     }//GEN-LAST:event_cmbOrganizationActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-                
+
         int selectedIndex = tblEmployeeList.getSelectedRow();
-        if(selectedIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select an employee from the table first");
+        if ( selectedIndex < 0 ) {
+            JOptionPane.showMessageDialog(this , "Please select an employee from the table first");
             return;
         }
-        
-        Employee employee = (Employee)tblEmployeeList.getValueAt(selectedIndex, 1);
-        
+
+        Employee employee = ( Employee ) tblEmployeeList.getValueAt(selectedIndex , 1);
+
         String userName = txtUserName.getText();
-        if(userName.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new username for the employee");
+        if ( userName.isEmpty() ) {
+            JOptionPane.showMessageDialog(this , "Please set a new username for the employee");
             return;
         }
         String password = txtPassword.getText();
-        if(password.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new password for the employee");
+        if ( password.isEmpty() ) {
+            JOptionPane.showMessageDialog(this , "Please set a new password for the employee");
             return;
         }
-        
-        NvdsParticipatingOrganization organization = (NvdsParticipatingOrganization)cmbOrganization.getSelectedItem();
-        OrganizationEmployeeRole role = (OrganizationEmployeeRole)cmbRoleType.getSelectedItem();
-        
+
+        NvdsParticipatingOrganization organization = ( NvdsParticipatingOrganization ) cmbOrganization.getSelectedItem();
+        OrganizationEmployeeRole role = ( OrganizationEmployeeRole ) cmbRoleType.getSelectedItem();
+
         UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
-        userAccountDirectory.createUserAccount(userName, password, employee, role);
+        userAccountDirectory.createUserAccount(userName , password , employee , role);
 
         populateTable(organization);
-        
-        JOptionPane.showMessageDialog(this, "User account created successfully");
-        
+
+        JOptionPane.showMessageDialog(this , "User account created successfully");
+
         txtUserName.setText("");
         txtPassword.setText("");
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cmbRoleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleTypeActionPerformed
-        
+
     }//GEN-LAST:event_cmbRoleTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
