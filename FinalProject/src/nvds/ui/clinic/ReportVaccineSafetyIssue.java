@@ -2,11 +2,13 @@ package nvds.ui.clinic;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.Organization.Hospital;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
 import nvds.WorkQueue.LabTestWorkRequest;
+import nvds.WorkQueue.WorkRequest;
 
 public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
@@ -26,6 +28,23 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         this.nvds = nvds;
 
         populateRequestTable();
+    }
+
+    private void populateRequestTable() {
+        DefaultTableModel model = ( DefaultTableModel ) tblWorkRequests.getModel();
+
+        model.setRowCount(0);
+        for ( WorkRequest request : employeeUserAccount.getWorkQueue().getListOfWorkRequests() ) {
+            Object[] row = new Object[ 4 ];
+            row[ 0 ] = request.getMessage();
+            row[ 1 ] = request.getRequestSender();
+            row[ 2 ] = request.getRequestReceiver();
+            row[ 3 ] = request.getStatus();
+            String result = (( LabTestWorkRequest ) request).getFeedBack();
+            row[ 4 ] = result == null ? "Waiting" : result;
+
+            model.addRow(row);
+        }
     }
 
     @SuppressWarnings ( "unchecked" )
@@ -340,7 +359,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         }
         LabTestWorkRequest request = new LabTestWorkRequest();
         request.setMessage(message);
-        request.setSender(employeeUserAccount);
+        request.setRequestSender(employeeUserAccount);
 
         request.setStatus("Sent");
 
@@ -353,7 +372,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         }
         if ( participatingOrganization != null ) {
             participatingOrganization.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
-            employeeUserAccount.getOrganizationWorkQueue().getWorkRequestList().add(request);
+            employeeUserAccount.getWorkQueue().getListOfWorkRequests().add(request);
         }
 
         JOptionPane.showMessageDialog(null , "Request message sent");

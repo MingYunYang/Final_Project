@@ -2,18 +2,18 @@ package nvds.WorkQueue;
 
 public class LabTestWorkRequest extends WorkRequest {
 
-    private String message;
+    private String feedBack;
 
     public LabTestWorkRequest() {
 
     }
 
-    public String getMessage() {
-        return message;
+    public String getFeedBack() {
+        return feedBack;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setFeedBack(String feedBack) {
+        this.feedBack = feedBack;
     }
 
 

@@ -2,6 +2,7 @@ package nvds.Useraccount;
 
 import nvds.Employee.Employee;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.WorkQueue.WorkQueue;
 
 public class UserAccount {
 
@@ -12,6 +13,8 @@ public class UserAccount {
     private Employee organizationEmployee;
 
     private OrganizationEmployeeUserAccountRole organizationEmployeeRole;
+
+    private WorkQueue workQueue;
 
 
     public UserAccount(String username , String password , Employee organizationEmployee , OrganizationEmployeeUserAccountRole organizationEmployeeRole) {
@@ -54,9 +57,18 @@ public class UserAccount {
         return organizationEmployee;
     }
 
+
     @Override
     public String toString() {
         return organizationEmployee.getOrganizationEmployeeName();
+    }
+
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
     }
 
 

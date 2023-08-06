@@ -363,9 +363,9 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             Object[] row = new Object[ 7 ];
             row[ 0 ] = request.getVaccine().getVaccineId();
             row[ 1 ] = request.getVaccine().getVaccineName();
-            row[ 2 ] = request.getVaccineRequestQuantity();
-            row[ 3 ] = request.getVaccineRequestSender();
-            row[ 4 ] = request.getVaccineRequestReceiver();
+            row[ 2 ] = request.getRequestQuantity();
+            row[ 3 ] = request.getRequestSender();
+            row[ 4 ] = request.getRequestReceiver();
             row[ 5 ] = request.getVaccineRequestStatus();
             
             String result = (( ReviewVaccineOrderRequestResult ) request).getReviewResult();

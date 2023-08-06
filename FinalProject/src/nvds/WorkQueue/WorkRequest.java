@@ -6,9 +6,15 @@ import nvds.VaccineManagement.Vaccine;
 
 public abstract class WorkRequest {
 
+    private String status;
+
+    private String message;
+
+    private Date requestDate;
+
     private Vaccine vaccine;
 
-    private int vaccineRequestQuantity;
+    private int requestQuantity;
 
     private UserAccount requestSender;
 
@@ -18,9 +24,6 @@ public abstract class WorkRequest {
 
     private UserAccount hospitalReviewer;
 
-    private String status;
-
-    private Date requestDate;
 
     public WorkRequest() {
         requestDate = new Date();
@@ -35,7 +38,7 @@ public abstract class WorkRequest {
         hospitalReviewer = userAccount;
     }
 
-    public UserAccount getVaccineRequestSender() {
+    public UserAccount getRequestSender() {
         return requestSender;
     }
 
@@ -43,7 +46,7 @@ public abstract class WorkRequest {
         this.requestSender = requestSender;
     }
 
-    public UserAccount getVaccineRequestReceiver() {
+    public UserAccount getRequestReceiver() {
         return requestReceiver;
     }
 
@@ -75,12 +78,12 @@ public abstract class WorkRequest {
         this.vaccine = vaccine;
     }
 
-    public int getVaccineRequestQuantity() {
-        return vaccineRequestQuantity;
+    public int getRequestQuantity() {
+        return requestQuantity;
     }
 
     public void setVaccineOrderRequestQuantity(int vaccineRequestQuantity) {
-        this.vaccineRequestQuantity = vaccineRequestQuantity;
+        this.requestQuantity = vaccineRequestQuantity;
     }
 
     public UserAccount getRequestReviewer() {
@@ -95,6 +98,30 @@ public abstract class WorkRequest {
     @Override
     public String toString() {
         return vaccine.getVaccineName();
+    }
+
+    public void setRequestQuantity(int requestQuantity) {
+        this.requestQuantity = requestQuantity;
+    }
+
+    public void setRequestSender(UserAccount requestSender) {
+        this.requestSender = requestSender;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 

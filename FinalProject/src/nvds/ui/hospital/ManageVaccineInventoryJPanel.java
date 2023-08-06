@@ -51,7 +51,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getVaccineRequestQuantity();
+            row[2] = request.getRequestQuantity();
             row[3] = request.getRequestReviewer(); //sender
             row[4] = request.getHospitalReviewer(); //hospital reviewer
             row[5] = request.getVaccineRequestStatus();
@@ -73,11 +73,11 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             Object[] row = new Object[8];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getVaccineRequestQuantity();
+            row[2] = request.getRequestQuantity();
             row[3] = request.getRequestReviewer(); 
             row[4] = request.getHospitalReviewer();
             row[5] = request.getVaccineRequestStatus();
-            row[6] = request.getVaccineRequestReceiver();
+            row[6] = request.getRequestReceiver();
             
             String result = ((ReviewVaccineOrderRequestResult) request).getReviewResult();
             row[7] = ((result == null) ? "Waiting" : result);

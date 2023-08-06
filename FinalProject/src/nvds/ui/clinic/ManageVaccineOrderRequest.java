@@ -40,8 +40,8 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getVaccineRequestQuantity();
-            row[3] = request.getVaccineRequestSender();
+            row[2] = request.getRequestQuantity();
+            row[3] = request.getRequestSender();
             row[4] = request.getRequestReviewer();
             row[5] = request.getVaccineRequestStatus();
             
@@ -62,11 +62,11 @@ public class ManageVaccineOrderRequest extends javax.swing.JPanel {
             Object[] row = new Object[8];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getVaccineRequestQuantity();
-            row[3] = request.getVaccineRequestSender();
+            row[2] = request.getRequestQuantity();
+            row[3] = request.getRequestSender();
             row[4] = request.getRequestReviewer();
             row[5] = request.getVaccineRequestStatus();
-            row[6] = request.getVaccineRequestReceiver();
+            row[6] = request.getRequestReceiver();
             
             String result = ((ReviewVaccineOrderRequestResult) request).getReviewResult();
             row[7] = ((result == null) ? "Waiting" : result);
