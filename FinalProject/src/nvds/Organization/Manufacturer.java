@@ -9,11 +9,11 @@ import nvds.OrganizationEmployeeRole.AdminRole;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import java.util.ArrayList;
 
-public class VaccineManufacturer extends NvdsParticipatingOrganization {
+public class Manufacturer extends NvdsParticipatingOrganization {
 
     private ArrayList<OrganizationEmployeeUserAccountRole> supportedRole;
 
-    public VaccineManufacturer(String organizationName , Country country , State state , City city , Address address , Contact contact) {
+    public Manufacturer(String organizationName , Country country , State state , City city , Address address , Contact contact) {
         super(organizationName , NvdsParticipatingOrganization.OrganizationType.VACCINE_MANUFACTURER , country , state , city , address , contact);
     }
 

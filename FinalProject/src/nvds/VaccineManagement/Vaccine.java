@@ -1,12 +1,22 @@
 package nvds.VaccineManagement;
 
+import nvds.Organization.Manufacturer;
+
 public class Vaccine {
 
     private String vaccineName;
 
+    private Manufacturer manufacturer;
+
     private int price;
 
     private int vaccineId;
+
+    private String batchId;
+
+    public Vaccine() {
+
+    }
 
     public Vaccine(String name , int price , int vaccineId) {
         this.vaccineName = name;
@@ -38,10 +48,26 @@ public class Vaccine {
         this.price = price;
     }
 
+
     @Override
     public String toString() {
         return vaccineName;
     }
 
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(String batchId) {
+        this.batchId = batchId;
+    }
 
 }

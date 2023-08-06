@@ -1,7 +1,7 @@
 package nvds.WorkQueue;
 
 public class LabTestWorkRequest extends WorkRequest {
-
+    
     private String feedBack;
 
     public LabTestWorkRequest() {

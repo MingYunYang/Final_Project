@@ -4,7 +4,7 @@
  */
 package nvds.VaccineManagement;
 
-import nvds.Organization.VaccineManufacturer;
+import nvds.Organization.Manufacturer;
 import java.util.Date;
 
 /**
@@ -15,7 +15,7 @@ public class VaccineOrderDetails {
 
     private Vaccine vaccine;
 
-    private VaccineManufacturer manufacturer;
+    private Manufacturer manufacturer;
 
     private int batchId;
 
@@ -23,7 +23,7 @@ public class VaccineOrderDetails {
 
     private Date expirationDate;
 
-    public VaccineOrderDetails(Vaccine vaccine , VaccineManufacturer manufacturer , int batchId) {
+    public VaccineOrderDetails(Vaccine vaccine , Manufacturer manufacturer , int batchId) {
         this.vaccine = vaccine;
         this.batchId = batchId;
         this.manufacturer = manufacturer;
@@ -55,11 +55,11 @@ public class VaccineOrderDetails {
         this.expirationDate = expirationDate;
     }
 
-    public VaccineManufacturer getManufacturer() {
+    public Manufacturer getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(VaccineManufacturer manufacturer) {
+    public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 

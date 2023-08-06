@@ -1,8 +1,13 @@
 package nvds.ui.clinic;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
+import nvds.HelperClasses.PlaceholderDocumentFilter;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.Organization.Hospital;
 import nvds.Organization.NvdsParticipatingOrganization;
@@ -31,7 +36,8 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
      *
      * @param userProcessContainer the main container panel
      * @param employeeUserAccount the account of the logged-in user
-     * @param participatingOrganization the participating organizationRecievingRequest
+     * @param participatingOrganization the participating
+     * organizationRecievingRequest
      * @param nvds the National Vaccine Distribution System instance
      */
     public ReportVaccineSafetyIssue(JPanel userProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization participatingOrganization , NationalVaccineDistributionSystem nvds) {
@@ -42,6 +48,12 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         this.nvds = nvds;
         // Populates the request table with existing work requests
         populateRequestTable();
+
+        // Place holder initialization for txt batch id
+        String placeholder = "MMYY-CODE-0000";
+        txtBatchId.setText(placeholder);
+        DocumentFilter filter = new PlaceholderDocumentFilter(placeholder);
+        (( AbstractDocument ) txtBatchId.getDocument()).setDocumentFilter(filter);
     }
 
     /**
@@ -376,15 +388,29 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
      */
     private void btnSendSafetyIssueReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendSafetyIssueReportActionPerformed
 
+        // Message
         String message = txtMessage.getText();
         if ( message.equals("") || message.isEmpty() ) {
             JOptionPane.showMessageDialog(null , "Please enter something to send.");
             return;
         }
+        // vaccine name
+        String vaccineName = txtVaccineName.getText();
+        // manufacturer
+        String manufacturer = txtVaccineManufacturer.getText();
+
+        // Generate the batch ID
+        String datePart = LocalDate.now().format(DateTimeFormatter.ofPattern("MMyy"));
+        String productCode = "XXR";
+        int currentBatchNumber = Integer.parseInt(txtBatchId.getText()); // Assuming batch number is stored in the txtBatchId field
+        String batchID = String.format("%s-%s-%05d" , datePart , productCode , currentBatchNumber);
+
         LabTestWorkRequest request = new LabTestWorkRequest();
         request.setMessage(message);
+        request.getVaccine().setVaccineName(vaccineName);
+        request.getVaccine().getManufacturer().setOrganizationName(manufacturer);
+        request.getVaccine().setBatchId(batchID);
         request.setRequestSender(employeeUserAccount);
-
         request.setStatus("Sent");
 
         // Finding the appropriate organizationRecievingRequest to send the request
@@ -401,7 +427,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         }
         // Display message
         JOptionPane.showMessageDialog(null , "Request message sent");
-        
+
         // Set texts
         txtMessage.setText("");
     }//GEN-LAST:event_btnSendSafetyIssueReportActionPerformed

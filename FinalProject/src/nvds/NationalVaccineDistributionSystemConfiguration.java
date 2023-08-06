@@ -11,7 +11,7 @@ import nvds.Organization.NvdsParticipatingOrganizationsDirectory;
 import nvds.Organization.NvdsAdmin;
 import nvds.Organization.Clinic;
 import nvds.Organization.Hospital;
-import nvds.Organization.VaccineManufacturer;
+import nvds.Organization.Manufacturer;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
@@ -146,8 +146,8 @@ public class NationalVaccineDistributionSystemConfiguration {
         // Create a new Vaccine
         Vaccine covid19Vaccine = new Vaccine("Covid-19 Vaccine" , 500 , 1);
         // Create the covid19Vaccine modena
-        VaccineManufacturer modena
-                = new VaccineManufacturer(
+        Manufacturer modena
+                = new Manufacturer(
                         "Modena" ,
                         usa ,
                         massachussets ,

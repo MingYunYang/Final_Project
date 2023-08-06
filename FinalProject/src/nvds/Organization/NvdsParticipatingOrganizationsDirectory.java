@@ -72,7 +72,7 @@ public class NvdsParticipatingOrganizationsDirectory {
         if (  ! type.getValue().equals(OrganizationType.VACCINE_MANUFACTURER.getValue()) ) {
             throw new IllegalArgumentException("Type must be Manufacturer for this method.");
         }
-        NvdsParticipatingOrganization organization = new VaccineManufacturer(name , country , state , city , address , contact);
+        NvdsParticipatingOrganization organization = new Manufacturer(name , country , state , city , address , contact);
         listOfParticipatingOrganizations.add(organization);
         return organization;
     }
