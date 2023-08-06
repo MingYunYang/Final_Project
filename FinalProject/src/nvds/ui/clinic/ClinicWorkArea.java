@@ -5,7 +5,7 @@ import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 
 public class ClinicWorkArea extends javax.swing.JPanel {
 
@@ -37,9 +37,9 @@ public class ClinicWorkArea extends javax.swing.JPanel {
      */
     private void toggleButtonsAccessBasedOnRole() {
 
-        OrganizationEmployeeUserAccountRole role = employeeUserAccount.getOrganizationEmployeeRole();
+        OrganizationEmployeeRole role = employeeUserAccount.getOrganizationEmployeeRole();
         switch ( role.organizationEmployeeUserAccountRoleType ) {
-            case ORGANIZATION_DOCTOR -> {
+            case CLINIC_LAB_TECHNICIAN -> {
                 btnManageVaccineInventory.setEnabled(false);
                 btnManageVaccineRequest.setEnabled(false);
             }

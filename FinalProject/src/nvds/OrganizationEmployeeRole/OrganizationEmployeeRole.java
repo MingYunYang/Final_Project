@@ -6,7 +6,7 @@ import nvds.Useraccount.UserAccount;
 import javax.swing.JPanel;
 import nvds.WorkQueue.WorkQueue;
 
-public abstract class OrganizationEmployeeUserAccountRole {
+public abstract class OrganizationEmployeeRole {
 
     public OrganizationEmployeeRoleType organizationEmployeeUserAccountRoleType;
 
@@ -19,10 +19,12 @@ public abstract class OrganizationEmployeeUserAccountRole {
     public enum OrganizationEmployeeRoleType {
 
         ORGANIZATION_ADMIN("Organization Admin"),
-        ORGANIZATION_DOCTOR("Organization Doctor"),
+        CLINIC_LAB_TECHNICIAN("Clinic Lab Technician"),
         VACCINE_ORDER_REQUEST_REVIEWER("Vaccine Order Request Reviewer"),
         VACCINE_INVENTORY_MANAGER("Vaccine Inventory manager"),
-        HOSPITAL_LAB_TECHNICIAN_ROLE("Hospital lab technician");
+        HOSPITAL_LAB_TECHNICIAN("Hospital lab technician"),
+        CDC_ADVERSE_EVENT_HANDLER("CDC adverse event handler");
+        
 
         private final String value;
 
@@ -41,7 +43,7 @@ public abstract class OrganizationEmployeeUserAccountRole {
 
     }
 
-    public OrganizationEmployeeUserAccountRole(OrganizationEmployeeRoleType roleType) {
+    public OrganizationEmployeeRole(OrganizationEmployeeRoleType roleType) {
         incomingVaccineOrderRequestsWorkQueue = new WorkQueue();
         vaccineOrderRequestsCurrentlyUnderReviewWorkQueue = new WorkQueue();
         this.organizationEmployeeUserAccountRoleType = roleType;

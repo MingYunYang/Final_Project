@@ -5,20 +5,20 @@ import nvds.Geography.Address;
 import nvds.Geography.City;
 import nvds.Geography.Country;
 import nvds.Geography.State;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import java.util.ArrayList;
 import nvds.OrganizationEmployeeRole.AdminRole;
 
 public class VaccineDistributor extends NvdsParticipatingOrganization {
 
-    private ArrayList<OrganizationEmployeeUserAccountRole> organizationSupportedRole;
+    private ArrayList<OrganizationEmployeeRole> organizationSupportedRole;
 
     public VaccineDistributor(String organizationName , Country country , State state , City city , Address address , Contact contact) {
         super(organizationName , NvdsParticipatingOrganization.OrganizationType.VACCINE_DISTRIBUTOR , country , state , city , address , contact);
     }
 
     @Override
-    public ArrayList<OrganizationEmployeeUserAccountRole> getOrganizationSupportedRole() {
+    public ArrayList<OrganizationEmployeeRole> getOrganizationSupportedRole() {
         if ( organizationSupportedRole == null ) {
             organizationSupportedRole = new ArrayList<>();
             organizationSupportedRole.add(new AdminRole());

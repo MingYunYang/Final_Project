@@ -6,7 +6,7 @@ import nvds.Useraccount.UserAccount;
 import javax.swing.JPanel;
 import nvds.ui.admin.AdminWorkArea;
 
-public class AdminRole extends OrganizationEmployeeUserAccountRole {
+public class AdminRole extends OrganizationEmployeeRole {
 
     public AdminRole() {
         super(OrganizationEmployeeRoleType.ORGANIZATION_ADMIN);

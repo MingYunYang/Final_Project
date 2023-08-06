@@ -7,21 +7,22 @@ import nvds.Geography.City;
 import nvds.Geography.Country;
 import nvds.Geography.State;
 import nvds.OrganizationEmployeeRole.AdminRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.OrganizationEmployeeRole.CDCAdverseEventHandlerRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 
 public class CDC extends NvdsParticipatingOrganization {
 
-    private ArrayList<OrganizationEmployeeUserAccountRole> organizationSupportedRole;
+    private ArrayList<OrganizationEmployeeRole> organizationSupportedRole;
 
     public CDC(String organizationName , Country country , State state , City city , Address address , Contact contact) {
         super(organizationName , NvdsParticipatingOrganization.OrganizationType.CDC , country , state , city , address , contact);
     }
 
     @Override
-    public ArrayList<OrganizationEmployeeUserAccountRole> getOrganizationSupportedRole() {
+    public ArrayList<OrganizationEmployeeRole> getOrganizationSupportedRole() {
         if ( organizationSupportedRole == null ) {
             organizationSupportedRole = new ArrayList<>();
-            organizationSupportedRole.add(new AdminRole());
+            organizationSupportedRole.add(new CDCAdverseEventHandlerRole());
         }
         return organizationSupportedRole;
     }

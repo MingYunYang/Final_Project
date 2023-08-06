@@ -7,15 +7,15 @@ import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
 import nvds.ui.clinic.ClinicWorkArea;
 
-public class DoctorRole extends OrganizationEmployeeUserAccountRole {
+public class DoctorRole extends OrganizationEmployeeRole {
 
     public DoctorRole() {
-        super(OrganizationEmployeeRoleType.ORGANIZATION_DOCTOR);
+        super(OrganizationEmployeeRoleType.CLINIC_LAB_TECHNICIAN);
     }
 
     @Override
     public JPanel createWorkArea(JPanel userAccountProcessContainer , UserAccount userAccount , NvdsParticipatingOrganization nvdsParticipatingOrganization , NationalVaccineDistributionSystem nvds) {
-        organizationEmployeeUserAccountRoleType = OrganizationEmployeeRoleType.ORGANIZATION_DOCTOR;
+        organizationEmployeeUserAccountRoleType = OrganizationEmployeeRoleType.CLINIC_LAB_TECHNICIAN;
 
         if ( nvdsParticipatingOrganization instanceof Clinic ) {
             return new ClinicWorkArea(userAccountProcessContainer , userAccount , nvdsParticipatingOrganization , NationalVaccineDistributionSystem.getSingleInstance());

@@ -4,8 +4,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.NationalVaccineDistributionSystem;
-import nvds.Organization.Hospital;
+import nvds.Organization.CDC;
 import nvds.Organization.NvdsParticipatingOrganization;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import nvds.Useraccount.UserAccount;
 import nvds.WorkQueue.AdverseEventTrackingWorkRequest;
 import nvds.WorkQueue.WorkRequest;
@@ -32,7 +33,6 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
      * @param userProcessContainer the main container panel
      * @param employeeUserAccount the account of the logged-in user
      * @param participatingOrganization the participating
-     * organizationRecievingRequest
      * @param nvds the National Vaccine Distribution System instance
      */
     public ReportVaccineSafetyIssue(JPanel userProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization participatingOrganization , NationalVaccineDistributionSystem nvds) {
@@ -54,10 +54,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for ( WorkRequest request : employeeUserAccount.getWorkQueue().getListOfWorkRequests() ) {
-            if ( request instanceof AdverseEventTrackingWorkRequest ) {
-
-                AdverseEventTrackingWorkRequest report = ( AdverseEventTrackingWorkRequest ) request;
-
+            if ( request instanceof AdverseEventTrackingWorkRequest report ) {
                 Object[] row = new Object[ 12 ];
                 row[ 0 ] = report.getAdverseEventTracking().getEventId();
                 row[ 1 ] = report.getAdverseEventTracking().getDateReported();
@@ -320,8 +317,17 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         String vaccineName = txtVaccineName.getText();
         String manufacturer = txtVaccineManufacturer.getText();
         String batchId = txtBatchId.getText();
-        int patientsAffected = Integer.parseInt(txtPatientsAffected.getText());
-        int noOfDeaths = Integer.parseInt(txtPatientDeathsIfAny.getText());
+
+        int patientsAffected;
+        int noOfDeaths;
+        try {
+            patientsAffected = Integer.parseInt(txtPatientsAffected.getText());
+            noOfDeaths = Integer.parseInt(txtPatientDeathsIfAny.getText());
+
+        } catch ( NumberFormatException e ) {
+            JOptionPane.showMessageDialog(null , "Please enter a valid number for patients affected and deaths.");
+            return;
+        }
 
 
         AdverseEventTrackingWorkRequest request = new AdverseEventTrackingWorkRequest();
@@ -334,20 +340,28 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         request.setRequestSender(employeeUserAccount);
         request.setStatus("Sent");
 
-        // Finding the appropriate organizationRecievingRequest to send the request
-        NvdsParticipatingOrganization hospitalOrganization = null;
-        for ( NvdsParticipatingOrganization organizationRecievingRequest : nvds.getParticipatingOrganizations().getListOfParticipatingOrganizations() ) {
-            if ( organizationRecievingRequest instanceof Hospital ) {
-                hospitalOrganization = organizationRecievingRequest;
+        for ( UserAccount cdcAdverseEventHandlerUserAccount : participatingOrganization.getUserAccountDirectory().getListOfUserAccounts() ) {
+            OrganizationEmployeeRole adverseEventHandler = participatingOrganization.getSpecificRole(OrganizationEmployeeRole.OrganizationEmployeeRoleType.CDC_ADVERSE_EVENT_HANDLER);
+            if ( cdcAdverseEventHandlerUserAccount.getOrganizationEmployeeRole().equals(adverseEventHandler) ) {
+                request.setRequestReceiver(cdcAdverseEventHandlerUserAccount);
+                break; // Optionally, you can break out of the loop if you've found the reviewer
+            }
+        }
+
+        // Finding the appropriate cdc to send the request
+        NvdsParticipatingOrganization cdc = null;
+        for ( NvdsParticipatingOrganization organizationRecieveingAdverseEventsReport : nvds.getParticipatingOrganizations().getListOfParticipatingOrganizations() ) {
+            if ( organizationRecieveingAdverseEventsReport instanceof CDC ) {
+                cdc = organizationRecieveingAdverseEventsReport;
                 break;
             }
         }
-        if ( hospitalOrganization != null ) {
-            hospitalOrganization.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
+        if ( cdc != null ) {
+            cdc.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
             employeeUserAccount.getWorkQueue().getListOfWorkRequests().add(request);
         }
         // Display description
-        JOptionPane.showMessageDialog(null , "Request message sent");
+        JOptionPane.showMessageDialog(null , "Request sent");
 
         // Set texts
         txtDescription.setText("");

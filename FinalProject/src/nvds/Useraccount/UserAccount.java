@@ -1,7 +1,7 @@
 package nvds.Useraccount;
 
 import nvds.Employee.Employee;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import nvds.WorkQueue.WorkQueue;
 
 public class UserAccount {
@@ -12,12 +12,12 @@ public class UserAccount {
 
     private Employee organizationEmployee;
 
-    private OrganizationEmployeeUserAccountRole organizationEmployeeRole;
+    private OrganizationEmployeeRole organizationEmployeeRole;
 
     private WorkQueue workQueue;
 
 
-    public UserAccount(String username , String password , Employee organizationEmployee , OrganizationEmployeeUserAccountRole organizationEmployeeRole) {
+    public UserAccount(String username , String password , Employee organizationEmployee , OrganizationEmployeeRole organizationEmployeeRole) {
         this.username = username;
         this.password = password;
         this.organizationEmployee = organizationEmployee;
@@ -41,7 +41,7 @@ public class UserAccount {
         this.password = password;
     }
 
-    public OrganizationEmployeeUserAccountRole getOrganizationEmployeeRole() {
+    public OrganizationEmployeeRole getOrganizationEmployeeRole() {
         return organizationEmployeeRole;
     }
 
@@ -49,7 +49,7 @@ public class UserAccount {
         this.organizationEmployee = organizationEmployee;
     }
 
-    public void setOrganizationEmployeeRole(OrganizationEmployeeUserAccountRole organizationEmployeeRole) {
+    public void setOrganizationEmployeeRole(OrganizationEmployeeRole organizationEmployeeRole) {
         this.organizationEmployeeRole = organizationEmployeeRole;
     }
 

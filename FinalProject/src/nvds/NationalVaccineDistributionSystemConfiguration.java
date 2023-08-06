@@ -13,8 +13,8 @@ import nvds.Organization.Clinic;
 import nvds.Organization.Hospital;
 import nvds.Organization.Manufacturer;
 import nvds.Organization.NvdsParticipatingOrganization;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole.OrganizationEmployeeRoleType;
 import nvds.VaccineManagement.Vaccine;
 import nvds.VaccineManagement.VaccineInventoryCatalog;
 import nvds.VaccineManagement.VaccineOrderDetails;
@@ -72,7 +72,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         // Get NVDS admin organization supported employee roles and assign each adminOrganization Employee a role
         // This role depaends on the roles that an organization supports
         // This account is for MING
-        OrganizationEmployeeUserAccountRole admin1 = nvdsAdminOrganization.getSpecificRole(OrganizationEmployeeRoleType.ORGANIZATION_ADMIN);
+        OrganizationEmployeeRole admin1 = nvdsAdminOrganization.getSpecificRole(OrganizationEmployeeRoleType.ORGANIZATION_ADMIN);
         // Create user account for MING an employee of the admin organization
         nvdsAdminOrganization.getUserAccountDirectory()
                 .createUserAccount(
@@ -83,7 +83,7 @@ public class NationalVaccineDistributionSystemConfiguration {
                 );
 
         // This account is for William
-        OrganizationEmployeeUserAccountRole admin2 = nvdsAdminOrganization.getSpecificRole(OrganizationEmployeeRoleType.ORGANIZATION_ADMIN);
+        OrganizationEmployeeRole admin2 = nvdsAdminOrganization.getSpecificRole(OrganizationEmployeeRoleType.ORGANIZATION_ADMIN);
         // Create user account for MING an employee of the admin organization
         // This employee in the NVDS admin organization, will be responsible for managing the whole NVDS 
         nvdsAdminOrganization.getUserAccountDirectory()
@@ -111,7 +111,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee archil
                 = havardSquareClinic.getEmployeeDirectory().addNewEmployee("Archil: CE");
         // get supported role
-        OrganizationEmployeeUserAccountRole clinicVaccineInventoryManagementRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
+        OrganizationEmployeeRole clinicVaccineInventoryManagementRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
         // create user acount
         havardSquareClinic.getUserAccountDirectory().createUserAccount("archil" ,
                 "archil" ,
@@ -123,7 +123,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee kal
                 = havardSquareClinic.getEmployeeDirectory().addNewEmployee("Kal: CE");
         // get supported role
-        OrganizationEmployeeUserAccountRole clinicReviewVaccineOrderRequestRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
+        OrganizationEmployeeRole clinicReviewVaccineOrderRequestRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
         // create user account
         havardSquareClinic.getUserAccountDirectory().createUserAccount("kal" ,
                 "kal" ,
@@ -133,7 +133,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         // Employee 3 and their role and user account
         Employee meg = havardSquareClinic.getEmployeeDirectory().addNewEmployee("Meghana: CE");
         // get supported roles
-        OrganizationEmployeeUserAccountRole clinicDoctorRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.ORGANIZATION_DOCTOR);
+        OrganizationEmployeeRole clinicDoctorRole = havardSquareClinic.getSpecificRole(OrganizationEmployeeRoleType.CLINIC_LAB_TECHNICIAN);
         // create user account
         havardSquareClinic.getUserAccountDirectory().createUserAccount(
                 "meg" ,
@@ -179,7 +179,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee rose
                 = cambridgeHospital.getEmployeeDirectory().addNewEmployee("Rose: HE");
         // get supported role
-        OrganizationEmployeeUserAccountRole hospitalVaccineInventoryManagementRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
+        OrganizationEmployeeRole hospitalVaccineInventoryManagementRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
         // create user account
         cambridgeHospital.getUserAccountDirectory().createUserAccount("rose" ,
                 "rose" ,
@@ -191,7 +191,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee jack
                 = cambridgeHospital.getEmployeeDirectory().addNewEmployee("Jack: HE");
         // get supported role
-        OrganizationEmployeeUserAccountRole hospitalReviewVaccineOrderRequestRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
+        OrganizationEmployeeRole hospitalReviewVaccineOrderRequestRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
         // create user account
         cambridgeHospital.getUserAccountDirectory().createUserAccount("jack" ,
                 "jack" ,
@@ -202,7 +202,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee joana
                 = cambridgeHospital.getEmployeeDirectory().addNewEmployee("Joana");
         // get supported role
-        OrganizationEmployeeUserAccountRole hospitalLabRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.HOSPITAL_LAB_TECHNICIAN_ROLE);
+        OrganizationEmployeeRole hospitalLabRole = cambridgeHospital.getSpecificRole(OrganizationEmployeeRoleType.HOSPITAL_LAB_TECHNICIAN);
         // create user account
         cambridgeHospital.getUserAccountDirectory().createUserAccount(
                 "joana" ,

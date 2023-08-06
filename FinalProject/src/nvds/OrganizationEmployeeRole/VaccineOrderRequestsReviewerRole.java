@@ -9,7 +9,7 @@ import nvds.Useraccount.UserAccount;
 import nvds.ui.clinic.ClinicWorkArea;
 import nvds.ui.hospital.HospitalWorkArea;
 
-public class VaccineOrderRequestsReviewerRole extends OrganizationEmployeeUserAccountRole {
+public class VaccineOrderRequestsReviewerRole extends OrganizationEmployeeRole {
 
     public VaccineOrderRequestsReviewerRole() {
         super(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);

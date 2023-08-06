@@ -13,8 +13,8 @@ import nvds.VaccineManagement.Vaccine;
 import nvds.VaccineManagement.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole.OrganizationEmployeeRoleType;
 import nvds.WorkQueue.ReviewVaccineOrderRequestResult;
 import nvds.WorkQueue.WorkQueue;
 import nvds.WorkQueue.WorkRequest;
@@ -301,7 +301,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         vaccineOrderRequest.setVaccineOrderRequestSender(clinicVaccineInventoryManagerUserAccount); // will show the employee's name
 
         for ( UserAccount vaccineOrderRequestReviewRoleUserAccount : participatingOrganization.getUserAccountDirectory().getListOfUserAccounts() ) {
-            OrganizationEmployeeUserAccountRole vaccineOrderRequestReviewRole = participatingOrganization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
+            OrganizationEmployeeRole vaccineOrderRequestReviewRole = participatingOrganization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
             if ( vaccineOrderRequestReviewRoleUserAccount.getOrganizationEmployeeRole().equals(vaccineOrderRequestReviewRole) ) {
                 vaccineOrderRequest.setRequestReceiver(vaccineOrderRequestReviewRoleUserAccount);
                 break; // Optionally, you can break out of the loop if you've found the reviewer
@@ -310,9 +310,9 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         
         vaccineOrderRequest.setVaccineOrderRequestStatus("Sent");
 
-        // add the vaccineOrderRequest to Inventory OrganizationEmployeeUserAccountRole's work queue
-        // add the vaccineOrderRequest to the Review OrganizationEmployeeUserAccountRole's work queue as well
-        OrganizationEmployeeUserAccountRole vaccineOrderRequestReviewRole = participatingOrganization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
+        // add the vaccineOrderRequest to Inventory OrganizationEmployeeRole's work queue
+        // add the vaccineOrderRequest to the Review OrganizationEmployeeRole's work queue as well
+        OrganizationEmployeeRole vaccineOrderRequestReviewRole = participatingOrganization.getSpecificRole(OrganizationEmployeeRoleType.VACCINE_ORDER_REQUEST_REVIEWER);
         
         WorkQueue vaccineInventoryManagementRoleAwaitingVaccineOrderRequestReviewResultWorkQueue = clinicVaccineInventoryManagerUserAccount.getOrganizationEmployeeRole().getVaccineOrderRequestsCurrentlyUnderReviewWorkQueue();
         

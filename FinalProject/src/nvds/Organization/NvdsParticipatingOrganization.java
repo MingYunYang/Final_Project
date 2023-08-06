@@ -7,8 +7,8 @@ import nvds.Geography.Address;
 import nvds.Geography.Country;
 import nvds.Geography.City;
 import nvds.Geography.State;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole.OrganizationEmployeeRoleType;
 import nvds.Useraccount.UserAccountDirectory;
 import nvds.VaccineManagement.VaccineInventoryCatalog;
 import nvds.WorkQueue.WorkQueue;
@@ -37,7 +37,7 @@ public abstract class NvdsParticipatingOrganization {
 
     private Contact organizationContact;
 
-    public abstract ArrayList<OrganizationEmployeeUserAccountRole> getOrganizationSupportedRole();
+    public abstract ArrayList<OrganizationEmployeeRole> getOrganizationSupportedRole();
 
     public enum OrganizationType {
 
@@ -83,8 +83,8 @@ public abstract class NvdsParticipatingOrganization {
         getOrganizationSupportedRole();
     }
 
-    public OrganizationEmployeeUserAccountRole getSpecificRole(OrganizationEmployeeRoleType roleType) {
-        for ( OrganizationEmployeeUserAccountRole role : getOrganizationSupportedRole() ) {
+    public OrganizationEmployeeRole getSpecificRole(OrganizationEmployeeRoleType roleType) {
+        for ( OrganizationEmployeeRole role : getOrganizationSupportedRole() ) {
             if ( role.organizationEmployeeUserAccountRoleType == roleType ) {
                 return role;
             }

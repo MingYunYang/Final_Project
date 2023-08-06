@@ -9,7 +9,7 @@ import nvds.Useraccount.UserAccount;
 import nvds.ui.clinic.ClinicWorkArea;
 import nvds.ui.hospital.HospitalWorkArea;
 
-public class VaccineInventoryManagerRole extends OrganizationEmployeeUserAccountRole {
+public class VaccineInventoryManagerRole extends OrganizationEmployeeRole {
 
     public VaccineInventoryManagerRole() {
         super(OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);

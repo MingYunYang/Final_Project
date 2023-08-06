@@ -14,8 +14,8 @@ import nvds.VaccineManagement.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.Organization.Hospital;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole.OrganizationEmployeeRoleType;
 import nvds.WorkQueue.ReviewVaccineOrderRequestResult;
 import nvds.WorkQueue.WorkQueue;
 import nvds.WorkQueue.WorkRequest;
@@ -295,7 +295,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
 
         // push the request to affiliate hospital's inventory role's work queue
         Hospital affiliateHospital = organization.getOrganizationCity().getAffiliateHospital();
-        OrganizationEmployeeUserAccountRole inventoryRole = affiliateHospital.getSpecificRole(OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
+        OrganizationEmployeeRole inventoryRole = affiliateHospital.getSpecificRole(OrganizationEmployeeRole.OrganizationEmployeeRoleType.VACCINE_INVENTORY_MANAGER);
 
         if (inventoryRole != null) {
             inventoryRole.getIncomingVaccineOrderRequestsWorkQueue().getListOfWorkRequests().add(request);

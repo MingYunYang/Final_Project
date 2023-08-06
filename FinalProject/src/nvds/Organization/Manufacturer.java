@@ -6,19 +6,19 @@ import nvds.Geography.City;
 import nvds.Geography.Country;
 import nvds.Geography.State;
 import nvds.OrganizationEmployeeRole.AdminRole;
-import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
+import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import java.util.ArrayList;
 
 public class Manufacturer extends NvdsParticipatingOrganization {
 
-    private ArrayList<OrganizationEmployeeUserAccountRole> supportedRole;
+    private ArrayList<OrganizationEmployeeRole> supportedRole;
 
     public Manufacturer(String organizationName , Country country , State state , City city , Address address , Contact contact) {
         super(organizationName , NvdsParticipatingOrganization.OrganizationType.VACCINE_MANUFACTURER , country , state , city , address , contact);
     }
 
     @Override
-    public ArrayList<OrganizationEmployeeUserAccountRole> getOrganizationSupportedRole() {
+    public ArrayList<OrganizationEmployeeRole> getOrganizationSupportedRole() {
         if ( supportedRole == null ) {
             supportedRole = new ArrayList<>();
             supportedRole.add(new AdminRole());
