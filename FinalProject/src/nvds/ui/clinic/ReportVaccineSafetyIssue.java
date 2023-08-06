@@ -10,8 +10,13 @@ import nvds.Useraccount.UserAccount;
 import nvds.WorkQueue.LabTestWorkRequest;
 import nvds.WorkQueue.WorkRequest;
 
+/**
+ * ReportVaccineSafetyIssue class represents a panel for reporting safety issues
+ * related to vaccines.
+ */
 public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
+    // Instance variables
     JPanel userProcessContainer;
 
     UserAccount employeeUserAccount;
@@ -20,16 +25,28 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
     NationalVaccineDistributionSystem nvds;
 
+    /**
+     * Constructor that initializes the panel, and sets up the user details,
+     * participating organizations, and NVDS instance.
+     *
+     * @param userProcessContainer the main container panel
+     * @param employeeUserAccount the account of the logged-in user
+     * @param participatingOrganization the participating organizationRecievingRequest
+     * @param nvds the National Vaccine Distribution System instance
+     */
     public ReportVaccineSafetyIssue(JPanel userProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization participatingOrganization , NationalVaccineDistributionSystem nvds) {
         initComponents();
         this.employeeUserAccount = employeeUserAccount;
         this.userProcessContainer = userProcessContainer;
         this.participatingOrganization = participatingOrganization;
         this.nvds = nvds;
-
+        // Populates the request table with existing work requests
         populateRequestTable();
     }
 
+    /**
+     * Method to populate the request table with existing work requests.
+     */
     private void populateRequestTable() {
         DefaultTableModel model = ( DefaultTableModel ) tblWorkRequests.getModel();
 
@@ -344,12 +361,19 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel10, jLabel4, jLabel5, jLabel9, txtSymptom1, txtSymptom2, txtSymptom3, txtSymptom4});
 
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Action listener to refresh the request table when the refresh button is
+     * clicked.
+     */
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
 
         populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
+    /**
+     * Action listener to send a safety issue report when the send report button
+     * is clicked.
+     */
     private void btnSendSafetyIssueReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendSafetyIssueReportActionPerformed
 
         String message = txtMessage.getText();
@@ -363,19 +387,22 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
         request.setStatus("Sent");
 
-        NvdsParticipatingOrganization participatingOrganization = null;
-        for ( NvdsParticipatingOrganization organization : nvds.getParticipatingOrganizations().getListOfParticipatingOrganizations() ) {
-            if ( organization instanceof Hospital ) {
-                participatingOrganization = organization;
+        // Finding the appropriate organizationRecievingRequest to send the request
+        NvdsParticipatingOrganization hospitalOrganization = null;
+        for ( NvdsParticipatingOrganization organizationRecievingRequest : nvds.getParticipatingOrganizations().getListOfParticipatingOrganizations() ) {
+            if ( organizationRecievingRequest instanceof Hospital ) {
+                hospitalOrganization = organizationRecievingRequest;
                 break;
             }
         }
-        if ( participatingOrganization != null ) {
-            participatingOrganization.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
+        if ( hospitalOrganization != null ) {
+            hospitalOrganization.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
             employeeUserAccount.getWorkQueue().getListOfWorkRequests().add(request);
         }
-
+        // Display message
         JOptionPane.showMessageDialog(null , "Request message sent");
+        
+        // Set texts
         txtMessage.setText("");
     }//GEN-LAST:event_btnSendSafetyIssueReportActionPerformed
 
