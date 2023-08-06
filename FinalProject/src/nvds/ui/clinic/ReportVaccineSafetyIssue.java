@@ -9,6 +9,7 @@ import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import nvds.Useraccount.UserAccount;
 import nvds.WorkQueue.AdverseEventTrackingWorkRequest;
+import nvds.WorkQueue.WorkQueue;
 import nvds.WorkQueue.WorkRequest;
 
 /**
@@ -53,23 +54,26 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         DefaultTableModel model = ( DefaultTableModel ) tblWorkRequests.getModel();
         model.setRowCount(0);
 
-        for ( WorkRequest request : employeeUserAccount.getWorkQueue().getListOfWorkRequests() ) {
-            if ( request instanceof AdverseEventTrackingWorkRequest report ) {
-                Object[] row = new Object[ 12 ];
-                row[ 0 ] = report.getAdverseEventTracking().getEventId();
-                row[ 1 ] = report.getAdverseEventTracking().getDateReported();
-                row[ 2 ] = report.getAdverseEventTracking().getDescription();
-                row[ 3 ] = report.getAdverseEventTracking().getPeopleAffected();
-                row[ 4 ] = report.getAdverseEventTracking().getVaccineName();
-                row[ 5 ] = report.getAdverseEventTracking().getBatchId();
-                row[ 6 ] = report.getAdverseEventTracking().getManufacturer();
-                row[ 7 ] = request.getRequestSender();
-                row[ 8 ] = request.getRequestReceiver();
-                String recallStatus = report.getAdverseEventTracking().getRecallStatus();
-                row[ 9 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
-                String recallReason = report.getAdverseEventTracking().getRecallReason();
-                row[ 10 ] = ((recallReason == null) ? "Waiting" : recallReason);
-                model.addRow(row);
+        WorkQueue workQueue = employeeUserAccount.getWorkQueue();
+        if ( workQueue != null ) {
+            for ( WorkRequest request : workQueue.getListOfWorkRequests() ) {
+                if ( request instanceof AdverseEventTrackingWorkRequest report ) {
+                    Object[] row = new Object[ 12 ];
+                    row[ 0 ] = report.getAdverseEventTracking().getEventId();
+                    row[ 1 ] = report.getAdverseEventTracking().getDateReported();
+                    row[ 2 ] = report.getAdverseEventTracking().getDescription();
+                    row[ 3 ] = report.getAdverseEventTracking().getPeopleAffected();
+                    row[ 4 ] = report.getAdverseEventTracking().getVaccineName();
+                    row[ 5 ] = report.getAdverseEventTracking().getBatchId();
+                    row[ 6 ] = report.getAdverseEventTracking().getManufacturer();
+                    row[ 7 ] = request.getRequestSender();
+                    row[ 8 ] = request.getRequestReceiver();
+                    String recallStatus = report.getAdverseEventTracking().getRecallStatus();
+                    row[ 9 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
+                    String recallReason = report.getAdverseEventTracking().getRecallReason();
+                    row[ 10 ] = ((recallReason == null) ? "Waiting" : recallReason);
+                    model.addRow(row);
+                }
             }
         }
     }
@@ -157,6 +161,13 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         txtVaccineName.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
 
         txtBatchId.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        txtBatchId.setForeground(new java.awt.Color(0, 0, 0));
+        txtBatchId.setToolTipText("MMYY-CODE-00000");
+        txtBatchId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBatchIdActionPerformed(evt);
+            }
+        });
 
         txtVaccineManufacturer.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         txtVaccineManufacturer.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +180,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         jLabel1.setText("Vaccine Name");
 
         jLabel2.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        jLabel2.setText("Vaccine Batch Id");
+        jLabel2.setText("Batch Id(MMYY-CODE-00000)");
 
         jLabel3.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         jLabel3.setText("Manufacturer");
@@ -221,7 +232,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(47, 47, 47)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtBatchId)
+                                            .addComponent(txtBatchId, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtVaccineName))))
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,6 +303,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel7, jLabel8, lblMessage, txtBatchId, txtDescription, txtPatientDeathsIfAny, txtPatientsAffected, txtVaccineManufacturer, txtVaccineName});
 
+        txtBatchId.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Action listener to refresh the request table when the refresh button is
@@ -309,14 +321,13 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
     private void btnSendSafetyIssueReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendSafetyIssueReportActionPerformed
 
         String description = txtDescription.getText();
-        if ( description.equals("") || description.isEmpty() ) {
-            JOptionPane.showMessageDialog(null , "Please enter something to send.");
-            return;
-        }
-
         String vaccineName = txtVaccineName.getText();
         String manufacturer = txtVaccineManufacturer.getText();
         String batchId = txtBatchId.getText();
+        if ( description.isEmpty() || vaccineName.isEmpty() || manufacturer.isEmpty() || batchId.isEmpty() ) {
+            JOptionPane.showMessageDialog(null , "All fields must be filled out.");
+            return;
+        }
 
         int patientsAffected;
         int noOfDeaths;
@@ -356,12 +367,17 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                 break;
             }
         }
-        if ( cdc != null ) {
-            cdc.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
-            employeeUserAccount.getWorkQueue().getListOfWorkRequests().add(request);
+
+        if ( cdc == null ) {
+            JOptionPane.showMessageDialog(null , "CDC organization not found. Cannot send request.");
+            return;
         }
-        // Display description
+
+        cdc.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
+        employeeUserAccount.getWorkQueue().getListOfWorkRequests().add(request);
+
         JOptionPane.showMessageDialog(null , "Request sent");
+
 
         // Set texts
         txtDescription.setText("");
@@ -384,6 +400,10 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
     private void txtPatientDeathsIfAnyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientDeathsIfAnyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPatientDeathsIfAnyActionPerformed
+
+    private void txtBatchIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBatchIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBatchIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

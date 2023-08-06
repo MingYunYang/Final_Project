@@ -28,6 +28,7 @@ public class AdverseEventTracking {
 
     public AdverseEventTracking() {
         this.eventId =  ++ nextEventId;
+        this.dateReported = new Date();
     }
 
 
