@@ -147,7 +147,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void btnReportSafetyIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSafetyIssueActionPerformed
 
-        ReportSafetyIssue rsi = new ReportSafetyIssue(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineTestRequests rsi = new ManageVaccineTestRequests(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ReportSafetyIssue" , rsi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -35,7 +35,7 @@ public abstract class WorkRequest {
         hospitalReviewer = userAccount;
     }
 
-    public UserAccount getRequestSender() {
+    public UserAccount getVaccineRequestSender() {
         return requestSender;
     }
 
@@ -43,7 +43,7 @@ public abstract class WorkRequest {
         this.requestSender = requestSender;
     }
 
-    public UserAccount getRequestReceiver() {
+    public UserAccount getVaccineRequestReceiver() {
         return requestReceiver;
     }
 
@@ -51,7 +51,7 @@ public abstract class WorkRequest {
         this.requestReceiver = requestReceiver;
     }
 
-    public String getStatus() {
+    public String getVaccineRequestStatus() {
         return status;
     }
 

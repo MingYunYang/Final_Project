@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
-import nvds.Workqueue.ClinicReviewVaccineOrderRequest;
+import nvds.Workqueue.ReviewVaccineOrderRequestResult;
 
 
 /**
@@ -156,7 +156,7 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a request from the table first");
             return;
         }
-        ClinicReviewVaccineOrderRequest request = (ClinicReviewVaccineOrderRequest) tblRequestList.getValueAt(selectedRow, 1);
+        ReviewVaccineOrderRequestResult request = (ReviewVaccineOrderRequestResult) tblRequestList.getValueAt(selectedRow, 1);
         
         
     }//GEN-LAST:event_btnProcessActionPerformed

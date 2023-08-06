@@ -144,7 +144,7 @@ public class ClinicWorkArea extends javax.swing.JPanel {
     private void btnReportSafetyIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportSafetyIssueActionPerformed
         // Doctor role
         ReportVaccineSafetyIssue rsi = new ReportVaccineSafetyIssue(userProcessContainer , employeeUserAccount , participatingOrganization , nvds);
-        userProcessContainer.add("ReportSafetyIssue" , rsi);
+        userProcessContainer.add("ReportVaccineSafetyIssue" , rsi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnReportSafetyIssueActionPerformed

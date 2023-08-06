@@ -127,7 +127,7 @@ public class MainScreen extends javax.swing.JPanel {
                 + "!");
 
         CardLayout layout = ( CardLayout ) loggedInUserWorkAreaJPanel.getLayout();
-        loggedInUserWorkAreaJPanel.add("loggedInUserWorkArea" , organizationEmployeeUserAccount.getOrganizationEmployeeRole().createWorkArea(loggedInUserWorkAreaJPanel , organizationEmployeeUserAccount , participatingOrganization , nvds));
+        loggedInUserWorkAreaJPanel.add("LoginScreen" , organizationEmployeeUserAccount.getOrganizationEmployeeRole().createWorkArea(loggedInUserWorkAreaJPanel , organizationEmployeeUserAccount , participatingOrganization , nvds));
         layout.next(loggedInUserWorkAreaJPanel);
     }
 

@@ -1,10 +1,10 @@
 package nvds.Workqueue;
 
-public class ClinicReviewVaccineOrderRequest extends WorkRequest {
+public class ReviewVaccineOrderRequestResult extends WorkRequest {
 
     private String reviewResult;
 
-    public ClinicReviewVaccineOrderRequest() {
+    public ReviewVaccineOrderRequestResult() {
         super();
     }
 

@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import nvds.Organization.Hospital;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
-import nvds.Workqueue.ClinicReviewVaccineOrderRequest;
+import nvds.Workqueue.ReviewVaccineOrderRequestResult;
 import nvds.Workqueue.WorkQueue;
 import nvds.Workqueue.WorkRequest;
 
@@ -54,9 +54,9 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             row[2] = request.getVaccineRequestQuantity();
             row[3] = request.getRequestReviewer(); //sender
             row[4] = request.getHospitalReviewer(); //hospital reviewer
-            row[5] = request.getStatus();
+            row[5] = request.getVaccineRequestStatus();
             
-            String result = ((ClinicReviewVaccineOrderRequest) request).getReviewResult();
+            String result = ((ReviewVaccineOrderRequestResult) request).getReviewResult();
             row[6] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);
@@ -76,10 +76,10 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             row[2] = request.getVaccineRequestQuantity();
             row[3] = request.getRequestReviewer(); 
             row[4] = request.getHospitalReviewer();
-            row[5] = request.getStatus();
-            row[6] = request.getRequestReceiver();
+            row[5] = request.getVaccineRequestStatus();
+            row[6] = request.getVaccineRequestReceiver();
             
-            String result = ((ClinicReviewVaccineOrderRequest) request).getReviewResult();
+            String result = ((ReviewVaccineOrderRequestResult) request).getReviewResult();
             row[7] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);  
@@ -247,7 +247,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         int selectedRow = tblReceivedVaccineRequest.getSelectedRow();
         if (selectedRow >= 0) {
             WorkRequest request = (WorkRequest) tblReceivedVaccineRequest.getValueAt(selectedRow, 1);
-            if (request.getStatus().equalsIgnoreCase("Completed")) {
+            if (request.getVaccineRequestStatus().equalsIgnoreCase("Completed")) {
                 JOptionPane.showMessageDialog(this, "Request already completed");
                 return;
             } else {
@@ -271,7 +271,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
 
         int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
         if (selectedRow >= 0) {
-            ClinicReviewVaccineOrderRequest request = (ClinicReviewVaccineOrderRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
+            ReviewVaccineOrderRequestResult request = (ReviewVaccineOrderRequestResult) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
             request.setVaccineOrderRequestStatus("Completed");
             request.setReviewResult("Rejected");
             JOptionPane.showMessageDialog(this, "Review send successfully");
