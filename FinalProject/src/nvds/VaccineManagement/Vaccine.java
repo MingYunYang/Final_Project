@@ -4,15 +4,15 @@ import nvds.Organization.Manufacturer;
 
 public class Vaccine {
 
+    private int vaccineId;
+
+    private Batch batch;
+
     private String vaccineName;
 
     private Manufacturer manufacturer;
 
     private int price;
-
-    private int vaccineId;
-
-    private String batchId;
 
     public Vaccine() {
 
@@ -24,14 +24,6 @@ public class Vaccine {
         this.vaccineId = vaccineId;
     }
 
-    public String getVaccineName() {
-        return vaccineName;
-    }
-
-    public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
-    }
-
     public int getVaccineId() {
         return vaccineId;
     }
@@ -40,18 +32,20 @@ public class Vaccine {
         this.vaccineId = vaccineId;
     }
 
-    public int getPrice() {
-        return price;
+    public Batch getBatch() {
+        return batch;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setBatch(Batch batch) {
+        this.batch = batch;
     }
 
-
-    @Override
-    public String toString() {
+    public String getVaccineName() {
         return vaccineName;
+    }
+
+    public void setVaccineName(String vaccineName) {
+        this.vaccineName = vaccineName;
     }
 
     public Manufacturer getManufacturer() {
@@ -62,12 +56,13 @@ public class Vaccine {
         this.manufacturer = manufacturer;
     }
 
-    public String getBatchId() {
-        return batchId;
+    public int getPrice() {
+        return price;
     }
 
-    public void setBatchId(String batchId) {
-        this.batchId = batchId;
+    public void setPrice(int price) {
+        this.price = price;
     }
+
 
 }
