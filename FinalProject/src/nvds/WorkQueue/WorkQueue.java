@@ -1,4 +1,4 @@
-package nvds.Workqueue;
+package nvds.WorkQueue;
 
 import java.util.ArrayList;
 

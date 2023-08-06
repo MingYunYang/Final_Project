@@ -4,7 +4,7 @@ import nvds.NationalVaccineDistributionSystem;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
 import javax.swing.JPanel;
-import nvds.Workqueue.WorkQueue;
+import nvds.WorkQueue.WorkQueue;
 
 public abstract class OrganizationEmployeeUserAccountRole {
 

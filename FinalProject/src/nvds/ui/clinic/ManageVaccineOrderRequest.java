@@ -9,8 +9,8 @@ import nvds.Organization.Hospital;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.Useraccount.UserAccount;
-import nvds.Workqueue.ReviewVaccineOrderRequestResult;
-import nvds.Workqueue.WorkRequest;
+import nvds.WorkQueue.ReviewVaccineOrderRequestResult;
+import nvds.WorkQueue.WorkRequest;
 
 public class ManageVaccineOrderRequest extends javax.swing.JPanel {
 

@@ -1,4 +1,4 @@
-package nvds.Workqueue;
+package nvds.WorkQueue;
 
 import nvds.Useraccount.UserAccount;
 import java.util.Date;

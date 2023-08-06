@@ -11,7 +11,7 @@ import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
 import nvds.Useraccount.UserAccountDirectory;
 import nvds.VaccineManagement.VaccineInventoryCatalog;
-import nvds.Workqueue.WorkQueue;
+import nvds.WorkQueue.WorkQueue;
 
 public abstract class NvdsParticipatingOrganization {
 

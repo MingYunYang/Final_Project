@@ -1,14 +1,31 @@
 package nvds.ui.clinic;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
+import nvds.Organization.Hospital;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.Useraccount.UserAccount;
+import nvds.WorkQueue.LabTestWorkRequest;
 
 public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+
+    UserAccount employeeUserAccount;
+
+    NvdsParticipatingOrganization participatingOrganization;
+
+    NationalVaccineDistributionSystem nvds;
+
     public ReportVaccineSafetyIssue(JPanel userProcessContainer , UserAccount employeeUserAccount , NvdsParticipatingOrganization participatingOrganization , NationalVaccineDistributionSystem nvds) {
         initComponents();
+        this.employeeUserAccount = employeeUserAccount;
+        this.userProcessContainer = userProcessContainer;
+        this.participatingOrganization = participatingOrganization;
+        this.nvds = nvds;
+
+        populateRequestTable();
     }
 
     @SuppressWarnings ( "unchecked" )
@@ -19,7 +36,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         tblWorkRequests = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        btnGenerateSafetyReport = new javax.swing.JButton();
+        btnSendSafetyIssueReport = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
         txtVaccineName = new javax.swing.JTextField();
         txtBatchId = new javax.swing.JTextField();
@@ -40,6 +57,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtSymptom2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 102, 102));
 
@@ -85,10 +103,11 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         lblTitle.setText("Doctor's Work Area");
 
-        btnGenerateSafetyReport.setText("Send Safety issue report");
-        btnGenerateSafetyReport.addActionListener(new java.awt.event.ActionListener() {
+        btnSendSafetyIssueReport.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnSendSafetyIssueReport.setText("Send Safety Issue Report");
+        btnSendSafetyIssueReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateSafetyReportActionPerformed(evt);
+                btnSendSafetyIssueReportActionPerformed(evt);
             }
         });
 
@@ -175,6 +194,9 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jLabel6.setText("Safety issue report work list:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,28 +213,30 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(47, 47, 47)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtNoOfPatientsAffected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblMessage)
+                                                .addGap(47, 47, 47)
+                                                .addComponent(txtMessage))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabel3)
+                                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(47, 47, 47)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtNoOfPatientsAffected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtBatchId)
+                                                    .addComponent(txtVaccineManufacturer)
+                                                    .addComponent(txtVaccineName))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel3))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(47, 47, 47)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtBatchId)
-                                            .addComponent(txtVaccineManufacturer)
-                                            .addComponent(txtVaccineName)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblMessage)
-                                        .addGap(47, 47, 47)
-                                        .addComponent(txtMessage)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                                        .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -227,7 +251,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                                                 .addComponent(txtSymptom3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtSymptom1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtSymptom4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(btnGenerateSafetyReport, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(btnSendSafetyIssueReport, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -288,10 +312,12 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(btnGenerateSafetyReport))
+                    .addComponent(btnSendSafetyIssueReport))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel7, jLabel8, lblMessage, txtBatchId, txtMessage, txtNoOfPatientsAffected, txtPatientDeathsIfAny, txtVaccineManufacturer, txtVaccineName});
@@ -305,7 +331,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void btnGenerateSafetyReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateSafetyReportActionPerformed
+    private void btnSendSafetyIssueReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendSafetyIssueReportActionPerformed
 
         String message = txtMessage.getText();
         if ( message.equals("") || message.isEmpty() ) {
@@ -314,24 +340,25 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         }
         LabTestWorkRequest request = new LabTestWorkRequest();
         request.setMessage(message);
-        request.setSender(userAccount);
+        request.setSender(employeeUserAccount);
+
         request.setStatus("Sent");
 
-        Organization org = null;
-        for ( Organization organization : business.getOrganizationDirectory().getOrganizationList() ) {
-            if ( organization instanceof LabOrganization ) {
-                org = organization;
+        NvdsParticipatingOrganization participatingOrganization = null;
+        for ( NvdsParticipatingOrganization organization : nvds.getParticipatingOrganizations().getListOfParticipatingOrganizations() ) {
+            if ( organization instanceof Hospital ) {
+                participatingOrganization = organization;
                 break;
             }
         }
-        if ( org != null ) {
-            org.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
+        if ( participatingOrganization != null ) {
+            participatingOrganization.getOrganizationWorkQueue().getListOfWorkRequests().add(request);
+            employeeUserAccount.getOrganizationWorkQueue().getWorkRequestList().add(request);
         }
 
         JOptionPane.showMessageDialog(null , "Request message sent");
         txtMessage.setText("");
-    }//GEN-LAST:event_btnGenerateSafetyReportActionPerformed
+    }//GEN-LAST:event_btnSendSafetyIssueReportActionPerformed
 
     private void txtVaccineManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVaccineManufacturerActionPerformed
         // TODO add your handling code here:
@@ -363,14 +390,15 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerateSafetyReport;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnSendSafetyIssueReport;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

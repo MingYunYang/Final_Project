@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeUserAccountRole.OrganizationEmployeeRoleType;
-import nvds.Workqueue.ReviewVaccineOrderRequestResult;
-import nvds.Workqueue.WorkQueue;
-import nvds.Workqueue.WorkRequest;
+import nvds.WorkQueue.ReviewVaccineOrderRequestResult;
+import nvds.WorkQueue.WorkQueue;
+import nvds.WorkQueue.WorkRequest;
 
 /**
  *

@@ -1,4 +1,4 @@
-package nvds.Workqueue;
+package nvds.WorkQueue;
 
 public class ReviewVaccineOrderRequestResult extends WorkRequest {
 
