@@ -365,11 +365,46 @@ public class ManageUserAccount extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+
+        int selectedIndex = tblEmployeeList.getSelectedRow();
+        if(selectedIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select an employee from the table first");
+            return;
+        }
+
+        Employee employee = (Employee)tblEmployeeList.getValueAt(selectedIndex, 1);
+
+        String userName = txtUserName.getText();
+        if(userName.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please set a new username for the employee");
+            return;
+        }
+        String password = txtPassword.getText();
+        if(password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please set a new password for the employee");
+            return;
+        }
+
+        Organization organization = (Organization)cmbOrganization.getSelectedItem();
+        Role role = (Role)cmbRoleType.getSelectedItem();
+
+        UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
+        userAccountDirectory.createUserAccount(userName, password, employee, role);
+
+        populateTable(organization);
+
+        JOptionPane.showMessageDialog(this, "User account created successfully");
+
+        txtUserName.setText("");
+        txtPassword.setText("");
+    }//GEN-LAST:event_btnCreateActionPerformed
+
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
-        
+
         Country country = (Country)cmbCountry.getSelectedItem();
         State state = (State) cmbState.getSelectedItem();
-        
+
         if (state != null && country != null) {
             populateOrganizationTypeCombo();
             Organization.Type type = (Organization.Type) cmbOrganizationType.getSelectedItem();
@@ -388,8 +423,45 @@ public class ManageUserAccount extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cmbStateActionPerformed
 
+    private void cmbRoleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleTypeActionPerformed
+
+    }//GEN-LAST:event_cmbRoleTypeActionPerformed
+
+    private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
+
+        Organization organization = (Organization)cmbOrganization.getSelectedItem();
+        if(organization != null){
+            populateRoleTypeCombo(organization);
+            populateTable(organization);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+            model.setRowCount(0);
+            cmbRoleType.removeAllItems();
+        }
+    }//GEN-LAST:event_cmbOrganizationActionPerformed
+
+    private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
+
+        Country country = (Country)cmbCountry.getSelectedItem();
+        State state = (State) cmbState.getSelectedItem();
+        Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
+
+        if(type != null){
+            populateOrganizationCombo(country, state, type);
+            Organization organization = (Organization)cmbOrganization.getSelectedItem();
+            if(organization != null){
+                populateRoleTypeCombo(organization);
+                populateTable(organization);
+            } else {
+                DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
+                model.setRowCount(0);
+                cmbRoleType.removeAllItems();
+            }
+        }
+    }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
+
     private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
-        
+
         Country country = (Country)cmbCountry.getSelectedItem();
         if(country != null){
             populateStateCombo(country);
@@ -412,78 +484,6 @@ public class ManageUserAccount extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_cmbCountryActionPerformed
-
-    private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
-
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
-        
-        if(type != null){
-            populateOrganizationCombo(country, state, type);
-            Organization organization = (Organization)cmbOrganization.getSelectedItem();
-            if(organization != null){
-                populateRoleTypeCombo(organization);
-                populateTable(organization);
-            } else {
-                DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-                model.setRowCount(0);
-                cmbRoleType.removeAllItems();
-            }
-        }     
-    }//GEN-LAST:event_cmbOrganizationTypeActionPerformed
-
-    private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
-
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
-        if(organization != null){
-            populateRoleTypeCombo(organization);
-            populateTable(organization);
-        } else {
-            DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-            model.setRowCount(0);
-            cmbRoleType.removeAllItems();
-        }
-    }//GEN-LAST:event_cmbOrganizationActionPerformed
-
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-                
-        int selectedIndex = tblEmployeeList.getSelectedRow();
-        if(selectedIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select an employee from the table first");
-            return;
-        }
-        
-        Employee employee = (Employee)tblEmployeeList.getValueAt(selectedIndex, 1);
-        
-        String userName = txtUserName.getText();
-        if(userName.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new username for the employee");
-            return;
-        }
-        String password = txtPassword.getText();
-        if(password.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new password for the employee");
-            return;
-        }
-        
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
-        Role role = (Role)cmbRoleType.getSelectedItem();
-        
-        UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
-        userAccountDirectory.createUserAccount(userName, password, employee, role);
-
-        populateTable(organization);
-        
-        JOptionPane.showMessageDialog(this, "User account created successfully");
-        
-        txtUserName.setText("");
-        txtPassword.setText("");
-    }//GEN-LAST:event_btnCreateActionPerformed
-
-    private void cmbRoleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleTypeActionPerformed
-        
-    }//GEN-LAST:event_cmbRoleTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
