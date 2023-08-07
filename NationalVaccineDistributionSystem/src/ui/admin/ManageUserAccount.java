@@ -105,9 +105,9 @@ public class ManageUserAccount extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
         model.setRowCount(0);
         
-        for (Employee employee : organization.getEmployeeDirectory().getListOfEmployees()){
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
             Object[] row = new Object[3];
-            row[0] = employee.getEmployeeID();
+            row[0] = employee.getId();
             row[1] = employee;
             row[2] = employee.getUserAccount() != null ? employee.getUserAccount().getUsername() : "No account";
             model.addRow(row);

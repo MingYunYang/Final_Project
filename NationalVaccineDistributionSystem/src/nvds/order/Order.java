@@ -7,9 +7,12 @@ import nvds.organization.Hospital;
 
 public class Order {
 
-    private ArrayList<OrderItem> orderItems;
-    private Date orderDate;
+    private final ArrayList<OrderItem> orderItemList;
+
+    private Date date;
+
     private Status status;
+
     private Hospital hospital;
 
     public enum Status {
@@ -34,28 +37,28 @@ public class Order {
     }
 
     public Order(Hospital hospital) {
-        orderItems = new ArrayList<>();
-        orderDate = new Date();
+        orderItemList = new ArrayList<>();
+        date = new Date();
         status = Status.CREATED;
         this.hospital = hospital;
     }
 
-    public OrderItem newOrderItem(VaccineItem vaccineItem, int quantity) {
-        OrderItem oi = new OrderItem(vaccineItem, quantity);
-        orderItems.add(oi);
+    public OrderItem newOrderItem(VaccineItem vaccineItem , int quantity) {
+        OrderItem oi = new OrderItem(vaccineItem , quantity);
+        orderItemList.add(oi);
         return oi;
     }
 
-    public ArrayList<OrderItem> getOrderItems() {
-        return orderItems;
+    public ArrayList<OrderItem> getOrderItemList() {
+        return orderItemList;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Status getStatus() {
@@ -73,7 +76,6 @@ public class Order {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
-    
-    
+
 
 }

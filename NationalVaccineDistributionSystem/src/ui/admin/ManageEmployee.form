@@ -24,47 +24,53 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="73" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
-                          <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="lblEmployeeList" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblOrganizationType" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbCountry" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="cmbOrganizationType" min="-2" pref="167" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblState" min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="lblOrganization" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cmbOrganization" min="-2" pref="167" max="-2" attributes="0"/>
-                              <Component id="cmbState" min="-2" pref="167" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="677" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblEmployeeName" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtEmployeeName" min="-2" pref="167" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnCreateEmployee" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
+                                  <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lblEmployeeList" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblOrganizationType" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCountry" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="cmbCountry" min="-2" pref="167" max="-2" attributes="0"/>
+                                      <Component id="cmbOrganizationType" min="-2" pref="167" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblState" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <Component id="lblOrganization" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="cmbOrganization" min="-2" pref="167" max="-2" attributes="0"/>
+                                      <Component id="cmbState" min="-2" pref="167" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblEmployeeName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtEmployeeName" min="-2" pref="167" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnCreateEmployee" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jScrollPane1" min="-2" pref="663" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

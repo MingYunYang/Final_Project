@@ -4,46 +4,46 @@ import java.util.ArrayList;
 
 public class State {
 
-    private String stateName;
+    private String name;
 
-    private int statePopulation;
+    private int population;
 
-    private final ArrayList<City> listOfCities;
+    private final ArrayList<City> cityList;
 
-    public State(String stateName) {
-        this.stateName = stateName;
-        listOfCities = new ArrayList<>();
+    public State(String name) {
+        this.name = name;
+        cityList = new ArrayList<>();
     }
 
     public City addCity(String name) {
         City city = new City(name);
-        listOfCities.add(city);
+        cityList.add(city);
         return city;
     }
 
-    public String getStateName() {
-        return stateName;
+    public String getName() {
+        return name;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getStatePopulation() {
-        return statePopulation;
+    public int getPopulation() {
+        return population;
     }
 
-    public void setStatePopulation(int statePopulation) {
-        this.statePopulation = statePopulation;
+    public void setPopulation(int population) {
+        this.population = population;
     }
 
-    public ArrayList<City> getListOfCities() {
-        return listOfCities;
+    public ArrayList<City> getCityList() {
+        return cityList;
     }
 
     @Override
     public String toString() {
-        return stateName;
+        return name;
     }
 
 }

@@ -8,17 +8,17 @@ public class Address {
 
     private String postalCode;
 
-    private HashSet<Contact> listOfContacts;
+    private HashSet<Contact> contactsList;
 
     public Address(String street, String postalCode) {
         this.street = street;
         this.postalCode = postalCode;
-        this.listOfContacts = new HashSet<>();
+        this.contactsList = new HashSet<>();
     }
 
     public Contact addContact(String phoneNumber) {
         Contact contact = new Contact(phoneNumber);
-        listOfContacts.add(contact);
+        contactsList.add(contact);
         return contact;
     }
 
@@ -38,12 +38,12 @@ public class Address {
         this.postalCode = postalCode;
     }
 
-    public HashSet<Contact> getListOfContacts() {
-        return listOfContacts;
+    public HashSet<Contact> getContactsList() {
+        return contactsList;
     }
 
-    public void setListOfContacts(HashSet<Contact> listOfContacts) {
-        this.listOfContacts = listOfContacts;
+    public void setContactsList(HashSet<Contact> contactsList) {
+        this.contactsList = contactsList;
     }
 
     @Override

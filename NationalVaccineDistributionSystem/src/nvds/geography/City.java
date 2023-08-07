@@ -5,73 +5,71 @@ import nvds.organization.Hospital;
 
 public class City {
 
-    private final int cityId;
+    private final int id;
 
     private static int count = 1;
 
-    private String cityName;
+    private String name;
 
-    private int cityPopulation;
+    private int population;
 
-    private HashSet<Address> listOfAddresses;
-    
-    private Hospital affiliateHospital;
+    private HashSet<Address> addressList;
+
+    private Hospital affiliatedHospital;
 
 
-    public City(String cityName) {
-        cityId = ++count;
-        this.cityName = cityName;
-        listOfAddresses = new HashSet<>();
+    public City(String name) {
+        id =  ++ count;
+        this.name = name;
+        addressList = new HashSet<>();
     }
 
-    public Address addAddress(String street, String postalCode) {
-        Address address = new Address(street, postalCode);
-        listOfAddresses.add(address);
+    public Address addAddress(String street , String postalCode) {
+        Address address = new Address(street , postalCode);
+        addressList.add(address);
         return address;
     }
 
-    public int getCityId() {
-        return cityId;
+    public int getId() {
+        return id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String cityName) {
+        this.name = cityName;
     }
 
-    public int getCityPopulation() {
-        return cityPopulation;
+    public int getPopulation() {
+        return population;
     }
 
-    public void setCityPopulation(int cityPopulation) {
-        this.cityPopulation = cityPopulation;
+    public void setPopulation(int population) {
+        this.population = population;
     }
 
-    public HashSet<Address> getListOfAddresses() {
-        return listOfAddresses;
+    public HashSet<Address> getAddressList() {
+        return addressList;
     }
 
-    public void setListOfAddresses(HashSet<Address> listOfAddresses) {
-        this.listOfAddresses = listOfAddresses;
+    public void setAddressList(HashSet<Address> addressList) {
+        this.addressList = addressList;
     }
 
-    public Hospital getAffiliateHospital() {
-        return affiliateHospital;
+    public Hospital getAffiliatedHospital() {
+        return affiliatedHospital;
     }
 
-    public void setAffiliateHospital(Hospital affiliateHospital) {
-        this.affiliateHospital = affiliateHospital;
+    public void setAffiliatedHospital(Hospital affiliatedHospital) {
+        this.affiliatedHospital = affiliatedHospital;
     }
 
-    
-    
 
     @Override
     public String toString() {
-        return cityName;
+        return name;
     }
 
 }

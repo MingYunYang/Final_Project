@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class EmployeeDirectory {
 
-    private final ArrayList<Employee> listOfEmployees;
+    private final ArrayList<Employee> employeeList;
 
     public EmployeeDirectory() {
-        this.listOfEmployees = new ArrayList<>();
+        this.employeeList = new ArrayList<>();
     }
 
     public Employee addEmployee(String name) {
         Employee e = new Employee(name);
-        listOfEmployees.add(e);
+        employeeList.add(e);
         return e;
     }
 
-    public ArrayList<Employee> getListOfEmployees() {
-        return listOfEmployees;
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeList;
     }
 
 }

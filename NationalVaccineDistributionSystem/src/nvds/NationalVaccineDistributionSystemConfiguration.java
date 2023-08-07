@@ -9,7 +9,7 @@ import nvds.geography.State;
 import nvds.order.OrderItem;
 import nvds.organization.CDC;
 import nvds.organization.OrganizationDirectory;
-import nvds.organization.NVDSAdmin;
+import nvds.organization.NvdsAdmin;
 import nvds.organization.Clinic;
 import nvds.organization.Hospital;
 import nvds.organization.Manufacturer;
@@ -27,22 +27,18 @@ public class NationalVaccineDistributionSystemConfiguration {
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem = NationalVaccineDistributionSystem.getInstance();
 
         Country usa = nationalVaccineDistributionSystem.addCountry("United States");
-
         State massachusetts = usa.addState("Massachusetts");
         City cambridge = massachusetts.addCity("Cambridge");
-        City boston = massachusetts.addCity("Boston");
-        City attleboro = massachusetts.addCity("Attleboro");
-
         Address address = cambridge.addAddress("215 Kelton St" , "02134");
         Contact contact = address.addContact("781-921-8195");
 
         OrganizationDirectory organizationDirectory = nationalVaccineDistributionSystem.getOrganizationDirectory();
-        NVDSAdmin adminOrganization = new NVDSAdmin("US Dept. of Health and Human Services" , usa , massachusetts , cambridge , address , contact);
-        organizationDirectory.addOrganization(adminOrganization); //要把這裡改用新方法
+        NvdsAdmin nvdsAdmin = new NvdsAdmin("US Dept. of Health and Human Services" , usa , massachusetts , cambridge , address , contact);
+        organizationDirectory.addOrganization(nvdsAdmin); //要把這裡改用新方法
 
-        Employee adminEmployee = adminOrganization.getEmployeeDirectory().addEmployee("admin employee 1");
-        Role adminRole = adminOrganization.getSpecificRole(RoleType.NVDS_ADMIN);
-        adminOrganization.getUserAccountDirectory().createUserAccount("admin" , "admin" , adminEmployee , adminRole);
+        Employee adminEmployee = nvdsAdmin.getEmployeeDirectory().addEmployee("admin employee 1");
+        Role adminRole = nvdsAdmin.getSpecificRole(RoleType.NVDS_ADMIN);
+        nvdsAdmin.getUserAccountDirectory().createUserAccount("admin" , "admin" , adminEmployee , adminRole);
 
         
         

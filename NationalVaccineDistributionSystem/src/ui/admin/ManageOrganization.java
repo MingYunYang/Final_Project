@@ -68,7 +68,7 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void populateCityCombo(State state){
         
         cmbCity.removeAllItems();
-        for (City city : state.getListOfCities()){
+        for (City city : state.getCityList()){
             cmbCity.addItem(city);
         }
     }

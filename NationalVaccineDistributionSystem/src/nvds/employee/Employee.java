@@ -4,30 +4,30 @@ import nvds.useraccount.UserAccount;
 
 public class Employee {
 
-    private String employeeName;
+    private String name;
 
-    private final int employeeID;
+    private final int id;
 
     private static int count = 1;
 
     private UserAccount userAccount;
 
     public Employee(String name) {
-        employeeName = name;
-        employeeID = count;
+        this.name = name;
+        id = count;
         count++;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getName() {
+        return name;
     }
 
-    public int getEmployeeID() {
-        return employeeID;
+    public int getId() {
+        return id;
     }
 
     public UserAccount getUserAccount() {
@@ -40,7 +40,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return employeeName;
+        return name;
     }
 
 }

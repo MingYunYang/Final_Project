@@ -17,7 +17,7 @@ public class Hospital extends Organization {
 
     public Hospital(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.Hospital, country, state, city, address, contact);
-        city.setAffiliateHospital(this);
+        city.setAffiliatedHospital(this);
     }
 
     @Override

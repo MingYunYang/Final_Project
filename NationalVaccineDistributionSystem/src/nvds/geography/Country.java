@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Country {
 
-    private String countryName;
+    private String name;
 
-    private int countryPopulation;
+    private int population;
 
     private final ArrayList<State> stateList;
 
-    public Country(String countryName) {
-        this.countryName = countryName;
+    public Country(String name) {
+        this.name = name;
         stateList = new ArrayList<>();
     }
 
@@ -21,20 +21,20 @@ public class Country {
         return state;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCountryPopulation() {
-        return countryPopulation;
+    public int getPopulation() {
+        return population;
     }
 
-    public void setCountryPopulation(int countryPopulation) {
-        this.countryPopulation = countryPopulation;
+    public void setPopulation(int population) {
+        this.population = population;
     }
 
     public ArrayList<State> getStateList() {
@@ -43,7 +43,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return countryName;
+        return name;
     }
 
 }

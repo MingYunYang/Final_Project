@@ -8,7 +8,7 @@ public class NationalVaccineDistributionSystem {
 
     private static NationalVaccineDistributionSystem singleInstance;
 
-    private final OrganizationDirectory participatingOrganizations;
+    private final OrganizationDirectory organizationList;
 
     private final ArrayList<Country> countryList;
 
@@ -20,20 +20,20 @@ public class NationalVaccineDistributionSystem {
     }
 
     private NationalVaccineDistributionSystem() {
-        participatingOrganizations = new OrganizationDirectory();
+        organizationList = new OrganizationDirectory();
         countryList = new ArrayList<>();
     }
 
     public OrganizationDirectory getOrganizationDirectory() {
-        return participatingOrganizations;
+        return organizationList;
     }
 
     public ArrayList<Country> getCountryList() {
         return countryList;
     }
 
-    public Country addCountry(String countryName) {
-        Country country = new Country(countryName);
+    public Country addCountry(String name) {
+        Country country = new Country(name);
         countryList.add(country);
         return country;
     }

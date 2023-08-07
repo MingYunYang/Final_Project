@@ -120,7 +120,7 @@ public class MainScreen extends javax.swing.JPanel {
     private void initUserWorkArea() {
         lblWelcome.setText("Welcome to "
                 + organization.getOrganizationName() + "'s Admin WorkArea, Account Holder:"
-                + ((userAccount.getEmployee().getEmployeeName() != null) ? userAccount.getEmployee().getEmployeeName() : userAccount.getUsername())
+                + ((userAccount.getEmployee().getName() != null) ? userAccount.getEmployee().getName() : userAccount.getUsername())
                 + "!");
 
         CardLayout layout = (CardLayout) workArea.getLayout();

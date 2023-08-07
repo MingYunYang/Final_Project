@@ -56,7 +56,7 @@ public class OrganizationDirectory {
             organization = new PublicHealthDepartment(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.NVDS_Admin.getValue())) {
-            organization = new NVDSAdmin(name, country, state, city, address, contact);
+            organization = new NvdsAdmin(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
         }
         return organization;

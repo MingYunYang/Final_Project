@@ -5,20 +5,20 @@ import nvds.organization.Hospital;
 
 public class MasterOrderList {
 
-    private final ArrayList<Order> listOfOrders;
+    private final ArrayList<Order> orderList;
 
     public MasterOrderList() {
-        listOfOrders = new ArrayList<>();
+        orderList = new ArrayList<>();
     }
 
     public Order addOrder(Hospital hospital) {
         Order o = new Order(hospital);
-        listOfOrders.add(o);
+        orderList.add(o);
         return o;
     }
 
-    public ArrayList<Order> getListOfOrders() {
-        return listOfOrders;
+    public ArrayList<Order> getOrderList() {
+        return orderList;
     }
 
 }
