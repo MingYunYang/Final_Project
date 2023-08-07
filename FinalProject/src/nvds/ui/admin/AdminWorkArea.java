@@ -26,7 +26,7 @@ public class AdminWorkArea extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         lblQuestion = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 102, 102));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         manageUserAccountJPanel.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         manageUserAccountJPanel.setText("Manage Users");
@@ -61,41 +61,35 @@ public class AdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        lblQuestion.setFont(new java.awt.Font("Courier New", 3, 18)); // NOI18N
+        lblQuestion.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblQuestion.setText("What would you like to do today?");
+        lblQuestion.setText("ALL OTHER BUTTONS ARE DISABLED FOR UNAUTHORIZED PERSONNEL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageUserAccountJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageOrganizationJButton)))
-                    .addComponent(lblQuestion))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(238, 238, 238)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageOrganizationJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(manageUserAccountJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {manageEmployeeJButton, manageOrganizationJButton, manageUserAccountJPanel});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
+                .addGap(161, 161, 161)
                 .addComponent(lblQuestion)
-                .addGap(31, 31, 31)
+                .addGap(42, 42, 42)
                 .addComponent(manageOrganizationJButton)
                 .addGap(38, 38, 38)
                 .addComponent(manageEmployeeJButton)
                 .addGap(41, 41, 41)
                 .addComponent(manageUserAccountJPanel)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, manageUserAccountJPanel});

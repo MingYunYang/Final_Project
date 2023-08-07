@@ -52,7 +52,7 @@ public class MainScreen extends javax.swing.JPanel {
 
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        menuPanel.setBackground(new java.awt.Color(255, 153, 102));
+        menuPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         lblWelcomeMessage.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
         lblWelcomeMessage.setText("<WelcomeMsg>");
@@ -71,7 +71,7 @@ public class MainScreen extends javax.swing.JPanel {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(lblWelcomeMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                .addComponent(lblWelcomeMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLogOut)
                 .addContainerGap())
@@ -80,15 +80,17 @@ public class MainScreen extends javax.swing.JPanel {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogOut)
-                    .addComponent(lblWelcomeMessage))
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(lblWelcomeMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLogOut, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
         splitPane.setTopComponent(menuPanel);
 
-        loggedInUserWorkAreaJPanel.setBackground(new java.awt.Color(255, 102, 102));
+        loggedInUserWorkAreaJPanel.setBackground(new java.awt.Color(255, 255, 255));
         loggedInUserWorkAreaJPanel.setLayout(new java.awt.CardLayout());
         splitPane.setRightComponent(loggedInUserWorkAreaJPanel);
 

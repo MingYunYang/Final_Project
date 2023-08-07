@@ -21,7 +21,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         this.nationalVaccineDistributionSystem = NationalVaccineDistributionSystemConfiguration.configure(); // initialize the nationalVaccineDistributionSystem object
-        setSize(800 , 600); // width and height of the screen
+        setSize(1000 , 600); // width and height of the screen
         initializeLoginScreen(); // call the initialize login screen within the main jframe constructor
     }
 
@@ -38,14 +38,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        nvdsMainWorkAreaJPanel.setBackground(new java.awt.Color(255, 102, 102));
+        nvdsMainWorkAreaJPanel.setBackground(new java.awt.Color(255, 255, 255));
         nvdsMainWorkAreaJPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nvdsMainWorkAreaJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(nvdsMainWorkAreaJPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

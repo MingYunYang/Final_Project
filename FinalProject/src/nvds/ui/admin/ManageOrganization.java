@@ -142,7 +142,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         txtStreetAddress = new javax.swing.JTextField();
         txtPostalCode = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 102, 102));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tblOrganizations.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
@@ -287,7 +287,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                                                     .addComponent(lblNewPhone, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lblNewPostalCode, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lblNewAddress, javax.swing.GroupLayout.Alignment.LEADING))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(txtPostalCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtStreetAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,7 +378,7 @@ public class ManageOrganization extends javax.swing.JPanel {
                         .addComponent(lblOrganizationList)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

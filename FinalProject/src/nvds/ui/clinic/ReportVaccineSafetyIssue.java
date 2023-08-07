@@ -8,6 +8,7 @@ import nvds.Organization.CDC;
 import nvds.Organization.NvdsParticipatingOrganization;
 import nvds.OrganizationEmployeeRole.OrganizationEmployeeRole;
 import nvds.Useraccount.UserAccount;
+import nvds.VaccineManagement.AdverseEventTracking;
 import nvds.WorkQueue.AdverseEventTrackingWorkRequest;
 import nvds.WorkQueue.WorkQueue;
 import nvds.WorkQueue.WorkRequest;
@@ -101,7 +102,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         txtDescription = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 102, 102));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,8 +132,19 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblWorkRequests);
         if (tblWorkRequests.getColumnModel().getColumnCount() > 0) {
+            tblWorkRequests.getColumnModel().getColumn(0).setResizable(false);
             tblWorkRequests.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblWorkRequests.getColumnModel().getColumn(1).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(2).setResizable(false);
             tblWorkRequests.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tblWorkRequests.getColumnModel().getColumn(3).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(4).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(5).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(6).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(7).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(8).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(9).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(10).setResizable(false);
         }
         tblWorkRequests.getAccessibleContext().setAccessibleName("");
 
@@ -229,12 +241,12 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(47, 47, 47)
+                                            .addComponent(jLabel2))
+                                        .addGap(40, 40, 40)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtBatchId, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtVaccineName))))
-                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGap(18, 196, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,18 +261,16 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                                         .addGap(47, 47, 47)
                                         .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(172, 172, 172)
-                        .addComponent(btnSendSafetyIssueReport)))
+                        .addComponent(btnSendSafetyIssueReport))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel7, jLabel8, lblMessage, txtBatchId, txtDescription, txtPatientDeathsIfAny, txtPatientsAffected, txtVaccineManufacturer, txtVaccineName});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel3, jLabel7, jLabel8, lblMessage, txtBatchId, txtDescription, txtPatientDeathsIfAny, txtPatientsAffected, txtVaccineManufacturer, txtVaccineName});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,8 +307,8 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
                     .addComponent(btnSendSafetyIssueReport)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel7, jLabel8, lblMessage, txtBatchId, txtDescription, txtPatientDeathsIfAny, txtPatientsAffected, txtVaccineManufacturer, txtVaccineName});
@@ -342,12 +352,18 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
 
         AdverseEventTrackingWorkRequest request = new AdverseEventTrackingWorkRequest();
-        request.getAdverseEventTracking().setDescription(description);
-        request.getAdverseEventTracking().setVaccineName(vaccineName);
-        request.getAdverseEventTracking().setManufacturer(manufacturer);
-        request.getAdverseEventTracking().setBatchId(batchId);
-        request.getAdverseEventTracking().setAffectedPeople(patientsAffected);
-        request.getAdverseEventTracking().setDeaths(noOfDeaths);
+        AdverseEventTracking adverseEventTracking = request.getAdverseEventTracking();
+
+        if ( adverseEventTracking == null ) {
+            JOptionPane.showMessageDialog(null , "Adverse event tracking is not initialized.");
+            return;
+        }
+        adverseEventTracking.setDescription(description);
+        adverseEventTracking.setVaccineName(vaccineName);
+        adverseEventTracking.setManufacturer(manufacturer);
+        adverseEventTracking.setBatchId(batchId);
+        adverseEventTracking.setAffectedPeople(patientsAffected);
+        adverseEventTracking.setDeaths(noOfDeaths);
         request.setRequestSender(employeeUserAccount);
         request.setStatus("Sent");
 

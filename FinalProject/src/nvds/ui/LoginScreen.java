@@ -26,6 +26,7 @@ public class LoginScreen extends javax.swing.JPanel {
         initComponents();
         this.accountUserMainWorkArea = accountUserMainWorkArea;
         this.nvds = nvds;
+        setSize(1000, 600);
     }
 
     /**
@@ -45,7 +46,7 @@ public class LoginScreen extends javax.swing.JPanel {
         btnLogin = new javax.swing.JButton();
         lbl = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 102, 102));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setBackground(new java.awt.Color(255, 255, 255));
         lblTitle.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
