@@ -1,4 +1,4 @@
-package ui.cdc;
+`package ui.cdc;
 
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -123,6 +123,8 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
         btnAllocateVaccineQuantity = new javax.swing.JButton();
         lblState = new javax.swing.JLabel();
         cmbState = new javax.swing.JComboBox();
+        lblCity = new javax.swing.JLabel();
+        cmbCity2 = new javax.swing.JComboBox();
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Manage Vaccine Allocation");
@@ -200,6 +202,15 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
             }
         });
 
+        lblCity.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblCity.setText("City:");
+
+        cmbCity2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCity2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,13 +228,19 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
                             .addComponent(btnAllocateVaccineQuantity))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnBack)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBack)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(16, 16, 16)
+                                    .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTitle))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(16, 16, 16)
-                            .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblCity)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(cmbCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblTitle)))))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -236,7 +253,9 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblState))
+                    .addComponent(lblState)
+                    .addComponent(cmbCity2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCity))
                 .addGap(47, 47, 47)
                 .addComponent(lblEmployeeList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,11 +324,27 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
         evt.getWhen();
     }//GEN-LAST:event_cmbStateActionPerformed
 
+    private void cmbCity2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCity2ActionPerformed
+
+        City city = (City)cmbCity.getSelectedItem();
+        if(city != null){
+            populateOrganizationTypeCombo();
+            Type type = (Type)cmbOrganizationType.getSelectedItem();
+            if(type != null){
+                populateTable();
+            }
+        }
+    }//GEN-LAST:event_cmbCity2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAllocateVaccineQuantity;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox cmbCity;
+    private javax.swing.JComboBox cmbCity1;
+    private javax.swing.JComboBox cmbCity2;
     private javax.swing.JComboBox cmbState;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblEmployeeList;
     private javax.swing.JLabel lblEmployeeName;
     private javax.swing.JLabel lblState;
