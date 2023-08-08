@@ -7,6 +7,8 @@ import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.organization.Organization.Type;
 import java.util.ArrayList;
+import nvds.vaccine.Vaccine;
+import nvds.vaccine.VaccineInventoryCatalog;
 
 public class OrganizationDirectory {
 
@@ -51,24 +53,27 @@ public class OrganizationDirectory {
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Manufacturer.getValue())) {
             organization = new Manufacturer(name, country, state, city, address, contact);
+            organization.createVaccineInventoryCatalog();
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Public_Health_Department.getValue())) {
             organization = new PublicHealthDepartment(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.NVDS_Admin.getValue())) {
-            organization = new NvdsAdmin(name, country, state, city, address, contact);
+            organization = new NVDSAdmin(name, country, state, city, address, contact);
             listOfOrganizations.add(organization);
         }
         return organization;
     }
     
-    public Organization getAffiliateHospital(City city){
+    public int getVaccineAvailability(Vaccine vaccineType, Country country){
+        int sum = 0;
         for(Organization organization : listOfOrganizations){
-            if(organization.getCity().equals(city) && organization.getType().equals(Type.Hospital)){
-                return organization;
+            if(organization.getType().equals(Type.Manufacturer) && organization.getCountry().equals(country)){
+                Manufacturer manufacturer = (Manufacturer) organization;
+                sum = sum + manufacturer.getVaccineAvailability(vaccineType, manufacturer.getInventoryCatalog());
             }
         }
-        return null;
+        return sum;
     }
 
 }

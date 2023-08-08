@@ -7,11 +7,14 @@ public class Vaccine {
     private int price;
     
     private int vaccineId;
+    
+    private static int nextVaccineId = 1;
 
-    public Vaccine(String name, int price, int vaccineId) {
+    public Vaccine(String name, int price) {
         this.name = name;
         this.price = price;
-        this.vaccineId = vaccineId;
+        this.vaccineId = nextVaccineId;
+        nextVaccineId++;
     }
 
     public String getName() {

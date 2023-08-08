@@ -37,19 +37,69 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblVaccineAllocation = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVaccineAllocation = new javax.swing.JTable();
+
+        lblVaccineAllocation.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblVaccineAllocation.setText("National Vaccine Allocation:");
+
+        tblVaccineAllocation.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        tblVaccineAllocation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "State", "Population", "Allocation Quantity"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblVaccineAllocation.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblVaccineAllocation);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblVaccineAllocation)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(lblVaccineAllocation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblVaccineAllocation;
+    private javax.swing.JTable tblVaccineAllocation;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,7 +21,8 @@ public abstract class Role {
         HOSPITAL_LAB_TECHNICIAN("Hospital Lab Technician"),
         VACCINE_REQUEST_REVIEWER("Vaccine Request Reviewer"),
         VACCINE_INVENTORY_MANAGER("Vaccine Inventory Manager"),
-        CDC_ADVERSE_EVENT_HANDLER("CDC Adverse Event Handler");
+        CDC_ADVERSE_EVENT_HANDLER("CDC Adverse Event Handler"),
+        CDC_CATALOG_AND_ALLOCATION_HANDLER("CDC Catalog And Allocation Handler");
 
         private final String value;
 

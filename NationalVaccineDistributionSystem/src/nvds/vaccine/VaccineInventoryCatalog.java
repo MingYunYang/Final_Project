@@ -7,6 +7,7 @@ package nvds.vaccine;
 import nvds.order.OrderItem;
 import java.util.ArrayList;
 import java.util.HashMap;
+import nvds.organization.Manufacturer;
 
 /**
  *
@@ -14,11 +15,13 @@ import java.util.HashMap;
  */
 public class VaccineInventoryCatalog {
     
-    private ArrayList<OrderItem> orderItemList;
+    private ArrayList<VaccineItem> vaccineItemList; // for manufacturer
+    private ArrayList<OrderItem> orderItemList; // for clinic、hospital
     private ArrayList<Vaccine> vaccineTypeList;
     private HashMap<Vaccine, Integer> vaccineInventoryCount;
     
     public VaccineInventoryCatalog(){
+        vaccineItemList = new ArrayList<>();
         orderItemList = new ArrayList<>();
         vaccineTypeList = new ArrayList<>();
         vaccineInventoryCount = new HashMap<>();
@@ -65,6 +68,14 @@ public class VaccineInventoryCatalog {
         }
         return "Sufficient";
     }
+    
+    public void newVaccineItem(int quantity, Vaccine vaccine, Manufacturer manufacturer, int batchID){
+        
+        for(int i = 0; i < quantity; i++){
+            VaccineItem vi = new VaccineItem(vaccine, manufacturer, batchID);
+            vaccineItemList.add(vi);
+        }
+    }
 
     public ArrayList<OrderItem> getOrderItemList() {
         return orderItemList;
@@ -77,6 +88,12 @@ public class VaccineInventoryCatalog {
     public HashMap<Vaccine, Integer> getVaccineInventoryCount() {
         return vaccineInventoryCount;
     }
+
+    public ArrayList<VaccineItem> getVaccineItemList() {
+        return vaccineItemList;
+    }
+    
+    
     
     
     

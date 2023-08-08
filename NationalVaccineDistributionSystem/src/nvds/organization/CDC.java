@@ -7,8 +7,10 @@ import nvds.geography.City;
 import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.role.CDCAdverseEventHandlerRole;
+import nvds.role.CDCCatalogAndAllocationHandlerRole;
 import nvds.role.Role;
 import nvds.role.VaccineInventoryManagerRole;
+import nvds.role.VaccineRequestReviewerRole;
 import nvds.vaccine.VaccineCatalog;
 
 public class CDC extends Organization {
@@ -18,7 +20,7 @@ public class CDC extends Organization {
 
     public CDC(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.CDC, country, state, city, address, contact);
-        VaccineCatalog vaccineCatalog = new VaccineCatalog();
+        vaccineCatalog = new VaccineCatalog();
     }
 
     @Override
@@ -26,7 +28,10 @@ public class CDC extends Organization {
         if(supportedRole == null){
             supportedRole = new ArrayList<>();
             supportedRole.add(new CDCAdverseEventHandlerRole());
-            supportedRole.add(new VaccineInventoryManagerRole());
+            supportedRole.add(new CDCCatalogAndAllocationHandlerRole()); 
+            supportedRole.add(new VaccineInventoryManagerRole()); 
+            supportedRole.add(new VaccineRequestReviewerRole()); 
+            
         }
         return supportedRole;
     }
@@ -34,6 +39,9 @@ public class CDC extends Organization {
     public VaccineCatalog getVaccineCatalog() {
         return vaccineCatalog;
     }
+
+    
+    
     
     
 

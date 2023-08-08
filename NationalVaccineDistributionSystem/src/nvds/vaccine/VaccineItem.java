@@ -16,6 +16,10 @@ public class VaccineItem {
     private Vaccine vaccine;
 
     private Manufacturer manufacturer;
+    
+    private int vaccineItemId;
+    
+    private static int count = 1;
 
     private int batchId;
 
@@ -27,8 +31,10 @@ public class VaccineItem {
         this.vaccine = vaccine;
         this.batchId = batchId;
         this.manufacturer = manufacturer;
+        vaccineItemId = count;
         manufactureDate = new Date();
         expirationDate = new Date();
+        count++;
     }
 
     public Vaccine getVaccine() {

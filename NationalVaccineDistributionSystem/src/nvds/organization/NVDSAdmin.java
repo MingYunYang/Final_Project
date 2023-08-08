@@ -9,11 +9,11 @@ import nvds.geography.State;
 import nvds.role.NVDSAdminRole;
 import nvds.role.Role;
 
-public class NvdsAdmin extends Organization {
+public class NVDSAdmin extends Organization {
 
     private ArrayList<Role> supportedRole;
     
-    public NvdsAdmin(String name, Country country, State state, City city, Address address, Contact contact) {
+    public NVDSAdmin(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.NVDS_Admin, country, state, city, address, contact);
     }
 

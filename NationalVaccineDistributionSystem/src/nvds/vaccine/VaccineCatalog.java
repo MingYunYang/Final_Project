@@ -10,8 +10,8 @@ public class VaccineCatalog {
         vaccineList = new ArrayList<>();
     }
 
-    public Vaccine newVaccine(String name, int price, int vaccineId) {
-        Vaccine vaccine = new Vaccine(name, price, vaccineId);
+    public Vaccine newVaccine(String name, int price) {
+        Vaccine vaccine = new Vaccine(name, price);
         vaccineList.add(vaccine);
         return vaccine;
     }

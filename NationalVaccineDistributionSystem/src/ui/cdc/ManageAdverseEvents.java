@@ -11,14 +11,14 @@ import nvds.workqueue.AdverseEventTrackingRequest;
 import nvds.workqueue.WorkRequest;
 
 
-public class AdverseEventHandling extends javax.swing.JPanel {
+public class ManageAdverseEvents extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     NationalVaccineDistributionSystem ecosystem;
     UserAccount userAccount;
     Organization organization;
 
-    public AdverseEventHandling(JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem ecosystem) {
+    public ManageAdverseEvents(JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
@@ -94,7 +94,7 @@ public class AdverseEventHandling extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblReceivedWorkRequests);
 
-        jLabel6.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         jLabel6.setText("Incoming adverse events for processing:");
 
         btnAssign.setText("Assign to me");
@@ -132,22 +132,20 @@ public class AdverseEventHandling extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnAssign)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRecall)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnNoRecall)
+                        .addGap(0, 491, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAssign)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRecall)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnNoRecall)
-                                .addGap(0, 491, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6))))
+                        .addComponent(jLabel6)))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnNoRecall, btnRecall});

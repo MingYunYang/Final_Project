@@ -10,8 +10,9 @@ public class State {
 
     private final ArrayList<City> cityList;
 
-    public State(String name) {
+    public State(String name, int population) {
         this.name = name;
+        this.population = population;
         cityList = new ArrayList<>();
     }
 
@@ -19,6 +20,17 @@ public class State {
         City city = new City(name);
         cityList.add(city);
         return city;
+    }
+    
+    public double countAllocationQuantity(int totalStateNum, int availabilityQuantity){
+        double distributionPercentageForHighPopulation = 1 / totalStateNum;
+        double distributionPercentageForLowPopulation = 1 / (totalStateNum + 1);
+        
+        if(population > 500){ // high population
+            return availabilityQuantity * distributionPercentageForHighPopulation;
+        } else { // low population
+            return availabilityQuantity * distributionPercentageForLowPopulation;
+        }
     }
 
     public String getName() {
@@ -40,6 +52,9 @@ public class State {
     public ArrayList<City> getCityList() {
         return cityList;
     }
+    
+    
+    
 
     @Override
     public String toString() {

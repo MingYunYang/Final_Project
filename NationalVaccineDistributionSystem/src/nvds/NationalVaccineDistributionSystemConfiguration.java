@@ -9,14 +9,15 @@ import nvds.geography.State;
 import nvds.order.OrderItem;
 import nvds.organization.CDC;
 import nvds.organization.OrganizationDirectory;
-import nvds.organization.NvdsAdmin;
 import nvds.organization.Clinic;
 import nvds.organization.Hospital;
 import nvds.organization.Manufacturer;
+import nvds.organization.NVDSAdmin;
 import nvds.organization.Organization;
 import nvds.role.Role;
 import nvds.role.Role.RoleType;
 import nvds.vaccine.Vaccine;
+import nvds.vaccine.VaccineCatalog;
 import nvds.vaccine.VaccineInventoryCatalog;
 import nvds.vaccine.VaccineItem;
 
@@ -27,14 +28,20 @@ public class NationalVaccineDistributionSystemConfiguration {
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem = NationalVaccineDistributionSystem.getInstance();
 
         Country usa = nationalVaccineDistributionSystem.addCountry("United States");
-        // Country canada = nationalVaccineDistributionSystem.addCountry("Canada");
-        State massachusetts = usa.addState("Massachusetts");
+        State massachusetts = usa.addState("Massachusetts", 500);
         City cambridge = massachusetts.addCity("Cambridge");
-        Address address = cambridge.addAddress("215 Kelton St" , "02134");
-        Contact contact = address.addContact("781-921-8195");
+        Address cambridgeAddress = cambridge.addAddress("215 Kelton St" , "02134");
+        Contact cambridgeContact = cambridgeAddress.addContact("781-921-8195");
+        
+        State newyork = usa.addState("New Work", 600);
+        City buffalo = newyork.addCity("Buffalo");
+        Address buffaloAddress = buffalo.addAddress("39 Florence St" , "03158");
+        Contact buffalocContact = buffaloAddress.addContact("654-998-237");
 
         OrganizationDirectory organizationDirectory = nationalVaccineDistributionSystem.getOrganizationDirectory();
-        NvdsAdmin nvdsAdmin = new NvdsAdmin("US Dept. of Health and Human Services" , usa , massachusetts , cambridge , address , contact);
+        
+        // create 1 nvds admin and add 1 role in it
+        NVDSAdmin nvdsAdmin = new NVDSAdmin("US Dept. of Health and Human Services" , usa , massachusetts , cambridge , cambridgeAddress , cambridgeContact);
         organizationDirectory.addOrganization(nvdsAdmin); //要把這裡改用新方法
 
         Employee adminEmployee = nvdsAdmin.getEmployeeDirectory().addEmployee("admin employee 1");
@@ -44,7 +51,7 @@ public class NationalVaccineDistributionSystemConfiguration {
 
         // TESTING
         // create 1 clinic and add 3 roles in it
-        Clinic havardSquareClinic = ( Clinic ) organizationDirectory.newOrganization("Havard Square Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
+        Clinic havardSquareClinic = ( Clinic ) organizationDirectory.newOrganization("Havard Square Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , cambridgeAddress , cambridgeContact);
 
         Employee clinicEmployee1 = havardSquareClinic.getEmployeeDirectory().addEmployee("clinic employee 1");
         Role clinicInventoryRole = havardSquareClinic.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
@@ -58,16 +65,8 @@ public class NationalVaccineDistributionSystemConfiguration {
         Role clinicDoctorRole = havardSquareClinic.getSpecificRole(RoleType.CLINIC_DOCTOR);
         havardSquareClinic.getUserAccountDirectory().createUserAccount("clinic doctor" , "clinic doctor" , clinicEmployee3 , clinicDoctorRole);
 
-        // create vaccine item to be added to the invantory catalog of the clinic
-        VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();
-        Vaccine vaccine = new Vaccine("Covid-19 Vaccine" , 500 , 1);
-        Manufacturer manufacturer = new Manufacturer("Modena" , usa , massachusetts , cambridge , address , contact);
-        VaccineItem vaccineItem = new VaccineItem(vaccine , manufacturer , 1);
-        OrderItem oi = new OrderItem(vaccineItem , 5);
-        clinicInventoryCatalog.getOrderItemList().add(oi);
-
         // create 1 hospital and add 3 roles in it
-        Hospital cambridgeHospital = ( Hospital ) organizationDirectory.newOrganization("Cambridge Hospital" , Organization.Type.Hospital , usa , massachusetts , cambridge , address , contact);
+        Hospital cambridgeHospital = ( Hospital ) organizationDirectory.newOrganization("Cambridge Hospital" , Organization.Type.Hospital , usa , massachusetts , cambridge , cambridgeAddress , cambridgeContact);
 
         Employee hospitalEmployee1 = cambridgeHospital.getEmployeeDirectory().addEmployee("hospital employee 1");
         Role hospitalInventoryRole = cambridgeHospital.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
@@ -81,22 +80,55 @@ public class NationalVaccineDistributionSystemConfiguration {
         Role hospitalLabRole = cambridgeHospital.getSpecificRole(RoleType.HOSPITAL_LAB_TECHNICIAN);
         cambridgeHospital.getUserAccountDirectory().createUserAccount("hospital lab" , "hospital lab" , hospitalEmployee3 , hospitalLabRole);
 
-        // create 1 CDC and add 1 role in it
-        CDC usaCDC = ( CDC ) organizationDirectory.newOrganization("USA CDC" , Organization.Type.CDC , usa , massachusetts , cambridge , address , contact);
+        // create 1 CDC and add 4 roles in it
+        CDC usaCDC = ( CDC ) organizationDirectory.newOrganization("United States CDC" , Organization.Type.CDC , usa , massachusetts , cambridge , cambridgeAddress , cambridgeContact);
+        
         Employee cdcEmployee1 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 1");
         Role cdcAdverseEventHandlerRole = usaCDC.getSpecificRole(RoleType.CDC_ADVERSE_EVENT_HANDLER);
-        usaCDC.getUserAccountDirectory().createUserAccount("cdc" , "cdc" , cdcEmployee1 , cdcAdverseEventHandlerRole);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdc adverse" , "cdc adverse" , cdcEmployee1 , cdcAdverseEventHandlerRole);
 
         // create  employee 2
         Employee cdcEmployee2 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 2");
         Role cdcVaccineInventoryManagerRole = usaCDC.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
-        usaCDC.getUserAccountDirectory().createUserAccount("cdcinventory" , "cdcinventory" , cdcEmployee2 , cdcVaccineInventoryManagerRole);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdc inventory" , "cdc inventory" , cdcEmployee2 , cdcVaccineInventoryManagerRole);
 
         // create  employee 3
         Employee cdcEmployee3 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 3");
         Role cdcVaccineRequestReviewerRole = usaCDC.getSpecificRole(RoleType.VACCINE_REQUEST_REVIEWER);
-        usaCDC.getUserAccountDirectory().createUserAccount("cdcreviewer" , "cdcreviwer" , cdcEmployee3 , cdcVaccineRequestReviewerRole);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdc review" , "cdc review" , cdcEmployee3 , cdcVaccineRequestReviewerRole);
+        
+        // create  employee 4
+        Employee cdcEmployee4 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 4");
+        Role cdcCatalogAndAllocationHandlerRole = usaCDC.getSpecificRole(RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdc allocation" , "cdc allocation" , cdcEmployee4 , cdcCatalogAndAllocationHandlerRole);
 
+        // create 1 Manufacturer and add 1 role in it
+        Manufacturer manufacturer = (Manufacturer) organizationDirectory.newOrganization("Modena", Organization.Type.Manufacturer, usa, massachusetts , cambridge , cambridgeAddress , cambridgeContact);
+        
+        Employee manufacturerEmployee1 = manufacturer.getEmployeeDirectory().addEmployee("manufacturer employee 1");
+        Role manufacturerVaccineInventoryManagerRole = manufacturer.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
+        manufacturer.getUserAccountDirectory().createUserAccount("manufacturer" , "manufacturer" , manufacturerEmployee1 , manufacturerVaccineInventoryManagerRole);
+        
+        
+        
+        // create vaccine for testing
+        // create 1 type of vaccine "Covid-19 Vaccine"
+        VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();
+        VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
+        Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19 Vaccine", 500);
+        
+        // create 1 manufacturer and 2 vaccine item of "Covid-19 Vaccine" in its inventory catalog
+        VaccineItem vaccineItem1 = new VaccineItem(vaccine , manufacturer , 1);
+        VaccineItem vaccineItem2 = new VaccineItem(vaccine , manufacturer , 1);
+        manufacturer.getInventoryCatalog().getVaccineItemList().add(vaccineItem1);
+        manufacturer.getInventoryCatalog().getVaccineItemList().add(vaccineItem2);
+        
+        // connect vaccine item with order item and add them to clinic's inventory catalog
+        OrderItem oi1 = new OrderItem(vaccineItem1 , 1);
+        OrderItem oi2 = new OrderItem(vaccineItem2 , 1);
+        clinicInventoryCatalog.getOrderItemList().add(oi1);
+        clinicInventoryCatalog.getOrderItemList().add(oi2);
+        
         return nationalVaccineDistributionSystem;
     }
 
