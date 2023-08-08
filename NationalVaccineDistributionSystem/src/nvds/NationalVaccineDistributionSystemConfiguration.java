@@ -27,6 +27,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem = NationalVaccineDistributionSystem.getInstance();
 
         Country usa = nationalVaccineDistributionSystem.addCountry("United States");
+        // Country canada = nationalVaccineDistributionSystem.addCountry("Canada");
         State massachusetts = usa.addState("Massachusetts");
         City cambridge = massachusetts.addCity("Cambridge");
         Address address = cambridge.addAddress("215 Kelton St" , "02134");
@@ -40,8 +41,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Role adminRole = nvdsAdmin.getSpecificRole(RoleType.NVDS_ADMIN);
         nvdsAdmin.getUserAccountDirectory().createUserAccount("admin" , "admin" , adminEmployee , adminRole);
 
-        
-        
+
         // TESTING
         // create 1 clinic and add 3 roles in it
         Clinic havardSquareClinic = ( Clinic ) organizationDirectory.newOrganization("Havard Square Clinic" , Organization.Type.Clinic , usa , massachusetts , cambridge , address , contact);
@@ -80,13 +80,23 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee hospitalEmployee3 = cambridgeHospital.getEmployeeDirectory().addEmployee("hospital employee 3");
         Role hospitalLabRole = cambridgeHospital.getSpecificRole(RoleType.HOSPITAL_LAB_TECHNICIAN);
         cambridgeHospital.getUserAccountDirectory().createUserAccount("hospital lab" , "hospital lab" , hospitalEmployee3 , hospitalLabRole);
-        
+
         // create 1 CDC and add 1 role in it
         CDC usaCDC = ( CDC ) organizationDirectory.newOrganization("USA CDC" , Organization.Type.CDC , usa , massachusetts , cambridge , address , contact);
         Employee cdcEmployee1 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 1");
         Role cdcAdverseEventHandlerRole = usaCDC.getSpecificRole(RoleType.CDC_ADVERSE_EVENT_HANDLER);
         usaCDC.getUserAccountDirectory().createUserAccount("cdc" , "cdc" , cdcEmployee1 , cdcAdverseEventHandlerRole);
-        
+
+        // create  employee 2
+        Employee cdcEmployee2 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 2");
+        Role cdcVaccineInventoryManagerRole = usaCDC.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdcinventory" , "cdcinventory" , cdcEmployee2 , cdcVaccineInventoryManagerRole);
+
+        // create  employee 3
+        Employee cdcEmployee3 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 3");
+        Role cdcVaccineRequestReviewerRole = usaCDC.getSpecificRole(RoleType.VACCINE_REQUEST_REVIEWER);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdcreviewer" , "cdcreviwer" , cdcEmployee3 , cdcVaccineRequestReviewerRole);
+
         return nationalVaccineDistributionSystem;
     }
 

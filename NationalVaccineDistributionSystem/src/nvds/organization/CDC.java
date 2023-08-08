@@ -8,6 +8,7 @@ import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.role.CDCAdverseEventHandlerRole;
 import nvds.role.Role;
+import nvds.role.VaccineInventoryManagerRole;
 import nvds.vaccine.VaccineCatalog;
 
 public class CDC extends Organization {
@@ -25,6 +26,7 @@ public class CDC extends Organization {
         if(supportedRole == null){
             supportedRole = new ArrayList<>();
             supportedRole.add(new CDCAdverseEventHandlerRole());
+            supportedRole.add(new VaccineInventoryManagerRole());
         }
         return supportedRole;
     }

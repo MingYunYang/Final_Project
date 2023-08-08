@@ -18,34 +18,37 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
-                      <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnManageAdverseEventHandling" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnManageCDCVacccineRequests" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnManageVaccineAllocation" max="32767" attributes="0"/>
+                          <Component id="btnCreateVaccineJPanel" max="32767" attributes="0"/>
+                          <Component id="btnManageVaccineAllocation1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="251" max="32767" attributes="0"/>
+              <EmptySpace pref="250" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
               <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Component id="btnCreateVaccineJPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnManageAdverseEventHandling" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnManageCDCVacccineRequests" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnManageVaccineAllocation" min="-2" max="-2" attributes="0"/>
+              <Component id="btnManageVaccineAllocation1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="219" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -79,8 +82,22 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Manage Vaccine Requests"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCDCVacccineRequestsActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnManageVaccineAllocation">
+    <Component class="javax.swing.JButton" name="btnCreateVaccineJPanel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Create Vaccines"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateVaccineJPanelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnManageVaccineAllocation1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="0"/>
@@ -88,7 +105,7 @@
         <Property name="text" type="java.lang.String" value="Manage Vaccine Allocation"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageVaccineAllocationActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageVaccineAllocation1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
