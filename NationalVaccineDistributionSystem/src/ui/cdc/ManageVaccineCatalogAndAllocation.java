@@ -41,18 +41,20 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         CDC CDC = (CDC)organization;
 
         for ( Vaccine vaccine : CDC.getVaccineCatalog().getVaccineList()) {
-            Object[] row = new Object[ 4 ];
+            Object[] row = new Object[ 8 ];
             row[ 0 ] = vaccine.getVaccineId();
             row[ 1 ] = vaccine;
             row[ 2 ] = vaccine.getPrice();
-            row[ 3 ] = nvds.getOrganizationDirectory().getVaccineAvailability(vaccine, organization.getCountry()); 
-            // get the availability quantity from all the manufacturers in this country
-            
+            row[ 3 ] = (vaccine.getManufacturer() == null)? "N/A" : vaccine.getManufacturer();
+            row[ 4 ] = (vaccine.getBatch() == null)? "N/A" : vaccine.getBatch().getBatchId();
+            row[ 5 ] = (vaccine.getBatch() == null)? "N/A" : vaccine.getBatch().getQuantity();
+            row[ 6 ] = (vaccine.getManufactureDate() == null)? "N/A" : vaccine.getManufactureDate();
+            row[ 7 ] = (vaccine.getExpirationDate() == null)? "N/A" : vaccine.getExpirationDate();
             model.addRow(row);
         }
     }
     
-    private void populateVaccineAllocationTable(int availabilityQuantity){
+    private void populateVaccineAllocationTable(int batchQuantity){
         
         DefaultTableModel model = ( DefaultTableModel ) tblVaccineAllocation.getModel();
         model.setRowCount(0);
@@ -62,9 +64,8 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
             row[ 0 ] = state;
             row[ 1 ] = state.getPopulation();
             
-            // 有問題！！！！！
             int totalStateNum = organization.getCountry().getStateList().size();
-            double allocationQuantityDouble = state.countAllocationQuantity(totalStateNum, availabilityQuantity);
+            double allocationQuantityDouble = state.countAllocationQuantity(totalStateNum, batchQuantity);
             int allocationQuantityInteger = (int)allocationQuantityDouble;
             row[ 2 ] = allocationQuantityInteger;
             
@@ -85,8 +86,6 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         tblVaccineCatalog = new javax.swing.JTable();
         lblNewVaccineName = new javax.swing.JLabel();
         txtNewVaccineName = new javax.swing.JTextField();
-        lblNewVaccinePrice = new javax.swing.JLabel();
-        txtNewVaccinePrice = new javax.swing.JTextField();
         btnCreateNewVaccine = new javax.swing.JButton();
         btnSearchVaccineAllocation = new javax.swing.JButton();
 
@@ -131,8 +130,6 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         tblVaccineAllocation.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblVaccineAllocation);
         if (tblVaccineAllocation.getColumnModel().getColumnCount() > 0) {
-            tblVaccineAllocation.getColumnModel().getColumn(0).setResizable(false);
-            tblVaccineAllocation.getColumnModel().getColumn(1).setResizable(false);
             tblVaccineAllocation.getColumnModel().getColumn(2).setResizable(false);
         }
 
@@ -142,17 +139,17 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         tblVaccineCatalog.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         tblVaccineCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Price", "Availability"
+                "Vaccine ID", "Vaccine Name", "Price", "Manufacturer", "Batch ID", "Batch Quantity", "Manufacture Date", "Expiration Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -161,12 +158,6 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         });
         tblVaccineCatalog.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblVaccineCatalog);
-        if (tblVaccineCatalog.getColumnModel().getColumnCount() > 0) {
-            tblVaccineCatalog.getColumnModel().getColumn(0).setResizable(false);
-            tblVaccineCatalog.getColumnModel().getColumn(1).setResizable(false);
-            tblVaccineCatalog.getColumnModel().getColumn(2).setResizable(false);
-            tblVaccineCatalog.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         lblNewVaccineName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblNewVaccineName.setText("New Vaccine Name:");
@@ -174,15 +165,6 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
         txtNewVaccineName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNewVaccineNameActionPerformed(evt);
-            }
-        });
-
-        lblNewVaccinePrice.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblNewVaccinePrice.setText("New Vaccine Price:");
-
-        txtNewVaccinePrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewVaccinePriceActionPerformed(evt);
             }
         });
 
@@ -209,28 +191,21 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTitle))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblVaccineCatalog))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNewVaccinePrice, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNewVaccinePrice))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnBack)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitle))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblVaccineCatalog, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnCreateNewVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(61, 61, 61)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSearchVaccineAllocation))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -248,17 +223,12 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNewVaccineName))
+                    .addComponent(lblNewVaccineName)
+                    .addComponent(btnCreateNewVaccine)
+                    .addComponent(btnSearchVaccineAllocation, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSearchVaccineAllocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNewVaccinePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCreateNewVaccine)
-                        .addComponent(lblNewVaccinePrice)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,10 +245,6 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
        
     }//GEN-LAST:event_txtNewVaccineNameActionPerformed
 
-    private void txtNewVaccinePriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewVaccinePriceActionPerformed
-        
-    }//GEN-LAST:event_txtNewVaccinePriceActionPerformed
-
     private void btnCreateNewVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewVaccineActionPerformed
         
         String vaccineName = txtNewVaccineName.getText();
@@ -287,20 +253,11 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
             return;
         }
         
-        int vaccinePrice;
-        try{
-            vaccinePrice = Integer.parseInt(txtNewVaccinePrice.getText());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Please check the vaccine price format");
-            return;
-        }
-        
         CDC CDC = (CDC)organization;
         VaccineCatalog vaccineCatalog = CDC.getVaccineCatalog();
-        vaccineCatalog.newVaccine(vaccineName, vaccinePrice);
+        vaccineCatalog.newVaccine(vaccineName, 0, null, null, null, null);
         
         txtNewVaccineName.setText("");
-        txtNewVaccinePrice.setText("");
         populateVaccineCatalogTable();
     }//GEN-LAST:event_btnCreateNewVaccineActionPerformed
 
@@ -311,8 +268,8 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select one type of vaccine first");
             return;
         } else {
-            int availabilityQuantity = (Integer)tblVaccineCatalog.getValueAt(selectedRowIndex, 3);
-            populateVaccineAllocationTable(availabilityQuantity);
+            int batchQuantity = (Integer)tblVaccineCatalog.getValueAt(selectedRowIndex, 5);
+            populateVaccineAllocationTable(batchQuantity);
         }    
     }//GEN-LAST:event_btnSearchVaccineAllocationActionPerformed
 
@@ -323,13 +280,11 @@ public class ManageVaccineCatalogAndAllocation extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblNewVaccineName;
-    private javax.swing.JLabel lblNewVaccinePrice;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblVaccineCatalog;
     private javax.swing.JTable tblVaccineAllocation;
     private javax.swing.JTable tblVaccineCatalog;
     private javax.swing.JTextField txtNewVaccineName;
-    private javax.swing.JTextField txtNewVaccinePrice;
     // End of variables declaration//GEN-END:variables
 
 }

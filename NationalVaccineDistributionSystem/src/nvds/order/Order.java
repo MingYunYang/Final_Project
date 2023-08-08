@@ -1,9 +1,9 @@
 package nvds.order;
 
-import nvds.vaccine.VaccineItem;
 import java.util.ArrayList;
 import java.util.Date;
 import nvds.organization.Hospital;
+import nvds.vaccine.Vaccine;
 
 public class Order {
 
@@ -43,8 +43,8 @@ public class Order {
         this.hospital = hospital;
     }
 
-    public OrderItem newOrderItem(VaccineItem vaccineItem , int quantity) {
-        OrderItem oi = new OrderItem(vaccineItem , quantity);
+    public OrderItem newOrderItem(Vaccine vaccine , int quantity) {
+        OrderItem oi = new OrderItem(vaccine , quantity);
         orderItemList.add(oi);
         return oi;
     }

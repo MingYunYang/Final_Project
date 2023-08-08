@@ -16,10 +16,10 @@ import nvds.organization.NVDSAdmin;
 import nvds.organization.Organization;
 import nvds.role.Role;
 import nvds.role.Role.RoleType;
+import nvds.vaccine.Batch;
 import nvds.vaccine.Vaccine;
 import nvds.vaccine.VaccineCatalog;
 import nvds.vaccine.VaccineInventoryCatalog;
-import nvds.vaccine.VaccineItem;
 
 public class NationalVaccineDistributionSystemConfiguration {
 
@@ -115,20 +115,14 @@ public class NationalVaccineDistributionSystemConfiguration {
         // create 1 type of vaccine "Covid-19 Vaccine"
         VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();
         VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
-        Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19 Vaccine", 500);
+        Batch batch = new Batch(12, 23, "XXX", 012345, 10);
+        String batchId1 = batch.getBatchId();
+        Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19 Vaccine", 500, manufacturer, batch, "2023/06/06", "2024/06/06");
         
-        // create 1 manufacturer and 2 vaccine item of "Covid-19 Vaccine" in its inventory catalog
-        VaccineItem vaccineItem1 = new VaccineItem(vaccine , manufacturer , 1);
-        VaccineItem vaccineItem2 = new VaccineItem(vaccine , manufacturer , 1);
-        manufacturer.getInventoryCatalog().getVaccineItemList().add(vaccineItem1);
-        manufacturer.getInventoryCatalog().getVaccineItemList().add(vaccineItem2);
-        
-        // connect vaccine item with order item and add them to clinic's inventory catalog
-        OrderItem oi1 = new OrderItem(vaccineItem1 , 1);
-        OrderItem oi2 = new OrderItem(vaccineItem2 , 1);
+
+        OrderItem oi1 = new OrderItem(vaccine , 1);
         clinicInventoryCatalog.getOrderItemList().add(oi1);
-        clinicInventoryCatalog.getOrderItemList().add(oi2);
-        
+
         return nationalVaccineDistributionSystem;
     }
 

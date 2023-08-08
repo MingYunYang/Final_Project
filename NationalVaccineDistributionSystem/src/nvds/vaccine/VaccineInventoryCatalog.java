@@ -7,21 +7,20 @@ package nvds.vaccine;
 import nvds.order.OrderItem;
 import java.util.ArrayList;
 import java.util.HashMap;
-import nvds.organization.Manufacturer;
 
 /**
  *
  * @author libby
  */
-public class VaccineInventoryCatalog {
+public class VaccineInventoryCatalog { // for clinic & hospital
     
-    private ArrayList<VaccineItem> vaccineItemList; // for manufacturer
-    private ArrayList<OrderItem> orderItemList; // for clinic、hospital
+    private ArrayList<Vaccine> vaccineList;
+    private ArrayList<OrderItem> orderItemList;
     private ArrayList<Vaccine> vaccineTypeList;
     private HashMap<Vaccine, Integer> vaccineInventoryCount;
     
     public VaccineInventoryCatalog(){
-        vaccineItemList = new ArrayList<>();
+        vaccineList = new ArrayList<>();
         orderItemList = new ArrayList<>();
         vaccineTypeList = new ArrayList<>();
         vaccineInventoryCount = new HashMap<>();
@@ -32,7 +31,7 @@ public class VaccineInventoryCatalog {
         vaccineTypeList.clear();
         
         for(OrderItem oi : orderItemList){
-            Vaccine vaccine = oi.getVaccineItem().getVaccine();
+            Vaccine vaccine = oi.getVaccine();
             if(!vaccineTypeList.contains(vaccine)){
                 vaccineTypeList.add(vaccine);
             }
@@ -43,7 +42,7 @@ public class VaccineInventoryCatalog {
         
         int sum = 0;
         for(OrderItem oi : orderItemList){
-            if(oi.getVaccineItem().getVaccine().equals(vaccine)){
+            if(oi.getVaccine().equals(vaccine)){
                 sum = sum + oi.getOrderQuantity();
             }
         }
@@ -68,14 +67,6 @@ public class VaccineInventoryCatalog {
         }
         return "Sufficient";
     }
-    
-    public void newVaccineItem(int quantity, Vaccine vaccine, Manufacturer manufacturer, int batchID){
-        
-        for(int i = 0; i < quantity; i++){
-            VaccineItem vi = new VaccineItem(vaccine, manufacturer, batchID);
-            vaccineItemList.add(vi);
-        }
-    }
 
     public ArrayList<OrderItem> getOrderItemList() {
         return orderItemList;
@@ -89,9 +80,16 @@ public class VaccineInventoryCatalog {
         return vaccineInventoryCount;
     }
 
-    public ArrayList<VaccineItem> getVaccineItemList() {
-        return vaccineItemList;
+    public ArrayList<Vaccine> getVaccineList() {
+        return vaccineList;
     }
+
+    public void setVaccineList(ArrayList<Vaccine> vaccineList) {
+        this.vaccineList = vaccineList;
+    }
+    
+    
+
     
     
     

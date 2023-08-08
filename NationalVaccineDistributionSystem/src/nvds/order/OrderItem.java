@@ -1,24 +1,24 @@
 package nvds.order;
 
-import nvds.vaccine.VaccineItem;
+import nvds.vaccine.Vaccine;
 
 public class OrderItem {
 
-    private VaccineItem vaccineItem;
+    private Vaccine vaccine;
     
     private int orderQuantity;
 
-    public OrderItem(VaccineItem vaccineItem, int quantity){
-        this.vaccineItem = vaccineItem;
+    public OrderItem(Vaccine vaccine, int quantity){
+        this.vaccine = vaccine;
         orderQuantity = quantity;
     }
 
-    public VaccineItem getVaccineItem() {
-        return vaccineItem;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setVaccineItem(VaccineItem vaccineItem) {
-        this.vaccineItem = vaccineItem;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
     public int getOrderQuantity() {
@@ -28,6 +28,8 @@ public class OrderItem {
     public void setOrderQuantity(int orderQuantity) {
         this.orderQuantity = orderQuantity;
     }
+    
+    
    
 
 }

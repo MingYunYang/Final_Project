@@ -3,6 +3,8 @@ package nvds.vaccine;
 public class Batch {
 
     private String batchId;
+    
+    private int quantity;
 
     private int productionMonth;
 
@@ -12,11 +14,12 @@ public class Batch {
 
     private int currentBatchNumber;
 
-    public Batch(int productionMonth , int productionYear , String manufacturerCode , int currentBatchNumber) {
+    public Batch(int productionMonth , int productionYear , String manufacturerCode , int currentBatchNumber, int quantity) {
         this.productionMonth = productionMonth;
         this.productionYear = productionYear;
         this.manufacturerCode = manufacturerCode;
         this.currentBatchNumber = currentBatchNumber;
+        this.quantity = quantity;
         generateBatchId();
     }
 
@@ -70,6 +73,16 @@ public class Batch {
     public void setCurrentBatchNumber(int currentBatchNumber) {
         this.currentBatchNumber = currentBatchNumber;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    
 
 
 }

@@ -8,9 +8,6 @@ import nvds.geography.State;
 import nvds.role.Role;
 import java.util.ArrayList;
 import nvds.role.VaccineInventoryManagerRole;
-import nvds.vaccine.Vaccine;
-import nvds.vaccine.VaccineInventoryCatalog;
-import nvds.vaccine.VaccineItem;
 
 public class Manufacturer extends Organization {
     
@@ -20,15 +17,15 @@ public class Manufacturer extends Organization {
         super(name, Organization.Type.Manufacturer, country, state, city, address, contact);
     }
     
-    public int getVaccineAvailability(Vaccine vaccineType, VaccineInventoryCatalog inventoryCatalog){
-        int sum = 0;
-        for(VaccineItem vaccineItem : inventoryCatalog.getVaccineItemList()){
-            if(vaccineItem.getVaccine().equals(vaccineType)){
-                sum = sum + 1;
-            }
-        }
-        return sum;
-    }
+//    public int getVaccineAvailability(Vaccine vaccineType, VaccineInventoryCatalog inventoryCatalog){
+//        int sum = 0;
+//        for(VaccineItem vaccineItem : inventoryCatalog.getVaccineItemList()){
+//            if(vaccineItem.getVaccine().equals(vaccineType)){
+//                sum = sum + 1;
+//            }
+//        }
+//        return sum;
+//    }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
