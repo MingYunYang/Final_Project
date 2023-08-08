@@ -130,7 +130,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(lblQuestion)))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +145,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
                 .addComponent(btnManageCDCVacccineRequests)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageVaccineAllocation1)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,7 +159,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
 
     private void btnCreateVaccineJPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateVaccineJPanelActionPerformed
         // TODO add your handling code here:
-        CreateVaccineJPanel mva = new CreateVaccineJPanel(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineInventoryJPanel mva = new ManageVaccineInventoryJPanel(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("CreateVaccineJPanel" , mva);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -131,7 +131,7 @@ public class ManageVaccineAllocation extends javax.swing.JPanel {
         cmbOrganizationType = new javax.swing.JComboBox();
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
-        lblTitle.setText("Manage Employees");
+        lblTitle.setText("Manage Vaccine Allocation");
 
         btnBack.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnBack.setText("Back");
