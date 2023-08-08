@@ -4,6 +4,7 @@
  */
 package ui.cdc;
 
+import ui.manufacturer.ManageVaccineInventoryJPanel;
 import java.awt.CardLayout;
 import nvds.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
