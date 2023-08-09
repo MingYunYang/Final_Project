@@ -19,12 +19,12 @@ import javax.swing.JPanel;
 public class LoginScreen extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
-    NationalVaccineDistributionSystem ecosystem;
+    NationalVaccineDistributionSystem nvds;
 
-    public LoginScreen(JPanel mainWorkArea, NationalVaccineDistributionSystem ecosystem) {
+    public LoginScreen(JPanel mainWorkArea, NationalVaccineDistributionSystem nvds) {
         initComponents();
         this.mainWorkArea = mainWorkArea;
-        this.ecosystem = ecosystem;
+        this.nvds = nvds;
     }
 
     /**
@@ -48,24 +48,31 @@ public class LoginScreen extends javax.swing.JPanel {
 
         lblTitle.setBackground(new java.awt.Color(255, 255, 255));
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(0, 0, 0));
         lblTitle.setText("Welcome! Please login to continue");
         lblTitle.setAlignmentY(0.0F);
 
         lblUserName.setBackground(new java.awt.Color(255, 255, 255));
         lblUserName.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblUserName.setForeground(new java.awt.Color(0, 0, 0));
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName.setText("Username:");
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblPassword.setForeground(new java.awt.Color(0, 0, 0));
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password:");
 
         txtUserName.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        txtUserName.setForeground(new java.awt.Color(0, 0, 0));
 
         pwdField.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        pwdField.setForeground(new java.awt.Color(0, 0, 0));
 
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
         btnLogin.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +82,7 @@ public class LoginScreen extends javax.swing.JPanel {
 
         lbl.setBackground(new java.awt.Color(255, 255, 255));
         lbl.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        lbl.setForeground(new java.awt.Color(0, 0, 0));
         lbl.setText("National Vaccine Distribution System");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -140,11 +148,11 @@ public class LoginScreen extends javax.swing.JPanel {
         String password = String.valueOf(passwordCharArray);
         boolean flag = false;
 
-        for (Organization organization : ecosystem.getOrganizationDirectory().getListOfOrganizations()) {
+        for (Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations()) {
             UserAccount userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
             if (userAccount != null) {
 
-                MainScreen mainScreen = new MainScreen(mainWorkArea, userAccount, organization, ecosystem);
+                MainScreen mainScreen = new MainScreen(mainWorkArea, userAccount, organization, nvds);
                 mainWorkArea.add("MainScreen", mainScreen);
                 CardLayout layout = (CardLayout) mainWorkArea.getLayout();
                 layout.next(mainWorkArea);
