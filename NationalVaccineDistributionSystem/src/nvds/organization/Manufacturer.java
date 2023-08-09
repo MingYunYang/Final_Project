@@ -16,16 +16,6 @@ public class Manufacturer extends Organization {
     public Manufacturer(String name, Country country, State state, City city, Address address, Contact contact) {
         super(name, Organization.Type.Manufacturer, country, state, city, address, contact);
     }
-    
-//    public int getVaccineAvailability(Vaccine vaccineType, VaccineInventoryCatalog inventoryCatalog){
-//        int sum = 0;
-//        for(VaccineItem vaccineItem : inventoryCatalog.getVaccineItemList()){
-//            if(vaccineItem.getVaccine().equals(vaccineType)){
-//                sum = sum + 1;
-//            }
-//        }
-//        return sum;
-//    }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
@@ -35,6 +25,7 @@ public class Manufacturer extends Organization {
         }
         return supportedRole;
     }
+
 
     
 

@@ -8,15 +8,11 @@ public class AdverseEventTrackingRequest extends WorkRequest {
 
     public AdverseEventTrackingRequest() {
         super();
-        adverseEventTracking = new AdverseEventTracking(); //不確定這樣可不可以
+        adverseEventTracking = new AdverseEventTracking();
     }
 
     public AdverseEventTracking getAdverseEventTracking() {
         return adverseEventTracking;
-    }
-
-    public void setAdverseEventTracking(AdverseEventTracking adverseEventTracking) {
-        this.adverseEventTracking = adverseEventTracking;
     }
     
     @Override

@@ -24,11 +24,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnApproved" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnRejected" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnApproved" min="-2" pref="236" max="-2" attributes="0"/>
                   <Component id="lblRequestWaitingToBeReviewed" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" alignment="0" min="-2" pref="691" max="-2" attributes="0"/>
                   <Component id="btnAssignToMe" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -42,7 +38,7 @@
                   </Group>
                   <Component id="lblSendingRequestList" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="166" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +50,7 @@
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnBack1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lblSendingRequestList" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="153" max="-2" attributes="0"/>
@@ -64,12 +60,9 @@
               <Component id="lblRequestWaitingToBeReviewed" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="138" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnApproved" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRejected" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="121" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnApproved" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="242" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -259,23 +252,12 @@
         <Property name="text" type="java.lang.String" value="Request Waiting To Be Reviewed:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnRejected">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Rejected"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRejectedActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnApproved">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Approved"/>
+        <Property name="text" type="java.lang.String" value="Check Inventory"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApprovedActionPerformed"/>

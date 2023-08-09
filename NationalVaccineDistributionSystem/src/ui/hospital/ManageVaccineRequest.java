@@ -47,7 +47,10 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnAssignToMe = new javax.swing.JButton();
-        btnProcess = new javax.swing.JButton();
+        lblRequestWaitingToBeReviewed = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblRequestWaitingToBeReviewed = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         lblRequestList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblRequestList.setText("Hospital Review Request List:");
@@ -92,25 +95,44 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
             }
         });
 
-        btnProcess.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnProcess.setText("Process");
-        btnProcess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessActionPerformed(evt);
+        lblRequestWaitingToBeReviewed.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblRequestWaitingToBeReviewed.setText("Request Waiting To Be Reviewed:");
+
+        tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Vaccine ID", "Vaccine Name", "Quantity", "Sender", "Reviewer", "Request Status", "Recipient", "Review Result"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane3.setViewportView(tblRequestWaitingToBeReviewed);
+
+        jButton1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jButton1.setText("Create Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAssignToMe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1)
+                    .addComponent(lblRequestWaitingToBeReviewed)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAssignToMe)
                     .addComponent(lblRequestList)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -118,15 +140,12 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBack))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAssignToMe, btnProcess});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
@@ -135,10 +154,14 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnProcess)
-                    .addComponent(btnAssignToMe))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addComponent(btnAssignToMe)
+                .addGap(18, 18, 18)
+                .addComponent(lblRequestWaitingToBeReviewed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,18 +172,6 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        
-        int selectedRow = tblRequestList.getSelectedRow();
-        if(selectedRow < 0){
-            JOptionPane.showMessageDialog(this,"Please select a request from the table first");
-            return;
-        }
-        ReviewVaccineOrderRequest request = (ReviewVaccineOrderRequest) tblRequestList.getValueAt(selectedRow, 1);
-        
-        
-    }//GEN-LAST:event_btnProcessActionPerformed
-
     private void btnAssignToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignToMeActionPerformed
 
        
@@ -170,10 +181,13 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignToMe;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnProcess;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblRequestList;
+    private javax.swing.JLabel lblRequestWaitingToBeReviewed;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblRequestList;
+    private javax.swing.JTable tblRequestWaitingToBeReviewed;
     // End of variables declaration//GEN-END:variables
 }

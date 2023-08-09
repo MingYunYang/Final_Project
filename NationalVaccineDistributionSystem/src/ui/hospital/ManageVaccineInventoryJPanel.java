@@ -95,7 +95,6 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblRequestWaitingToBeReviewed = new javax.swing.JTable();
         lblRequestWaitingToBeReviewed = new javax.swing.JLabel();
-        btnRejected = new javax.swing.JButton();
         btnApproved = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -167,16 +166,8 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         lblRequestWaitingToBeReviewed.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblRequestWaitingToBeReviewed.setText("Request Waiting To Be Reviewed:");
 
-        btnRejected.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnRejected.setText("Rejected");
-        btnRejected.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRejectedActionPerformed(evt);
-            }
-        });
-
         btnApproved.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnApproved.setText("Approved");
+        btnApproved.setText("Check Inventory");
         btnApproved.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApprovedActionPerformed(evt);
@@ -190,10 +181,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnApproved, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRejected, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnApproved, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRequestWaitingToBeReviewed)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAssignToMe)
@@ -204,7 +192,7 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
                             .addComponent(btnBack1))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblSendingRequestList))
-                .addGap(0, 166, Short.MAX_VALUE))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,11 +211,9 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
                 .addComponent(lblRequestWaitingToBeReviewed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApproved)
-                    .addComponent(btnRejected))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnApproved)
+                .addContainerGap(242, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,22 +247,6 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAssignToMeActionPerformed
 
-    private void btnRejectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectedActionPerformed
-
-        int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
-        if (selectedRow >= 0) {
-            ReviewVaccineOrderRequest request = (ReviewVaccineOrderRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
-            request.setStatus("Completed");
-            request.setResult("Rejected");
-            JOptionPane.showMessageDialog(this, "Review send successfully");
-            populateMainWorkQueue();
-            populateWaitingWorkQueue();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a request from the table first");
-            return;
-        }
-    }//GEN-LAST:event_btnRejectedActionPerformed
-
     private void btnApprovedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovedActionPerformed
 
         int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
@@ -308,7 +278,6 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnApproved;
     private javax.swing.JButton btnAssignToMe;
     private javax.swing.JButton btnBack1;
-    private javax.swing.JButton btnRejected;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblRequestWaitingToBeReviewed;

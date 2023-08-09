@@ -12,15 +12,15 @@ import java.util.HashMap;
  *
  * @author libby
  */
-public class VaccineInventoryCatalog { // for clinic & hospital
+public class VaccineInventoryCatalog { // for clinic, hospital, manufacturer
     
-    private ArrayList<Vaccine> vaccineList;
-    private ArrayList<OrderItem> orderItemList;
+    private ArrayList<Batch> batchList; // for manufacturer 儲存製造的疫苗
+    private ArrayList<OrderItem> orderItemList; // for clinic, hospital 儲存收到的疫苗
     private ArrayList<Vaccine> vaccineTypeList;
     private HashMap<Vaccine, Integer> vaccineInventoryCount;
     
     public VaccineInventoryCatalog(){
-        vaccineList = new ArrayList<>();
+        batchList = new ArrayList<>();
         orderItemList = new ArrayList<>();
         vaccineTypeList = new ArrayList<>();
         vaccineInventoryCount = new HashMap<>();
@@ -80,19 +80,11 @@ public class VaccineInventoryCatalog { // for clinic & hospital
         return vaccineInventoryCount;
     }
 
-    public ArrayList<Vaccine> getVaccineList() {
-        return vaccineList;
-    }
-
-    public void setVaccineList(ArrayList<Vaccine> vaccineList) {
-        this.vaccineList = vaccineList;
+    public ArrayList<Batch> getBatchList() {
+        return batchList;
     }
     
     
 
-    
-    
-    
-    
     
 }

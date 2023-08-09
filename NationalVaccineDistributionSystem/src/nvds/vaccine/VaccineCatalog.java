@@ -1,9 +1,8 @@
 package nvds.vaccine;
 
 import java.util.ArrayList;
-import nvds.organization.Manufacturer;
 
-public class VaccineCatalog { // for cdc
+public class VaccineCatalog { // for CDC
 
     ArrayList<Vaccine> vaccineList;
 
@@ -11,22 +10,25 @@ public class VaccineCatalog { // for cdc
         vaccineList = new ArrayList<>();
     }
 
-    public Vaccine newVaccine(String name, int price, Manufacturer manufacturer , Batch batch, String manufactureDate, String expirationDate){
-        Vaccine vaccine = new Vaccine(name, price, manufacturer, batch, manufactureDate, expirationDate);
+    public Vaccine newVaccine(String name){
+        Vaccine vaccine = new Vaccine(name);
         vaccineList.add(vaccine);
         return vaccine;
     }
     
-    // Get the quantity for a specific batch ID
+    // get the quantity for a specific batch ID 
+    // 找出整個目錄中某批疫苗的數量
     public int getQuantityForBatch(String batchId) {
         for (Vaccine vaccine : vaccineList) {
         if (vaccine.getBatch().getBatchId().equals(batchId)) {
             return vaccine.getBatch().getQuantity();
             }
         }
-        return 0; // Return 0 if the batch ID is not found
+        return 0; // return 0 if the batch ID is not found
     }
     
+    // maybe we don't need this method 
+    // 也許不用這個方法，因為不需要知道所有種類疫苗的總和
     public int getTotalQuantityOfAllVaccines() {
         int total = 0;
         for (Vaccine vaccine : vaccineList) {
@@ -35,6 +37,8 @@ public class VaccineCatalog { // for cdc
         return total;
     }
     
+    // maybe we don't need this method
+    // 如果目錄裡每種疫苗只會出現一次，為什麼還要這個方法，可以直接getBatchQuantity就好了
     public int getTotalQuantityOfSpecificVaccine(String vaccineName) {
         int total = 0;
         for (Vaccine vaccine : vaccineList) {

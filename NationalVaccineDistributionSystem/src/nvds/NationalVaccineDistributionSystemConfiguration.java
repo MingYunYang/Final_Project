@@ -33,7 +33,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         Address cambridgeAddress = cambridge.addAddress("215 Kelton St" , "02134");
         Contact cambridgeContact = cambridgeAddress.addContact("781-921-8195");
         
-        State newyork = usa.addState("New Work", 600);
+        State newyork = usa.addState("New York", 600);
         City buffalo = newyork.addCity("Buffalo");
         Address buffaloAddress = buffalo.addAddress("39 Florence St" , "03158");
         Contact buffalocContact = buffaloAddress.addContact("654-998-237");
@@ -108,19 +108,17 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee manufacturerEmployee1 = manufacturer.getEmployeeDirectory().addEmployee("manufacturer employee 1");
         Role manufacturerVaccineInventoryManagerRole = manufacturer.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
         manufacturer.getUserAccountDirectory().createUserAccount("manufacturer" , "manufacturer" , manufacturerEmployee1 , manufacturerVaccineInventoryManagerRole);
-        
-        
+
         
         // create vaccine for testing
-        // create 1 type of vaccine "Covid-19 Vaccine"
-        VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();
         VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
-        Batch batch = new Batch(12, 23, "XXX", 012345, 10);
-        String batchId1 = batch.getBatchId();
-        Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19 Vaccine", 500, manufacturer, batch, "2023/06/06", "2024/06/06");
+        Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19");
+        Batch batch = vaccine.newBatch(10, 500, manufacturer, "2023-06-06", "2024-06-06", "001");
+        VaccineInventoryCatalog manufacturerInventoryCatalog = manufacturer.getInventoryCatalog();
+        manufacturerInventoryCatalog.getBatchList().add(batch);
         
-
-        OrderItem oi1 = new OrderItem(vaccine , 1);
+        VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();  
+        OrderItem oi1 = new OrderItem(vaccine , 5);
         clinicInventoryCatalog.getOrderItemList().add(oi1);
 
         return nationalVaccineDistributionSystem;

@@ -95,7 +95,7 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblReceivedWorkRequests);
 
         jLabel6.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
-        jLabel6.setText("Incoming adverse events for processing:");
+        jLabel6.setText("Incoming Adverse Events:");
 
         btnAssign.setText("Assign to me");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {

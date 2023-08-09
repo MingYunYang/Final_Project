@@ -22,14 +22,14 @@ public class State {
         return city;
     }
     
-    public double countAllocationQuantity(int totalStateNum, int batchQuantity){
+    public double calculateAllocationQuantity(int totalStateNum, int availability){
         double distributionPercentageForHighPopulation = 1.0 / totalStateNum;
         double distributionPercentageForLowPopulation = 1.0 / (totalStateNum + 1);
         
         if(population > 500){ // high population
-            return batchQuantity * distributionPercentageForHighPopulation;
+            return availability * distributionPercentageForHighPopulation;
         } else { // low population
-            return batchQuantity * distributionPercentageForLowPopulation;
+            return availability * distributionPercentageForLowPopulation;
         }
     }
 
@@ -52,9 +52,6 @@ public class State {
     public ArrayList<City> getCityList() {
         return cityList;
     }
-    
-    
-    
 
     @Override
     public String toString() {

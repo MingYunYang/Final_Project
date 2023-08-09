@@ -7,8 +7,6 @@ import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.organization.Organization.Type;
 import java.util.ArrayList;
-import nvds.vaccine.Vaccine;
-import nvds.vaccine.VaccineInventoryCatalog;
 
 public class OrganizationDirectory {
 
@@ -65,15 +63,5 @@ public class OrganizationDirectory {
         return organization;
     }
     
-//    public int getVaccineAvailability(Vaccine vaccineType, Country country){
-//        int sum = 0;
-//        for(Organization organization : listOfOrganizations){
-//            if(organization.getType().equals(Type.Manufacturer) && organization.getCountry().equals(country)){
-//                Manufacturer manufacturer = (Manufacturer) organization;
-//                sum = sum + manufacturer.getVaccineAvailability(vaccineType, manufacturer.getInventoryCatalog());
-//            }
-//        }
-//        return sum;
-//    }
 
 }
