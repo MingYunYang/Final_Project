@@ -15,13 +15,13 @@ import javax.swing.JPanel;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    private NationalVaccineDistributionSystem ecosystem; // ecosystem object
+    private NationalVaccineDistributionSystem nvds; // nvds object
 
     public MainJFrame() {
         initComponents();
-        ecosystem = NationalVaccineDistributionSystemConfiguration.configure(); // initialize the ecosystem object
+        this.nvds = NationalVaccineDistributionSystemConfiguration.configure(); // initialize the nvds object
         setSize(800, 600); // width and height of the screen
-        initLoginScreen(); // call the initialize login screen within the main jframe constructor
+        setLoginScreen(); // call the initialize login screen within the main jframe constructor
     }
 
     /**
@@ -88,9 +88,9 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
 
-    private void initLoginScreen() {
+    private void setLoginScreen() {
 
-        JPanel loginScreen = new LoginScreen(mainWorkArea, ecosystem);
+        JPanel loginScreen = new LoginScreen(mainWorkArea, nvds);
         mainWorkArea.add("LoginScreen", loginScreen);
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
