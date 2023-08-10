@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.organization.Organization;
 import nvds.useraccount.UserAccount;
-import nvds.workqueue.ReviewVaccineOrderRequest;
+import nvds.workqueue.ReviewRequest;
 
 
 /**

@@ -29,7 +29,6 @@ public class CDC extends Organization {
             supportedRole = new ArrayList<>();
             supportedRole.add(new CDCAdverseEventHandlerRole());
             supportedRole.add(new CDCCatalogAndAllocationHandlerRole()); 
-            supportedRole.add(new VaccineInventoryManagerRole()); 
             supportedRole.add(new VaccineRequestReviewerRole()); 
             
         }

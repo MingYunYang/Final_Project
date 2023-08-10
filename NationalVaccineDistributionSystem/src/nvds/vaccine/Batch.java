@@ -10,12 +10,7 @@ public class Batch {
     private Manufacturer manufacturer;
     private String manufactureDate;
     private String expirationDate;
-    
     private String batchId;
-    private int productionMonth;
-    private int productionYear;
-    private String manufacturerCode;
-    private int currentBatchNumber;
 
     public Batch(Vaccine vaccine, int quantity, int priceForEachVaccine, Manufacturer manufacturer, String manufactureDate, String expirationDate, String batchId) { 
         
@@ -26,12 +21,6 @@ public class Batch {
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
         this.batchId = batchId;
-        
-//        this.productionMonth = productionMonth;
-//        this.productionYear = productionYear;
-//        this.manufacturerCode = manufacturerCode;
-//        this.currentBatchNumber = currentBatchNumber;
-//        generateBatchId(productionMonth, productionYear, manufacturerCode, currentBatchNumber);
     }
 
 //    private void generateBatchId(int productionMonth , int productionYear , String manufacturerCode , int currentBatchNumber) {
@@ -97,38 +86,6 @@ public class Batch {
         this.batchId = batchId;
     }
 
-    public int getProductionMonth() {
-        return productionMonth;
-    }
-
-    public void setProductionMonth(int productionMonth) {
-        this.productionMonth = productionMonth;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
-    }
-
-    public String getManufacturerCode() {
-        return manufacturerCode;
-    }
-
-    public void setManufacturerCode(String manufacturerCode) {
-        this.manufacturerCode = manufacturerCode;
-    }
-
-    public int getCurrentBatchNumber() {
-        return currentBatchNumber;
-    }
-
-    public void setCurrentBatchNumber(int currentBatchNumber) {
-        this.currentBatchNumber = currentBatchNumber;
-    }
-
     public int getPriceForEachVaccine() {
         return priceForEachVaccine;
     }
@@ -140,15 +97,13 @@ public class Batch {
     public Vaccine getVaccine() {
         return vaccine;
     }
-    
-    
-
 
     
-    
+    @Override
+    public String toString(){
+        return batchId;
+    }
 
-    
-    
     
 
 

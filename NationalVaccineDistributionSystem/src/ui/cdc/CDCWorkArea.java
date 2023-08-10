@@ -9,7 +9,6 @@ import nvds.NationalVaccineDistributionSystem;
 import javax.swing.JPanel;
 import nvds.organization.Organization;
 import nvds.role.Role;
-import static nvds.role.Role.RoleType.VACCINE_INVENTORY_MANAGER;
 import static nvds.role.Role.RoleType.VACCINE_REQUEST_REVIEWER;
 import nvds.useraccount.UserAccount;
 
@@ -42,11 +41,6 @@ public class CDCWorkArea extends javax.swing.JPanel {
         Role role = userAccount.getRole();
         switch ( role.type ) {
 
-            case VACCINE_INVENTORY_MANAGER -> {
-                btnManageAdverseEventHandling.setEnabled(false);
-                btnManageCDCVacccineRequests.setEnabled(false);
-                btnManageVaccineAllocation.setEnabled(false);
-            }
             case CDC_ADVERSE_EVENT_HANDLER -> {
                 btnManageCDCVacccineRequests.setEnabled(false);
                 btnManageVaccineAllocation.setEnabled(false);
@@ -142,7 +136,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineAllocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineAllocationActionPerformed
         
-        ManageVaccineInventory mva = new ManageVaccineInventory(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineCatalogAndAllocation mva = new ManageVaccineCatalogAndAllocation(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageVaccineAllocation" , mva);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -13,6 +13,7 @@ import nvds.organization.Clinic;
 import nvds.organization.Hospital;
 import nvds.organization.Manufacturer;
 import nvds.organization.NVDSAdmin;
+import nvds.organization.Distributor;
 import nvds.organization.Organization;
 import nvds.role.Role;
 import nvds.role.Role.RoleType;
@@ -108,12 +109,20 @@ public class NationalVaccineDistributionSystemConfiguration {
         Employee manufacturerEmployee1 = manufacturer.getEmployeeDirectory().addEmployee("manufacturer employee 1");
         Role manufacturerVaccineInventoryManagerRole = manufacturer.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
         manufacturer.getUserAccountDirectory().createUserAccount("manufacturer" , "manufacturer" , manufacturerEmployee1 , manufacturerVaccineInventoryManagerRole);
-
+        
+        // create 1 Distributor and add 1 role in it
+        Distributor distributor = (Distributor) organizationDirectory.newOrganization("United States Distributor", Organization.Type.Distributor, usa, massachusetts , cambridge , cambridgeAddress , cambridgeContact);
+        
+        Employee distributorEmployee1 = distributor.getEmployeeDirectory().addEmployee("distributor employee 1");
+        Role distributorVaccineInventoryManagerRole = distributor.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
+        distributor.getUserAccountDirectory().createUserAccount("distributor" , "distributor" , distributorEmployee1 , distributorVaccineInventoryManagerRole);
+        
         
         // create vaccine for testing
         VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
         Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19");
         Batch batch = vaccine.newBatch(10, 500, manufacturer, "2023-06-06", "2024-06-06", "001");
+        batch.getVaccine().setManufactureStatus("Delivered");
         VaccineInventoryCatalog manufacturerInventoryCatalog = manufacturer.getInventoryCatalog();
         manufacturerInventoryCatalog.getBatchList().add(batch);
         

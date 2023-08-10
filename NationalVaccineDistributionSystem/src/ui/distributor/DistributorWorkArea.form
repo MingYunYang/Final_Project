@@ -17,15 +17,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="248" max="32767" attributes="0"/>
+              <EmptySpace pref="240" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="btnManageVaccineInventory" min="-2" pref="257" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnManageAdverseEventHandling" min="-2" pref="257" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -37,7 +37,7 @@
               <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
               <Component id="lblQuestion" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnManageAdverseEventHandling" min="-2" max="-2" attributes="0"/>
+              <Component id="btnManageVaccineInventory" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="312" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -53,15 +53,15 @@
         <Property name="text" type="java.lang.String" value="What would you like to do today?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnManageAdverseEventHandling">
+    <Component class="javax.swing.JButton" name="btnManageVaccineInventory">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Manage Vaccine Distribution"/>
+        <Property name="text" type="java.lang.String" value="Manage Vaccine Inventory"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageAdverseEventHandlingActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageVaccineInventoryActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.role.Role;
 import nvds.role.Role.RoleType;
-import nvds.workqueue.ReviewVaccineOrderRequest;
+import nvds.workqueue.ReviewRequest;
 import nvds.workqueue.WorkRequest;
 
 /**
@@ -47,12 +47,12 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getRequestQuantity();
+            row[2] = request.getQuantity();
             row[3] = request.getClinicReviewer(); //sender
             row[4] = request.getHospitalReviewer(); //hospital reviewer
             row[5] = request.getStatus();
             
-            String result = ((ReviewVaccineOrderRequest) request).getResult();
+            String result = ((ReviewRequest) request).getResult();
             row[6] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);
@@ -69,13 +69,13 @@ public class ManageVaccineInventoryJPanel extends javax.swing.JPanel {
             Object[] row = new Object[8];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getRequestQuantity();
+            row[2] = request.getQuantity();
             row[3] = request.getClinicReviewer(); 
             row[4] = request.getHospitalReviewer();
             row[5] = request.getStatus();
             row[6] = request.getReceiver();
             
-            String result = ((ReviewVaccineOrderRequest) request).getResult();
+            String result = ((ReviewRequest) request).getResult();
             row[7] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);  

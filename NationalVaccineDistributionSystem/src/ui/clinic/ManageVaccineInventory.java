@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.role.Role;
 import nvds.role.Role.RoleType;
-import nvds.workqueue.ReviewVaccineOrderRequest;
+import nvds.workqueue.ReviewRequest;
 import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
@@ -253,10 +253,10 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
         Vaccine vaccine = (Vaccine) tblVaccineInventory.getValueAt(selectedRowIndex, 1);
         int requestQuantity = Integer.parseInt(txtRequestQuantity.getText());
-        ReviewVaccineOrderRequest request = new ReviewVaccineOrderRequest();
+        ReviewRequest request = new ReviewRequest();
 
         request.setVaccine(vaccine);
-        request.setRequestQuantity(requestQuantity);
+        request.setQuantity(requestQuantity);
         request.setSender(userAccount);
         request.setStatus("Sent");
 
@@ -307,12 +307,12 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request.getVaccine().getName();
-            row[2] = request.getRequestQuantity();
+            row[2] = request.getQuantity();
             row[3] = request.getSender();
             row[4] = request.getReceiver();
             row[5] = request.getStatus();
 
-            String result = ((ReviewVaccineOrderRequest) request).getResult();
+            String result = ((ReviewRequest) request).getResult();
             row[6] = ((result == null) ? "Waiting" : result);
 
             model.addRow(row);

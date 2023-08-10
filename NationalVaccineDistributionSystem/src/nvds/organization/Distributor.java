@@ -7,6 +7,7 @@ import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.role.Role;
 import java.util.ArrayList;
+import nvds.role.VaccineInventoryManagerRole;
 
 public class Distributor extends Organization {
     
@@ -20,7 +21,7 @@ public class Distributor extends Organization {
     public ArrayList<Role> getSupportedRole() {
         if(supportedRole == null){
             supportedRole = new ArrayList<>();
-
+            supportedRole.add(new VaccineInventoryManagerRole());
         }
         return supportedRole;
     }

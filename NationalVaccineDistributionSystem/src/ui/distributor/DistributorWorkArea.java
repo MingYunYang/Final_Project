@@ -37,17 +37,17 @@ public class DistributorWorkArea extends javax.swing.JPanel {
     private void initComponents() {
 
         lblQuestion = new javax.swing.JLabel();
-        btnManageAdverseEventHandling = new javax.swing.JButton();
+        btnManageVaccineInventory = new javax.swing.JButton();
 
         lblQuestion.setFont(new java.awt.Font("Courier New", 3, 18)); // NOI18N
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblQuestion.setText("What would you like to do today?");
 
-        btnManageAdverseEventHandling.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        btnManageAdverseEventHandling.setText("Manage Vaccine Distribution");
-        btnManageAdverseEventHandling.addActionListener(new java.awt.event.ActionListener() {
+        btnManageVaccineInventory.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageVaccineInventory.setText("Manage Vaccine Inventory");
+        btnManageVaccineInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageAdverseEventHandlingActionPerformed(evt);
+                btnManageVaccineInventoryActionPerformed(evt);
             }
         });
 
@@ -56,14 +56,14 @@ public class DistributorWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
+                .addContainerGap(240, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblQuestion)
-                        .addGap(200, 200, 200))
+                        .addComponent(btnManageVaccineInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnManageAdverseEventHandling, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(248, 248, 248))))
+                        .addComponent(lblQuestion)
+                        .addGap(208, 208, 208))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,22 +71,22 @@ public class DistributorWorkArea extends javax.swing.JPanel {
                 .addGap(226, 226, 226)
                 .addComponent(lblQuestion)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageAdverseEventHandling)
+                .addComponent(btnManageVaccineInventory)
                 .addContainerGap(312, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageAdverseEventHandlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdverseEventHandlingActionPerformed
+    private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
 
-        ManageVaccineDistribution mvd = new ManageVaccineDistribution(userProcessContainer , userAccount , organization , nvds);
+        ManageVaccineInventory mvd = new ManageVaccineInventory(userProcessContainer , userAccount , organization , nvds);
         userProcessContainer.add("ManageVaccineDistribution" , mvd);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageAdverseEventHandlingActionPerformed
+    }//GEN-LAST:event_btnManageVaccineInventoryActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageAdverseEventHandling;
+    private javax.swing.JButton btnManageVaccineInventory;
     private javax.swing.JLabel lblQuestion;
     // End of variables declaration//GEN-END:variables
 }

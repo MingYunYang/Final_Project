@@ -6,20 +6,16 @@ import nvds.vaccine.Vaccine;
 
 public abstract class WorkRequest {
     
+    // already used
     private String status;
-
     private Vaccine vaccine;
-    
-    private int requestQuantity;
-    
+    private int quantity;
     private UserAccount sender;
-
     private UserAccount receiver;
     
+    // might not needed
     private UserAccount clinicReviewer;
-    
     private UserAccount hospitalReviewer;
-
     private Date requestDate;
 
 
@@ -75,12 +71,12 @@ public abstract class WorkRequest {
         this.vaccine = vaccine;
     }
 
-    public int getRequestQuantity() {
-        return requestQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setRequestQuantity(int requestQuantity) {
-        this.requestQuantity = requestQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public UserAccount getClinicReviewer() {

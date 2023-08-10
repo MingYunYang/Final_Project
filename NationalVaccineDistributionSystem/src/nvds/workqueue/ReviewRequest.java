@@ -8,11 +8,11 @@ package nvds.workqueue;
  *
  * @author libby
  */
-public class ReviewVaccineOrderRequest extends WorkRequest {
+public class ReviewRequest extends WorkRequest {
     
     private String result;
     
-    public ReviewVaccineOrderRequest() {
+    public ReviewRequest() {
         super();
     }
     

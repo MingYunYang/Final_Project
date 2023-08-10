@@ -13,7 +13,7 @@ import nvds.organization.Hospital;
 import nvds.organization.Organization;
 import nvds.role.Role;
 import nvds.useraccount.UserAccount;
-import nvds.workqueue.ReviewVaccineOrderRequest;
+import nvds.workqueue.ReviewRequest;
 import nvds.workqueue.WorkRequest;
 
 /**
@@ -48,12 +48,12 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
             Object[] row = new Object[7];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getRequestQuantity();
+            row[2] = request.getQuantity();
             row[3] = request.getSender();
             row[4] = request.getClinicReviewer();
             row[5] = request.getStatus();
             
-            String result = ((ReviewVaccineOrderRequest) request).getResult();
+            String result = ((ReviewRequest) request).getResult();
             row[6] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);
@@ -70,13 +70,13 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
             Object[] row = new Object[8];
             row[0] = request.getVaccine().getVaccineId();
             row[1] = request;
-            row[2] = request.getRequestQuantity();
+            row[2] = request.getQuantity();
             row[3] = request.getSender();
             row[4] = request.getClinicReviewer();
             row[5] = request.getStatus();
             row[6] = request.getReceiver();
             
-            String result = ((ReviewVaccineOrderRequest) request).getResult();
+            String result = ((ReviewRequest) request).getResult();
             row[7] = ((result == null) ? "Waiting" : result);
             
             model.addRow(row);  
@@ -321,7 +321,7 @@ public class ManageVaccineRequest extends javax.swing.JPanel {
         
         int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
         if (selectedRow >= 0) {
-            ReviewVaccineOrderRequest request = (ReviewVaccineOrderRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
+            ReviewRequest request = (ReviewRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
             request.setStatus("Completed");
             request.setResult("Rejected");
             JOptionPane.showMessageDialog(this, "Review send successfully");
