@@ -80,9 +80,9 @@ public class AllocateVaccine extends javax.swing.JPanel {
                 int availability = Integer.parseInt(txtAvailability.getText());
                 int totalStateNum = organization.getCountry().getStateList().size();
                 double allocationQuantityDoubleForState = state.calculateAllocationQuantity(totalStateNum, availability);
-                System.out.println("allocation Quantity Double For State: " + allocationQuantityDoubleForState);
-                double allocationQuantityDoubleForCity = allocationQuantityDoubleForState * ((double) city.getPopulation() / state.getPopulation());
-                System.out.println("allocation Quantity Double For City: " + allocationQuantityDoubleForCity);
+                // System.out.println("allocation Quantity Double For State: " + allocationQuantityDoubleForState);
+                double allocationQuantityDoubleForCity = allocationQuantityDoubleForState * ((double) city.getPopulation() / state.calculateStatePopulation());
+                // System.out.println("allocation Quantity Double For City: " + allocationQuantityDoubleForCity);
                 int allocationQuantityIntForCity = (int)allocationQuantityDoubleForCity;
                 
                 row[ 5 ] = allocationQuantityIntForCity;
