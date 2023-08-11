@@ -15,8 +15,8 @@ public class Country {
         stateList = new ArrayList<>();
     }
 
-    public State addState(String name, int population) {
-        State state = new State(name, population);
+    public State addState(String name) {
+        State state = new State(name);
         stateList.add(state);
         return state;
     }

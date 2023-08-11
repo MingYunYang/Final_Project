@@ -3,6 +3,11 @@ package nvds;
 import nvds.geography.Country;
 import nvds.organization.OrganizationDirectory;
 import java.util.ArrayList;
+import nvds.organization.Manufacturer;
+import nvds.organization.Organization;
+import nvds.organization.Organization.Type;
+import nvds.vaccine.Batch;
+import nvds.vaccine.Vaccine;
 
 public class NationalVaccineDistributionSystem {
 
@@ -23,6 +28,22 @@ public class NationalVaccineDistributionSystem {
         organizationList = new OrganizationDirectory();
         countryList = new ArrayList<>();
     }
+    
+    public int getTotalAvailabilityForSpecificVaccine(Vaccine vaccine, Country country){
+        int sum = 0;
+        for(Organization organization : organizationList.getListOfOrganizations()){
+            if(organization.getType().equals(Type.Manufacturer) && organization.getCountry().equals(country)){
+                Manufacturer manufacturer = (Manufacturer) organization;
+                for(Batch batch : manufacturer.getInventoryCatalog().getBatchList()){
+                    if(batch.getVaccine().equals(vaccine)){
+                        sum = sum + batch.getQuantity();
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+    
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationList;

@@ -23,7 +23,6 @@ public class Vaccine {
         setManufactureStatus("Manufactured");
         return batch;
     }
-
     public String getName() {
         return name;
     }

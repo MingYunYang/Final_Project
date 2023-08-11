@@ -201,7 +201,7 @@ public class SendManufactureRequest extends javax.swing.JPanel {
         
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageVaccineCatalogAndAllocation mvc = (ManageVaccineCatalogAndAllocation) component;
+        ManageVaccineCatalog mvc = (ManageVaccineCatalog) component;
         mvc.populateVaccineCatalogTable();
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -217,6 +217,7 @@ public class SendManufactureRequest extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "No qualified vaccine now");
             return;
         }
+        
         // make sure we don't create second batch for the vaccine that alrady has a batch
         if(selectedVaccine.getManufactureStatus()!= null){
             JOptionPane.showMessageDialog(this, "Selected vaccine has already been requested");
@@ -271,7 +272,7 @@ public class SendManufactureRequest extends javax.swing.JPanel {
         
             txtExpectedQuantity.setText("");
             txtExpectedReceivedDate.setText("");
-            }
+        }
     }//GEN-LAST:event_btnSendManufactureRequestActionPerformed
 
     private void cmbVaccineTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVaccineTypeActionPerformed

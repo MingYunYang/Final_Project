@@ -18,9 +18,10 @@ public class City {
     private Hospital affiliatedHospital;
 
 
-    public City(String name) {
+    public City(String name, int population) {
         id =  ++ count;
         this.name = name;
+        this.population = population;
         addressList = new HashSet<>();
     }
 

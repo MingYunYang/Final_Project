@@ -8,16 +8,15 @@ public class State {
 
     private int population;
 
-    private final ArrayList<City> cityList;
+    private ArrayList<City> cityList;
 
-    public State(String name, int population) {
+    public State(String name) {
         this.name = name;
-        this.population = population;
         cityList = new ArrayList<>();
     }
 
-    public City addCity(String name) {
-        City city = new City(name);
+    public City addCity(String name, int cityPopulation) {
+        City city = new City(name, cityPopulation);
         cityList.add(city);
         return city;
     }
@@ -31,6 +30,14 @@ public class State {
         } else { // low population
             return availability * distributionPercentageForLowPopulation;
         }
+    }
+    
+    public int calculateStatePopulation(){
+        int sum = 0;
+        for(City city : cityList){
+            sum = sum + (city.getPopulation());
+        }
+        return sum;
     }
 
     public String getName() {

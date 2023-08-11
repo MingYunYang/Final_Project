@@ -9,7 +9,6 @@ import nvds.geography.State;
 import nvds.role.CDCAdverseEventHandlerRole;
 import nvds.role.CDCCatalogAndAllocationHandlerRole;
 import nvds.role.Role;
-import nvds.role.VaccineInventoryManagerRole;
 import nvds.role.VaccineRequestReviewerRole;
 import nvds.vaccine.VaccineCatalog;
 

@@ -34,6 +34,7 @@ public class OrganizationDirectory {
 
         if (type.getValue().equals(Type.CDC.getValue())) {
             organization = new CDC(name, country, state, city, address, contact);
+            organization.createVaccineInventoryCatalog();
             listOfOrganizations.add(organization);
         } else if (type.getValue().equals(Type.Clinic.getValue())) {
             organization = new Clinic(name, country, state, city, address, contact);

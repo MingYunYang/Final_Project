@@ -29,13 +29,13 @@ public class NationalVaccineDistributionSystemConfiguration {
         NationalVaccineDistributionSystem nationalVaccineDistributionSystem = NationalVaccineDistributionSystem.getInstance();
 
         Country usa = nationalVaccineDistributionSystem.addCountry("United States");
-        State massachusetts = usa.addState("Massachusetts", 500);
-        City cambridge = massachusetts.addCity("Cambridge");
+        State massachusetts = usa.addState("Massachusetts");
+        City cambridge = massachusetts.addCity("Cambridge", 100);
         Address cambridgeAddress = cambridge.addAddress("215 Kelton St" , "02134");
         Contact cambridgeContact = cambridgeAddress.addContact("781-921-8195");
         
-        State newyork = usa.addState("New York", 600);
-        City buffalo = newyork.addCity("Buffalo");
+        State newyork = usa.addState("New York");
+        City buffalo = newyork.addCity("Buffalo", 200);
         Address buffaloAddress = buffalo.addAddress("39 Florence St" , "03158");
         Contact buffalocContact = buffaloAddress.addContact("654-998-237");
 
@@ -101,7 +101,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         // create  employee 4
         Employee cdcEmployee4 = usaCDC.getEmployeeDirectory().addEmployee("cdc employee 4");
         Role cdcCatalogAndAllocationHandlerRole = usaCDC.getSpecificRole(RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER);
-        usaCDC.getUserAccountDirectory().createUserAccount("cdc allocation" , "cdc allocation" , cdcEmployee4 , cdcCatalogAndAllocationHandlerRole);
+        usaCDC.getUserAccountDirectory().createUserAccount("cdc" , "cdc" , cdcEmployee4 , cdcCatalogAndAllocationHandlerRole);
 
         // create 1 Manufacturer and add 1 role in it
         Manufacturer manufacturer = (Manufacturer) organizationDirectory.newOrganization("Modena", Organization.Type.Manufacturer, usa, massachusetts , cambridge , cambridgeAddress , cambridgeContact);
@@ -122,7 +122,9 @@ public class NationalVaccineDistributionSystemConfiguration {
         VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
         Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19");
         Batch batch = vaccine.newBatch(10, 500, manufacturer, "2023-06-06", "2024-06-06", "001");
-        batch.getVaccine().setManufactureStatus("Delivered");
+        batch.getVaccine().setManufactureStatus("Completed");
+//        VaccineInventoryCatalog cdcInventoryCatalog = usaCDC.getInventoryCatalog();
+//        cdcInventoryCatalog.getBatchList().add(batch);
         VaccineInventoryCatalog manufacturerInventoryCatalog = manufacturer.getInventoryCatalog();
         manufacturerInventoryCatalog.getBatchList().add(batch);
         

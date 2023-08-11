@@ -12,9 +12,9 @@ import java.util.HashMap;
  *
  * @author libby
  */
-public class VaccineInventoryCatalog { // for clinic, hospital, manufacturer
+public class VaccineInventoryCatalog { // for clinic, hospital, manufacturer,cdc
     
-    private ArrayList<Batch> batchList; // for manufacturer 儲存製造的疫苗
+    private ArrayList<Batch> batchList; // for manufacturer, cdc 儲存製造的疫苗
     private ArrayList<OrderItem> orderItemList; // for clinic, hospital 儲存收到的疫苗
     private ArrayList<Vaccine> vaccineTypeList;
     private HashMap<Vaccine, Integer> vaccineInventoryCount;

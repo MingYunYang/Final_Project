@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.organization.Organization;
 import nvds.useraccount.UserAccount;
-import nvds.workqueue.DistributionRequest;
+import nvds.workqueue.AllocationRequest;
 import nvds.workqueue.WorkRequest;
 
 /**
@@ -44,7 +44,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         
         for(WorkRequest request : userAccount.getRole().getMainWorkQueue().getListOfWorkRequests()){
             
-            DistributionRequest distributionRequest = (DistributionRequest) request;
+            AllocationRequest distributionRequest = (AllocationRequest) request;
             
             Object[] row = new Object[ 6 ];
             row[ 0 ] = distributionRequest.getVaccine().getVaccineId();

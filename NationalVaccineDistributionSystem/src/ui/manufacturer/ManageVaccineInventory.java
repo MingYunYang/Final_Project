@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.organization.Organization;
+import nvds.organization.CDC;
+import nvds.organization.Organization.Type;
 import nvds.useraccount.UserAccount;
 import nvds.vaccine.Batch;
+import nvds.vaccine.VaccineInventoryCatalog;
 import nvds.workqueue.ManufactureRequest;
 import nvds.workqueue.WorkRequest;
 
@@ -61,7 +64,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
     
     public void populateVaccineInventoryTable(){
         
-        DefaultTableModel model = ( DefaultTableModel ) tblVaccineInventory.getModel();
+        DefaultTableModel model = ( DefaultTableModel ) tblVaccineDeliveryWaitingList.getModel();
         model.setRowCount(0);
 
         for ( Batch batch : organization.getInventoryCatalog().getBatchList()) {
@@ -82,7 +85,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblVaccineInventory = new javax.swing.JLabel();
+        lblVaccineDeliveryWaitingList = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblReceivedManufactureRequests = new javax.swing.JLabel();
@@ -91,11 +94,11 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         btnReceivedRequest = new javax.swing.JButton();
         btnManufactureVaccine = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblVaccineInventory = new javax.swing.JTable();
+        tblVaccineDeliveryWaitingList = new javax.swing.JTable();
         btnDeliverVaccineToCDC = new javax.swing.JButton();
 
-        lblVaccineInventory.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblVaccineInventory.setText("Vaccine Inventory:");
+        lblVaccineDeliveryWaitingList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblVaccineDeliveryWaitingList.setText("Vaccine Delivery Waiting List:");
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Manage Vaccine Inventory");
@@ -119,11 +122,11 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Quantity", "Expected Date", "Status"
+                "Vaccine ID", "Vaccine", "Quantity", "Expect Received Date", "Manufacture Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,6 +135,11 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         });
         tblReceivedManufactureRequests.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblReceivedManufactureRequests);
+        if (tblReceivedManufactureRequests.getColumnModel().getColumnCount() > 0) {
+            tblReceivedManufactureRequests.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblReceivedManufactureRequests.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tblReceivedManufactureRequests.getColumnModel().getColumn(2).setPreferredWidth(50);
+        }
 
         btnReceivedRequest.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
         btnReceivedRequest.setText("Received Request");
@@ -149,7 +157,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             }
         });
 
-        tblVaccineInventory.setModel(new javax.swing.table.DefaultTableModel(
+        tblVaccineDeliveryWaitingList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -157,7 +165,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Batch ID", "Price", "Quantity", "MFD", "EXD", "Status"
+                "Vaccine ID", "Vaccine", "Batch ID", "Price", "Quantity", "MFD", "EXD", "Delivery Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -168,11 +176,14 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblVaccineInventory.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tblVaccineInventory);
-        if (tblVaccineInventory.getColumnModel().getColumnCount() > 0) {
-            tblVaccineInventory.getColumnModel().getColumn(0).setPreferredWidth(70);
-            tblVaccineInventory.getColumnModel().getColumn(2).setPreferredWidth(70);
+        tblVaccineDeliveryWaitingList.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblVaccineDeliveryWaitingList);
+        if (tblVaccineDeliveryWaitingList.getColumnModel().getColumnCount() > 0) {
+            tblVaccineDeliveryWaitingList.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tblVaccineDeliveryWaitingList.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblVaccineDeliveryWaitingList.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tblVaccineDeliveryWaitingList.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblVaccineDeliveryWaitingList.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
         btnDeliverVaccineToCDC.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
@@ -187,10 +198,10 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVaccineInventory)
+                    .addComponent(lblVaccineDeliveryWaitingList)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -207,12 +218,12 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnManufactureVaccine))
                     .addComponent(btnDeliverVaccineToCDC, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
@@ -225,12 +236,12 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                     .addComponent(btnReceivedRequest)
                     .addComponent(btnManufactureVaccine))
                 .addGap(18, 18, 18)
-                .addComponent(lblVaccineInventory)
+                .addComponent(lblVaccineDeliveryWaitingList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDeliverVaccineToCDC)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -265,15 +276,30 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
     private void btnDeliverVaccineToCDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverVaccineToCDCActionPerformed
         
-        int selectedRowIndex = tblVaccineInventory.getSelectedRow();
+        int selectedRowIndex = tblVaccineDeliveryWaitingList.getSelectedRow();
         if(selectedRowIndex < 0){
             JOptionPane.showMessageDialog(this, "Please select a batch of vaccine to deliver");
             return;
         }
         
-        Batch selectedBatch = (Batch)tblVaccineInventory.getValueAt(selectedRowIndex, 2);
-        selectedBatch.getVaccine().setManufactureStatus("Delivered");
+        Batch selectedBatch = (Batch)tblVaccineDeliveryWaitingList.getValueAt(selectedRowIndex, 2);
         
+        // deliver vaccine batch to CDC's inventory catalog
+        CDC CDC = null;
+        for(Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations()){
+            if(organization.getType().equals(Type.CDC) && organization.getCountry().equals(this.organization.getCountry())){
+                CDC = (CDC)organization; 
+            }
+        }
+        if(CDC != null){
+            VaccineInventoryCatalog inventroCatalog = CDC.getInventoryCatalog();
+            inventroCatalog.getBatchList().add(selectedBatch);
+            selectedBatch.getVaccine().setManufactureStatus("Delivering");
+        } else {
+            JOptionPane.showMessageDialog(this, "No CDC founded");
+            return;
+        }
+
         JOptionPane.showMessageDialog(this, "Vaccine delivered successfully");
         populateReceivedManufactureRequestsTable();
         populateVaccineInventoryTable();
@@ -289,8 +315,8 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblReceivedManufactureRequests;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblVaccineInventory;
+    private javax.swing.JLabel lblVaccineDeliveryWaitingList;
     private javax.swing.JTable tblReceivedManufactureRequests;
-    private javax.swing.JTable tblVaccineInventory;
+    private javax.swing.JTable tblVaccineDeliveryWaitingList;
     // End of variables declaration//GEN-END:variables
 }
