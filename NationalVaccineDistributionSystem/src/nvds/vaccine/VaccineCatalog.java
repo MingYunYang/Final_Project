@@ -16,6 +16,7 @@ public class VaccineCatalog { // for CDC
         return vaccine;
     }
     
+    
     // get the quantity for a specific batch ID 
     // 找出整個目錄中某批疫苗的數量
     public int getQuantityForBatch(String batchId) {

@@ -13,8 +13,8 @@ public class Batch {
     private String batchId;
     private String paymentStatus;
 
-    public Batch(Vaccine vaccine, int quantity, int priceForEachVaccine, Manufacturer manufacturer, String manufactureDate, String expirationDate, String batchId) { 
-        
+    public Batch ( Vaccine vaccine, int quantity, int priceForEachVaccine, Manufacturer manufacturer, String manufactureDate, String expirationDate, String batchId ) {
+
         this.vaccine = vaccine;
         this.quantity = quantity;
         this.priceForEachVaccine = priceForEachVaccine;
@@ -23,6 +23,16 @@ public class Batch {
         this.expirationDate = expirationDate;
         this.batchId = batchId;
         paymentStatus = "Waiting";
+    }
+
+    public Batch ( Vaccine vaccine,String batchId, int quantity, Manufacturer manufacturer, String manufactureDate, String expirationDate ) {
+
+        this.vaccine = vaccine;
+        this.quantity = quantity;
+        this.manufacturer = manufacturer;
+        this.manufactureDate = manufactureDate;
+        this.expirationDate = expirationDate;
+        this.batchId = batchId;
     }
 
 //    private void generateBatchId(int productionMonth , int productionYear , String manufacturerCode , int currentBatchNumber) {
@@ -35,7 +45,6 @@ public class Batch {
 //                currentBatchNumber
 //        );
 //    }
-    
 //    private boolean isValidDate(String date) {
 //        
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,75 +56,69 @@ public class Batch {
 //            return false;
 //        }
 //    }
-
-    public int getQuantity() {
+    public int getQuantity () {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity ( int quantity ) {
         this.quantity = quantity;
     }
 
-    public Manufacturer getManufacturer() {
+    public Manufacturer getManufacturer () {
         return manufacturer;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
+    public void setManufacturer ( Manufacturer manufacturer ) {
         this.manufacturer = manufacturer;
     }
 
-    public String getManufactureDate() {
+    public String getManufactureDate () {
         return manufactureDate;
     }
 
-    public void setManufactureDate(String manufactureDate) {
+    public void setManufactureDate ( String manufactureDate ) {
         this.manufactureDate = manufactureDate;
     }
 
-    public String getExpirationDate() {
+    public String getExpirationDate () {
         return expirationDate;
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public void setExpirationDate ( String expirationDate ) {
         this.expirationDate = expirationDate;
     }
 
-    public String getBatchId() {
+    public String getBatchId () {
         return batchId;
     }
 
-    public void setBatchId(String batchId) {
+    public void setBatchId ( String batchId ) {
         this.batchId = batchId;
     }
 
-    public int getPriceForEachVaccine() {
+    public int getPriceForEachVaccine () {
         return priceForEachVaccine;
     }
 
-    public void setPriceForEachVaccine(int priceForEachVaccine) {
+    public void setPriceForEachVaccine ( int priceForEachVaccine ) {
         this.priceForEachVaccine = priceForEachVaccine;
     }
 
-    public Vaccine getVaccine() {
+    public Vaccine getVaccine () {
         return vaccine;
     }
 
-    public String getPaymentStatus() {
+    public String getPaymentStatus () {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus ( String paymentStatus ) {
         this.paymentStatus = paymentStatus;
     }
 
-    
-    
     @Override
-    public String toString(){
+    public String toString () {
         return batchId;
     }
-
-    
-
 
 }
