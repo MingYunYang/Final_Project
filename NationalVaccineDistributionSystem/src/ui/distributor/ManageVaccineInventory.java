@@ -38,49 +38,52 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.organization = organization;
         
-        populateReceivedAllocationRequestTable();
-        populateVaccineWaitingToBeDeliveredTable();
+        populateReceivedDeliveryNotificationsTable();
+        populateDeliveryWaitingListTable();
     }
     
-    public void populateReceivedAllocationRequestTable(){
+    public void populateReceivedDeliveryNotificationsTable(){
         
-        DefaultTableModel model = ( DefaultTableModel ) tblReceivedAllocationRequest.getModel();
+        DefaultTableModel model = ( DefaultTableModel ) tblReceivedDeliveryNotifications.getModel();
         model.setRowCount(0);
         
         for(WorkRequest request : userAccount.getRole().getMainWorkQueue().getListOfWorkRequests()){
             
             AllocationRequest allocationRequest = (AllocationRequest)request;
             
-            Object[] row = new Object[ 7 ];
-            row[ 0 ] = allocationRequest.getVaccine().getVaccineId();
-            row[ 1 ] = allocationRequest.getVaccine();
-            row[ 2 ] = allocationRequest; // will show as the state name
-            row[ 3 ] = allocationRequest.getCity();
-            row[ 4 ] = allocationRequest.getReceivedHospital();
-            row[ 5 ] = allocationRequest.getQuantity();
+            Object[] row = new Object[ 8 ];
+            row[ 0 ] = allocationRequest.getBatch().getVaccine().getVaccineId();
+            row[ 1 ] = allocationRequest; // will show as the vaccine's name
+            row[ 2 ] = allocationRequest.getBatch().getManufacturer();
+            row[ 3 ] = allocationRequest.getBatch().getBatchId();
+            row[ 4 ] = allocationRequest.getQuantity();
+            row[ 5 ] = allocationRequest.getBatch().getPriceForEachVaccine() * allocationRequest.getQuantity();
             row[ 6 ] = allocationRequest.getStatus();
+            row[ 7 ] = allocationRequest.getPaymentStatus();
             
             model.addRow(row);
         }
     }
     
-    public void populateVaccineWaitingToBeDeliveredTable(){
+    public void populateDeliveryWaitingListTable(){
         
-        DefaultTableModel model = ( DefaultTableModel ) tblVaccineWaitingToBeDelivered.getModel();
+        DefaultTableModel model = ( DefaultTableModel ) tblDeliveryWaitingList.getModel();
         model.setRowCount(0);
         
         for(WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests()){
         
             AllocationRequest allocationRequest = (AllocationRequest)request;
             
-            Object[] row = new Object[ 7 ];
+            Object[] row = new Object[ 9 ];
             row[ 0 ] = allocationRequest.getVaccine().getVaccineId();
-            row[ 1 ] = allocationRequest.getVaccine();
-            row[ 2 ] = allocationRequest; // will show as the state name
+            row[ 1 ] = allocationRequest; // will show as the vaccine's name
+            row[ 2 ] = allocationRequest.getState();
             row[ 3 ] = allocationRequest.getCity();
             row[ 4 ] = allocationRequest.getReceivedHospital();
-            row[ 5 ] = allocationRequest.getQuantity();
-            row[ 6 ] = allocationRequest.getStatus();
+            row[ 5 ] = allocationRequest.getQuantity(); // allocated quantity for each city
+            row[ 6 ] = allocationRequest.getQuantity() * allocationRequest.getBatch().getPriceForEachVaccine();
+            row[ 7 ] = allocationRequest.getStatus();
+            row[ 8 ] = allocationRequest.getPaymentStatus();
             
             model.addRow(row);
         }
@@ -92,15 +95,15 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        lblReceivedVaccine = new javax.swing.JLabel();
-        lblVaccineWaitingToBeDelivered = new javax.swing.JLabel();
+        lblReceivedDeliveryNotifications = new javax.swing.JLabel();
+        lblDeliveryWaitingList = new javax.swing.JLabel();
         btnReceived = new javax.swing.JButton();
-        btnDistributeVaccine = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblReceivedAllocationRequest = new javax.swing.JTable();
+        btnConfirmDistribution = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblVaccineWaitingToBeDelivered = new javax.swing.JTable();
-        btnDeliverVaccineToDistributor = new javax.swing.JButton();
+        tblDeliveryWaitingList = new javax.swing.JTable();
+        btnDeliverToHospital = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblReceivedDeliveryNotifications = new javax.swing.JTable();
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Manage Vaccine Inventory");
@@ -113,11 +116,11 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             }
         });
 
-        lblReceivedVaccine.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblReceivedVaccine.setText("Received Allocation Request:");
+        lblReceivedDeliveryNotifications.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblReceivedDeliveryNotifications.setText("Received Delivery Notifications:");
 
-        lblVaccineWaitingToBeDelivered.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblVaccineWaitingToBeDelivered.setText("Vaccine Waiting To Be Delivered:");
+        lblDeliveryWaitingList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        lblDeliveryWaitingList.setText("Delivery Waiting List:");
 
         btnReceived.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
         btnReceived.setText("Received");
@@ -127,30 +130,30 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
             }
         });
 
-        btnDistributeVaccine.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        btnDistributeVaccine.setText("Distribute Vaccine");
-        btnDistributeVaccine.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmDistribution.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btnConfirmDistribution.setText("Confirm Distribution");
+        btnConfirmDistribution.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDistributeVaccineActionPerformed(evt);
+                btnConfirmDistributionActionPerformed(evt);
             }
         });
 
-        tblReceivedAllocationRequest.setModel(new javax.swing.table.DefaultTableModel(
+        tblDeliveryWaitingList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "State", "City", "Received Hospital", "Quantity", "Allocation Status"
+                "Vaccine ID", "Vaccine", "State", "City", "Received Hospital", "Quantity", "Total Price", "Delivery Status", "Payment Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -161,71 +164,69 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblReceivedAllocationRequest.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tblReceivedAllocationRequest);
+        tblDeliveryWaitingList.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblDeliveryWaitingList);
+        if (tblDeliveryWaitingList.getColumnModel().getColumnCount() > 0) {
+            tblDeliveryWaitingList.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblDeliveryWaitingList.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tblDeliveryWaitingList.getColumnModel().getColumn(2).setPreferredWidth(60);
+            tblDeliveryWaitingList.getColumnModel().getColumn(3).setPreferredWidth(60);
+            tblDeliveryWaitingList.getColumnModel().getColumn(5).setPreferredWidth(50);
+        }
 
-        tblVaccineWaitingToBeDelivered.setModel(new javax.swing.table.DefaultTableModel(
+        btnDeliverToHospital.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btnDeliverToHospital.setText("Deliver To Hospital");
+        btnDeliverToHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeliverToHospitalActionPerformed(evt);
+            }
+        });
+
+        tblReceivedDeliveryNotifications.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "State", "City", "Received Hospital", "Quantity", "Allocation Status"
+                "Vaccine ID", "Vaccine", "Manufacturer", "Batch ID", "Quantity", "Total Price", "Delivery Status", "Payment Status"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblVaccineWaitingToBeDelivered.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tblVaccineWaitingToBeDelivered);
-
-        btnDeliverVaccineToDistributor.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        btnDeliverVaccineToDistributor.setText("Deliver Vaccine To Hospital");
-        btnDeliverVaccineToDistributor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeliverVaccineToDistributorActionPerformed(evt);
-            }
-        });
+        tblReceivedDeliveryNotifications.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblReceivedDeliveryNotifications);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDeliverVaccineToDistributor)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeliverToHospital)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBack))
-                            .addComponent(lblReceivedVaccine)
-                            .addComponent(lblVaccineWaitingToBeDelivered)
+                            .addComponent(lblReceivedDeliveryNotifications)
+                            .addComponent(lblDeliveryWaitingList)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnReceived)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDistributeVaccine))
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
-                        .addGap(19, 19, 19))))
+                                .addComponent(btnConfirmDistribution))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTitle)
+                                .addGap(380, 380, 380)
+                                .addComponent(btnBack)))))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,20 +236,20 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
                 .addGap(18, 18, 18)
-                .addComponent(lblReceivedVaccine)
+                .addComponent(lblReceivedDeliveryNotifications)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDistributeVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblVaccineWaitingToBeDelivered)
+                    .addComponent(btnConfirmDistribution, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDeliveryWaitingList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDeliverVaccineToDistributor)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addComponent(btnDeliverToHospital)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,69 +262,69 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
     private void btnReceivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReceivedActionPerformed
         
-        int selectedRowIndex = tblReceivedAllocationRequest.getSelectedRow();
+        int selectedRowIndex = tblReceivedDeliveryNotifications.getSelectedRow();
         if(selectedRowIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select a request first");
+            JOptionPane.showMessageDialog(this, "Please select a batch of vaccine first");
             return;
         }
 
-        AllocationRequest allocationRequest = (AllocationRequest)tblReceivedAllocationRequest.getValueAt(selectedRowIndex, 2);
-        allocationRequest.setStatus("Received by distributor");
+        AllocationRequest allocationRequest = (AllocationRequest)tblReceivedDeliveryNotifications.getValueAt(selectedRowIndex, 1);
+        allocationRequest.setStatus("Processing By Distributor");
         
-        populateReceivedAllocationRequestTable();
+        populateReceivedDeliveryNotificationsTable();
     }//GEN-LAST:event_btnReceivedActionPerformed
 
-    private void btnDistributeVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistributeVaccineActionPerformed
+    private void btnConfirmDistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmDistributionActionPerformed
         
-        int selectedRowIndex = tblReceivedAllocationRequest.getSelectedRow();
+        int selectedRowIndex = tblReceivedDeliveryNotifications.getSelectedRow();
         if(selectedRowIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select a request first");
+            JOptionPane.showMessageDialog(this, "Please select a batch of vaccine first");
             return;
         }
         
-        AllocationRequest allocationRequest = (AllocationRequest)tblReceivedAllocationRequest.getValueAt(selectedRowIndex, 2);
+        AllocationRequest allocationRequest = (AllocationRequest)tblReceivedDeliveryNotifications.getValueAt(selectedRowIndex, 1);
         
         WorkQueue waitingWorkQueue = userAccount.getRole().getWaitingWorkQueue();
         waitingWorkQueue.getListOfWorkRequests().add(allocationRequest);
-        allocationRequest.setStatus("Processing by distributor");
+        allocationRequest.setStatus("Confirmed By Distributor");
         
-        populateReceivedAllocationRequestTable();
-        populateVaccineWaitingToBeDeliveredTable();
-    }//GEN-LAST:event_btnDistributeVaccineActionPerformed
+        populateReceivedDeliveryNotificationsTable();
+        populateDeliveryWaitingListTable();
+    }//GEN-LAST:event_btnConfirmDistributionActionPerformed
 
-    private void btnDeliverVaccineToDistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverVaccineToDistributorActionPerformed
+    private void btnDeliverToHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliverToHospitalActionPerformed
 
-        int selectedRowIndex = tblVaccineWaitingToBeDelivered.getSelectedRow();
+        int selectedRowIndex = tblDeliveryWaitingList.getSelectedRow();
         if(selectedRowIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select a row to continue");
+            JOptionPane.showMessageDialog(this, "Please select a delivery task from the table");
             return;
         }
 
-        AllocationRequest allocationRequest = (AllocationRequest)tblVaccineWaitingToBeDelivered.getValueAt(selectedRowIndex, 2);
+        AllocationRequest allocationRequest = (AllocationRequest)tblDeliveryWaitingList.getValueAt(selectedRowIndex, 1);
 
-        // add the request to Hospital Role's main work queue
+        // add the request to Hospital Inventory Role's main work queue
         Hospital hospital = allocationRequest.getReceivedHospital();
         Role role = hospital.getSpecificRole(Role.RoleType.VACCINE_INVENTORY_MANAGER);
         WorkQueue mainWorkQueue = role.getMainWorkQueue();
         mainWorkQueue.getListOfWorkRequests().add(allocationRequest);
-        allocationRequest.setStatus("Delivering to hospital");
+        allocationRequest.setStatus("Delivered To Hospital");
         
-        populateReceivedAllocationRequestTable();
-        populateVaccineWaitingToBeDeliveredTable();
-    }//GEN-LAST:event_btnDeliverVaccineToDistributorActionPerformed
+        populateReceivedDeliveryNotificationsTable();
+        populateDeliveryWaitingListTable();
+    }//GEN-LAST:event_btnDeliverToHospitalActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDeliverVaccineToDistributor;
-    private javax.swing.JButton btnDistributeVaccine;
+    private javax.swing.JButton btnConfirmDistribution;
+    private javax.swing.JButton btnDeliverToHospital;
     private javax.swing.JButton btnReceived;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblReceivedVaccine;
+    private javax.swing.JLabel lblDeliveryWaitingList;
+    private javax.swing.JLabel lblReceivedDeliveryNotifications;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblVaccineWaitingToBeDelivered;
-    private javax.swing.JTable tblReceivedAllocationRequest;
-    private javax.swing.JTable tblVaccineWaitingToBeDelivered;
+    private javax.swing.JTable tblDeliveryWaitingList;
+    private javax.swing.JTable tblReceivedDeliveryNotifications;
     // End of variables declaration//GEN-END:variables
 }

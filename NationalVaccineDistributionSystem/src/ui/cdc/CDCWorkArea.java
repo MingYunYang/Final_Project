@@ -150,7 +150,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineAllocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineAllocationActionPerformed
         
-        ManageVaccineAllocation mva = new ManageVaccineAllocation(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineInventory mva = new ManageVaccineInventory(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageVaccineAllocation" , mva);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

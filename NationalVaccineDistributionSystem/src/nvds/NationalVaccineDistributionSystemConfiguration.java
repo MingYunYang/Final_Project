@@ -21,6 +21,7 @@ import nvds.vaccine.Batch;
 import nvds.vaccine.Vaccine;
 import nvds.vaccine.VaccineCatalog;
 import nvds.vaccine.VaccineInventoryCatalog;
+import nvds.workqueue.DeliveryRequest;
 import nvds.workqueue.WorkQueue;
 
 public class NationalVaccineDistributionSystemConfiguration {
@@ -124,8 +125,13 @@ public class NationalVaccineDistributionSystemConfiguration {
         Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19");
         Batch batch = vaccine.newBatch(10, 500, manufacturer, "2023-06-06", "2024-06-06", "001");
         batch.getVaccine().setManufactureStatus("Completed");
-        VaccineInventoryCatalog cdcInventoryCatalog = usaCDC.getInventoryCatalog();
-        cdcInventoryCatalog.getBatchList().add(batch);
+        
+        DeliveryRequest deliveryRequest = new DeliveryRequest();
+        deliveryRequest.setBatch(batch);
+        Role cdcInventoryRole = usaCDC.getSpecificRole(RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER);
+        WorkQueue mainWorkQueue = cdcInventoryRole.getMainWorkQueue();
+        mainWorkQueue.getListOfWorkRequests().add(deliveryRequest);
+        
         VaccineInventoryCatalog manufacturerInventoryCatalog = manufacturer.getInventoryCatalog();
         manufacturerInventoryCatalog.getBatchList().add(batch);
         VaccineInventoryCatalog clinicInventoryCatalog = havardSquareClinic.getInventoryCatalog();  

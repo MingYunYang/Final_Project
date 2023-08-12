@@ -140,7 +140,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
 
-        ManageVaccineInventoryJPanel mcvi = new ManageVaccineInventoryJPanel(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineInventory mcvi = new ManageVaccineInventory(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageClinicVaccineInventory" , mcvi);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
