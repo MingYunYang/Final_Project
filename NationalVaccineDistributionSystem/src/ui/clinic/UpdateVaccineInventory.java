@@ -84,7 +84,7 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCreateNewVaccine = new javax.swing.JButton();
+        btnUpdateVaccineAvailability = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblClinicVaccineInventoryCatalog = new javax.swing.JTable();
         btnSendRequest = new javax.swing.JButton();
@@ -92,13 +92,13 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         lblRequestQuantity = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblRequestQuantity1 = new javax.swing.JLabel();
-        txtRequestQuantity1 = new javax.swing.JTextField();
+        txtUpdateQuantity = new javax.swing.JTextField();
 
-        btnCreateNewVaccine.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        btnCreateNewVaccine.setText("Update Availabilty");
-        btnCreateNewVaccine.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateVaccineAvailability.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btnUpdateVaccineAvailability.setText("Update Availabilty");
+        btnUpdateVaccineAvailability.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateNewVaccineActionPerformed(evt);
+                btnUpdateVaccineAvailabilityActionPerformed(evt);
             }
         });
 
@@ -146,28 +146,35 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         lblRequestQuantity1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblRequestQuantity1.setText("Manage Vaccine Inventory");
 
+        txtUpdateQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUpdateQuantityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(btnUpdateVaccineAvailability)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtUpdateQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(lblRequestQuantity)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtRequestQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblRequestQuantity1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBack))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnCreateNewVaccine)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtRequestQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(85, 85, 85)
-                            .addComponent(lblRequestQuantity)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtRequestQuantity)))
-                    .addComponent(btnSendRequest))
+                        .addComponent(btnSendRequest)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -178,23 +185,44 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
                     .addComponent(btnBack)
                     .addComponent(lblRequestQuantity1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreateNewVaccine)
-                    .addComponent(txtRequestQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRequestQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRequestQuantity))
+                    .addComponent(lblRequestQuantity)
+                    .addComponent(txtUpdateQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateVaccineAvailability))
                 .addGap(18, 18, 18)
                 .addComponent(btnSendRequest)
-                .addGap(141, 141, 141))
+                .addGap(129, 129, 129))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateNewVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewVaccineActionPerformed
+    private void btnUpdateVaccineAvailabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateVaccineAvailabilityActionPerformed
 
+        int selectedRowIndex = tblClinicVaccineInventoryCatalog.getSelectedRow();
+        if ( selectedRowIndex < 0 ) {
+            JOptionPane.showMessageDialog( this, "Please select a batch to update." );
+            return;
+        }
 
-    }//GEN-LAST:event_btnCreateNewVaccineActionPerformed
+        Batch batch = ( Batch ) tblClinicVaccineInventoryCatalog.getValueAt( selectedRowIndex, 3 );
+        int updateQuantity = Integer.parseInt( txtUpdateQuantity.getText() );
+
+        if ( updateQuantity < 0 || updateQuantity > batch.getQuantity() ) {
+            JOptionPane.showMessageDialog( this, "Invalid quantity." );
+            return;
+        }
+
+        batch.setQuantity( batch.getQuantity() - updateQuantity );
+        txtUpdateQuantity.setText( "" );
+
+        Clinic clinic = ( Clinic ) organization;
+        VaccineInventoryCatalog clinicVaccineInventoryCatalog = clinic.getInventoryCatalog();
+
+        populateClinicVaccineInventoryTable( clinicVaccineInventoryCatalog );
+
+    }//GEN-LAST:event_btnUpdateVaccineAvailabilityActionPerformed
 
     private void btnSendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendRequestActionPerformed
 
@@ -206,6 +234,17 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         }
 
         Vaccine vaccine = ( Vaccine ) tblClinicVaccineInventoryCatalog.getValueAt( selectedRowIndex, 1 );
+        Clinic clinic = ( Clinic ) organization;
+        VaccineInventoryCatalog clinicVaccineInventoryCatalog = clinic.getInventoryCatalog();
+
+        String inventoryStatus = clinicVaccineInventoryCatalog.getInventoryStatus( vaccine );
+
+        // Check if the inventory status is "Insufficient"
+        if ( "Insufficient".equals( inventoryStatus ) ) {
+            JOptionPane.showMessageDialog( this, "Inventory is insufficient, cannot send request." );
+            return; // Exit the method without sending the request
+        }
+
         int requestQuantity = Integer.parseInt( txtRequestQuantity.getText() );
         ReviewRequest request = new ReviewRequest();
 
@@ -242,17 +281,21 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         evt.getWhen();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void txtUpdateQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUpdateQuantityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCreateNewVaccine;
     private javax.swing.JButton btnSendRequest;
+    private javax.swing.JButton btnUpdateVaccineAvailability;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblRequestQuantity;
     private javax.swing.JLabel lblRequestQuantity1;
     private javax.swing.JTable tblClinicVaccineInventoryCatalog;
     private javax.swing.JTextField txtRequestQuantity;
-    private javax.swing.JTextField txtRequestQuantity1;
+    private javax.swing.JTextField txtUpdateQuantity;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -18,7 +18,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="btnUpdateVaccineAvailability" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtUpdateQuantity" min="-2" pref="131" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="lblRequestQuantity" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtRequestQuantity" pref="140" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lblRequestQuantity1" min="-2" max="-2" attributes="0"/>
@@ -26,17 +36,8 @@
                           <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" alignment="1" pref="791" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnCreateNewVaccine" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtRequestQuantity1" min="-2" pref="132" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="lblRequestQuantity" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtRequestQuantity" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnSendRequest" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnSendRequest" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -51,23 +52,23 @@
                   <Component id="lblRequestQuantity1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="323" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="327" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCreateNewVaccine" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtRequestQuantity1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRequestQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblRequestQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUpdateQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUpdateVaccineAvailability" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnSendRequest" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnCreateNewVaccine">
+    <Component class="javax.swing.JButton" name="btnUpdateVaccineAvailability">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="13" style="1"/>
@@ -75,7 +76,7 @@
         <Property name="text" type="java.lang.String" value="Update Availabilty"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateNewVaccineActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateVaccineAvailabilityActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -190,7 +191,10 @@
         <Property name="text" type="java.lang.String" value="Manage Vaccine Inventory"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtRequestQuantity1">
+    <Component class="javax.swing.JTextField" name="txtUpdateQuantity">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateQuantityActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
