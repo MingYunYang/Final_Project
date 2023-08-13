@@ -12,6 +12,8 @@ public class Batch {
     private String expirationDate;
     private String batchId;
     private String paymentStatus;
+    private int originalQuantity;
+
 
     public Batch ( Vaccine vaccine, int quantity, int priceForEachVaccine, Manufacturer manufacturer, String manufactureDate, String expirationDate, String batchId ) {
 
@@ -25,7 +27,7 @@ public class Batch {
         paymentStatus = "Waiting";
     }
 
-    public Batch ( Vaccine vaccine,String batchId, int quantity, Manufacturer manufacturer, String manufactureDate, String expirationDate ) {
+    public Batch ( Vaccine vaccine, String batchId, int quantity, Manufacturer manufacturer, String manufactureDate, String expirationDate ) {
 
         this.vaccine = vaccine;
         this.quantity = quantity;
@@ -114,6 +116,14 @@ public class Batch {
 
     public void setPaymentStatus ( String paymentStatus ) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public int getOriginalQuantity () {
+        return originalQuantity;
+    }
+
+    public void setOriginalQuantity ( int originalQuantity ) {
+        this.originalQuantity = originalQuantity;
     }
 
     @Override

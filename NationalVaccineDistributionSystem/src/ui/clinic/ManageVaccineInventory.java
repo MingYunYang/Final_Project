@@ -295,7 +295,10 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
         Clinic clinic = ( Clinic ) organization;
         VaccineInventoryCatalog clinicVaccineInventoryCatalog = clinic.getInventoryCatalog();
-        clinicVaccineInventoryCatalog.addBatch( vaccine, batchId, clinicDistributedQuantity, manufacturer, mfd, erd );
+        Batch batch  = clinicVaccineInventoryCatalog.addBatch( vaccine, batchId, clinicDistributedQuantity, manufacturer, mfd, erd );
+        batch.setQuantity(clinicDistributedQuantity);
+        batch.setOriginalQuantity(clinicDistributedQuantity);
+
         clinicVaccineInventoryCatalog.populateVaccineTypeList();
         clinicVaccineInventoryCatalog.populateVaccineInventoryCount();
 

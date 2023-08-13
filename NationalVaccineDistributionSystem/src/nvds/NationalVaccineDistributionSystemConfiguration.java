@@ -123,7 +123,7 @@ public class NationalVaccineDistributionSystemConfiguration {
         // create vaccine for testing
         VaccineCatalog vaccineCatalog = usaCDC.getVaccineCatalog();
         Vaccine vaccine = vaccineCatalog.newVaccine("Covid-19");
-        Batch batch = vaccine.newBatch(10, 500, manufacturer, "2023-06-06", "2024-06-06", "001");
+        Batch batch = vaccine.newBatch(10000, 18, manufacturer, "2023-06-06", "2024-06-06", "001");
         batch.getVaccine().setManufactureStatus("Completed");
         
         DeliveryRequest deliveryRequest = new DeliveryRequest();

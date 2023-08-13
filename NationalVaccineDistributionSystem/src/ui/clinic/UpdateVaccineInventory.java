@@ -5,6 +5,7 @@
 package ui.clinic;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -57,19 +58,24 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         DefaultTableModel model = ( DefaultTableModel ) tblClinicVaccineInventoryCatalog.getModel();
         model.setRowCount( 0 );
 
+        VaccineInventoryCatalog inventory = organization.getInventoryCatalog();
+        inventory.populateVaccineTypeList();
+        inventory.populateVaccineInventoryCount();
+
         for ( Batch batch : clinicVaccineInventoryCatalog.getBatchList() ) {
 
             Vaccine vaccine = batch.getVaccine();
 
-            Object[] row = new Object[ 8 ];
+            Object[] row = new Object[ 9 ];
             row[ 0 ] = batch.getVaccine().getVaccineId();
             row[ 1 ] = vaccine;
             row[ 2 ] = batch.getManufacturer();
-            row[ 3 ] = batch.getBatchId();
-            row[ 4 ] = batch.getQuantity();
-            row[ 5 ] = batch.getManufactureDate(); // allocated quantity for each clinic
-            row[ 6 ] = batch.getExpirationDate();
-            row[ 7 ] = clinicVaccineInventoryCatalog.getInventoryStatus( vaccine );
+            row[ 3 ] = batch;
+            row[ 4 ] = batch.getOriginalQuantity(); // recieved quantity
+            row[ 5 ] = batch.getQuantity(); // Total availability
+            row[ 6 ] = batch.getManufactureDate(); // allocated quantity for each clinic
+            row[ 7 ] = batch.getExpirationDate();
+            row[ 8 ] = clinicVaccineInventoryCatalog.getInventoryStatus( vaccine );
 
             model.addRow( row );
         }
@@ -104,17 +110,17 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
 
         tblClinicVaccineInventoryCatalog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Manufacturer", "Batch id", "Total Availability", "MFD", "ERD", "Status"
+                "Vaccine ID", "Vaccine", "Manufacturer", "Batch id", "Qty Recieved", "Availability", "MFD", "ERD", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -214,12 +220,21 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
             return;
         }
 
-        batch.setQuantity( batch.getQuantity() - updateQuantity );
+        // Calculate the new total availability
+        int newTotalAvailability = batch.getQuantity() - updateQuantity;
+
+        // Update the Batch object
+        batch.setQuantity( newTotalAvailability );
+
+        // Update the total availability in the table
+        tblClinicVaccineInventoryCatalog.setValueAt( newTotalAvailability, selectedRowIndex, 5 );
+
+        // Clear the update quantity text field
         txtUpdateQuantity.setText( "" );
 
+        // Refresh the table or any other UI components
         Clinic clinic = ( Clinic ) organization;
         VaccineInventoryCatalog clinicVaccineInventoryCatalog = clinic.getInventoryCatalog();
-
         populateClinicVaccineInventoryTable( clinicVaccineInventoryCatalog );
 
     }//GEN-LAST:event_btnUpdateVaccineAvailabilityActionPerformed
@@ -240,8 +255,8 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
         String inventoryStatus = clinicVaccineInventoryCatalog.getInventoryStatus( vaccine );
 
         // Check if the inventory status is "Insufficient"
-        if ( "Insufficient".equals( inventoryStatus ) ) {
-            JOptionPane.showMessageDialog( this, "Inventory is insufficient, cannot send request." );
+        if ( "Sufficient".equals( inventoryStatus ) ) {
+            JOptionPane.showMessageDialog( this, "Inventory is Sufficient, cannot send request." );
             return; // Exit the method without sending the request
         }
 
@@ -268,13 +283,20 @@ public class UpdateVaccineInventory extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog( this, "Request sent successfully" );
         txtRequestQuantity.setText( "" );
-        ManageVaccineInventory mvi = new ManageVaccineInventory( userProcessContainer, userAccount, organization, nvds );
-        mvi.populateWaitingWorkQueueTable();
+
+//        ManageVaccineInventory mvi = new ManageVaccineInventory( userProcessContainer, userAccount, organization, nvds );
+//        mvi.populateWaitingWorkQueueTable();
     }//GEN-LAST:event_btnSendRequestActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove( this );
+
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[ componentArray.length - 1 ];
+        ManageVaccineInventory mvi = ( ManageVaccineInventory ) component;
+        mvi.populateWaitingWorkQueueTable();
+
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.previous( userProcessContainer );
 
