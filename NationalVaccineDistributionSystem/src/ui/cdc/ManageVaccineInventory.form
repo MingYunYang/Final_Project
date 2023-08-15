@@ -102,21 +102,25 @@
         <Component class="javax.swing.JTable" name="tblDeliveryWaitingList">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="4">
-                <Column editable="false" title="Vaccine ID" type="java.lang.Object"/>
+              <Table columnCount="8" rowCount="4">
+                <Column editable="false" title="Del. No" type="java.lang.Object"/>
+                <Column editable="false" title="Del. State" type="java.lang.String"/>
+                <Column editable="false" title="Del. City" type="java.lang.Object"/>
                 <Column editable="false" title="Vaccine" type="java.lang.Object"/>
-                <Column editable="false" title="State" type="java.lang.String"/>
-                <Column editable="false" title="City" type="java.lang.Object"/>
-                <Column editable="false" title="Received Hospital" type="java.lang.Object"/>
-                <Column editable="false" title="Quantity" type="java.lang.Object"/>
+                <Column editable="false" title="Del. Qty" type="java.lang.Object"/>
                 <Column editable="false" title="Total Price" type="java.lang.Object"/>
-                <Column editable="false" title="Delivery Status" type="java.lang.Object"/>
-                <Column editable="false" title="Payment Status" type="java.lang.Object"/>
+                <Column editable="false" title="Del. Status" type="java.lang.Object"/>
+                <Column editable="false" title="Pay. Status" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="30" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="70" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -127,6 +131,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="40" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -142,21 +151,6 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -192,26 +186,16 @@
                 <Column editable="false" title="Vaccine ID" type="java.lang.Object"/>
                 <Column editable="false" title="Vaccine" type="java.lang.Object"/>
                 <Column editable="false" title="Manufacturer" type="java.lang.Object"/>
-                <Column editable="false" title="Batch ID" type="java.lang.Object"/>
-                <Column editable="false" title="Quantity" type="java.lang.Object"/>
+                <Column editable="false" title="Recv. Qty" type="java.lang.Object"/>
                 <Column editable="false" title="Total Price" type="java.lang.Object"/>
-                <Column editable="false" title="Delivery Status" type="java.lang.Object"/>
-                <Column editable="false" title="Payment Status" type="java.lang.Object"/>
+                <Column editable="false" title="Del. Status" type="java.lang.Object"/>
+                <Column editable="false" title="Pay. Status" type="java.lang.Object"/>
+                <Column editable="true" title="Avail. Qty" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="70" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -231,12 +215,22 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -288,7 +282,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Received Delivery Notifications:"/>
+        <Property name="text" type="java.lang.String" value="Received Manufactured Vaccine:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnViewBatchDetails">

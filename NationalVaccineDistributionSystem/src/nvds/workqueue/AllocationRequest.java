@@ -24,11 +24,15 @@ public class AllocationRequest extends WorkRequest{
     private int distributedQuantityForClinic; // will be set until hospital distributes vaccine to clinic
     private String paymentStatus;
     private String clinicPaymentStatus;
+    private int deliveryNumber;
+    private static int deliveryNumberCount = 1;
     
     public AllocationRequest(){
         super();
         paymentStatus = "Waiting";
         clinicPaymentStatus = "Waiting";
+        deliveryNumber = deliveryNumberCount;
+        deliveryNumberCount++;
     }
 
     public State getState() {
@@ -94,6 +98,11 @@ public class AllocationRequest extends WorkRequest{
     public void setClinicPaymentStatus(String clinicPaymentStatus) {
         this.clinicPaymentStatus = clinicPaymentStatus;
     }
+
+    public int getDeliveryNumber() {
+        return deliveryNumber;
+    }
+    
     
     
     

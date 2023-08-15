@@ -19,6 +19,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnManufactureVaccine" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblBatchID" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -26,26 +32,17 @@
                           <Component id="lblPrice" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblExpirationDate" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblManufactureDate" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblVaccineType" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtVaccineType" min="-2" pref="191" max="-2" attributes="0"/>
                           <Component id="txtQuantity" min="-2" pref="191" max="-2" attributes="0"/>
                           <Component id="txtBatchID" min="-2" pref="191" max="-2" attributes="0"/>
                           <Component id="txtPrice" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                           <Component id="txtManufactureDate" alignment="0" min="-2" pref="191" max="-2" attributes="0"/>
                           <Component id="txtExpirationDate" min="-2" pref="191" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Component id="btnManufactureVaccine" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblVaccineType" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                      <Component id="cmbVaccineType" min="-2" pref="191" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="216" max="32767" attributes="0"/>
@@ -63,7 +60,7 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblVaccineType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmbVaccineType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtVaccineType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -124,16 +121,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Expiration Date:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cmbVaccineType">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbVaccineTypeActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblVaccineType">
       <Properties>
@@ -204,6 +191,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtVaccineType">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

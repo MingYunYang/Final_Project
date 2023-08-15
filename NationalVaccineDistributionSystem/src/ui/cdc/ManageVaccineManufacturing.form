@@ -30,12 +30,12 @@
                       <Component id="txtNewVaccineName" min="-2" pref="152" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCreateNewVaccine" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                       <Component id="btnSendManufactureRequest" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,13 +50,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="181" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNewVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNewVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSendManufactureRequest" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="btnCreateNewVaccine" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNewVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNewVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSendManufactureRequest" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="btnCreateNewVaccine" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="413" max="32767" attributes="0"/>
           </Group>

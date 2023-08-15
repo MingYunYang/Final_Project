@@ -71,7 +71,7 @@ public class NationalVaccineDistributionSystemConfiguration {
 
         // create 1 hospital and add 3 roles in it
         Hospital cambridgeHospital = ( Hospital ) organizationDirectory.newOrganization("Cambridge Hospital" , Organization.Type.Hospital , usa , massachusetts , cambridge , cambridgeAddress , cambridgeContact);
-
+        
         Employee hospitalEmployee1 = cambridgeHospital.getEmployeeDirectory().addEmployee("hospital employee 1");
         Role hospitalInventoryRole = cambridgeHospital.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
         cambridgeHospital.getUserAccountDirectory().createUserAccount("hospital inventory" , "hospital inventory" , hospitalEmployee1 , hospitalInventoryRole);

@@ -11,10 +11,8 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
-import nvds.organization.CDC;
 import nvds.organization.Manufacturer;
 import nvds.organization.Organization;
-import nvds.organization.Organization.Type;
 import nvds.useraccount.UserAccount;
 import nvds.vaccine.Batch;
 import nvds.vaccine.Vaccine;
@@ -34,31 +32,17 @@ public class ManufactureVaccine extends javax.swing.JPanel {
 
     Organization organization;
     
-    public ManufactureVaccine(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds) {
+    Vaccine vaccine;
+    
+    public ManufactureVaccine(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds, Vaccine vaccine) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.nvds = nvds;
         this.userAccount = userAccount;
         this.organization = organization;
+        this.vaccine = vaccine;
         
-        populateVaccineTypeCombo();
-    }
-    
-    public void populateVaccineTypeCombo(){
-        
-        cmbVaccineType.removeAllItems();
-        
-        CDC CDC = null;
-        for(Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations()){
-            if(organization.getType().equals(Type.CDC) && organization.getCountry().equals(this.organization.getCountry())){
-                CDC = (CDC)organization;
-            }
-        }
-        if(CDC != null){
-            for(Vaccine vaccine : CDC.getVaccineCatalog().getVaccineList()){
-                cmbVaccineType.addItem(vaccine);
-            }
-        }
+        txtVaccineType.setText(vaccine.getName());
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +52,6 @@ public class ManufactureVaccine extends javax.swing.JPanel {
         lblManufactureDate = new javax.swing.JLabel();
         btnManufactureVaccine = new javax.swing.JButton();
         lblExpirationDate = new javax.swing.JLabel();
-        cmbVaccineType = new javax.swing.JComboBox();
         lblVaccineType = new javax.swing.JLabel();
         lblPrice = new javax.swing.JLabel();
         txtBatchID = new javax.swing.JTextField();
@@ -80,6 +63,7 @@ public class ManufactureVaccine extends javax.swing.JPanel {
         txtManufactureDate = new javax.swing.JTextField();
         txtExpirationDate = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        txtVaccineType = new javax.swing.JTextField();
 
         lblManufactureDate.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblManufactureDate.setText("Manufacture Date:");
@@ -94,12 +78,6 @@ public class ManufactureVaccine extends javax.swing.JPanel {
 
         lblExpirationDate.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblExpirationDate.setText("Expiration Date:");
-
-        cmbVaccineType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbVaccineTypeActionPerformed(evt);
-            }
-        });
 
         lblVaccineType.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblVaccineType.setText("Vaccine Type:");
@@ -142,6 +120,8 @@ public class ManufactureVaccine extends javax.swing.JPanel {
             }
         });
 
+        txtVaccineType.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,29 +129,27 @@ public class ManufactureVaccine extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnManufactureVaccine)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(200, 200, 200)
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBatchID)
                             .addComponent(lblQuantity)
                             .addComponent(lblPrice)
                             .addComponent(lblExpirationDate)
-                            .addComponent(lblManufactureDate))
+                            .addComponent(lblManufactureDate)
+                            .addComponent(lblVaccineType))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBatchID, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtManufactureDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnManufactureVaccine)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblVaccineType)
-                        .addGap(95, 95, 95)
-                        .addComponent(cmbVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(200, 200, 200)
-                        .addComponent(btnBack)))
+                            .addComponent(txtExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(216, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,7 +162,7 @@ public class ManufactureVaccine extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblVaccineType)
-                    .addComponent(cmbVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBatchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,18 +192,6 @@ public class ManufactureVaccine extends javax.swing.JPanel {
     private void btnManufactureVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManufactureVaccineActionPerformed
 
         Manufacturer manufacturer = (Manufacturer) organization;
-        Vaccine selectedVaccine = (Vaccine)cmbVaccineType.getSelectedItem();
-        if(selectedVaccine == null){
-            JOptionPane.showMessageDialog(this, "No qualified vaccine now");
-            return;
-        }
-        // make sure we don't create second batch for the vaccine that alrady has a batch
-        for(Batch batch : organization.getInventoryCatalog().getBatchList()){
-            if(batch.getVaccine().getName().equals(selectedVaccine.getName())){
-                JOptionPane.showMessageDialog(this, "Selected vaccine already has a batch");
-                return;
-            }
-        }
 
         String batchID = txtBatchID.getText();
         String manufactureDate = txtManufactureDate.getText();
@@ -256,25 +222,26 @@ public class ManufactureVaccine extends javax.swing.JPanel {
         }
 
         // create new vaccine batch
-        Batch batch = selectedVaccine.newBatch(quantity, price, manufacturer, manufactureDate, expirationDate, batchID);
+        Batch batch = vaccine.newBatch(quantity, price, manufacturer, manufactureDate, expirationDate, batchID);
 
         // add new vaccine batch to Manufacturer's inventory catalog's batch list
         VaccineInventoryCatalog inventoryCatalog = organization.getInventoryCatalog();
         inventoryCatalog.getBatchList().add(batch);
 
-        JOptionPane.showMessageDialog(this, "New batch of vaccine created succesfully");
+        JOptionPane.showMessageDialog(this, "New batch of vaccine manufactured succesfully");
+        
+        // going back to the previous page automatically
+        userProcessContainer.remove(this);
 
-        txtPrice.setText("");
-        txtBatchID.setText("");
-        txtQuantity.setText("");
-        txtManufactureDate.setText("");
-        txtExpirationDate.setText("");
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageVaccineManufacturing mvi = (ManageVaccineManufacturing) component;
+        mvi.populateDeliveryWaitingListTable();
+        mvi.populateReceivedManufactureRequestsTable();
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnManufactureVaccineActionPerformed
-
-    private void cmbVaccineTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVaccineTypeActionPerformed
-
-        evt.getWhen();
-    }//GEN-LAST:event_cmbVaccineTypeActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         
@@ -294,7 +261,7 @@ public class ManufactureVaccine extends javax.swing.JPanel {
 
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageVaccineInventory mvi = (ManageVaccineInventory) component;
+        ManageVaccineManufacturing mvi = (ManageVaccineManufacturing) component;
         mvi.populateDeliveryWaitingListTable();
         mvi.populateReceivedManufactureRequestsTable();
 
@@ -308,7 +275,6 @@ public class ManufactureVaccine extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnManufactureVaccine;
-    private javax.swing.JComboBox cmbVaccineType;
     private javax.swing.JLabel lblBatchID;
     private javax.swing.JLabel lblExpirationDate;
     private javax.swing.JLabel lblManufactureDate;
@@ -321,5 +287,6 @@ public class ManufactureVaccine extends javax.swing.JPanel {
     private javax.swing.JTextField txtManufactureDate;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtVaccineType;
     // End of variables declaration//GEN-END:variables
 }

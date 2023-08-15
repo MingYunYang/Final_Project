@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
-import nvds.organization.CDC;
 import nvds.organization.Manufacturer;
 import nvds.organization.Organization;
 import nvds.organization.Organization.Type;
@@ -36,25 +35,18 @@ public class SendManufactureRequest extends javax.swing.JPanel {
 
     Organization organization;
     
-    public SendManufactureRequest(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds) {
+    Vaccine vaccine;
+    
+    public SendManufactureRequest(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds, Vaccine vaccine) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.nvds = nvds;
         this.userAccount = userAccount;
         this.organization = organization;
+        this.vaccine = vaccine;
         
-        populateVaccineTypeCombo();
+        txtVaccineType.setText(vaccine.getName());
         populateManufacturerCombo();
-    }
-    
-    public void populateVaccineTypeCombo(){
-        
-        cmbVaccineType.removeAllItems();
-        
-        CDC CDC = (CDC)organization;
-        for(Vaccine vaccine : CDC.getVaccineCatalog().getVaccineList()){
-            cmbVaccineType.addItem(vaccine);
-        }
     }
     
     public void populateManufacturerCombo(){
@@ -82,8 +74,8 @@ public class SendManufactureRequest extends javax.swing.JPanel {
         txtExpectedQuantity = new javax.swing.JTextField();
         txtExpectedReceivedDate = new javax.swing.JTextField();
         btnSendManufactureRequest = new javax.swing.JButton();
-        cmbVaccineType = new javax.swing.JComboBox();
         cmbManufacturer = new javax.swing.JComboBox();
+        txtVaccineType = new javax.swing.JTextField();
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Send Manufacture Request");
@@ -116,17 +108,13 @@ public class SendManufactureRequest extends javax.swing.JPanel {
             }
         });
 
-        cmbVaccineType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbVaccineTypeActionPerformed(evt);
-            }
-        });
-
         cmbManufacturer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbManufacturerActionPerformed(evt);
             }
         });
+
+        txtVaccineType.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,9 +149,9 @@ public class SendManufactureRequest extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblVaccineType, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                         .addGap(82, 82, 82)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cmbVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtVaccineType))))
                         .addGap(344, 344, 344))))
         );
         layout.setVerticalGroup(
@@ -176,7 +164,7 @@ public class SendManufactureRequest extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblVaccineType)
-                    .addComponent(cmbVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVaccineType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblManufacturer)
@@ -201,7 +189,7 @@ public class SendManufactureRequest extends javax.swing.JPanel {
         
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageVaccineCatalog mvc = (ManageVaccineCatalog) component;
+        ManageVaccineManufacturing mvc = (ManageVaccineManufacturing) component;
         mvc.populateVaccineCatalogTable();
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -211,76 +199,69 @@ public class SendManufactureRequest extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSendManufactureRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendManufactureRequestActionPerformed
+        
+        Manufacturer selectedManufacturer = (Manufacturer) cmbManufacturer.getSelectedItem();
+        if (selectedManufacturer == null) {
+            JOptionPane.showMessageDialog(this, "No available manufacturer now");
+            return;
+        }
 
-        Vaccine selectedVaccine = (Vaccine)cmbVaccineType.getSelectedItem();
-        if(selectedVaccine == null){
-            JOptionPane.showMessageDialog(this, "No qualified vaccine now");
+        String expectedReceivedDate = txtExpectedReceivedDate.getText();
+        if (txtExpectedReceivedDate.getText().isEmpty() || txtExpectedQuantity.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All the blanks must be filled");
             return;
         }
-        
-        // make sure we don't create second batch for the vaccine that alrady has a batch
-        if(selectedVaccine.getManufactureStatus()!= null){
-            JOptionPane.showMessageDialog(this, "Selected vaccine has already been requested");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(expectedReceivedDate);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Please check the date format");
             return;
         }
-        
-        if(selectedVaccine.getManufactureStatus() == null){
-            Manufacturer selectedManufacturer = (Manufacturer)cmbManufacturer.getSelectedItem();
-            if(selectedManufacturer == null){
-                JOptionPane.showMessageDialog(this, "No available manufacturer now");
-                return;
-            }
-        
-            String expectedReceivedDate = txtExpectedReceivedDate.getText();
-            if(txtExpectedReceivedDate.getText().isEmpty() || txtExpectedQuantity.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "All the blanks must be filled");
-                return;
-            }
-            
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            dateFormat.setLenient(false);
-            try {
-                dateFormat.parse(expectedReceivedDate);
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(this, "Please check the date format");
-                return;
-            }
-        
-            int expectedQuantity;
-            try{
-                expectedQuantity = Integer.parseInt(txtExpectedQuantity.getText());
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(this, "Please check the quantity format");
-                return;
-            }
-        
-            // create manufacture request
-            // add it to Manufacture Role's main work queue
-            ManufactureRequest manufactureRequest = new ManufactureRequest();
-            manufactureRequest.setVaccine(selectedVaccine);
-            manufactureRequest.setRequestQuantity(expectedQuantity);
-            manufactureRequest.setExpectedReceivedDate(expectedReceivedDate);
-        
-            Role role = selectedManufacturer.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
-            WorkQueue mainWorkQueue = role.getMainWorkQueue();
-            mainWorkQueue.getListOfWorkRequests().add(manufactureRequest);
-        
-            // update selected vaccine's manufacture status
-            selectedVaccine.setManufactureStatus("Requesting");
-        
-            JOptionPane.showMessageDialog(this, "Manufacture request send successfully");
-        
-            txtExpectedQuantity.setText("");
-            txtExpectedReceivedDate.setText("");
+
+        int expectedQuantity;
+        try {
+            expectedQuantity = Integer.parseInt(txtExpectedQuantity.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Please check the quantity format");
+            return;
         }
+
+        // create manufacture request
+        // add it to Manufacture Role's main work queue
+        ManufactureRequest manufactureRequest = new ManufactureRequest();
+        manufactureRequest.setVaccine(vaccine);
+        manufactureRequest.setRequestQuantity(expectedQuantity);
+        manufactureRequest.setExpectedReceivedDate(expectedReceivedDate);
+
+        Role role = selectedManufacturer.getSpecificRole(RoleType.VACCINE_INVENTORY_MANAGER);
+        WorkQueue mainWorkQueue = role.getMainWorkQueue();
+        mainWorkQueue.getListOfWorkRequests().add(manufactureRequest);
+
+        // update selected vaccine's manufacture status
+        vaccine.setManufactureStatus("Requesting");
+
+        JOptionPane.showMessageDialog(this, "Manufacture request send successfully");
+
+        
+        // go back to the previous page automatically
+        userProcessContainer.remove(this);
+        
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageVaccineManufacturing mvc = (ManageVaccineManufacturing) component;
+        mvc.populateVaccineCatalogTable();
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+
+        evt.getWhen();
     }//GEN-LAST:event_btnSendManufactureRequestActionPerformed
 
-    private void cmbVaccineTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVaccineTypeActionPerformed
-
-    }//GEN-LAST:event_cmbVaccineTypeActionPerformed
-
     private void cmbManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbManufacturerActionPerformed
-        
+
     }//GEN-LAST:event_cmbManufacturerActionPerformed
 
 
@@ -288,7 +269,6 @@ public class SendManufactureRequest extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSendManufactureRequest;
     private javax.swing.JComboBox cmbManufacturer;
-    private javax.swing.JComboBox cmbVaccineType;
     private javax.swing.JLabel lblExpectedQuantity;
     private javax.swing.JLabel lblExpectedReceivedDate;
     private javax.swing.JLabel lblManufacturer;
@@ -296,5 +276,6 @@ public class SendManufactureRequest extends javax.swing.JPanel {
     private javax.swing.JLabel lblVaccineType;
     private javax.swing.JTextField txtExpectedQuantity;
     private javax.swing.JTextField txtExpectedReceivedDate;
+    private javax.swing.JTextField txtVaccineType;
     // End of variables declaration//GEN-END:variables
 }

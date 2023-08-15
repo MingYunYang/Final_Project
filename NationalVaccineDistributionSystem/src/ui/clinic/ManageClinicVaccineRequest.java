@@ -46,19 +46,18 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getMainWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 9 ];
+                Object[] row = new Object[ 8 ];
 
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getOrginalQuantity();
-                row[ 3 ] = reviewRequest.getAvailableQuantity();
-                row[ 4 ] = reviewRequest.getRequestQuantity();
-                row[ 5 ] = reviewRequest.getSender();
-                row[ 6 ] = reviewRequest.getClinicReviewer();
-                row[ 7 ] = reviewRequest.getStatus();
+                row[ 2 ] = reviewRequest.getAvailableQuantity();
+                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 4 ] = reviewRequest.getSender();
+                row[ 5 ] = reviewRequest.getClinicReviewer();
+                row[ 6 ] = reviewRequest.getStatus();
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 8 ] = ((result == null) ? "Waiting" : result);
+                row[ 7 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -72,18 +71,17 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 9 ];
+                Object[] row = new Object[ 8 ];
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getOrginalQuantity();
-                row[ 3 ] = reviewRequest.getAvailableQuantity();
-                row[ 4 ] = reviewRequest.getRequestQuantity();
-                row[ 5 ] = reviewRequest.getClinicReviewer();
-                row[ 6 ] = reviewRequest.getStatus();
-                row[ 7 ] = reviewRequest.getHospitalReviewer();
+                row[ 2 ] = reviewRequest.getAvailableQuantity();
+                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 4 ] = reviewRequest.getClinicReviewer();
+                row[ 5 ] = reviewRequest.getStatus();
+                row[ 6 ] = reviewRequest.getHospitalReviewer();
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 8 ] = ((result == null) ? "Waiting" : result);
+                row[ 7 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -105,24 +103,23 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblRequestWaitingToBeReviewed = new javax.swing.JTable();
         btnRejected = new javax.swing.JButton();
-        btnCheckInventory = new javax.swing.JButton();
 
         lblReceivedVaccineRequest.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblReceivedVaccineRequest.setText("Received Vaccine Request:");
 
         tblReceivedVaccineRequest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Qty Recieved", "Qty Available", "Qty Requested", "Sender", "Recipient", "Request Status", "Review Result"
+                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Sender", "Recipient", "Req. Status", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,9 +129,9 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblReceivedVaccineRequest);
         if (tblReceivedVaccineRequest.getColumnModel().getColumnCount() > 0) {
             tblReceivedVaccineRequest.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblReceivedVaccineRequest.getColumnModel().getColumn(3).setPreferredWidth(50);
             tblReceivedVaccineRequest.getColumnModel().getColumn(4).setPreferredWidth(50);
             tblReceivedVaccineRequest.getColumnModel().getColumn(5).setPreferredWidth(50);
-            tblReceivedVaccineRequest.getColumnModel().getColumn(6).setPreferredWidth(50);
         }
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
@@ -169,17 +166,17 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
 
         tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Qty Recieved", "Qty Available", "Quantity", "Reviewer", "Request Status", "Recipient", "Review Result"
+                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -189,8 +186,8 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblRequestWaitingToBeReviewed);
         if (tblRequestWaitingToBeReviewed.getColumnModel().getColumnCount() > 0) {
             tblRequestWaitingToBeReviewed.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblRequestWaitingToBeReviewed.getColumnModel().getColumn(3).setPreferredWidth(50);
             tblRequestWaitingToBeReviewed.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tblRequestWaitingToBeReviewed.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         btnRejected.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
@@ -201,14 +198,6 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
             }
         });
 
-        btnCheckInventory.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnCheckInventory.setText("Check Inventory");
-        btnCheckInventory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckInventoryActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,6 +205,10 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnApproved, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRejected, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblRequestWaitingToBeReviewed)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblReceivedVaccineRequest)
@@ -225,13 +218,7 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
                             .addComponent(lblTitle)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBack))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCheckInventory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnApproved, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRejected, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
@@ -257,8 +244,7 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnApproved)
-                    .addComponent(btnRejected)
-                    .addComponent(btnCheckInventory))
+                    .addComponent(btnRejected))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -285,7 +271,7 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
 
         if ( vaccineRequestReviewerRole != null ) {
             vaccineRequestReviewerRole.getMainWorkQueue().getListOfWorkRequests().add( request );
-            request.setStatus( "Process to Hospital" );
+            request.setStatus( "Approved By Clinic" );
         } else {
             JOptionPane.showMessageDialog( this, "There's no service in affiliate hospital now" );
             return;
@@ -336,20 +322,11 @@ public class ManageClinicVaccineRequest extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRejectedActionPerformed
 
-    private void btnCheckInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckInventoryActionPerformed
-
-        UpdateVaccineInventory uvi = new UpdateVaccineInventory( userProcessContainer, userAccount, organization, nvds );
-        userProcessContainer.add( "UpdateVaccineInventory", uvi );
-        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
-        layout.next( userProcessContainer );
-    }//GEN-LAST:event_btnCheckInventoryActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApproved;
     private javax.swing.JButton btnAssignToMe;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCheckInventory;
     private javax.swing.JButton btnRejected;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -28,7 +28,7 @@ public class DeliveryRequest extends WorkRequest{
     
     @Override
     public String toString(){
-        return batch.getBatchId();
+        return batch.getVaccine().getName();
     }
     
     

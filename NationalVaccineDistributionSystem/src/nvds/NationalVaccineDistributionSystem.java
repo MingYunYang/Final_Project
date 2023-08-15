@@ -37,7 +37,7 @@ public class NationalVaccineDistributionSystem {
                 Manufacturer manufacturer = (Manufacturer) organization;
                 for(Batch batch : manufacturer.getInventoryCatalog().getBatchList()){
                     if(batch.getVaccine().equals(vaccine)){
-                        sum = sum + batch.getQuantity();
+                        sum = sum + batch.getAvailableQuantityInCDC();
                     }
                 }
             }

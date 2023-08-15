@@ -19,7 +19,7 @@ import nvds.vaccine.VaccineCatalog;
  *
  * @author libby
  */
-public class ManageVaccineCatalog extends javax.swing.JPanel {
+public class ManageVaccineManufacturing extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
 
@@ -29,7 +29,7 @@ public class ManageVaccineCatalog extends javax.swing.JPanel {
 
     Organization organization;
     
-    public ManageVaccineCatalog(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds) {
+    public ManageVaccineManufacturing(JPanel userProcessContainer , UserAccount userAccount , Organization organization , NationalVaccineDistributionSystem nvds) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.nvds = nvds;
@@ -150,10 +150,10 @@ public class ManageVaccineCatalog extends javax.swing.JPanel {
                         .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCreateNewVaccine)
-                        .addGap(69, 69, 69)
+                        .addGap(81, 81, 81)
                         .addComponent(btnSendManufactureRequest))
                     .addComponent(jScrollPane2))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,11 +165,10 @@ public class ManageVaccineCatalog extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNewVaccineName)
-                        .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSendManufactureRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNewVaccineName)
+                    .addComponent(txtNewVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSendManufactureRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCreateNewVaccine))
                 .addContainerGap(413, Short.MAX_VALUE))
         );
@@ -198,10 +197,22 @@ public class ManageVaccineCatalog extends javax.swing.JPanel {
 
     private void btnSendManufactureRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendManufactureRequestActionPerformed
 
-        SendManufactureRequest smr = new SendManufactureRequest(userProcessContainer , userAccount , organization , nvds);
-        userProcessContainer.add("SendManufactureRequest" , smr);
-        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        int selectedRowIndex = tblVaccineCatalog.getSelectedRow();
+        if(selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a type of vaccine first");
+            return;
+        }
+        Vaccine vaccine = (Vaccine)tblVaccineCatalog.getValueAt(selectedRowIndex, 1);
+        if(vaccine.getManufactureStatus() == null){
+            
+            SendManufactureRequest smr = new SendManufactureRequest(userProcessContainer , userAccount , organization , nvds, vaccine);
+            userProcessContainer.add("SendManufactureRequest" , smr);
+            CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selected vaccine type has already been manufactured");
+            return;
+        }
     }//GEN-LAST:event_btnSendManufactureRequestActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

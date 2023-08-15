@@ -43,13 +43,13 @@ public class CDCWorkArea extends javax.swing.JPanel {
 
             case CDC_ADVERSE_EVENT_HANDLER -> {
                 btnManageCDCVacccineRequests.setEnabled(false);
-                btnManageVaccineAllocation.setEnabled(false);
-                btnManageVaccineCatalog.setEnabled(false);
+                btnManageVaccineInventory.setEnabled(false);
+                btnManageVaccineManufacturing.setEnabled(false);
             }
             case VACCINE_REQUEST_REVIEWER -> {
                 btnManageAdverseEventHandling.setEnabled(false);
-                btnManageVaccineAllocation.setEnabled(false);
-                btnManageVaccineCatalog.setEnabled(false);
+                btnManageVaccineInventory.setEnabled(false);
+                btnManageVaccineManufacturing.setEnabled(false);
             }
             case CDC_CATALOG_AND_ALLOCATION_HANDLER -> {
                 btnManageAdverseEventHandling.setEnabled(false);
@@ -66,8 +66,8 @@ public class CDCWorkArea extends javax.swing.JPanel {
         lblQuestion = new javax.swing.JLabel();
         btnManageAdverseEventHandling = new javax.swing.JButton();
         btnManageCDCVacccineRequests = new javax.swing.JButton();
-        btnManageVaccineAllocation = new javax.swing.JButton();
-        btnManageVaccineCatalog = new javax.swing.JButton();
+        btnManageVaccineInventory = new javax.swing.JButton();
+        btnManageVaccineManufacturing = new javax.swing.JButton();
 
         lblQuestion.setFont(new java.awt.Font("Courier New", 3, 18)); // NOI18N
         lblQuestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -89,19 +89,19 @@ public class CDCWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnManageVaccineAllocation.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        btnManageVaccineAllocation.setText("Manage Vaccine Allocation");
-        btnManageVaccineAllocation.addActionListener(new java.awt.event.ActionListener() {
+        btnManageVaccineInventory.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageVaccineInventory.setText("Manage Vaccine Inventory");
+        btnManageVaccineInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageVaccineAllocationActionPerformed(evt);
+                btnManageVaccineInventoryActionPerformed(evt);
             }
         });
 
-        btnManageVaccineCatalog.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        btnManageVaccineCatalog.setText("Manage Vaccine Catalog");
-        btnManageVaccineCatalog.addActionListener(new java.awt.event.ActionListener() {
+        btnManageVaccineManufacturing.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        btnManageVaccineManufacturing.setText("Manage Vaccine Manufacturing");
+        btnManageVaccineManufacturing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageVaccineCatalogActionPerformed(evt);
+                btnManageVaccineManufacturingActionPerformed(evt);
             }
         });
 
@@ -117,10 +117,10 @@ public class CDCWorkArea extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnManageAdverseEventHandling, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageVaccineManufacturing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageVaccineInventory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnManageCDCVacccineRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageVaccineAllocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageVaccineCatalog, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnManageAdverseEventHandling, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,9 +129,9 @@ public class CDCWorkArea extends javax.swing.JPanel {
                 .addGap(158, 158, 158)
                 .addComponent(lblQuestion)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageVaccineCatalog)
+                .addComponent(btnManageVaccineManufacturing)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageVaccineAllocation)
+                .addComponent(btnManageVaccineInventory)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageCDCVacccineRequests)
                 .addGap(18, 18, 18)
@@ -148,13 +148,13 @@ public class CDCWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageAdverseEventHandlingActionPerformed
 
-    private void btnManageVaccineAllocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineAllocationActionPerformed
+    private void btnManageVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineInventoryActionPerformed
         
         ManageVaccineInventory mva = new ManageVaccineInventory(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageVaccineAllocation" , mva);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageVaccineAllocationActionPerformed
+    }//GEN-LAST:event_btnManageVaccineInventoryActionPerformed
 
     private void btnManageCDCVacccineRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCDCVacccineRequestsActionPerformed
         
@@ -164,20 +164,20 @@ public class CDCWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageCDCVacccineRequestsActionPerformed
 
-    private void btnManageVaccineCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineCatalogActionPerformed
+    private void btnManageVaccineManufacturingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineManufacturingActionPerformed
         
-        ManageVaccineCatalog mvc = new ManageVaccineCatalog(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineManufacturing mvc = new ManageVaccineManufacturing(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageVaccineRequests" , mvc);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageVaccineCatalogActionPerformed
+    }//GEN-LAST:event_btnManageVaccineManufacturingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageAdverseEventHandling;
     private javax.swing.JButton btnManageCDCVacccineRequests;
-    private javax.swing.JButton btnManageVaccineAllocation;
-    private javax.swing.JButton btnManageVaccineCatalog;
+    private javax.swing.JButton btnManageVaccineInventory;
+    private javax.swing.JButton btnManageVaccineManufacturing;
     private javax.swing.JLabel lblQuestion;
     // End of variables declaration//GEN-END:variables
 }

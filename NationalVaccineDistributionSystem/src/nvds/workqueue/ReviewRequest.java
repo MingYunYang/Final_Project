@@ -13,11 +13,8 @@ import nvds.vaccine.Batch;
 public class ReviewRequest extends WorkRequest {
 
     private String result;
-
-    private int originalQuantity;
-
-    private int availableQuantity;
-    
+    private int originalQuantity; // allocated quantity for clinic 分配給診所的數量
+    private int availableQuantity; // left quantity in clinic 診所實際上剩下的數量
     private Batch batch;
 
     public ReviewRequest () {

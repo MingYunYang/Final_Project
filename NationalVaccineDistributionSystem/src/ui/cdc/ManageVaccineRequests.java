@@ -47,19 +47,18 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getMainWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 9 ];
+                Object[] row = new Object[ 8 ];
 
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getOrginalQuantity();
-                row[ 3 ] = reviewRequest.getAvailableQuantity();
-                row[ 4 ] = reviewRequest.getRequestQuantity();
-                row[ 5 ] = reviewRequest.getPhdReviewer();
-                row[ 6 ] = reviewRequest.getCdcReviewer();
-                row[ 7 ] = reviewRequest.getStatus();
+                row[ 2 ] = reviewRequest.getAvailableQuantity();
+                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 4 ] = reviewRequest.getPhdReviewer();
+                row[ 5 ] = reviewRequest.getCdcReviewer();
+                row[ 6 ] = reviewRequest.getStatus();
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 8 ] = ((result == null) ? "Waiting" : result);
+                row[ 7 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -73,18 +72,17 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 9 ];
+                Object[] row = new Object[ 8 ];
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getOrginalQuantity();
-                row[ 3 ] = reviewRequest.getAvailableQuantity();
-                row[ 4 ] = reviewRequest.getRequestQuantity();
-                row[ 5 ] = reviewRequest.getCdcReviewer();
-                row[ 6 ] = reviewRequest.getStatus();
-                row[ 7 ] = reviewRequest.getClinicReviewer(); //!!!!!
+                row[ 2 ] = reviewRequest.getAvailableQuantity();
+                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 4 ] = reviewRequest.getCdcReviewer();
+                row[ 5 ] = reviewRequest.getStatus();
+                row[ 6 ] = reviewRequest.getClinicReviewer(); //!!!!!
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 8 ] = ((result == null) ? "Waiting" : result);
+                row[ 7 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -129,17 +127,17 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
 
         tblVaccineRequestList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Qty Sent", "Qty  Available", "Qty Requested", "Sender", "Recipient", "Status", "Result"
+                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Sender", "Recipient", "Req. Status", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -172,17 +170,17 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
 
         tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine Name", "Qty Recieved", "Qty Available", "Quantity", "Reviewer", "Request Status", "Recipient", "Review Result"
+                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false, false, false, false, false
+                false, false, true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -268,43 +266,18 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
 
     private void btnApprovedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovedActionPerformed
 
-//        int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
-//        if ( selectedRow < 0 ) {
-//            JOptionPane.showMessageDialog( this, "Please select a request from the table first" );
-//            return;
-//        }
-//        ReviewRequest reviewRequest = ( ReviewRequest ) tblRequestWaitingToBeReviewed.getValueAt( selectedRow, 1 );
-//
-//        // send request to CDC Reviewer Role's main work queue
-//        CDC CDC = null;
-//        for(Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations()){
-//            if(organization.getType().equals(Type.CDC) && organization.getState().equals(this.organization.getCountry())){
-//                CDC = (CDC) organization;
-//            }
-//        }
-//
-//        if(CDC != null){
-//
-//            Role reviewerRole = CDC.getSpecificRole(Role.RoleType.VACCINE_REQUEST_REVIEWER);
-//            if(reviewerRole != null){
-//                reviewRequest.setStatus("Approved By PHD");
-//                reviewRequest.setResult("Approved By PHD");
-//                WorkQueue mainWorkQueue = reviewerRole.getMainWorkQueue();
-//                mainWorkQueue.getListOfWorkRequests().add(reviewRequest);
-//
-//                JOptionPane.showMessageDialog(this, "Request sent to CDC successfully");
-//                populateMainWorkQueue();
-//                populateWaitingWorkQueue();
-//                return;
-//            } else {
-//                JOptionPane.showMessageDialog( this, "No reviewer role founded in CDC" );
-//                return;
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(this, "No CDC founded");
-//            return;
-//        }
+        int selectedRow = tblRequestWaitingToBeReviewed.getSelectedRow();
+        if ( selectedRow < 0 ) {
+            JOptionPane.showMessageDialog( this, "Please select a request from the table first" );
+            return;
+        }
+        ReviewRequest reviewRequest = ( ReviewRequest ) tblRequestWaitingToBeReviewed.getValueAt( selectedRow, 1 );
+        reviewRequest.setStatus("Completed");
+        reviewRequest.setResult("Approved");
+
+        JOptionPane.showMessageDialog(this, "Result sent back to clinic successfully");
+        populateMainWorkQueue();
+        populateWaitingWorkQueue();
     }//GEN-LAST:event_btnApprovedActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
