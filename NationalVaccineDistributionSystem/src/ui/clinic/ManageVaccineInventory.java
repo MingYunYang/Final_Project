@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.organization.Organization;
 import nvds.useraccount.UserAccount;
-import nvds.vaccine.Vaccine;
+// import nvds.vaccine.Vaccine;
 import nvds.vaccine.VaccineInventoryCatalog;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.organization.Clinic;
-import nvds.organization.Manufacturer;
+// import nvds.organization.Manufacturer;
 import nvds.vaccine.Batch;
 import nvds.workqueue.AllocationRequest;
 import nvds.workqueue.ReviewRequest;
@@ -272,23 +272,38 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReceived2ActionPerformed
 
     private void btnAddDeliveryToClinicVaccineInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDeliveryToClinicVaccineInventoryActionPerformed
-              
         int selectedRowIndex = tblReceivedDeliveryNotifications.getSelectedRow();
         if ( selectedRowIndex < 0 ) {
             JOptionPane.showMessageDialog( this, "Please select a batch of vaccine first" );
             return;
         }
-        
+
         Clinic clinic = ( Clinic ) organization;
         VaccineInventoryCatalog clinicVaccineInventoryCatalog = clinic.getInventoryCatalog();
 
         AllocationRequest allocationRequest = ( AllocationRequest ) tblReceivedDeliveryNotifications.getValueAt( selectedRowIndex, 1 );
         Batch batch = allocationRequest.getBatch();
-        
+
         int clinicDistributedQuantity = allocationRequest.getDistributedQuantityForClinic();
-        batch.setOriginalQuantity( clinicDistributedQuantity );
-        batch.setAvailableQuantity( clinicDistributedQuantity );
-        clinicVaccineInventoryCatalog.getBatchList().add(batch);
+
+        // Check if the batch already exists in the clinic's inventory
+        boolean isBatchFound = false;
+        for ( Batch existingBatch : clinicVaccineInventoryCatalog.getBatchList() ) {
+            if ( existingBatch.getBatchId().equals( batch.getBatchId() ) ) {
+                // Update the existing batch's quantity
+                existingBatch.setAvailableQuantity( existingBatch.getAvailableQuantity() + clinicDistributedQuantity );
+                existingBatch.setOriginalQuantity( existingBatch.getOriginalQuantity() + clinicDistributedQuantity );
+                isBatchFound = true;
+                break;
+            }
+        }
+
+        if ( !isBatchFound ) {
+            // If the batch is not found, add it to the inventory
+            batch.setOriginalQuantity( clinicDistributedQuantity );
+            batch.setAvailableQuantity( clinicDistributedQuantity );
+            clinicVaccineInventoryCatalog.getBatchList().add( batch );
+        }
 
         clinicVaccineInventoryCatalog.populateVaccineTypeList();
         clinicVaccineInventoryCatalog.populateVaccineInventoryCount();

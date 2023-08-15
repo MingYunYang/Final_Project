@@ -245,7 +245,7 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
                     .addComponent(btnApproved)
                     .addComponent(btnRejected)
                     .addComponent(btnCheckAllocationDetails))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
