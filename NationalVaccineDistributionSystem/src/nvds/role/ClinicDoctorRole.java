@@ -23,7 +23,7 @@ public class ClinicDoctorRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.CLINIC_DOCTOR;
+        setType( RoleType.CLINIC_DOCTOR );
         
         if(organization instanceof Clinic){
             return new ClinicWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getInstance());

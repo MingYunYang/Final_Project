@@ -14,7 +14,7 @@ public class NVDSAdminRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.NVDS_ADMIN;
+        setType( RoleType.NVDS_ADMIN );
         return new AdminWorkArea(userProcessContainer, NationalVaccineDistributionSystem.getInstance());
     }
 

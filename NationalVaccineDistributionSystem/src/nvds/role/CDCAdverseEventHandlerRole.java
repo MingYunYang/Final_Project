@@ -23,7 +23,7 @@ public class CDCAdverseEventHandlerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.CDC_ADVERSE_EVENT_HANDLER;
+        setType( RoleType.CDC_ADVERSE_EVENT_HANDLER );
         
         if(organization instanceof CDC){
             return new CDCWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getInstance());

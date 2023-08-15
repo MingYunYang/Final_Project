@@ -39,7 +39,7 @@ public class CDCWorkArea extends javax.swing.JPanel {
     private void toggleButtonsAccessBasedOnRole() {
 
         Role role = userAccount.getRole();
-        switch ( role.type ) {
+        switch ( role.getType() ) {
 
             case CDC_ADVERSE_EVENT_HANDLER -> {
                 btnManageCDCVacccineRequests.setEnabled(false);

@@ -349,7 +349,7 @@ public class ManageVaccineRequests extends javax.swing.JPanel {
         Batch batch = reviewRequest.getBatch();
 
         AllocateVaccine av = new AllocateVaccine( userProcessContainer, userAccount, organization, nvds, batch);
-        userProcessContainer.add( "CheckVaccineAllocation", av);
+        userProcessContainer.add( "AllocateVaccine", av);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next( userProcessContainer );
     }//GEN-LAST:event_btnCheckAllocationDetailsActionPerformed

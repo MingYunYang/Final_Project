@@ -29,7 +29,7 @@ public class VaccineRequestReviewerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer , UserAccount account , Organization organization , NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.VACCINE_REQUEST_REVIEWER;
+        setType( RoleType.VACCINE_REQUEST_REVIEWER );
 
         if ( organization instanceof Clinic ) {
             return new ClinicWorkArea(userProcessContainer , account , organization , NationalVaccineDistributionSystem.getInstance());

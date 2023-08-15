@@ -23,7 +23,7 @@ public class CDCCatalogAndAllocationHandlerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER;
+        setType( RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER );
         
         if(organization instanceof CDC){
             return new CDCWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getInstance());

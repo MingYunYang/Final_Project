@@ -23,7 +23,7 @@ public class HospitalLabTechnicianRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = Role.RoleType.HOSPITAL_LAB_TECHNICIAN;
+        setType( Role.RoleType.HOSPITAL_LAB_TECHNICIAN );
         
         if(organization instanceof Hospital){
             return new HospitalWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getInstance());

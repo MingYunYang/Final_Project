@@ -40,7 +40,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
     private void toggleButtonsAccessBasedOnRole() {
 
         Role role = userAccount.getRole();
-        switch ( role.type ) {
+        switch ( role.getType() ) {
             
             case HOSPITAL_LAB_TECHNICIAN -> {
                 btnManageVaccineInventory.setEnabled(false);

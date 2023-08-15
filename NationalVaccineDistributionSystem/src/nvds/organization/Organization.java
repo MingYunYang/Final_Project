@@ -84,7 +84,7 @@ public abstract class Organization {
     
     public Role getSpecificRole(RoleType roleType){ 
         for(Role role : getSupportedRole()){
-            if(role.type == roleType){
+            if(role.getType() == roleType){
                 return role;
             }
         }

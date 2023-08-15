@@ -31,7 +31,7 @@ public class VaccineInventoryManagerRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, NationalVaccineDistributionSystem ecosystem) {
-        type = RoleType.VACCINE_INVENTORY_MANAGER;
+        setType( RoleType.VACCINE_INVENTORY_MANAGER );
         
         if(organization instanceof Clinic){
             return new ClinicWorkArea(userProcessContainer, account, organization, NationalVaccineDistributionSystem.getInstance());
