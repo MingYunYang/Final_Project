@@ -12,8 +12,8 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
- *
- * @author archil
+ * @author libby
+ * @author mutara
  */
 public class MainScreen extends javax.swing.JPanel {
 

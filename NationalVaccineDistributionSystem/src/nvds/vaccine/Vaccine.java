@@ -3,6 +3,10 @@ package nvds.vaccine;
 import java.util.Objects;
 import nvds.organization.Manufacturer;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Vaccine {
 
     private String name;

@@ -13,8 +13,8 @@ import nvds.vaccine.Batch;
 import nvds.workqueue.AllocationRequest;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ViewBatchDetails extends javax.swing.JPanel {
 

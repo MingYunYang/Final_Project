@@ -4,6 +4,10 @@ import nvds.useraccount.UserAccount;
 import java.util.Date;
 import nvds.vaccine.Vaccine;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public abstract class WorkRequest {
     
     // already used

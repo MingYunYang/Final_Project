@@ -16,6 +16,10 @@ import nvds.workqueue.DeliveryRequest;
 import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class ManageVaccineInventory extends javax.swing.JPanel {
 
     JPanel userProcessContainer;

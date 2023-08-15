@@ -12,8 +12,8 @@ import nvds.organization.Organization;
 import ui.cdc.CDCWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class CDCAdverseEventHandlerRole extends Role {
     

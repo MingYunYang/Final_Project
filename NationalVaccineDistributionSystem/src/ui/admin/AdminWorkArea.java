@@ -4,6 +4,10 @@ import nvds.NationalVaccineDistributionSystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class AdminWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;

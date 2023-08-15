@@ -2,6 +2,10 @@ package nvds.order;
 
 import nvds.vaccine.Vaccine;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class OrderItem {
 
     private Vaccine vaccine;

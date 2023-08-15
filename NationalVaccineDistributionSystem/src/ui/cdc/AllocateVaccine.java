@@ -27,7 +27,6 @@ import nvds.workqueue.WorkRequest;
  * @author libby
  * @author william
  */
-
 public class AllocateVaccine extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
@@ -96,7 +95,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
 
                 // Checking for special allocations and adding them as separate rows
                 Role cdcAllocationRole = CDC.getSpecificRole( Role.RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER );
-                
+
                 for ( WorkRequest request : cdcAllocationRole.getWaitingWorkQueue().getListOfWorkRequests() ) {
                     AllocationRequest allocationRequest = ( AllocationRequest ) request;
                     if ( allocationRequest.getCity().equals( city ) && "Special Allocation".equals( allocationRequest.getStatus() ) ) {
@@ -411,8 +410,8 @@ public class AllocateVaccine extends javax.swing.JPanel {
             JOptionPane.showMessageDialog( this, "Please select an allocation target first" );
             return;
         }
-        if(tblAllocationWaitingList.getValueAt( selectedRowIndex, 6).equals("Allocated")){
-            JOptionPane.showMessageDialog(this, "Selected target has already been allocated");
+        if ( tblAllocationWaitingList.getValueAt( selectedRowIndex, 6 ).equals( "Allocated" ) ) {
+            JOptionPane.showMessageDialog( this, "Selected target has already been allocated" );
             return;
         }
 
@@ -507,7 +506,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCheckCDCApprovalRequestStatus1ActionPerformed
 
     private void btnSpecialAllocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialAllocationActionPerformed
-        
+
         int selectedRowIndex = tblAllocationWaitingList.getSelectedRow();
         if ( selectedRowIndex < 0 ) {
             JOptionPane.showMessageDialog( this, "Please select an allocation row first" );
@@ -529,11 +528,11 @@ public class AllocateVaccine extends javax.swing.JPanel {
         State selectedState = ( State ) tblAllocationWaitingList.getValueAt( selectedRowIndex, 0 );
         City selectedCity = ( City ) tblAllocationWaitingList.getValueAt( selectedRowIndex, 3 );
         int allocationQuantityForCity = specialQuantity;
-        
+
         WorkQueue waitingWorkQueue = null;
         Role.RoleType roleType = userAccount.getRole().getType();
         if ( roleType != Role.RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER || roleType != Role.RoleType.VACCINE_REQUEST_REVIEWER ) {
-            
+
             CDC CDC = null;
             for ( Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations() ) {
                 if ( organization.getType().equals( Type.CDC ) && organization.getCountry().equals( this.organization.getCountry() ) ) {

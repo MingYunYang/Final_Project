@@ -8,6 +8,10 @@ import nvds.geography.Country;
 import nvds.geography.State;
 import nvds.role.Role;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class DistributionCenter extends Organization {
     
     private ArrayList<Role> supportedRole;

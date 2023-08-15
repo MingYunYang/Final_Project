@@ -22,8 +22,8 @@ import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ManageVaccineManufacturing extends javax.swing.JPanel {
 

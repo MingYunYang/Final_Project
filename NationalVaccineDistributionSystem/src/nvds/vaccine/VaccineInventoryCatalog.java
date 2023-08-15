@@ -10,8 +10,8 @@ import java.util.HashMap;
 import nvds.organization.Manufacturer;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class VaccineInventoryCatalog { // for clinic, hospital, manufacturer,cdc
 

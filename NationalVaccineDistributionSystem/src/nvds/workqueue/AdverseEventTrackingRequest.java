@@ -2,6 +2,10 @@ package nvds.workqueue;
 
 import nvds.vaccine.AdverseEventTracking;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class AdverseEventTrackingRequest extends WorkRequest {
 
     private AdverseEventTracking adverseEventTracking;

@@ -2,6 +2,10 @@ package nvds.vaccine;
 
 import nvds.organization.Manufacturer;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Batch {
 
     private Vaccine vaccine;

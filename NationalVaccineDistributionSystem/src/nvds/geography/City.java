@@ -3,6 +3,10 @@ package nvds.geography;
 import java.util.HashSet;
 import nvds.organization.Hospital;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class City {
 
     private final int id;

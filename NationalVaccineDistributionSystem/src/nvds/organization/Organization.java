@@ -13,6 +13,10 @@ import nvds.useraccount.UserAccountDirectory;
 import nvds.vaccine.VaccineInventoryCatalog;
 import nvds.workqueue.WorkQueue;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public abstract class Organization {
 
     private String organizationName;

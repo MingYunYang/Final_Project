@@ -22,8 +22,8 @@ import nvds.workqueue.ManufactureRequest;
 import nvds.workqueue.WorkQueue;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class SendManufactureRequest extends javax.swing.JPanel {
 

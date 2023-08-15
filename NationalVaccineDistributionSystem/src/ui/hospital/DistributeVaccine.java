@@ -19,8 +19,8 @@ import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class DistributeVaccine extends javax.swing.JPanel {
 

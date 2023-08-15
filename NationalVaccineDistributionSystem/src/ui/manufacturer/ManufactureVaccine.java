@@ -19,8 +19,8 @@ import nvds.vaccine.Vaccine;
 import nvds.vaccine.VaccineInventoryCatalog;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ManufactureVaccine extends javax.swing.JPanel {
 

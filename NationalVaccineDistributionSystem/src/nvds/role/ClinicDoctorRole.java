@@ -12,8 +12,8 @@ import nvds.useraccount.UserAccount;
 import ui.clinic.ClinicWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ClinicDoctorRole extends Role {
     

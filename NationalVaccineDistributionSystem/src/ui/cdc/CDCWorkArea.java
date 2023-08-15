@@ -13,8 +13,8 @@ import static nvds.role.Role.RoleType.VACCINE_REQUEST_REVIEWER;
 import nvds.useraccount.UserAccount;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class CDCWorkArea extends javax.swing.JPanel {
 

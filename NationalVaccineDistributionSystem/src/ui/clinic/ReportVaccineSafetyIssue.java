@@ -18,8 +18,8 @@ import nvds.workqueue.AdverseEventTrackingRequest;
 import nvds.workqueue.WorkRequest;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 

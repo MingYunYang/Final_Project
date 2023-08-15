@@ -14,6 +14,10 @@ import nvds.geography.City;
 import nvds.geography.Contact;
 import nvds.organization.Organization.Type;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class ManageOrganization extends javax.swing.JPanel {
 
     OrganizationDirectory directory;

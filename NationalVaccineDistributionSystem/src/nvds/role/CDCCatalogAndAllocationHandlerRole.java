@@ -12,8 +12,8 @@ import nvds.useraccount.UserAccount;
 import ui.cdc.CDCWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class CDCCatalogAndAllocationHandlerRole extends Role {
     

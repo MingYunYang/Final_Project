@@ -10,6 +10,10 @@ import nvds.organization.Organization.Type;
 import nvds.vaccine.Batch;
 import nvds.vaccine.Vaccine;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class NationalVaccineDistributionSystem {
 
     private static NationalVaccineDistributionSystem singleInstance;

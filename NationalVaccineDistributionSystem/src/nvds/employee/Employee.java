@@ -2,6 +2,10 @@ package nvds.employee;
 
 import nvds.useraccount.UserAccount;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Employee {
 
     private String name;
@@ -12,34 +16,34 @@ public class Employee {
 
     private UserAccount userAccount;
 
-    public Employee(String name) {
+    public Employee ( String name ) {
         this.name = name;
         id = count;
         count++;
     }
 
-    public void setName(String name) {
+    public void setName ( String name ) {
         this.name = name;
     }
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public int getId() {
+    public int getId () {
         return id;
     }
 
-    public UserAccount getUserAccount() {
+    public UserAccount getUserAccount () {
         return userAccount;
     }
 
-    public void setUserAccount(UserAccount userAccount) {
+    public void setUserAccount ( UserAccount userAccount ) {
         this.userAccount = userAccount;
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return name;
     }
 

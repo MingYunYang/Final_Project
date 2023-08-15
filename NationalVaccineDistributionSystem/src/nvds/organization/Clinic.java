@@ -12,6 +12,10 @@ import nvds.role.Role;
 import nvds.role.VaccineRequestReviewerRole;
 import nvds.vaccine.VaccineCatalog;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Clinic extends Organization {
 
     private ArrayList<Role> supportedRole;

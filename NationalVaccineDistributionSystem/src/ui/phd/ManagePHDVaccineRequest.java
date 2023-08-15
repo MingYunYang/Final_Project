@@ -21,8 +21,8 @@ import nvds.workqueue.WorkRequest;
 import ui.cdc.AllocateVaccine;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ManagePHDVaccineRequest extends javax.swing.JPanel {
 

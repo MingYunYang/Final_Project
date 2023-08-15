@@ -10,8 +10,8 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class MainJFrame extends javax.swing.JFrame {
 

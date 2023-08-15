@@ -5,6 +5,10 @@ import java.util.Date;
 import nvds.organization.Hospital;
 import nvds.vaccine.Vaccine;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Order {
 
     private final ArrayList<OrderItem> orderItemList;

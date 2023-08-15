@@ -7,6 +7,10 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import nvds.role.Role;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class ClinicWorkArea extends javax.swing.JPanel {
 
     JPanel userProcessContainer;

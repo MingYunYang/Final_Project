@@ -11,6 +11,10 @@ import nvds.role.HospitalLabTechnicianRole;
 import nvds.role.VaccineRequestReviewerRole;
 import nvds.role.Role;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Hospital extends Organization {
     
     private ArrayList<Role> supportedRole;

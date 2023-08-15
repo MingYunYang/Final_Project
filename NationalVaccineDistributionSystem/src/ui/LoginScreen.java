@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
- * @author archil
+ * @author libby
+ * @author mutara
  */
 public class LoginScreen extends javax.swing.JPanel {
 

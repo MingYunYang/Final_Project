@@ -1,5 +1,9 @@
 package nvds.geography;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Contact {
 
     private String phoneNumber;

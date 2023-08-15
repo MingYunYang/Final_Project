@@ -18,8 +18,8 @@ import ui.hospital.HospitalWorkArea;
 import ui.phd.PHDWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class VaccineRequestReviewerRole extends Role {
 

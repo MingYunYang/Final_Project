@@ -10,7 +10,10 @@ import nvds.useraccount.UserAccount;
 import nvds.workqueue.AdverseEventTrackingRequest;
 import nvds.workqueue.WorkRequest;
 
-
+/**
+ * @author libby
+ * @author mutara
+ */
 public class ManageAdverseEvents extends javax.swing.JPanel {
 
     JPanel userProcessContainer;

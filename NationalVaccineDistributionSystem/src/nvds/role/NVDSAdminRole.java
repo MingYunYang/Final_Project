@@ -6,6 +6,10 @@ import nvds.useraccount.UserAccount;
 import javax.swing.JPanel;
 import ui.admin.AdminWorkArea;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class NVDSAdminRole extends Role {
 
     public NVDSAdminRole() {

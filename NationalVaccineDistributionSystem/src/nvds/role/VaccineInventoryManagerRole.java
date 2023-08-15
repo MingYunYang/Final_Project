@@ -20,8 +20,8 @@ import ui.hospital.HospitalWorkArea;
 import ui.manufacturer.ManufacturerWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class VaccineInventoryManagerRole extends Role{
     

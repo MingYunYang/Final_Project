@@ -9,6 +9,10 @@ import nvds.geography.State;
 import nvds.role.Role;
 import nvds.role.VaccineRequestReviewerRole;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class PublicHealthDepartment extends Organization {
     
     private ArrayList<Role> supportedRole;

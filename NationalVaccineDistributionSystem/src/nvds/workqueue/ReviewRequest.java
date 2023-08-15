@@ -7,8 +7,8 @@ package nvds.workqueue;
 import nvds.vaccine.Batch;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ReviewRequest extends WorkRequest {
 

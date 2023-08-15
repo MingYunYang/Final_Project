@@ -3,6 +3,10 @@ package nvds.useraccount;
 import nvds.employee.Employee;
 import nvds.role.Role;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class UserAccount {
 
     private String username;

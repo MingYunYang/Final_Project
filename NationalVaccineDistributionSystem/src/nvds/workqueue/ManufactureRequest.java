@@ -4,10 +4,9 @@
  */
 package nvds.workqueue;
 
-
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ManufactureRequest extends WorkRequest{
 

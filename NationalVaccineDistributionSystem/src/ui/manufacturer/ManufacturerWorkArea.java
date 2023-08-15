@@ -11,8 +11,8 @@ import nvds.organization.Organization;
 import nvds.useraccount.UserAccount;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ManufacturerWorkArea extends javax.swing.JPanel {
 

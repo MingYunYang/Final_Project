@@ -11,8 +11,8 @@ import nvds.organization.Organization;
 import nvds.useraccount.UserAccount;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class DistributorWorkArea extends javax.swing.JPanel {
 

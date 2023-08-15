@@ -2,6 +2,10 @@ package nvds.vaccine;
 
 import java.util.Date;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class AdverseEventTracking {
 
     private int eventId;

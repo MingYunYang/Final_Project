@@ -6,6 +6,10 @@ import nvds.useraccount.UserAccount;
 import javax.swing.JPanel;
 import nvds.workqueue.WorkQueue;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public abstract class Role {
 
     private RoleType type;

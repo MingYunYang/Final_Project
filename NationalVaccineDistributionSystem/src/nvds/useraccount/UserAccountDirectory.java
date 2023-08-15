@@ -4,6 +4,10 @@ import nvds.employee.Employee;
 import nvds.role.Role;
 import java.util.ArrayList;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class UserAccountDirectory {
 
     private final ArrayList<UserAccount> listOfAccounts;

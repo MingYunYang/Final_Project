@@ -16,8 +16,8 @@ import nvds.workqueue.ReviewRequest;
 import nvds.workqueue.WorkRequest;
 
 /**
- *
- * @author tugum
+ * @author libby
+ * @author mutara
  */
 public class ManageVaccineRequests extends javax.swing.JPanel {
 

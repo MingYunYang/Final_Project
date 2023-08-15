@@ -14,8 +14,8 @@ import nvds.workqueue.AllocationRequest;
 import nvds.workqueue.WorkQueue;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class CheckDistributionDetails extends javax.swing.JPanel {
 

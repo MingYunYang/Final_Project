@@ -9,6 +9,10 @@ import nvds.role.Role;
 import java.util.ArrayList;
 import nvds.role.VaccineInventoryManagerRole;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Distributor extends Organization {
     
     private ArrayList<Role> supportedRole;

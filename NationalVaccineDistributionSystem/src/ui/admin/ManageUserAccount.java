@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Administrator
+ * @author libby
+ * @author mutara
  */
 public class ManageUserAccount extends javax.swing.JPanel {
 
@@ -28,99 +28,98 @@ public class ManageUserAccount extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private NationalVaccineDistributionSystem ecosystem;
 
-    public ManageUserAccount(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, NationalVaccineDistributionSystem ecosystem) {
-        
+    public ManageUserAccount ( JPanel userProcessContainer, OrganizationDirectory organizationDirectory, NationalVaccineDistributionSystem ecosystem ) {
+
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organizationDirectory = organizationDirectory;
         this.ecosystem = ecosystem;
 
         populateCountryCombo();
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
-            populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        if ( country != null ) {
+            populateStateCombo( country );
+            State state = ( State ) cmbState.getSelectedItem();
+            if ( state != null ) {
                 populateOrganizationTypeCombo();
-                Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    Organization organization = (Organization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
-                        populateRoleTypeCombo(organization);
-                        populateTable(organization);
+                Organization.Type type = ( Organization.Type ) cmbOrganizationType.getSelectedItem();
+                if ( type != null ) {
+                    populateOrganizationCombo( country, state, type );
+                    Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+                    if ( organization != null ) {
+                        populateRoleTypeCombo( organization );
+                        populateTable( organization );
                     }
                 }
             }
-        }  
-    }
-    
-    public void populateCountryCombo(){
-        
-        cmbCountry.removeAllItems();
-        for(Country country : ecosystem.getCountryList()){
-            cmbCountry.addItem(country);
-        }
-    }
-    
-    public void populateStateCombo(Country country){
-        
-        cmbState.removeAllItems();
-        for(State state : country.getStateList()){
-            cmbState.addItem(state);
-        }
-    }
-    
-    public void populateOrganizationTypeCombo(){
-                
-        cmbOrganizationType.removeAllItems();
-        for(Organization.Type type : Organization.Type.values()){
-            cmbOrganizationType.addItem(type);
-        }
-    }
-    
-    public void populateOrganizationCombo(Country country, State state, Organization.Type type){
-        
-        cmbOrganization.removeAllItems();
-        for (Organization organization : organizationDirectory.getListOfOrganizations()){
-            if(organization.getCountry().equals(country) 
-               && organization.getState().equals(state)
-               && organization.getType().equals(type)){
-               
-               cmbOrganization.addItem(organization); 
-            }
-        }
-    }
-    
-    private void populateRoleTypeCombo(Organization organization){
-        
-        cmbRoleType.removeAllItems();
-        for(Role role : organization.getSupportedRole()){
-            cmbRoleType.addItem(role);
-        }
-    }
-    
-    private void populateTable(Organization organization){
-        
-        DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-        model.setRowCount(0);
-        
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
-            Object[] row = new Object[3];
-            row[0] = employee.getId();
-            row[1] = employee;
-            row[2] = employee.getUserAccount() != null ? employee.getUserAccount().getUsername() : "No account";
-            model.addRow(row);
         }
     }
 
+    public void populateCountryCombo () {
+
+        cmbCountry.removeAllItems();
+        for ( Country country : ecosystem.getCountryList() ) {
+            cmbCountry.addItem( country );
+        }
+    }
+
+    public void populateStateCombo ( Country country ) {
+
+        cmbState.removeAllItems();
+        for ( State state : country.getStateList() ) {
+            cmbState.addItem( state );
+        }
+    }
+
+    public void populateOrganizationTypeCombo () {
+
+        cmbOrganizationType.removeAllItems();
+        for ( Organization.Type type : Organization.Type.values() ) {
+            cmbOrganizationType.addItem( type );
+        }
+    }
+
+    public void populateOrganizationCombo ( Country country, State state, Organization.Type type ) {
+
+        cmbOrganization.removeAllItems();
+        for ( Organization organization : organizationDirectory.getListOfOrganizations() ) {
+            if ( organization.getCountry().equals( country )
+                    && organization.getState().equals( state )
+                    && organization.getType().equals( type ) ) {
+
+                cmbOrganization.addItem( organization );
+            }
+        }
+    }
+
+    private void populateRoleTypeCombo ( Organization organization ) {
+
+        cmbRoleType.removeAllItems();
+        for ( Role role : organization.getSupportedRole() ) {
+            cmbRoleType.addItem( role );
+        }
+    }
+
+    private void populateTable ( Organization organization ) {
+
+        DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
+        model.setRowCount( 0 );
+
+        for ( Employee employee : organization.getEmployeeDirectory().getEmployeeList() ) {
+            Object[] row = new Object[ 3 ];
+            row[ 0 ] = employee.getId();
+            row[ 1 ] = employee;
+            row[ 2 ] = employee.getUserAccount() != null ? employee.getUserAccount().getUsername() : "No account";
+            model.addRow( row );
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings( "unchecked" )
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -360,64 +359,64 @@ public class ManageUserAccount extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+
+        userProcessContainer.remove( this );
+        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
+        layout.previous( userProcessContainer );
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
         int selectedIndex = tblEmployeeList.getSelectedRow();
-        if(selectedIndex < 0){
-            JOptionPane.showMessageDialog(this, "Please select an employee from the table first");
+        if ( selectedIndex < 0 ) {
+            JOptionPane.showMessageDialog( this, "Please select an employee from the table first" );
             return;
         }
 
-        Employee employee = (Employee)tblEmployeeList.getValueAt(selectedIndex, 1);
+        Employee employee = ( Employee ) tblEmployeeList.getValueAt( selectedIndex, 1 );
 
         String userName = txtUserName.getText();
-        if(userName.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new username for the employee");
+        if ( userName.isEmpty() ) {
+            JOptionPane.showMessageDialog( this, "Please set a new username for the employee" );
             return;
         }
         String password = txtPassword.getText();
-        if(password.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please set a new password for the employee");
+        if ( password.isEmpty() ) {
+            JOptionPane.showMessageDialog( this, "Please set a new password for the employee" );
             return;
         }
 
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
-        Role role = (Role)cmbRoleType.getSelectedItem();
+        Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+        Role role = ( Role ) cmbRoleType.getSelectedItem();
 
         UserAccountDirectory userAccountDirectory = organization.getUserAccountDirectory();
-        userAccountDirectory.createUserAccount(userName, password, employee, role);
+        userAccountDirectory.createUserAccount( userName, password, employee, role );
 
-        populateTable(organization);
+        populateTable( organization );
 
-        JOptionPane.showMessageDialog(this, "User account created successfully");
+        JOptionPane.showMessageDialog( this, "User account created successfully" );
 
-        txtUserName.setText("");
-        txtPassword.setText("");
+        txtUserName.setText( "" );
+        txtPassword.setText( "" );
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void cmbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStateActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        State state = ( State ) cmbState.getSelectedItem();
 
-        if (state != null && country != null) {
+        if ( state != null && country != null ) {
             populateOrganizationTypeCombo();
-            Organization.Type type = (Organization.Type) cmbOrganizationType.getSelectedItem();
-            if (type != null) {
-                populateOrganizationCombo(country, state, type);
-                Organization organization = (Organization) cmbOrganization.getSelectedItem();
-                if (organization != null) {
-                    populateRoleTypeCombo(organization);
-                    populateTable(organization);
-                }  else {
-                    DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-                    model.setRowCount(0);
+            Organization.Type type = ( Organization.Type ) cmbOrganizationType.getSelectedItem();
+            if ( type != null ) {
+                populateOrganizationCombo( country, state, type );
+                Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+                if ( organization != null ) {
+                    populateRoleTypeCombo( organization );
+                    populateTable( organization );
+                } else {
+                    DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
+                    model.setRowCount( 0 );
                     cmbRoleType.removeAllItems();
                 }
             }
@@ -430,32 +429,32 @@ public class ManageUserAccount extends javax.swing.JPanel {
 
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
 
-        Organization organization = (Organization)cmbOrganization.getSelectedItem();
-        if(organization != null){
-            populateRoleTypeCombo(organization);
-            populateTable(organization);
+        Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+        if ( organization != null ) {
+            populateRoleTypeCombo( organization );
+            populateTable( organization );
         } else {
-            DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-            model.setRowCount(0);
+            DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
+            model.setRowCount( 0 );
             cmbRoleType.removeAllItems();
         }
     }//GEN-LAST:event_cmbOrganizationActionPerformed
 
     private void cmbOrganizationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationTypeActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        State state = (State) cmbState.getSelectedItem();
-        Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        State state = ( State ) cmbState.getSelectedItem();
+        Organization.Type type = ( Organization.Type ) cmbOrganizationType.getSelectedItem();
 
-        if(type != null){
-            populateOrganizationCombo(country, state, type);
-            Organization organization = (Organization)cmbOrganization.getSelectedItem();
-            if(organization != null){
-                populateRoleTypeCombo(organization);
-                populateTable(organization);
+        if ( type != null ) {
+            populateOrganizationCombo( country, state, type );
+            Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+            if ( organization != null ) {
+                populateRoleTypeCombo( organization );
+                populateTable( organization );
             } else {
-                DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-                model.setRowCount(0);
+                DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
+                model.setRowCount( 0 );
                 cmbRoleType.removeAllItems();
             }
         }
@@ -463,22 +462,22 @@ public class ManageUserAccount extends javax.swing.JPanel {
 
     private void cmbCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCountryActionPerformed
 
-        Country country = (Country)cmbCountry.getSelectedItem();
-        if(country != null){
-            populateStateCombo(country);
-            State state = (State)cmbState.getSelectedItem();
-            if(state != null){
+        Country country = ( Country ) cmbCountry.getSelectedItem();
+        if ( country != null ) {
+            populateStateCombo( country );
+            State state = ( State ) cmbState.getSelectedItem();
+            if ( state != null ) {
                 populateOrganizationTypeCombo();
-                Organization.Type type = (Organization.Type)cmbOrganizationType.getSelectedItem();
-                if(type != null){
-                    populateOrganizationCombo(country, state, type);
-                    Organization organization = (Organization)cmbOrganization.getSelectedItem();
-                    if(organization != null){
-                        populateRoleTypeCombo(organization);
-                        populateTable(organization);
-                    }  else {
-                        DefaultTableModel model = (DefaultTableModel) tblEmployeeList.getModel();
-                        model.setRowCount(0);
+                Organization.Type type = ( Organization.Type ) cmbOrganizationType.getSelectedItem();
+                if ( type != null ) {
+                    populateOrganizationCombo( country, state, type );
+                    Organization organization = ( Organization ) cmbOrganization.getSelectedItem();
+                    if ( organization != null ) {
+                        populateRoleTypeCombo( organization );
+                        populateTable( organization );
+                    } else {
+                        DefaultTableModel model = ( DefaultTableModel ) tblEmployeeList.getModel();
+                        model.setRowCount( 0 );
                         cmbRoleType.removeAllItems();
                     }
                 }

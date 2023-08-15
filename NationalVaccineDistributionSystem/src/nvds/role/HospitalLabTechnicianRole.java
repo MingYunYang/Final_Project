@@ -12,8 +12,8 @@ import nvds.useraccount.UserAccount;
 import ui.hospital.HospitalWorkArea;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class HospitalLabTechnicianRole extends Role{
     

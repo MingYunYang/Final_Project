@@ -12,8 +12,8 @@ import nvds.useraccount.UserAccount;
 import nvds.vaccine.Batch;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class ViewBatchDetails extends javax.swing.JPanel {
 

@@ -8,6 +8,10 @@ import nvds.geography.State;
 import nvds.organization.Organization.Type;
 import java.util.ArrayList;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class OrganizationDirectory {
 
     private final ArrayList<Organization> listOfOrganizations;

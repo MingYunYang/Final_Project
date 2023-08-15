@@ -2,6 +2,10 @@ package nvds.vaccine;
 
 import java.util.ArrayList;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class VaccineCatalog { // for CDC
 
     ArrayList<Vaccine> vaccineList;

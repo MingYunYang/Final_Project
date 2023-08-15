@@ -11,8 +11,8 @@ import nvds.organization.Hospital;
 import nvds.vaccine.Batch;
 
 /**
- *
  * @author libby
+ * @author mutara
  */
 public class AllocationRequest extends WorkRequest{
     

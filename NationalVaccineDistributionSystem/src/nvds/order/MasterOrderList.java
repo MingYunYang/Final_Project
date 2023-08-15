@@ -3,6 +3,10 @@ package nvds.order;
 import java.util.ArrayList;
 import nvds.organization.Hospital;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class MasterOrderList {
 
     private final ArrayList<Order> orderList;

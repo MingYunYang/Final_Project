@@ -17,8 +17,8 @@ import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
 /**
- *
- * @author mutar
+ * @author libby
+ * @author mutara
  */
 public class ViewCityAllocationDetails extends javax.swing.JPanel {
 

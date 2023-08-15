@@ -2,6 +2,10 @@ package nvds.geography;
 
 import java.util.ArrayList;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class Country {
 
     private String name;

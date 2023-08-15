@@ -9,6 +9,10 @@ import nvds.geography.State;
 import nvds.role.NVDSAdminRole;
 import nvds.role.Role;
 
+/**
+ * @author libby
+ * @author mutara
+ */
 public class NVDSAdmin extends Organization {
 
     private ArrayList<Role> supportedRole;
