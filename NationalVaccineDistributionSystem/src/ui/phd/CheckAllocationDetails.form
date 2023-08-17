@@ -19,50 +19,50 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnDistributeVaccine" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDistributionWaitingList" alignment="0" min="-2" pref="287" max="-2" attributes="0"/>
+                  <Component id="btnCheckPHDApprovalRequestStatus" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAllocationWaitingList" alignment="0" min="-2" pref="287" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblBatchID1" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="lblVaccineID1" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                                      <Component id="lblBatchID" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <Component id="lblVaccineID" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="lblVaccineName1" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Component id="lblVaccineName" min="-2" pref="114" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtVaccineID" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtVaccineID" max="32767" attributes="0"/>
                               <Component id="txtVaccineName" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtBatchID" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblMFD1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAvailability1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEXD1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMFD" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAvailability" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEXD" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtAvailability" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtAvailability" max="32767" attributes="0"/>
                               <Component id="txtMFD" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtEXD" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="632" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <EmptySpace pref="108" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,52 +72,35 @@
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBack" linkSize="1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtVaccineID" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblVaccineID1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblVaccineName1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtBatchID" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblBatchID1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEXD1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtAvailability" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAvailability1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="txtMFD" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblMFD1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="txtEXD" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtVaccineID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVaccineID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAvailability" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtAvailability" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVaccineName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMFD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMFD" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtBatchID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblBatchID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEXD" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEXD" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblDistributionWaitingList" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAllocationWaitingList" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="159" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnDistributeVaccine" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnCheckPHDApprovalRequestStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="183" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -135,23 +118,51 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDistributeVaccine">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="13" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Confirm Distribution"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDistributeVaccineActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDistributionWaitingList">
+    <Component class="javax.swing.JLabel" name="lblAvailability">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Distribution Waiting List:"/>
+        <Property name="text" type="java.lang.String" value="Available Quantity:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVaccineName">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Vaccine Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Check Regular Allocation Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtVaccineName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVaccineID">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Vaccine ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtVaccineID">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAvailability">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -161,29 +172,53 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblSuggestedDistributionList">
+        <Component class="javax.swing.JTable" name="tblAllocationWaitingList">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="4">
-                <Column editable="false" title="Satellite Clinic" type="java.lang.Object"/>
-                <Column editable="false" title="Distributed Qty" type="java.lang.Object"/>
-                <Column editable="true" title="Specific Qty" type="java.lang.Object"/>
+              <Table columnCount="7" rowCount="4">
+                <Column editable="false" title="State" type="java.lang.String"/>
+                <Column editable="false" title="State Popul." type="java.lang.Object"/>
+                <Column editable="false" title="State Alloc." type="java.lang.Object"/>
+                <Column editable="false" title="City" type="java.lang.Object"/>
+                <Column editable="false" title="City Popul." type="java.lang.Object"/>
+                <Column editable="false" title="City Alloc." type="java.lang.Object"/>
+                <Column editable="false" title="Status" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                  <Title value="Status"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
@@ -196,70 +231,28 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblTitle">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Distribute Vaccine"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblVaccineID1">
+    <Component class="javax.swing.JLabel" name="lblAllocationWaitingList">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier New" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Vaccine ID:"/>
+        <Property name="text" type="java.lang.String" value="Allocation List:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtVaccineName">
+    <Component class="javax.swing.JButton" name="btnCheckPHDApprovalRequestStatus">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Check Approve Or Reject"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckPHDApprovalRequestStatusActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEXD">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblVaccineName1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Vaccine Name:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAvailability1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Available Quantity:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtBatchID">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblBatchID1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Batch ID:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMFD1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Batch MFD:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEXD1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Courier New" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Batch EXD:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMFD">
@@ -267,17 +260,31 @@
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEXD">
+    <Component class="javax.swing.JLabel" name="lblEXD">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Batch EXD:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAvailability">
+    <Component class="javax.swing.JLabel" name="lblMFD">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Batch MFD:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtVaccineID">
+    <Component class="javax.swing.JLabel" name="lblBatchID">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier New" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Batch ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtBatchID">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>

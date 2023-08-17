@@ -16,7 +16,7 @@ public class AdverseEventTracking {
 
     private String batchId;
 
-    private String vaccineName;
+    private Vaccine vaccine;
 
     private String manufacturer;
 
@@ -52,12 +52,12 @@ public class AdverseEventTracking {
         this.batchId = batchId;
     }
 
-    public String getVaccineName() {
-        return vaccineName;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
     public String getManufacturer() {

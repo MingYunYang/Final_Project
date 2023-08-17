@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import nvds.NationalVaccineDistributionSystem;
+import nvds.organization.Hospital;
 import nvds.organization.Organization;
 import nvds.organization.Organization.Type;
 import nvds.organization.PublicHealthDepartment;
@@ -23,14 +24,14 @@ import nvds.workqueue.WorkRequest;
  * @author libby
  * @author mutara
  */
-public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
+public class ManageVaccineRequest extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     NationalVaccineDistributionSystem nvds;
     UserAccount userAccount;
     Organization organization;
 
-    public ManageHospitalVaccineRequest ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds ) {
+    public ManageVaccineRequest ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds ) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
@@ -53,12 +54,11 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
 
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getAvailableQuantity();
-                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 2 ] = reviewRequest.getRequestQuantity();
+                row[ 3 ] = reviewRequest.getRequestingClinic().getOrganizationName();
                 row[ 4 ] = reviewRequest.getClinicReviewer();
                 row[ 5 ] = reviewRequest.getHospitalReviewer();
                 row[ 6 ] = reviewRequest.getStatus();
-
                 String result = (( ReviewRequest ) request).getResult();
                 row[ 7 ] = ((result == null) ? "Waiting" : result);
 
@@ -74,17 +74,16 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 8 ];
+                Object[] row = new Object[ 7 ];
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getAvailableQuantity();
-                row[ 3 ] = reviewRequest.getRequestQuantity();
-                row[ 4 ] = reviewRequest.getHospitalReviewer();
-                row[ 5 ] = reviewRequest.getStatus();
-                row[ 6 ] = reviewRequest.getPhdReviewer();;
+                row[ 2 ] = reviewRequest.getRequestQuantity();
+                row[ 3 ] = reviewRequest.getHospitalReviewer();
+                row[ 4 ] = reviewRequest.getStatus();
+                row[ 5 ] = reviewRequest.getPhdReviewer();;
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 7 ] = ((result == null) ? "Waiting" : result);
+                row[ 6 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -119,7 +118,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Sender", "Recipient", "Req. Status", "Req. Result"
+                "Vaccine ID", "Vaccine", "Req. Qty", "Req. Clinic", "Sender", "Recipient", "Req. Status", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -156,17 +155,17 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
 
         tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
+                "Vaccine ID", "Vaccine", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -176,7 +175,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblRequestWaitingToBeReviewed);
 
         btnCheckIAllocationDetails.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnCheckIAllocationDetails.setText("Check Allocation Details");
+        btnCheckIAllocationDetails.setText("Check Regular Allocation Details");
         btnCheckIAllocationDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheckIAllocationDetailsActionPerformed(evt);
@@ -226,7 +225,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
@@ -234,9 +233,9 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
                 .addComponent(lblRequestList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAssignToMe)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRequestWaitingToBeReviewed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,7 +244,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
                     .addComponent(btnApproved)
                     .addComponent(btnRejected)
                     .addComponent(btnCheckIAllocationDetails))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,6 +263,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog( this, "Request already completed" );
                 return;
             } else {
+                
                 userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests().add( request );
                 request.setHospitalReviewer( userAccount );
                 request.setStatus( "Under Hospital Review" );
@@ -276,7 +276,6 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
             JOptionPane.showMessageDialog( this, "Please select a request from the table first" );
             return;
         }
-
     }//GEN-LAST:event_btnAssignToMeActionPerformed
 
     private void btnCheckIAllocationDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckIAllocationDetailsActionPerformed
@@ -290,7 +289,7 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
         ReviewRequest reviewRequest = (ReviewRequest)tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
         Vaccine selectedVaccine = reviewRequest.getVaccine();
         
-        ViewCityAllocationDetails uvi = new ViewCityAllocationDetails( userProcessContainer, userAccount, organization, nvds, selectedVaccine);
+        CheckAllocationDetails uvi = new CheckAllocationDetails( userProcessContainer, userAccount, organization, nvds, selectedVaccine);
         userProcessContainer.add( "CheckVaccineAllocation", uvi );
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next( userProcessContainer );
@@ -335,6 +334,8 @@ public class ManageHospitalVaccineRequest extends javax.swing.JPanel {
             Role reviewerRole = PHD.getSpecificRole(Role.RoleType.VACCINE_REQUEST_REVIEWER);
             if(reviewerRole != null){
                 reviewRequest.setStatus("Approved By Hospital");
+                Hospital hospital = (Hospital) organization;
+                reviewRequest.setRequestingHospital(hospital);
                 WorkQueue mainWorkQueue = reviewerRole.getMainWorkQueue();
                 mainWorkQueue.getListOfWorkRequests().add(reviewRequest);
                 

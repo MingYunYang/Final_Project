@@ -71,15 +71,16 @@ public class AdminWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(202, 202, 202)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(202, 202, 202)
+                        .addComponent(lblQuestion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(manageUserAccountJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageOrganizationJButton)))
-                    .addComponent(lblQuestion))
+                            .addComponent(manageOrganizationJButton))))
                 .addContainerGap(246, Short.MAX_VALUE))
         );
 
@@ -90,13 +91,13 @@ public class AdminWorkArea extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addComponent(lblQuestion)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(manageOrganizationJButton)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(manageEmployeeJButton)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addComponent(manageUserAccountJPanel)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblQuestion, manageEmployeeJButton, manageOrganizationJButton, manageUserAccountJPanel});

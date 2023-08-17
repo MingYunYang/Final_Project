@@ -4,6 +4,8 @@
  */
 package nvds.workqueue;
 
+import nvds.organization.Clinic;
+import nvds.organization.Hospital;
 import nvds.vaccine.Batch;
 
 /**
@@ -15,7 +17,9 @@ public class ReviewRequest extends WorkRequest {
     private String result;
     private int originalQuantity; // allocated quantity for clinic 分配給診所的數量
     private int availableQuantity; // left quantity in clinic 診所實際上剩下的數量
-    private Batch batch;
+    private Clinic requestingClinic;
+    private Hospital requestingHospital;
+    Batch batch;
 
     public ReviewRequest () {
         super();
@@ -52,6 +56,32 @@ public class ReviewRequest extends WorkRequest {
     public void setBatch(Batch batch) {
         this.batch = batch;
     }
+
+    public Clinic getRequestingClinic() {
+        return requestingClinic;
+    }
+
+    public void setRequestingClinic(Clinic requestingClinic) {
+        this.requestingClinic = requestingClinic;
+    }
+
+    public int getOriginalQuantity() {
+        return originalQuantity;
+    }
+
+    public void setOriginalQuantity(int originalQuantity) {
+        this.originalQuantity = originalQuantity;
+    }
+
+    public Hospital getRequestingHospital() {
+        return requestingHospital;
+    }
+
+    public void setRequestingHospital(Hospital requestingHospital) {
+        this.requestingHospital = requestingHospital;
+    }
+    
+    
 
     
     

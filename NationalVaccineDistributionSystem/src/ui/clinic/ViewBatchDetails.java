@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.hospital;
+package ui.clinic;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -47,7 +47,7 @@ public class ViewBatchDetails extends javax.swing.JPanel {
         txtVaccineName.setText(batch.getVaccine().getName());
         txtBatchID.setText(batch.getBatchId());
         txtPrice.setText(String.valueOf(batch.getPriceForEachVaccine()));
-        txtQuantity.setText(String.valueOf(allocationRequest.getRequestQuantity()));
+        txtQuantity.setText(String.valueOf(allocationRequest.getDistributedQuantityForClinic()));
         txtManufacturer.setText(batch.getManufacturer().getOrganizationName());
         txtMFD.setText(batch.getManufactureDate());
         txtEXD.setText(batch.getExpirationDate());
@@ -235,7 +235,7 @@ public class ViewBatchDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtManufacturerActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtManufacturerActionPerformed
 
 

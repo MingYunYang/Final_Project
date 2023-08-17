@@ -18,7 +18,9 @@ public class Batch {
     private String paymentStatus;
     private int originalQuantity; // allocated quantity for clinic 分配給診所的數量
     private int availableQuantity; // left quantity in clinic 診所實際上剩下的數量
-    private int availableQuantityInCDC; // left quantity in CDC 實際上剩下的數量
+    private int availableQuantityInCDC; // left quantity in CDC CDC實際上剩下的數量
+    private int availableQuantityInHospital; // left quantity in hospital 醫院實際上剩下的數量
+    private int availableQuantityInDistributor; // left quantity in distributor Distributor實際上剩下的數量
 
 
     public Batch ( Vaccine vaccine, int quantity, int priceForEachVaccine, Manufacturer manufacturer, String manufactureDate, String expirationDate, String batchId ) {
@@ -30,7 +32,6 @@ public class Batch {
         this.manufactureDate = manufactureDate;
         this.expirationDate = expirationDate;
         this.batchId = batchId;
-        this.availableQuantityInCDC = quantity;
         paymentStatus = "Waiting";
     }
     
@@ -41,27 +42,6 @@ public class Batch {
         return "Sufficient";
     }
 
-//    private void generateBatchId(int productionMonth , int productionYear , String manufacturerCode , int currentBatchNumber) {
-//        
-//        this.batchId = String.format(
-//                "%02d%02d-%s-%05d" ,
-//                productionMonth ,
-//                productionYear ,
-//                manufacturerCode ,
-//                currentBatchNumber
-//        );
-//    }
-//    private boolean isValidDate(String date) {
-//        
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        dateFormat.setLenient(false);
-//        try {
-//            dateFormat.parse(date);
-//            return true;
-//        } catch (ParseException e) {
-//            return false;
-//        }
-//    }
     public int getQuantity () {
         return quantity;
     }
@@ -144,6 +124,22 @@ public class Batch {
 
     public void setAvailableQuantityInCDC(int availableQuantityInCDC) {
         this.availableQuantityInCDC = availableQuantityInCDC;
+    }
+
+    public int getAvailableQuantityInHospital() {
+        return availableQuantityInHospital;
+    }
+
+    public void setAvailableQuantityInHospital(int availableQuantityInHospital) {
+        this.availableQuantityInHospital = availableQuantityInHospital;
+    }
+
+    public int getAvailableQuantityInDistributor() {
+        return availableQuantityInDistributor;
+    }
+
+    public void setAvailableQuantityInDistributor(int availableQuantityInDistributor) {
+        this.availableQuantityInDistributor = availableQuantityInDistributor;
     }
 
 

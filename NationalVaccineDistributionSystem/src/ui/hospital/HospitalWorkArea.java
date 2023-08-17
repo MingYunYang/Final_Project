@@ -132,7 +132,7 @@ public class HospitalWorkArea extends javax.swing.JPanel {
 
     private void btnManageVaccineRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVaccineRequestActionPerformed
 
-        ManageHospitalVaccineRequest mvr = new ManageHospitalVaccineRequest(userProcessContainer , userAccount , organization , ecosystem);
+        ManageVaccineRequest mvr = new ManageVaccineRequest(userProcessContainer , userAccount , organization , ecosystem);
         userProcessContainer.add("ManageHospitalVaccineRequest" , mvr);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

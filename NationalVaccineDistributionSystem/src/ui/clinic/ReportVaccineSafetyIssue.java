@@ -14,6 +14,7 @@ import nvds.organization.Organization.Type;
 import nvds.role.Role;
 import nvds.useraccount.UserAccount;
 import nvds.vaccine.AdverseEventTracking;
+import nvds.vaccine.Vaccine;
 import nvds.workqueue.AdverseEventTrackingRequest;
 import nvds.workqueue.WorkRequest;
 
@@ -36,7 +37,22 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.organization = organization;
         
+        populateVaccineCombo();
         populateWaitingWorkQueueTable();
+    }
+    
+    private void populateVaccineCombo(){
+        
+        CDC CDC = null;
+        for(Organization organization : ecosystem.getOrganizationDirectory().getListOfOrganizations()){
+            if(organization.getType().equals(Type.CDC) && organization.getCountry().equals(this.organization.getCountry())){
+                CDC = (CDC)organization;
+            }
+        }
+        
+        for(Vaccine vaccine : CDC.getVaccineCatalog().getVaccineList()){
+            cmbVaccineName.addItem(vaccine);
+        }
     }
 
     private void populateWaitingWorkQueueTable() {
@@ -46,20 +62,19 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
 
         for (WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests()) {
             if (request instanceof AdverseEventTrackingRequest) {
-                    Object[] row = new Object[ 11 ];
+                    Object[] row = new Object[ 10 ];
                     row[ 0 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getEventId();
-                    row[ 1 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getDateReported();
+                    row[ 1 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getVaccine().getName();
                     row[ 2 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getDescription();
                     row[ 3 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getPeopleAffected();
-                    row[ 4 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getVaccineName();
-                    row[ 5 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getBatchId();
-                    row[ 6 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getManufacturer();
-                    row[ 7 ] = request.getSender();
-                    row[ 8 ] = request.getReceiver();
+                    row[ 4 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getBatchId();
+                    row[ 5 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getManufacturer();
+                    row[ 6 ] = request.getSender();
+                    row[ 7 ] = request.getReceiver();
                     String recallStatus = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getRecallStatus();
-                    row[ 9 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
+                    row[ 8 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
                     String recallReason = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getRecallReason();
-                    row[ 10 ] = ((recallReason == null) ? "Waiting" : recallReason);
+                    row[ 9 ] = ((recallReason == null) ? "Waiting" : recallReason);
                     model.addRow(row);
             }
         }
@@ -72,7 +87,6 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         txtPatientDeathsIfAny = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
-        txtVaccineName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtBatchId = new javax.swing.JTextField();
         txtVaccineManufacturer = new javax.swing.JTextField();
@@ -86,6 +100,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnSendSafetyIssueReport = new javax.swing.JButton();
+        cmbVaccineName = new javax.swing.JComboBox();
 
         txtPatientDeathsIfAny.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,11 +108,11 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
 
-        lblMessage.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        lblMessage.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblMessage.setText("Description:");
 
         jLabel6.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel6.setText("Safety issue report work list:");
+        jLabel6.setText("Safety Issue Report List:");
 
         txtBatchId.setToolTipText("MMYY-CODE-00000");
         txtBatchId.addActionListener(new java.awt.event.ActionListener() {
@@ -112,28 +127,28 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        jLabel1.setText("Vaccine Name:");
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jLabel1.setText("Vaccine:");
 
-        jLabel2.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         jLabel2.setText("Batch ID:");
 
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Event Id", "Report date", "Description", "People Affected", "Vaccine", "BatchID", "Manufacturer", "Sender", "Reciever", "Recall Status", "Recall Reason"
+                "Event ID", "Vaccine", "Description", "Affected Patients", "Batch ID", "Manufacturer", "Sender", "Reciever", "Recall Status", "Recall Reason"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,8 +160,14 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblWorkRequests);
+        if (tblWorkRequests.getColumnModel().getColumnCount() > 0) {
+            tblWorkRequests.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblWorkRequests.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblWorkRequests.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tblWorkRequests.getColumnModel().getColumn(5).setPreferredWidth(50);
+        }
 
-        jLabel3.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         jLabel3.setText("Manufacturer:");
 
         txtPatientsAffected.addActionListener(new java.awt.event.ActionListener() {
@@ -155,16 +176,16 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        jLabel7.setText("Report any deaths:");
+        jLabel7.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jLabel7.setText("Report Deaths:");
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lblTitle.setText("Report Vaccine Safety Issue:");
 
-        jLabel8.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         jLabel8.setText("Affected Patients:");
 
-        btnSendSafetyIssueReport.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
+        btnSendSafetyIssueReport.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnSendSafetyIssueReport.setText("Send Report");
         btnSendSafetyIssueReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,84 +193,105 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             }
         });
 
+        cmbVaccineName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVaccineNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblTitle)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                                .addGap(81, 81, 81)
+                                .addComponent(btnSendSafetyIssueReport))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
                                     .addComponent(lblMessage)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2)))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(txtVaccineName)
-                                    .addComponent(txtBatchId))
-                                .addGap(45, 45, 45)
+                                    .addComponent(txtBatchId)
+                                    .addComponent(cmbVaccineName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(76, 76, 76)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtVaccineManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnSendSafetyIssueReport)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtPatientsAffected, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                                .addComponent(txtPatientDeathsIfAny)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(91, 91, 91))
-                            .addComponent(lblTitle)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(254, 254, 254))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtPatientsAffected)
+                                            .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(316, 316, 316))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblTitle)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel1)
+                                .addGap(17, 17, 17))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblMessage)
-                            .addComponent(jLabel3))
-                        .addGap(15, 15, 15))
+                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBatchId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtVaccineManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(17, 17, 17))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtVaccineManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtPatientsAffected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8)
-                    .addComponent(txtPatientsAffected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBatchId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel7)
-                    .addComponent(txtPatientDeathsIfAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnSendSafetyIssueReport)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel6)
+                    .addComponent(btnSendSafetyIssueReport))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,10 +314,10 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
     private void btnSendSafetyIssueReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendSafetyIssueReportActionPerformed
 
         String description = txtDescription.getText();
-        String vaccineName = txtVaccineName.getText();
+        Vaccine vaccine = (Vaccine)cmbVaccineName.getSelectedItem();
         String manufacturer = txtVaccineManufacturer.getText();
         String batchId = txtBatchId.getText();
-        if ( description.isEmpty() || vaccineName.isEmpty() || manufacturer.isEmpty() || batchId.isEmpty() ) {
+        if ( description.isEmpty() || manufacturer.isEmpty() || batchId.isEmpty() ) {
             JOptionPane.showMessageDialog(this , "All fields must be filled out");
             return;
         }
@@ -299,7 +341,7 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
             return;
         }
         adverseEventTracking.setDescription(description);
-        adverseEventTracking.setVaccineName(vaccineName);
+        adverseEventTracking.setVaccine(vaccine);
         adverseEventTracking.setManufacturer(manufacturer);
         adverseEventTracking.setBatchId(batchId);
         adverseEventTracking.setAffectedPeople(patientsAffected);
@@ -332,14 +374,18 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
         txtPatientDeathsIfAny.setText("");
         txtPatientsAffected.setText("");
         txtVaccineManufacturer.setText("");
-        txtVaccineName.setText("");
         
         populateWaitingWorkQueueTable();
     }//GEN-LAST:event_btnSendSafetyIssueReportActionPerformed
 
+    private void cmbVaccineNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVaccineNameActionPerformed
+
+    }//GEN-LAST:event_cmbVaccineNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendSafetyIssueReport;
+    private javax.swing.JComboBox cmbVaccineName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -355,6 +401,5 @@ public class ReportVaccineSafetyIssue extends javax.swing.JPanel {
     private javax.swing.JTextField txtPatientDeathsIfAny;
     private javax.swing.JTextField txtPatientsAffected;
     private javax.swing.JTextField txtVaccineManufacturer;
-    private javax.swing.JTextField txtVaccineName;
     // End of variables declaration//GEN-END:variables
 }

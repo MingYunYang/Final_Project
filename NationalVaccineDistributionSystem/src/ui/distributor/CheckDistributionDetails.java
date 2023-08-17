@@ -6,6 +6,7 @@ package ui.distributor;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import nvds.NationalVaccineDistributionSystem;
 import nvds.organization.Organization;
@@ -45,7 +46,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
         txtVaccineName.setText(allocationRequest.getVaccine().getName());
         txtBatchID.setText(allocationRequest.getBatch().getBatchId());
         txtPrice.setText(String.valueOf(allocationRequest.getBatch().getPriceForEachVaccine()));
-        txtQuantity.setText(String.valueOf(allocationRequest.getRequestQuantity())); // allocated quantity for city
+        txtQuantity.setText(String.valueOf(allocationRequest.getBatch().getAvailableQuantityInDistributor())); 
         txtMFD.setText(allocationRequest.getBatch().getManufactureDate());
         txtEXD.setText(allocationRequest.getBatch().getExpirationDate());
         
@@ -124,7 +125,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
         lblMFD.setText("Batch MFD:");
 
         lblQuantity.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblQuantity.setText("Distribution Quantity:");
+        lblQuantity.setText("Available Quantity:");
 
         lblBatchID.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         lblBatchID.setText("Batch ID:");
@@ -170,11 +171,11 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblMFD)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblEXD)
-                                        .addGap(114, 114, 114)
+                                        .addGap(90, 90, 90)
                                         .addComponent(txtEXD, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtMFD, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +193,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
                                                 .addComponent(txtVaccineName, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtVaccineID, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(txtQuantity)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblReceivedHospital)
@@ -220,7 +221,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
-                .addGap(32, 32, 32)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -247,7 +248,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
                             .addComponent(txtMFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblMFD))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEXD)
                             .addComponent(txtEXD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -264,7 +265,7 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
                             .addComponent(txtReceivedHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 27, 27)
                 .addComponent(btnConfirmDistribution)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,10 +283,17 @@ public class CheckDistributionDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnConfirmDistributionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmDistributionActionPerformed
-                
+
+        if(txtQuantity.getText().equals("0")){
+            JOptionPane.showMessageDialog(this, "Selected batch of vaccine has already been distributed");
+            return;
+        }
+        
         WorkQueue waitingWorkQueue = userAccount.getRole().getWaitingWorkQueue();
         waitingWorkQueue.getListOfWorkRequests().add(allocationRequest);
         allocationRequest.setStatus("Confirmed By Distributor");
+        int updateAvailableQuantity = allocationRequest.getBatch().getAvailableQuantityInDistributor() - allocationRequest.getRequestQuantity();
+        allocationRequest.getBatch().setAvailableQuantityInDistributor(updateAvailableQuantity);
         
         // going back to the previous page automatically
         userProcessContainer.remove( this );

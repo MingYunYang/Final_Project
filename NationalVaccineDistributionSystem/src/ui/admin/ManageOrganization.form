@@ -80,9 +80,9 @@
                                                   </Group>
                                               </Group>
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="cmbState" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="cmbCity" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="cmbOrganizationType" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="cmbState" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                                                  <Component id="cmbCity" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                                                  <Component id="cmbOrganizationType" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
                                                   <Component id="cmbCountry" min="-2" pref="162" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>

@@ -14,9 +14,9 @@ import nvds.organization.Clinic;
 import nvds.organization.Organization;
 import nvds.organization.Organization.Type;
 import nvds.useraccount.UserAccount;
+import nvds.vaccine.Batch;
 import nvds.workqueue.AllocationRequest;
 import nvds.workqueue.WorkQueue;
-import nvds.workqueue.WorkRequest;
 
 /**
  * @author libby
@@ -33,14 +33,17 @@ public class DistributeVaccine extends javax.swing.JPanel {
     Organization organization;
 
     AllocationRequest allocationRequest;
+    
+    Batch batch;
 
-    public DistributeVaccine ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds, AllocationRequest allocationRequest ) {
+    public DistributeVaccine ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds, AllocationRequest allocationRequest, Batch batch ) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.nvds = nvds;
         this.userAccount = userAccount;
         this.organization = organization;
         this.allocationRequest = allocationRequest;
+        this.batch = batch;
 
         populateAllocatedvaccineDetails();
         populateSuggestedDistributionListTable();
@@ -50,7 +53,7 @@ public class DistributeVaccine extends javax.swing.JPanel {
         txtVaccineID.setText( String.valueOf( allocationRequest.getBatch().getVaccine().getVaccineId() ) );
         txtVaccineName.setText( allocationRequest.getBatch().getVaccine().getName() );
         txtBatchID.setText( allocationRequest.getBatch().getBatchId() );
-        txtAvailability.setText( String.valueOf( allocationRequest.getRequestQuantity() ) );
+        txtAvailability.setText( String.valueOf( allocationRequest.getBatch().getAvailableQuantityInHospital() ) );
         txtMFD.setText( allocationRequest.getBatch().getManufactureDate() );
         txtEXD.setText( allocationRequest.getBatch().getExpirationDate() );
     }
@@ -69,29 +72,16 @@ public class DistributeVaccine extends javax.swing.JPanel {
 
                 Clinic clinic = ( Clinic ) organization;
 
-                Object[] row = new Object[ 4 ]; // Added new column for specific quantity
+                Object[] row = new Object[ 3 ]; // Added new column for specific quantity
                 row[ 0 ] = clinic; // will show as the clinic's name
                 row[ 1 ] = distributedQuantityForClinic;
                 row[ 2 ] = ""; // New column to take input for specific quantity
-                row[ 3 ] = checkDistributionStatus( clinic );
-
                 model.addRow( row );
             }
         }
     }
 
-    public String checkDistributionStatus ( Clinic clinic ) {
-
-        for ( WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests() ) {
-            AllocationRequest allocationRequest = ( AllocationRequest ) request;
-            if ( allocationRequest.getReceivedClinic() != null && allocationRequest.getReceivedClinic().equals( clinic ) ) {
-                return "Distributed";
-            }
-        }
-        return "Waiting";
-    }
-
-    @SuppressWarnings( "unchecked" )
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -135,17 +125,17 @@ public class DistributeVaccine extends javax.swing.JPanel {
 
         tblSuggestedDistributionList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Satellite Clinic", "Distributed Qty", "Specific Qty", "Status"
+                "Satellite Clinic", "Distributed Qty", "Specific Qty"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -279,22 +269,23 @@ public class DistributeVaccine extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
-        userProcessContainer.remove( this );
+        userProcessContainer.remove(this);
 
         Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[ componentArray.length - 1 ];
-        ManageVaccineInventory mva = ( ManageVaccineInventory ) component;
+        Component component = componentArray[componentArray.length - 1];
+        ManageVaccineInventory mva = (ManageVaccineInventory) component;
         mva.populateDeliveryWaitingListTable();
         mva.populateReceivedDeliveryNotificationsTable();
 
-        CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
-        layout.previous( userProcessContainer );
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
 
         evt.getWhen();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDistributeVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistributeVaccineActionPerformed
 
+        
         int selectedRowIndex = tblSuggestedDistributionList.getSelectedRow();
         if ( selectedRowIndex < 0 ) {
             JOptionPane.showMessageDialog( this, "Please select a distribution target first" );
@@ -327,6 +318,8 @@ public class DistributeVaccine extends javax.swing.JPanel {
         allocationRequest.setReceivedClinic( receivedClinic );
         allocationRequest.setDistributedQuantityForClinic( distributionQuantity );
         allocationRequest.setStatus( "Distributed By Hospital" );
+        int updateAvailableQuantity = allocationRequest.getBatch().getAvailableQuantityInHospital() - distributionQuantity;
+        allocationRequest.getBatch().setAvailableQuantityInHospital(updateAvailableQuantity);
 
         WorkQueue waitingWorkQueue = userAccount.getRole().getWaitingWorkQueue();
         waitingWorkQueue.getListOfWorkRequests().add( allocationRequest );

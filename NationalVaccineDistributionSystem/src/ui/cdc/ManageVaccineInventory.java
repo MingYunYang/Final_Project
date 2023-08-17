@@ -353,6 +353,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         Batch batch = deliveryRequest.getBatch();
         batch.getVaccine().setManufactureStatus("Completed");
         batch.setPaymentStatus("Paid");
+        batch.setAvailableQuantityInCDC(batch.getQuantity());
         
         populateReceivedDeliveryNotificationsTable();
     }//GEN-LAST:event_btnReceivedActionPerformed

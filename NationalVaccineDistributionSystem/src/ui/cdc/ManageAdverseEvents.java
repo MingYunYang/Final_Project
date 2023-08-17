@@ -38,20 +38,19 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
         
             for (WorkRequest request : userAccount.getRole().getMainWorkQueue().getListOfWorkRequests()) {
             if (request instanceof AdverseEventTrackingRequest) {
-                    Object[] row = new Object[ 11 ];
+                    Object[] row = new Object[ 10 ];
                     row[ 0 ] = ((AdverseEventTrackingRequest) request);
-                    row[ 1 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getDateReported();
+                    row[ 1 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getVaccine().getName();
                     row[ 2 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getDescription();
                     row[ 3 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getPeopleAffected();
-                    row[ 4 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getVaccineName();
-                    row[ 5 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getBatchId();
-                    row[ 6 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getManufacturer();
-                    row[ 7 ] = request.getSender();
-                    row[ 8 ] = request.getReceiver();
+                    row[ 4 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getBatchId();
+                    row[ 5 ] = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getManufacturer();
+                    row[ 6 ] = request.getSender();
+                    row[ 7 ] = request.getReceiver();
                     String recallStatus = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getRecallStatus();
-                    row[ 9 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
+                    row[ 8 ] = ((recallStatus == null) ? "Waiting" : recallStatus);
                     String recallReason = ((AdverseEventTrackingRequest) request).getAdverseEventTracking().getRecallReason();
-                    row[ 10 ] = ((recallReason == null) ? "Waiting" : recallReason);
+                    row[ 9 ] = ((recallReason == null) ? "Waiting" : recallReason);
                     model.addRow(row);
             }
         }
@@ -71,20 +70,20 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
 
         tblReceivedWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Event Id", "Report date", "Description", "People Affected", "Vaccine", "BatchID", "Manufacturer", "Sender", "Reciever", "Recall Status", "Recall Reason"
+                "Event ID", "Vaccine", "Description", "Affected Patient", "Batch ID", "Manufacturer", "Sender", "Reciever", "Recall Status", "Recall Reason"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,6 +99,7 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         jLabel6.setText("Incoming Adverse Events:");
 
+        btnAssign.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnAssign.setText("Assign to me");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +107,7 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
             }
         });
 
+        btnRecall.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnRecall.setText("Recall");
         btnRecall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +115,7 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
             }
         });
 
+        btnNoRecall.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnNoRecall.setText("No Recall");
         btnNoRecall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,19 +137,19 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAssign)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRecall)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNoRecall)
-                        .addGap(0, 491, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)))
+                        .addComponent(btnBack)))
                 .addContainerGap())
         );
 
@@ -162,12 +164,12 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
                     .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAssign)
                     .addComponent(btnNoRecall)
                     .addComponent(btnRecall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(193, 193, 193))
+                .addGap(205, 205, 205))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -225,7 +227,7 @@ public class ManageAdverseEvents extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNoRecallActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        
         userProcessContainer.remove(this);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

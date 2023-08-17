@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.cdc;
+package ui.phd;
 
+import ui.cdc.*;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -19,7 +20,6 @@ import nvds.role.Role;
 import nvds.useraccount.UserAccount;
 import nvds.vaccine.Batch;
 import nvds.workqueue.AllocationRequest;
-import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
 
 /**
@@ -27,7 +27,7 @@ import nvds.workqueue.WorkRequest;
  * @author libby
  * @author william
  */
-public class AllocateVaccine extends javax.swing.JPanel {
+public class CheckAllocationDetails extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
 
@@ -39,7 +39,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
 
     Batch batch;
 
-    public AllocateVaccine ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds, Batch batch ) {
+    public CheckAllocationDetails ( JPanel userProcessContainer, UserAccount userAccount, Organization organization, NationalVaccineDistributionSystem nvds, Batch batch ) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.nvds = nvds;
@@ -73,7 +73,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
 
         for ( State state : CDC.getCountry().getStateList() ) {
             for ( City city : state.getCityList() ) {
-                Object[] row = new Object[ 6 ];
+                Object[] row = new Object[ 7 ];
                 row[ 0 ] = state;
                 row[ 1 ] = state.calculateStatePopulation();
 
@@ -90,6 +90,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
                 int allocationQuantityIntForCity = ( int ) allocationQuantityDoubleForCity;
 
                 row[ 5 ] = allocationQuantityIntForCity;
+                row[ 6 ] = checkAllocationStatus( city );
                 model.addRow( row );
 
                 // Checking for special allocations and adding them as separate rows
@@ -98,19 +99,41 @@ public class AllocateVaccine extends javax.swing.JPanel {
                 for ( WorkRequest request : cdcAllocationRole.getWaitingWorkQueue().getListOfWorkRequests() ) {
                     AllocationRequest allocationRequest = ( AllocationRequest ) request;
                     if ( allocationRequest.getCity().equals( city ) && "Special Allocation".equals( allocationRequest.getStatus() ) ) {
-                        Object[] specialRow = new Object[ 6 ];
+                        Object[] specialRow = new Object[ 7 ];
                         specialRow[ 0 ] = state;
                         specialRow[ 1 ] = state.calculateStatePopulation();
                         specialRow[ 2 ] = allocationRequest.getRequestQuantity(); // Special quantity
                         specialRow[ 3 ] = city;
                         specialRow[ 4 ] = city.getPopulation();
                         specialRow[ 5 ] = allocationRequest.getRequestQuantity(); // Special quantity for city
+                        specialRow[ 6 ] = "Special Allocation";
                         model.addRow( specialRow );
                     }
                 }
             }
         }
     }
+    
+    public String checkAllocationStatus ( City city ) {
+
+        CDC CDC = null;
+        for ( Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations() ) {
+            if ( organization.getType().equals( Type.CDC ) && organization.getCountry().equals( this.organization.getCountry() ) ) {
+                CDC = ( CDC ) organization;
+            }
+        }
+
+        Role cdcAllocationRole = CDC.getSpecificRole( Role.RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER );
+        for ( WorkRequest request : cdcAllocationRole.getWaitingWorkQueue().getListOfWorkRequests() ) {
+            AllocationRequest allocationRequest = ( AllocationRequest ) request;
+            if ( allocationRequest.getCity().equals( city ) ) {
+                return "Allocated";
+            }
+        }
+        return "Waiting";
+    }
+    
+    
 
     public boolean isApproved () {
 
@@ -132,7 +155,6 @@ public class AllocateVaccine extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAllocateVaccine = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblAvailability = new javax.swing.JLabel();
         lblVaccineName = new javax.swing.JLabel();
@@ -144,20 +166,13 @@ public class AllocateVaccine extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAllocationWaitingList = new javax.swing.JTable();
         lblAllocationWaitingList = new javax.swing.JLabel();
+        btnCheckPHDApprovalRequestStatus = new javax.swing.JButton();
         txtEXD = new javax.swing.JTextField();
         txtMFD = new javax.swing.JTextField();
         lblEXD = new javax.swing.JLabel();
         lblMFD = new javax.swing.JLabel();
         lblBatchID = new javax.swing.JLabel();
         txtBatchID = new javax.swing.JTextField();
-
-        btnAllocateVaccine.setFont(new java.awt.Font("Courier New", 1, 13)); // NOI18N
-        btnAllocateVaccine.setText("Confirm Allocation");
-        btnAllocateVaccine.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAllocateVaccineActionPerformed(evt);
-            }
-        });
 
         btnBack.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         btnBack.setText("Back");
@@ -174,7 +189,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
         lblVaccineName.setText("Vaccine Name:");
 
         lblTitle.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
-        lblTitle.setText("Allocate Vaccine");
+        lblTitle.setText("Check Regular Allocation Details");
 
         txtVaccineName.setEditable(false);
 
@@ -187,20 +202,20 @@ public class AllocateVaccine extends javax.swing.JPanel {
 
         tblAllocationWaitingList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "State", "State Popul.", "State Alloc.", "City", "City Popul.", "City Alloc."
+                "State", "State Popul.", "State Alloc.", "City", "City Popul.", "City Alloc.", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -220,10 +235,20 @@ public class AllocateVaccine extends javax.swing.JPanel {
             tblAllocationWaitingList.getColumnModel().getColumn(3).setPreferredWidth(60);
             tblAllocationWaitingList.getColumnModel().getColumn(4).setPreferredWidth(60);
             tblAllocationWaitingList.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tblAllocationWaitingList.getColumnModel().getColumn(6).setPreferredWidth(60);
+            tblAllocationWaitingList.getColumnModel().getColumn(6).setHeaderValue("Status");
         }
 
         lblAllocationWaitingList.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        lblAllocationWaitingList.setText("Allocation Waiting List:");
+        lblAllocationWaitingList.setText("Allocation List:");
+
+        btnCheckPHDApprovalRequestStatus.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        btnCheckPHDApprovalRequestStatus.setText("Check Approve Or Reject");
+        btnCheckPHDApprovalRequestStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckPHDApprovalRequestStatusActionPerformed(evt);
+            }
+        });
 
         txtEXD.setEditable(false);
 
@@ -247,7 +272,7 @@ public class AllocateVaccine extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAllocateVaccine)
+                    .addComponent(btnCheckPHDApprovalRequestStatus)
                     .addComponent(lblAllocationWaitingList, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -311,71 +336,10 @@ public class AllocateVaccine extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAllocateVaccine)
+                .addComponent(btnCheckPHDApprovalRequestStatus)
                 .addContainerGap(183, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAllocateVaccine, btnBack});
-
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAllocateVaccineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllocateVaccineActionPerformed
-
-        int selectedRowIndex = tblAllocationWaitingList.getSelectedRow();
-        if ( selectedRowIndex < 0 ) {
-            JOptionPane.showMessageDialog( this, "Please select an allocation target first" );
-            return;
-        }
-
-        State selectedState = ( State ) tblAllocationWaitingList.getValueAt( selectedRowIndex, 0 );
-        City selectedCity = ( City ) tblAllocationWaitingList.getValueAt( selectedRowIndex, 3 );
-        int allocationQuantityForCity = ( Integer ) tblAllocationWaitingList.getValueAt( selectedRowIndex, 5 );
-
-        WorkQueue waitingWorkQueue;
-        Role.RoleType roleType = userAccount.getRole().getType();
-        if ( roleType != Role.RoleType.CDC_ADVERSE_EVENT_HANDLER && roleType != Role.RoleType.VACCINE_REQUEST_REVIEWER ) {
-            CDC CDC = null;
-            for ( Organization organization : nvds.getOrganizationDirectory().getListOfOrganizations() ) {
-                if ( organization.getType().equals( Type.CDC ) && organization.getCountry().equals( this.organization.getCountry() ) ) {
-                    CDC = ( CDC ) organization;
-                    break; // Exit the loop once the correct CDC object is found
-                }
-            }
-            if ( CDC == null ) {
-                JOptionPane.showMessageDialog( this, "CDC not found." );
-                return;
-            }
-
-            // Find the CDC_CATALOG_AND_ALLOCATION_HANDLER role's waiting work queue
-            Role cdcAllocationRole = CDC.getSpecificRole( Role.RoleType.CDC_CATALOG_AND_ALLOCATION_HANDLER );
-            waitingWorkQueue = cdcAllocationRole.getWaitingWorkQueue();
-
-            // create allocation request for the selected row
-            // add the request to CDC Allocation Role's waiting workqueue
-            AllocationRequest allocationRequest = new AllocationRequest();
-
-            allocationRequest.setVaccine( batch.getVaccine() );
-            allocationRequest.setStatus( "Waiting" );
-            allocationRequest.setRequestQuantity( allocationQuantityForCity );
-            allocationRequest.setBatch( batch );
-            allocationRequest.setState( selectedState );
-            allocationRequest.setCity( selectedCity );
-            allocationRequest.setReceivedHospital( selectedCity.getAffiliatedHospital() );
-
-            waitingWorkQueue.getListOfWorkRequests().add( allocationRequest );
-        } else {
-            JOptionPane.showMessageDialog( this, "You do not have permission to allocate vaccines." );
-            return;
-        }
-
-        // update available vaccine quantity in CDC
-        int updateAvailableQuantityInCDC = batch.getAvailableQuantityInCDC() - allocationQuantityForCity;
-        batch.setAvailableQuantityInCDC( updateAvailableQuantityInCDC );
-
-        JOptionPane.showMessageDialog( this, "Vaccine allocated successfully" );
-        populateBatchDetails();
-        populateAllocationTable();
-    }//GEN-LAST:event_btnAllocateVaccineActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -395,10 +359,21 @@ public class AllocateVaccine extends javax.swing.JPanel {
         evt.getWhen();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnCheckPHDApprovalRequestStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckPHDApprovalRequestStatusActionPerformed
+
+        if ( isApproved() ) {
+            JOptionPane.showMessageDialog( this, "Approve request because state and city population are higher than allocated quantity" );
+            return;
+        } else {
+            JOptionPane.showMessageDialog( this, "Reject request because state and city population are lower than allocated quantity" );
+            return;
+        }
+    }//GEN-LAST:event_btnCheckPHDApprovalRequestStatusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAllocateVaccine;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCheckPHDApprovalRequestStatus;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAllocationWaitingList;
     private javax.swing.JLabel lblAvailability;

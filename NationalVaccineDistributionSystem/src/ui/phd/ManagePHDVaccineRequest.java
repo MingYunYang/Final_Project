@@ -18,7 +18,6 @@ import nvds.vaccine.Batch;
 import nvds.workqueue.ReviewRequest;
 import nvds.workqueue.WorkQueue;
 import nvds.workqueue.WorkRequest;
-import ui.cdc.AllocateVaccine;
 
 /**
  * @author libby
@@ -56,12 +55,11 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
 
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getAvailableQuantity();
-                row[ 3 ] = reviewRequest.getRequestQuantity();
+                row[ 2 ] = reviewRequest.getRequestQuantity();
+                row[ 3 ] = reviewRequest.getRequestingHospital();          
                 row[ 4 ] = reviewRequest.getHospitalReviewer();
                 row[ 5 ] = reviewRequest.getPhdReviewer();
                 row[ 6 ] = reviewRequest.getStatus();
-
                 String result = (( ReviewRequest ) request).getResult();
                 row[ 7 ] = ((result == null) ? "Waiting" : result);
 
@@ -77,17 +75,16 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
 
         for ( WorkRequest request : userAccount.getRole().getWaitingWorkQueue().getListOfWorkRequests() ) {
             if ( request instanceof ReviewRequest reviewRequest ) {
-                Object[] row = new Object[ 8 ];
+                Object[] row = new Object[ 7 ];
                 row[ 0 ] = reviewRequest.getVaccine().getVaccineId();
                 row[ 1 ] = reviewRequest;
-                row[ 2 ] = reviewRequest.getAvailableQuantity();
-                row[ 3 ] = reviewRequest.getRequestQuantity();
-                row[ 4 ] = reviewRequest.getPhdReviewer();
-                row[ 5 ] = reviewRequest.getStatus();
-                row[ 6 ] = reviewRequest.getCdcReviewer();
+                row[ 2 ] = reviewRequest.getRequestQuantity();
+                row[ 3 ] = reviewRequest.getPhdReviewer();
+                row[ 4 ] = reviewRequest.getStatus();
+                row[ 5 ] = reviewRequest.getCdcReviewer();
 
                 String result = (( ReviewRequest ) request).getResult();
-                row[ 7 ] = ((result == null) ? "Waiting" : result);
+                row[ 6 ] = ((result == null) ? "Waiting" : result);
 
                 model.addRow( row );
             }
@@ -130,7 +127,7 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Sender", "Recipient", "Req. Status", "Req. Result"
+                "Vaccine ID", "Vaccine", "Req. Qty", "Req. Hospital", "Sender", "Recipient", "Req. Status", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -163,7 +160,7 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
         });
 
         btnCheckIAllocationDetails.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        btnCheckIAllocationDetails.setText("Check Allocation Details");
+        btnCheckIAllocationDetails.setText("Check Regular Allocation Details");
         btnCheckIAllocationDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheckIAllocationDetailsActionPerformed(evt);
@@ -172,17 +169,17 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
 
         tblRequestWaitingToBeReviewed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Vaccine ID", "Vaccine", "Avail. Qty", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
+                "Vaccine ID", "Vaccine", "Req. Qty", "Reviewer", "Req. Status", "Recipient", "Req. Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -207,7 +204,7 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblRequestWaitingToBeReviewed)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,12 +221,12 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
                         .addComponent(btnApproved, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRejected, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
                     .addComponent(btnBack))
@@ -237,9 +234,9 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
                 .addComponent(lblRequestList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAssignToMe)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRequestWaitingToBeReviewed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,7 +245,7 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
                     .addComponent(btnApproved)
                     .addComponent(btnRejected)
                     .addComponent(btnCheckIAllocationDetails))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -327,8 +324,8 @@ public class ManagePHDVaccineRequest extends javax.swing.JPanel {
         ReviewRequest reviewRequest = (ReviewRequest) tblRequestWaitingToBeReviewed.getValueAt(selectedRow, 1);
         Batch batch = reviewRequest.getBatch();
         
-        AllocateVaccine av = new AllocateVaccine( userProcessContainer, userAccount, organization, nvds, batch);
-        userProcessContainer.add( "CheckVaccineAllocation", av);
+        CheckAllocationDetails av = new CheckAllocationDetails( userProcessContainer, userAccount, organization, nvds, batch);
+        userProcessContainer.add( "CheckAllocationDetails", av);
         CardLayout layout = ( CardLayout ) userProcessContainer.getLayout();
         layout.next( userProcessContainer );
     }//GEN-LAST:event_btnCheckIAllocationDetailsActionPerformed

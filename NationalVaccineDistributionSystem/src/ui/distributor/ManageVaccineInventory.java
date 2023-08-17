@@ -269,6 +269,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
 
         AllocationRequest allocationRequest = (AllocationRequest)tblReceivedDeliveryNotifications.getValueAt(selectedRowIndex, 1);
         allocationRequest.setStatus("Processing By Distributor");
+        allocationRequest.getBatch().setAvailableQuantityInDistributor(allocationRequest.getRequestQuantity());
         
         populateReceivedDeliveryNotificationsTable();
     }//GEN-LAST:event_btnReceivedActionPerformed
@@ -309,6 +310,7 @@ public class ManageVaccineInventory extends javax.swing.JPanel {
         mainWorkQueue.getListOfWorkRequests().add(allocationRequest);
         allocationRequest.setStatus("Delivered To Hospital");
         
+        JOptionPane.showMessageDialog(this, "Vaccine delivered sucessfully");
         populateReceivedDeliveryNotificationsTable();
         populateDeliveryWaitingListTable();
     }//GEN-LAST:event_btnDeliverToHospitalActionPerformed
